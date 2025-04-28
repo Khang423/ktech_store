@@ -9,9 +9,9 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class CategoryEnum extends Enum
+final class PaymentStatusEnum extends Enum
 {
-    const OptionOne = 0;
-    const OptionTwo = 1;
-    const OptionThree = 2;
+    const PENDING = 0; // Chờ thanh toán
+    const COMPLETED = 1; // Đã thanh toán
+    const FAILED = 2; // Thanh toán thất bại
 }

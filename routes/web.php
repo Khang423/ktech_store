@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('admin.index');
+Route::group([
+    'as' => 'members.'
+], function() {
+    Route::get('/',[MemberController::class, 'index'])->name('index');
 });
