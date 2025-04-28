@@ -1,10 +1,10 @@
 <div class="leftside-menu">
     <a href="{{ env('APP_URL') }}" class="logo logo-light">
         <span class="logo-lg">
-            <img src="{{ asset('asset/outside/fpt-logo.svg') }}" alt="Hytertech" style="height: 28px">
+            <img src="{{ asset('asset/admin/systemImage/laravel.png') }}" alt="Hytertech" style="width: 40px;height: 40px">
         </span>
         <span class="logo-sm">
-            <img src="{{ asset('asset/outside/fpt-logo.svg') }}" alt="Hytertech" style="height:30px;width:30px">
+            <img src="{{ asset('asset/admin/systemImage/laravel.png') }}" alt="Hytertech" style="height:30px;width:30px">
         </span>
     </a>
     <div class="h-100" id="leftside-menu-container" data-simplebar>
