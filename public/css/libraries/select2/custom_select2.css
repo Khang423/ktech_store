@@ -1,0 +1,17 @@
+.select2-selection {
+    height: 50px !important;
+}
+
+.select2-selection:focus {
+    border: 1px solid #5e2670 !important;
+}
+
+.select2-selection__rendered {
+    position: relative;
+    top: 10px !important;
+}
+
+.select2-selection__arrow {
+    position: relative;
+    top: 10px !important;
+}
