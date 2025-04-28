@@ -34,7 +34,8 @@ jobs:
           port: 22  # Port SSH mặc định, thay đổi nếu nhà cung cấp chỉ định khác
           script: |
             cd /home/ktechidv/public_html
-            composer install --optimize-autoloader --no-dev  # Thay 'composer2 update' bằng lệnh này
+            git pull origin main
+            composer2 update
             php artisan migrate --force
             php artisan db:seed --force
             php artisan route:clear
