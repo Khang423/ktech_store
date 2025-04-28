@@ -11,19 +11,19 @@
 
         <ul class="side-nav">
             <li class="side-nav-title">
-                Điều khiển
+                Control
             </li>
             <li class="side-nav-item">
-                <a href="" class="side-nav-link">
+                <a href="{{ route('admin.index')}}" class="side-nav-link">
                     <i class="uil-calender"></i>
                     <span>
-                        Bản điều khiển
+                        Dashboard
                     </span>
                 </a>
             </li>
 
             <li class="side-nav-title">
-                Thành phần
+                Management
             </li>
             <li class="side-nav-item">
                 <a class="side-nav-link collapsed"
@@ -46,55 +46,17 @@
                         </li>
                         <li>
                             <a href="/">
-                                Điện thoại
+                                Phone
                             </a>
                         </li>
                         <li>
                             <a href="/">
-                                Phụ kiện Laptop
+                                Accessories
                             </a>
                         </li>
                         <li>
                             <a href="/">
-                                Phụ kiện điện thoại
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a class="side-nav-link collapsed"
-                data-bs-toggle="collapse"
-                href="#sidebarProdyctCategory"
-                aria-expanded="false"
-                aria-controls="sidebarDevice" >
-                    <i class="uil-layer-group"></i>
-                    <span>
-                       Category product
-                    </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarProdyctCategory" style="">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="/">
-                                Laptop
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Điện thoại
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Phụ kiện Laptop
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Phụ kiện điện thoại
+                                Category product
                             </a>
                         </li>
                     </ul>
@@ -116,7 +78,7 @@
                 <div class="collapse" id="sidebarMember" style="">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="/">
+                            <a href="{{route('admin.members.index')}}">
                                 Administrator
                             </a>
                         </li>

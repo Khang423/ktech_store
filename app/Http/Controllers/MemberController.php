@@ -12,7 +12,7 @@ class MemberController extends Controller
     private $memberInterface;
     private $memberRepository;
 
-    public function __contruct(
+    public function __construct(
         MemberInterface $memberInterface,
         MemberRepository $memberRepository
     ) {
@@ -23,9 +23,13 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::all();
-        return view('admin.index', [
-            'members' => $members
-        ]);
+        return view('admin.member.index');
     }
+
+    public function getList(){
+        return $this->memberInterface->getList();
+    }
+
+
 
 }

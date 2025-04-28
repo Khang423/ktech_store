@@ -19,7 +19,7 @@ class Member extends Model
         'updated_at',
     ];
 
-    public function get_info() {
+    public function getInfo() {
         return [
             'id',
             'name',

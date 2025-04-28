@@ -5,7 +5,7 @@
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
-                ©  FPT Kiên Giang
+                ©  K-Tech
             </div>
         </div>
     </div>
