@@ -1,1 +1,44 @@
+name: Deploy Laravel to cPanel
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: develop
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
+      - name: Sync files to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}  # Ví dụ: ftp.ktech.id.vn
+          username: ${{ secrets.FTP_USERNAME }}  # Ví dụ: ktech@ktech.id.vn
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/  # Thư mục đích trên cPanel, ví dụ: /home/ktech/public_html/
+          exclude: |
+            **/.git/**
+            **/.gitignore
+            **/.env
+            **/node_modules/**
+            **/vendor/**
+            **/storage/**
+
+      - name: Deploy using SSH and run Laravel commands
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.CPANEL_SSH_HOST }}  # Ví dụ: ktech.id.vn
+          username: ${{ secrets.CPANEL_SSH_USERNAME }}  # Ví dụ: ktech
+          key: ${{ secrets.CPANEL_SSH_KEY }}  # Hoặc dùng password: ${{ secrets.CPANEL_SSH_PASSWORD }}
+          port: 22  # Port SSH mặc định, thay đổi nếu nhà cung cấp chỉ định khác
+          script: |
+            cd /home/ktechidv/public_html
+            composer install --optimize-autoloader --no-dev  # Thay 'composer2 update' bằng lệnh này
+            php artisan migrate --force
+            php artisan db:seed --force
+            php artisan route:clear
+            php artisan cache:clear
+            php artisan config:clear
+            php artisan storage:link
+            php artisan config:cache
