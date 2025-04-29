@@ -26,10 +26,37 @@ class MemberController extends Controller
         return view('admin.member.index');
     }
 
-    public function getList(){
+    public function getList()
+    {
         return $this->memberInterface->getList();
     }
 
+    public function create()
+    {
+        return view('admin.member.create');
+    }
 
+    public function store(Request $request)
+    {
+        $this->memberInterface->store($request);
+        return true;
+    }
 
+    public function edit(Member $member)
+    {
+        return view('admin.member.edit', [
+            'member' => $member
+        ]);
+    }
+
+    public function update(Request $request, Member $member)
+    {
+        $this->memberInterface->update($request, $member);
+        return 1;
+    }
+    public function delete(Request $request)
+    {
+        $this->memberInterface->delete($request);
+        return true;
+    }
 }

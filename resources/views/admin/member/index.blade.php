@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.members.create')}}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Invite Member
                             </a>
@@ -196,6 +196,28 @@
                 rowCallback: function(row, data, index) {
                     $('td:eq(1)', row).html(index + 1 + this.api().page.info().start);
                 }
+            });
+
+            $(document).on('click', '.destroy', function(e) {
+                e.preventDefault();
+                let form = $(this).parents('form');
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'DELETE',
+                    dataType: 'json',
+                    data: form.serialize(),
+                    success: function() {
+                        toast('Xóa thành công.');
+                        table.draw();
+                    },
+                    error: function(data) {
+                        let datas = data.responseJSON;
+                        datas.messages ?
+                            toast(datas.messages, 'error') :
+                            toast(datas.errors.id, 'error');
+                    }
+                });
             });
         });
     </script>
