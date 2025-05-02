@@ -64,37 +64,36 @@
             </li>
 
             <li class="side-nav-item">
-                <a class="side-nav-link collapsed"
-                data-bs-toggle="collapse"
-                href="#sidebarMember"
-                aria-expanded="false"
-                aria-controls="sidebarDevice" >
+                <a href="{{route('admin.members.index')}}" class="side-nav-link">
                     <i class="u uil-users-alt"></i>
                     <span>
                         Members
                     </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a class="side-nav-link collapsed"
+                data-bs-toggle="collapse"
+                href="#sidebarRoles"
+                aria-expanded="false"
+                aria-controls="sidebarDevice" >
+                    <i class="u uil-users-alt"></i>
+                    <span>
+                        Roles
+                    </span>
                     <span class="menu-arrow"></span>
                 </a>
-                <div class="collapse" id="sidebarMember" style="">
+                <div class="collapse" id="sidebarRoles" style="">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="{{route('admin.members.index')}}">
-                                Administrator
+                            <a href="/">
+                                Permissions
                             </a>
                         </li>
                         <li>
                             <a href="/">
-                                Manager
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Sales staff
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Inventory staff
+                                Member Role
                             </a>
                         </li>
                     </ul>

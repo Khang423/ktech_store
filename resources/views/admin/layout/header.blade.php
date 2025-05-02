@@ -38,23 +38,20 @@
                 <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="account-user-avatar">
-                        {{-- <img src="{{ asset('asset/admin/members/') }}/{{ Auth::user()->avatar }}" width="45"
-                            height="45" class="rounded-circle"> --}}
+                        <img src="{{ asset('asset/admin/members/') }}/{{ Auth::user()->avatar }}" width="45"
+                            height="45" class="rounded-circle">
                     </span>
                     <span class="text-dark d-lg-flex flex-column gap-1 d-none">
-                        {{-- <h5 class="my-0">
+                        <h5 class="my-0">
                             {{ Auth::user()->name }}
-                        </h5> --}}
-                        {{-- <h6 class="my-0 fw-normal">
-                            {{ Auth::user()->roles->first()->name }}
-                        </h6> --}}
+                        </h5>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                     <div class="dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Xin chào!</h6>
                     </div>
-                    <a  class="dropdown-item">
+                    <a class="dropdown-item">
                         {{-- href="{{ route('admin.members.edit', Auth::user()) }}" --}}
                         <i class="uil-user-circle me-1"></i>
                         <span>
@@ -62,8 +59,7 @@
                         </span>
                     </a>
 
-                    <a  >
-                        {{-- href="{{ route('admin.logout') }}" --}}
+                    <a href="{{ route('admin.logout') }}">
                         <button type="submit" class="logout dropdown-item">
                             <i class="uil-sign-out-alt me-1"></i>
                             Đăng xuất

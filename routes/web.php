@@ -1,16 +1,25 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/admin', [AuthController::class, 'index'])->name('admin.index');
+Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login');
+Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 Route::group([
     'prefix' => 'admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware' => 'admin'
 ], function () {
     Route::group([
     ], function () {
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     });
 
     Route::group([
@@ -24,5 +33,44 @@ Route::group([
         Route::get('/edit/{member:slug}', [MemberController::class, 'edit'])->name('edit');
         Route::put('/edit/{member:slug}', [MemberController::class, 'update'])->name('update');
         Route::delete('/delete', [MemberController::class, 'delete'])->name('delete');
+    });
+
+    Route::group([
+        'prefix' => 'product',
+        'as' => 'product.'
+    ], function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::post('/getList', [ProductController::class, 'getList'])->name('getList');
+        Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::post('/store', [ProductController::class, 'store'])->name('store');
+        Route::get('/edit/{product:slug}', [ProductController::class, 'edit'])->name('edit');
+        Route::put('/edit/{product:slug}', [ProductController::class, 'update'])->name('update');
+        Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
+    });
+
+    Route::group([
+        'prefix' => 'permissions',
+        'as' => 'permissions.'
+    ], function () {
+        Route::get('/', [PermissionController::class, 'index'])->name('index');
+        Route::post('/getList', [PermissionController::class, 'getList'])->name('getList');
+        Route::get('/create', [PermissionController::class, 'create'])->name('create');
+        Route::post('/store', [PermissionController::class, 'store'])->name('store');
+        Route::get('/edit/{product:slug}', [PermissionController::class, 'edit'])->name('edit');
+        Route::put('/edit/{product:slug}', [PermissionController::class, 'update'])->name('update');
+        Route::delete('/delete', [PermissionController::class, 'delete'])->name('delete');
+    });
+
+    Route::group([
+        'prefix' => 'roles',
+        'as' => 'roles.'
+    ], function () {
+        Route::get('/', [RoleController::class, 'index'])->name('index');
+        Route::post('/getList', [RoleController::class, 'getList'])->name('getList');
+        Route::get('/create', [RoleController::class, 'create'])->name('create');
+        Route::post('/store', [RoleController::class, 'store'])->name('store');
+        Route::get('/edit/{product:slug}', [RoleController::class, 'edit'])->name('edit');
+        Route::put('/edit/{product:slug}', [RoleController::class, 'update'])->name('update');
+        Route::delete('/delete', [RoleController::class, 'delete'])->name('delete');
     });
 });

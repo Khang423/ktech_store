@@ -6,5 +6,11 @@ use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
-    //
+    public function index() {}
+    public function getList() {}
+    public function create() {}
+    public function store() {}
+    public function edit() {}
+    public function update() {}
+    public function delete() {}
 }

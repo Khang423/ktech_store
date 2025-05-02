@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Member extends Model
+
+class Member extends Authenticatable
 {
     protected $fillable = [
         'id',
@@ -21,7 +22,8 @@ class Member extends Model
         'updated_at',
     ];
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return [
             'id',
             'name',

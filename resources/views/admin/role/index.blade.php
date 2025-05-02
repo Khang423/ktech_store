@@ -73,7 +73,7 @@
                         previous: "<i class='mdi mdi-chevron-left'>",
                         next: "<i class='mdi mdi-chevron-right'>"
                     },
-                    processing: "Processing...",
+                    processing: "Đang xử lý...",
                     search: "Search:",
                     searchPlaceholder: "Keywords...",
                     info: "Hiện thị từ _START_ đến _END_ trên _TOTAL_",

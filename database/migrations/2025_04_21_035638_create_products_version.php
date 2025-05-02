@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('product_versions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
-            $table->foreignId('product_image_id')->constrained('product_images')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
             $table->text('thumbnail')->nullable();

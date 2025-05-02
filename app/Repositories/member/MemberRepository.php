@@ -21,6 +21,41 @@ class MemberRepository extends Repository implements MemberInterface
         parent::__construct();
         $this->model = $member;
     }
+
+    public function getList()
+    {
+        return DataTables::of(
+            $this->model::query()
+                ->get($this->model->getInfo())
+        )
+            ->editColumn('index', function ($object) {
+                static $i = 0;
+                return ++$i;
+            })
+            ->editColumn('avatar', function ($object) {
+                return [
+                    'avatar' => $object->avatar,
+                ];
+            })
+            ->addColumn('actions', function ($object) {
+                return [
+                    'id' => $object->id,
+                    'destroy' => route('admin.members.delete'),
+                    'edit' => route('admin.members.edit', $object),
+                ];
+            })
+            ->filter(function ($query) {
+                if (request()->has('name')) {
+                    $query->where('name', 'like', "%" . request('name') . "%");
+                }
+
+                if (request()->has('email')) {
+                    $query->where('email', 'like', "%" . request('email') . "%");
+                }
+            })
+            ->make(true);
+    }
+
     public function store($request)
     {
         DB::beginTransaction();
@@ -100,30 +135,5 @@ class MemberRepository extends Repository implements MemberInterface
             DB::rollBack();
             throw $e;
         }
-    }
-
-    public function getList()
-    {
-        return DataTables::of(
-            $this->model::query()
-                ->get($this->model->getInfo())
-        )
-            ->editColumn('index', function ($object) {
-                static $i = 0;
-                return ++$i;
-            })
-            ->editColumn('avatar', function ($object) {
-                return [
-                    'avatar' => $object->avatar,
-                ];
-            })
-            ->addColumn('actions', function ($object) {
-                return [
-                    'id' => $object->id,
-                    'destroy' => route('admin.members.delete'),
-                    'edit' => route('admin.members.edit', $object),
-                ];
-            })
-            ->make(true);
     }
 }
