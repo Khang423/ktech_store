@@ -8,7 +8,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
-
+Route::get('/', function () {
+    return view('outside.index');
+});
 Route::get('/admin', [AuthController::class, 'index'])->name('admin.index');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login');
 Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
@@ -17,8 +19,7 @@ Route::group([
     'as' => 'admin.',
     'middleware' => 'admin'
 ], function () {
-    Route::group([
-    ], function () {
+    Route::group([], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     });
 
