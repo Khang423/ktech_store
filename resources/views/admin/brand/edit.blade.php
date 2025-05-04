@@ -1,118 +1,82 @@
 @extends('admin.layout.master')
+@section('title')
+    <div class="text-dark">
+        <span class="text-primary">
+            Brands
+        </span>
+        <i class="mdi mdi-chevron-right"></i>
+        <span class="text-primary">
+            List
+        </span>
+        <i class="mdi mdi-chevron-right"></i>
+        Update
+    </div>
+@endsection
 @section('content')
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="custom-styles-preview">
-                            <form action="{{ route('admin.members.update', $member->slug) }}"
+                            <form action="{{ route('admin.brands.update', $brand->slug) }}"
                                 enctype="multipart/form-data" autocomplete="off">
                                 @csrf
                                 @method('PUT')
                                 <h4 class="header-title mb-3">Information</h4>
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="name"
-                                                value="{{ $member->name }}" placeholder="Name" name="name" required>
+                                            <input type="text" class="form-control" id="name" placeholder="Name"
+                                                name="name" required value="{{ $brand->name }}">
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label class="form-label" for="phone">Tel</label>
-                                            <input type="text" class="form-control" id="phone" placeholder="Tel"
-                                                value="{{ $member->phone }}" name="phone" required>
-                                            <div class="text-danger mt-1 error-phone"></div>
+                                            <label for="country" class="form-label">Country</label>
+                                            <input type="text" class="form-control" id="country" placeholder="Country"
+                                                name="country" required value="{{ $brand->country }}">
+                                            <div class="text-danger mt-1 error-country"></div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="website_link" class="form-label">Website URL</label>
+                                            <input type="text" class="form-control" id="website_link"
+                                                placeholder="Website URL" name="website_link" required
+                                                value="{{ $brand->website_link }}">
+                                            <div class="text-danger mt-1 error-website_link"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="email">Email</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="email" class="form-control" id="email"
-                                                    placeholder="Email" aria-describedby="inputGroupPrepend" required
-                                                    name="email" value="{{ $member->email }}">
-                                            </div>
-                                            <div class="text-danger mt-1 error-email"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="gender" class="form-label">Gender</label>
-                                            <select class="form-select" id="gender" name="gender" style="height: 48px">
-                                                <option value="{{ $member->gender }}" hidden>
-                                                    @if ($member->gender == '0')
-                                                        Male
-                                                    @elseif ($member->gender == '1')
-                                                        Female
-                                                    @else
-                                                        Other
-                                                    @endif
-                                                </option>
-                                                <option value="0">Male</option>
-                                                <option value="1">Female</option>
-                                                <option value="2">Other</option>
-
-                                            </select>
-                                            <div class="text-danger mt-1 error-gender"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label fw-semibold">Birthday</label>
-                                            <input type="text" id="datepicker" class="form-control" name="birthday"
-                                                placeholder="Birthday" value="{{ $member->birthday }}">
-                                            <div class="text-danger mt-1 error-birthday"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="ward" class="form-label">Address</label>
-                                            <div class="input-group">
-                                                <textarea class="form-control" placeholder="Address" id="address" style="height: 100px" name="address">
-                                                    {!! $member->address !!}
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="avatar">Choose Avatar</label>
-                                                    <input class="form-control" type="hidden"  id="avatar"
-                                                        name="avatar_old" value="{{ $member->avatar }}">
-                                                    <input class="form-control" type="file" id="avatar_new"
-                                                        name="avatar_new">
-                                                    <div class="text-danger mt-1 error-avatar"></div>
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <lable class="text-dark header-title font-16 fw-bold">
+                                                    Thumbnail
+                                                </lable>
+                                                <div class="d-flex justify-content-center mb-2 mt-2">
+                                                    <div id="preview-thumbnail">
+                                                        <img src="{{ asset('asset/admin/brands') . '/' . $brand->logo }}"
+                                                            width="250" height="auto" class="img-fluid  mt-2 mb-2"
+                                                            style="border:2px solid gray">
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    @if ($member->avatar)
-                                                        <img src="{{ asset('asset/admin/members') }}/{{ $member->avatar }}"
-                                                            class="img-fluid avatar-lg rounded-circle" alt="image"
-                                                            id="preview-avatar">
-                                                    @else
-                                                        <img id="preview-avatar"
-                                                            src="{{ asset('asset/admin/systemImage/avatar.png') }}"
-                                                            alt="image" class="img-fluid avatar-lg rounded-circle">
-                                                    @endif
+                                                <input name="thumbnail_old" type="hidden" value="{{ $brand->logo }}" id="thumbnail_old"/>
+                                                <input name="thumbnail_new" type="file" id="thumbnail_new"
+                                                    style="display: none" />
+                                                <div class="thumbnail text-center dropzone">
+                                                    <i class="h1 text-muted uil-upload-alt"></i>
+                                                    <h3>Chose Image</h3>
                                                 </div>
+                                                <div class="error-thumbnail text-center text-danger"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary" id="btn-store">
-                                    <i class="mdi mdi-plus-circle me-2"></i>
-                                    <span>Invite Member</span>
-                                </button>
+                                <div>
+                                    <button class="btn btn-primary" type="button" id="btn-update">
+                                        <i class="mdi mdi-plus-circle me-2"></i>
+                                        <span>Add Brand</span>
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -131,20 +95,37 @@
     <script src="{{ asset('js/libraries/select2/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#datepicker').datepicker({
-                uiLibrary: 'bootstrap5'
+            function formatBytes(bytes, decimals = 2) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            }
+            $(".thumbnail").on("click", function() {
+                $("#thumbnail_new").click();
             });
-            $('.select2').select2();
 
-            $('#avatar_new').on('change', function() {
-                const file = event.target.files[0];
-                if (file) {
-                    const previewUrl = URL.createObjectURL(file);
-                    $('#preview-avatar').attr('src', previewUrl);
-                }
-            })
+            $("#thumbnail_new").change(function() {
+                let preview_thumbnail = $("#preview-thumbnail");
+                preview_thumbnail.empty();
+                let fileList = Array.from(this.files).map(file => {
+                    let img = $("<img class='img-fluid img-thumbnail' width='250' height='auto'>")
+                        .attr("src", URL.createObjectURL(file));
+                    img.on("load", function() {
+                        URL.revokeObjectURL(img.attr("src"));
+                    });
 
-            $('#btn-store').click(function(e) {
+                    let sizeText = $("<div class='text-center text-dark mt-2'>" + formatBytes(file
+                        .size) + "</div>");
+                    return $("<div class='d-inline-block text-center'></div>").append(img,
+                        sizeText);
+                });
+                preview_thumbnail.append(fileList);
+            });
+
+            $('#btn-update').click(function(e) {
                 e.preventDefault();
                 let form = $(this).parents('form');
                 let form_data = new FormData(form[0]);
@@ -157,7 +138,7 @@
                     processData: false,
                     data: form_data,
                     success: function() {
-                        window.location.href = '{{ route('admin.members.index') }}';
+                        window.location.href = '{{ route('admin.brands.index') }}';
                         toast('Update member successfully');
                     },
                     error: function(data) {

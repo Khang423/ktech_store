@@ -118,7 +118,7 @@
                         searchable: false,
                         render: function(data) {
                             return `
-                                <img src="{{ asset('asset/admin/brands') }}/${data.logo}"  height="60" width="60">
+                                <img src="{{ asset('asset/admin/brands') }}/${data.logo}"  height="100" width="120" loading="lazy">
                             `;
                         }
                     },

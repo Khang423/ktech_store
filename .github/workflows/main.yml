@@ -35,7 +35,7 @@ jobs:
           script: |
             cd /home/ktechidv/public_html
             git pull origin main
-            composer2 update
+            composer update
             php artisan migrate --force
             php artisan db:seed --force
             php artisan route:clear

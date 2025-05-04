@@ -28,4 +28,14 @@ class ImageTrait
         }
         return false;
     }
+
+    public function deleteImage($image, $folderName)
+    {
+        if ($image && $folderName) {
+            $path = 'asset/admin/' . $folderName . '/' . $image;
+            Storage::disk('public_path')->delete($path);
+            return true;
+        }
+        return false;
+    }
 }

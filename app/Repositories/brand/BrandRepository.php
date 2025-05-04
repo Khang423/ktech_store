@@ -78,32 +78,36 @@ class BrandRepository extends Repository implements BrandInterface
         }
     }
 
-    public function update($request, $member)
+    public function update($request, $brand)
     {
         DB::beginTransaction();
         try {
+            $folderName = 'brands';
             $updateData = [
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'gender' => $request->gender,
-                'birthday' => $request->birthday,
+                'country' => $request->country,
+                'website_link' => $request->website_link,
             ];
+            if ($request->hasFile('thumbnail')) {
+                $thumbnailName = $this->imageTrait->convertToWebpAndStore($request->file('thumbnail'), $folderName);
+                $thumbnail = $thumbnailName;
+            }
+            if ($request->hasFile('thumbnail_new')) {
+                $thumbnailName = $this->imageTrait->convertToWebpAndStore($request->file('thumbnail_new'), $folderName);
+                $thumbnailNew = $thumbnailName;
 
-            if ($request->hasFile('avatar_new')) {
-                $avatarNewPath = Storage::disk('public_path')->putFile('asset/admin/members', $request->file('avatar_new'));
-                $avatarNewName = basename($avatarNewPath);
-
-                if ($avatarNewName) {
-                    Storage::disk('public_path')->delete('asset/admin/members/' . $request->avatar_old);
-                    $updateData['avatar'] = $avatarNewName;
+                if ($thumbnailNew) {
+                    $result = $this->imageTrait->deleteImage($request->thumbnail_old,$folderName);
+                    if($result){
+                        $updateData['logo'] = $thumbnailNew;
+                    }
                 }
             }
 
             $this->model
                 ->query()
-                ->where('id', $member->id)
+                ->where('id', $brand->id)
                 ->update($updateData);
             DB::commit();
             return true;
