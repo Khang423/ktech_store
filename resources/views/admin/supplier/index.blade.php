@@ -2,7 +2,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Member
+            Supplier
         </span>
         <i class="mdi mdi-chevron-right"></i>
             List
@@ -39,7 +39,6 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Avatar</th>
-                                    <th>Gender</th>
                                     <th>Tel</th>
                                     <th>Email</th>
                                     <th>Created at</th>
@@ -119,19 +118,6 @@
                         render: function(data) {
                             return `
                                 <img src="{{ asset('asset/admin/members') }}/${data.avatar}" class="rounded-circle me-3" height="60" width="60">
-                            `;
-                        }
-                    },
-                    {
-                        data: 'gender',
-                        name: 'gender',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data) {
-                            return `
-                                <span class='text-dark'>
-                                    ${data}
-                                </span>
                             `;
                         }
                     },

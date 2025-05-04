@@ -2,7 +2,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Member
+            Brands
         </span>
         <i class="mdi mdi-chevron-right"></i>
             List
@@ -15,9 +15,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.members.create')}}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.brands.create')}}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
-                                Invite Member
+                                Add Brand
                             </a>
                         </div>
                         <div class="col-sm-7">
@@ -38,10 +38,10 @@
                                     </th>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Avatar</th>
-                                    <th>Gender</th>
-                                    <th>Tel</th>
-                                    <th>Email</th>
+                                    <th>Logo</th>
+                                    <th>Country</th>
+                                    <th>Website</th>
+                                    <th>Status</th>
                                     <th>Created at</th>
                                     <th style="width: 80px;">Actions</th>
                                 </tr>
@@ -60,7 +60,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('admin.members.getList') }}",
+                    url: "{{ route('admin.brands.getList') }}",
                     type: "POST",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -112,32 +112,19 @@
                         }
                     },
                     {
-                        data: 'avatar',
-                        name: 'avatar',
+                        data: 'logo',
+                        name: 'logo',
                         orderable: false,
                         searchable: false,
                         render: function(data) {
                             return `
-                                <img src="{{ asset('asset/admin/members') }}/${data.avatar}" class="rounded-circle me-3" height="60" width="60">
+                                <img src="{{ asset('asset/admin/brands') }}/${data.logo}"  height="60" width="60">
                             `;
                         }
                     },
                     {
-                        data: 'gender',
-                        name: 'gender',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data) {
-                            return `
-                                <span class='text-dark'>
-                                    ${data}
-                                </span>
-                            `;
-                        }
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone',
+                        data: 'country',
+                        name: 'country',
                         orderable: false,
                         searchable: false,
                         render: function(data) {
@@ -149,8 +136,21 @@
                         }
                     },
                     {
-                        data: 'email',
-                        name: 'email',
+                        data: 'website_link',
+                        name: 'website_link',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data) {
+                            return `
+                                <a href="${data}" class='text-dark' target="_blank" rel="noopener noreferrer">
+                                    ${data}
+                                </a>
+                            `;
+                        }
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
                         orderable: false,
                         searchable: false,
                         render: function(data) {

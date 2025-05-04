@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Repositories\member\MemberInterface;
 use App\Repositories\member\MemberRepository;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+    use ApiResponse;
     private $memberInterface;
     private $memberRepository;
 
@@ -57,6 +59,6 @@ class MemberController extends Controller
     public function delete(Request $request)
     {
         $this->memberInterface->delete($request);
-        return true;
+        return $this->successResponse();
     }
 }

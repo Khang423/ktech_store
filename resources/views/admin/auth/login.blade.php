@@ -37,8 +37,8 @@
                         <!-- Logo -->
                         <div class="card-header py-4 text-center bg-primary">
                             <a href="index.html">
-                                <span><img src="{{ asset('asset/admin/systemImage/laravel.png') }}" alt="logo"
-                                        height="22"></span>
+                                <span><img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="logo"
+                                        height="50"></span>
                             </a>
                         </div>
 

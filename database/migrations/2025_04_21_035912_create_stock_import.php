@@ -11,21 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('stock_imports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_product_id')->constrained('category_products')->cascadeOnDelete();
+            $table->foreignId('inventory_id')->constrained('inventory')->cascadeOnDelete();
             $table->foreignId('supplier_id')->constrained('suppliers')->cascadeOnDelete();
-            $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
-            $table->smallInteger('status')->default(0)->comment('0: active, 1: inactive');
+            $table->integer('quantity_imported');
+            $table->integer('quantity_remaining');
+            $table->double('import_price');
+            $table->string('import_date');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('stock_imports');
     }
 };

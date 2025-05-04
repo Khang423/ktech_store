@@ -1,6 +1,19 @@
 @extends('admin.layout.master')
+@section('title')
+    <div class="text-dark">
+        <span class="text-primary">
+            Member
+        </span>
+        <i class="mdi mdi-chevron-right"></i>
+        <span class="text-primary">
+            List
+        </span>
+        <i class="mdi mdi-chevron-right"></i>
+        Invite 
+    </div>
+@endsection
 @section('content')
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -22,8 +35,8 @@
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="phone">Tel</label>
-                                            <input type="text" class="form-control" id="phone"
-                                                placeholder="Tel" name="phone" required>
+                                            <input type="text" class="form-control" id="phone" placeholder="Tel"
+                                                name="phone" required>
                                             <div class="text-danger mt-1 error-phone"></div>
                                         </div>
                                     </div>
@@ -96,8 +109,8 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <img id="preview-avatar"
-                                                        src="{{ asset('asset/admin/systemImage/avatar.png') }}" alt="image"
-                                                        class="img-fluid avatar-lg rounded-circle">
+                                                        src="{{ asset('asset/admin/systemImage/avatar.png') }}"
+                                                        alt="image" class="img-fluid avatar-lg rounded-circle">
                                                 </div>
                                             </div>
                                         </div>
@@ -132,7 +145,7 @@
 
             $('#avatar').on('change', function() {
                 const file = event.target.files[0];
-                if(file) {
+                if (file) {
                     const previewUrl = URL.createObjectURL(file);
                     $('#preview-avatar').attr('src', previewUrl);
                 }

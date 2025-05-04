@@ -1,43 +1,29 @@
 @extends('admin.layout.master')
-@section('title')
-    <div class="text-dark">
-        <span class="text-primary">
-            Member
-        </span>
-        <i class="mdi mdi-chevron-right"></i>
-        <span class="text-primary">
-            List
-        </span>
-        <i class="mdi mdi-chevron-right"></i>
-        Update
-    </div>
-@endsection
 @section('content')
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="custom-styles-preview">
-                            <form action="{{ route('admin.members.update', $member->slug) }}"
-                                enctype="multipart/form-data" autocomplete="off">
+                            <form action="{{ route('admin.members.store') }}" method="post" enctype="multipart/form-data"
+                                autocomplete="off">
                                 @csrf
-                                @method('PUT')
                                 <h4 class="header-title mb-3">Information</h4>
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="name"
-                                                value="{{ $member->name }}" placeholder="Name" name="name" required>
+                                            <input type="text" class="form-control" id="name" placeholder="Name"
+                                                name="name" required>
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="phone">Tel</label>
-                                            <input type="text" class="form-control" id="phone" placeholder="Tel"
-                                                value="{{ $member->phone }}" name="phone" required>
+                                            <input type="text" class="form-control" id="phone"
+                                                placeholder="Tel" name="phone" required>
                                             <div class="text-danger mt-1 error-phone"></div>
                                         </div>
                                     </div>
@@ -48,7 +34,7 @@
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="email" class="form-control" id="email"
                                                     placeholder="Email" aria-describedby="inputGroupPrepend" required
-                                                    name="email" value="{{ $member->email }}">
+                                                    name="email">
                                             </div>
                                             <div class="text-danger mt-1 error-email"></div>
                                         </div>
@@ -59,15 +45,7 @@
                                         <div class="mb-3">
                                             <label for="gender" class="form-label">Gender</label>
                                             <select class="form-select" id="gender" name="gender" style="height: 48px">
-                                                <option value="{{ $member->gender }}" hidden>
-                                                    @if ($member->gender == '0')
-                                                        Male
-                                                    @elseif ($member->gender == '1')
-                                                        Female
-                                                    @else
-                                                        Other
-                                                    @endif
-                                                </option>
+                                                <option value="" hidden>Change Gender</option>
                                                 <option value="0">Male</option>
                                                 <option value="1">Female</option>
                                                 <option value="2">Other</option>
@@ -78,9 +56,22 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <div class="input-group input-group-merge">
+                                                <input type="password" id="password" class="form-control"
+                                                    placeholder="Password" required name="password">
+                                                <div class="input-group-text" data-password="false">
+                                                    <span class="password-eye"></span>
+                                                </div>
+                                            </div>
+                                            <div class="text-danger mt-1 error-password"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
                                             <label for="" class="form-label fw-semibold">Birthday</label>
                                             <input type="text" id="datepicker" class="form-control" name="birthday"
-                                                placeholder="Birthday" value="{{ $member->birthday }}">
+                                                placeholder="Birthday">
                                             <div class="text-danger mt-1 error-birthday"></div>
                                         </div>
                                     </div>
@@ -90,9 +81,7 @@
                                         <div class="mb-3">
                                             <label for="ward" class="form-label">Address</label>
                                             <div class="input-group">
-                                                <textarea class="form-control" placeholder="Address" id="address" style="height: 100px" name="address">
-                                                    {!! $member->address !!}
-                                                </textarea>
+                                                <textarea class="form-control" placeholder="Address" id="address" style="height: 100px" name="address"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -101,22 +90,14 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label class="form-label" for="avatar">Choose Avatar</label>
-                                                    <input class="form-control" type="hidden"  id="avatar"
-                                                        name="avatar_old" value="{{ $member->avatar }}">
-                                                    <input class="form-control" type="file" id="avatar_new"
-                                                        name="avatar_new">
+                                                    <input class="form-control" type="file" id="avatar"
+                                                        name="avatar">
                                                     <div class="text-danger mt-1 error-avatar"></div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    @if ($member->avatar)
-                                                        <img src="{{ asset('asset/admin/members') }}/{{ $member->avatar }}"
-                                                            class="img-fluid avatar-lg rounded-circle" alt="image"
-                                                            id="preview-avatar">
-                                                    @else
-                                                        <img id="preview-avatar"
-                                                            src="{{ asset('asset/admin/systemImage/avatar.png') }}"
-                                                            alt="image" class="img-fluid avatar-lg rounded-circle">
-                                                    @endif
+                                                    <img id="preview-avatar"
+                                                        src="{{ asset('asset/admin/systemImage/avatar.png') }}" alt="image"
+                                                        class="img-fluid avatar-lg rounded-circle">
                                                 </div>
                                             </div>
                                         </div>
@@ -149,9 +130,9 @@
             });
             $('.select2').select2();
 
-            $('#avatar_new').on('change', function() {
+            $('#avatar').on('change', function() {
                 const file = event.target.files[0];
-                if (file) {
+                if(file) {
                     const previewUrl = URL.createObjectURL(file);
                     $('#preview-avatar').attr('src', previewUrl);
                 }
@@ -171,7 +152,6 @@
                     data: form_data,
                     success: function() {
                         window.location.href = '{{ route('admin.members.index') }}';
-                        toast('Update member successfully');
                     },
                     error: function(data) {
                         $('.text-danger').text('');

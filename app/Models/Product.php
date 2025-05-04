@@ -24,7 +24,6 @@ class Product extends Model
             'category_product_id',
             'supplier_id',
             'brand_id',
-            'price',
             'status',
             'created_at',
             'updated_at',

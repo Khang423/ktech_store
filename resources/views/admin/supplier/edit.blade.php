@@ -1,19 +1,6 @@
 @extends('admin.layout.master')
-@section('title')
-    <div class="text-dark">
-        <span class="text-primary">
-            Member
-        </span>
-        <i class="mdi mdi-chevron-right"></i>
-        <span class="text-primary">
-            List
-        </span>
-        <i class="mdi mdi-chevron-right"></i>
-        Update
-    </div>
-@endsection
 @section('content')
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">

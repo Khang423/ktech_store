@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -73,5 +74,18 @@ Route::group([
         Route::get('/edit/{product:slug}', [RoleController::class, 'edit'])->name('edit');
         Route::put('/edit/{product:slug}', [RoleController::class, 'update'])->name('update');
         Route::delete('/delete', [RoleController::class, 'delete'])->name('delete');
+    });
+
+    Route::group([
+        'prefix' => 'brands',
+        'as' => 'brands.'
+    ], function () {
+        Route::get('/', [BrandController::class, 'index'])->name('index');
+        Route::post('/getList', [BrandController::class, 'getList'])->name('getList');
+        Route::get('/create', [BrandController::class, 'create'])->name('create');
+        Route::post('/store', [BrandController::class, 'store'])->name('store');
+        Route::get('/edit/{brand:slug}', [BrandController::class, 'edit'])->name('edit');
+        Route::put('/edit/{brand:slug}', [BrandController::class, 'update'])->name('update');
+        Route::delete('/delete', [BrandController::class, 'delete'])->name('delete');
     });
 });
