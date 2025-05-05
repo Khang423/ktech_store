@@ -50,6 +50,7 @@
 <script src="{{ asset('js/admin/hyper/hyper-config.js') }}"></script>
 <script src="{{ asset('js/admin/hyper/vendor.min.js') }}"></script>
 <script src="{{ asset('js/admin/hyper/app.min.js') }}"></script>
+<script src="{{ asset('js/admin/main.js') }}"></script>
 
 <script src="{{ asset('js/libraries/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/libraries/datatable/dataTables.bootstrap5.min.js') }}"></script>
@@ -60,6 +61,7 @@
 <script src="{{ asset('js/libraries/sweetalert/sweetalert2.js') }}"></script>
 <script src="{{ asset('js/libraries/sweetalert/confirm_toast.js') }}"></script>
 <script src="{{ asset('js/libraries/sweetalert/confirm_alert.js') }}"></script>
+
 @stack('js')
 </body>
 </html>

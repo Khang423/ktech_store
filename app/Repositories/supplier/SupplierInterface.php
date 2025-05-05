@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\product;
+namespace App\Repositories\supplier;
 
-interface ProductInterface {
+interface SupplierInterface {
     public function store($parameters);
     public function getList();
     public function update($request,$member);

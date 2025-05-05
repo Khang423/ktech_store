@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -23,7 +24,7 @@ Route::group([
     Route::group([], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     });
-
+    // Member route
     Route::group([
         'prefix' => 'members',
         'as' => 'members.'
@@ -36,7 +37,7 @@ Route::group([
         Route::put('/edit/{member:slug}', [MemberController::class, 'update'])->name('update');
         Route::delete('/delete', [MemberController::class, 'delete'])->name('delete');
     });
-
+    // Product route
     Route::group([
         'prefix' => 'product',
         'as' => 'product.'
@@ -49,7 +50,7 @@ Route::group([
         Route::put('/edit/{product:slug}', [ProductController::class, 'update'])->name('update');
         Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
     });
-
+    // Permission route
     Route::group([
         'prefix' => 'permissions',
         'as' => 'permissions.'
@@ -62,7 +63,7 @@ Route::group([
         Route::put('/edit/{product:slug}', [PermissionController::class, 'update'])->name('update');
         Route::delete('/delete', [PermissionController::class, 'delete'])->name('delete');
     });
-
+    // Role route
     Route::group([
         'prefix' => 'roles',
         'as' => 'roles.'
@@ -75,7 +76,7 @@ Route::group([
         Route::put('/edit/{product:slug}', [RoleController::class, 'update'])->name('update');
         Route::delete('/delete', [RoleController::class, 'delete'])->name('delete');
     });
-
+    // Brand route
     Route::group([
         'prefix' => 'brands',
         'as' => 'brands.'
@@ -87,5 +88,18 @@ Route::group([
         Route::get('/edit/{brand:slug}', [BrandController::class, 'edit'])->name('edit');
         Route::put('/edit/{brand:slug}', [BrandController::class, 'update'])->name('update');
         Route::delete('/delete', [BrandController::class, 'delete'])->name('delete');
+    });
+    // Supplier route
+    Route::group([
+        'prefix' => 'suppliers',
+        'as' => 'suppliers.'
+    ], function () {
+        Route::get('/', [SupplierController::class, 'index'])->name('index');
+        Route::post('/getList', [SupplierController::class, 'getList'])->name('getList');
+        Route::get('/create', [SupplierController::class, 'create'])->name('create');
+        Route::post('/store', [SupplierController::class, 'store'])->name('store');
+        Route::get('/edit/{supplier:slug}', [SupplierController::class, 'edit'])->name('edit');
+        Route::put('/edit/{supplier:slug}', [SupplierController::class, 'update'])->name('update');
+        Route::delete('/delete', [SupplierController::class, 'delete'])->name('delete');
     });
 });

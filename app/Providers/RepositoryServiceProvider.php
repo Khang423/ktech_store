@@ -11,6 +11,8 @@ use App\Repositories\member\MemberInterface;
 use App\Repositories\member\MemberRepository;
 use App\Repositories\product\ProductInterface;
 use App\Repositories\product\ProductRepository;
+use App\Repositories\supplier\SupplierRepository;
+use App\Repositories\supplier\SupplierInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -24,6 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(AuthInterface::class, AuthRepository::class);
         $this->app->singleton(ProductInterface::class, ProductRepository::class);
         $this->app->singleton(BrandInterface::class, BrandRepository::class);
+        $this->app->singleton(SupplierInterface::class, SupplierRepository::class);
     }
 
     /**

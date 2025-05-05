@@ -95,7 +95,7 @@
             </li>
 
             <li class="side-nav-item">
-                <a href="{{ route('admin.members.index') }}" class="side-nav-link">
+                <a href="{{ route('admin.suppliers.index') }}" class="side-nav-link">
                     <i class="uil-truck"> </i>
                     <span>
                         Suplliers
