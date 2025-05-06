@@ -7,6 +7,8 @@ use App\Repositories\auth\AuthInterface;
 use App\Repositories\auth\AuthRepository;
 use App\Repositories\brand\BrandInterface;
 use App\Repositories\brand\BrandRepository;
+use App\Repositories\categoryProduct\CategoryProductInterface;
+use App\Repositories\categoryProduct\CategoryProductRepository;
 use App\Repositories\member\MemberInterface;
 use App\Repositories\member\MemberRepository;
 use App\Repositories\product\ProductInterface;
@@ -27,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ProductInterface::class, ProductRepository::class);
         $this->app->singleton(BrandInterface::class, BrandRepository::class);
         $this->app->singleton(SupplierInterface::class, SupplierRepository::class);
+        $this->app->singleton(CategoryProductInterface::class, CategoryProductRepository::class);
     }
 
     /**

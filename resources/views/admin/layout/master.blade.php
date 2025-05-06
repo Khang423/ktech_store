@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8"/>
     <title>
-	    Dashboard | K-Tech
+        Dashboard | K-Tech
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
 
-    <link rel="shortcut icon" href="{{ asset('asset/admin/systemImage/laravel.png') }}">
+    <link rel="shortcut icon" href="{{ asset('asset/admin/systemImage/KtechLogo.png') }}">
 
     <link href="{{ asset('css/libraries/datatable/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/libraries/datatable/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -62,6 +62,9 @@
 <script src="{{ asset('js/libraries/sweetalert/confirm_toast.js') }}"></script>
 <script src="{{ asset('js/libraries/sweetalert/confirm_alert.js') }}"></script>
 
+{{--tinymce js--}}
+<script src="{{ asset('vendor/tinymce/tinymce.js') }}"></script>
+<script src="{{ asset('vendor/tinymce/config.js') }}"></script>
 @stack('js')
 </body>
 </html>

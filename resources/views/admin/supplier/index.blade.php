@@ -2,10 +2,10 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Supplier
+            Nhà cung cấp
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        List
+        Danh sách
     </div>
 @endsection
 @section('content')
@@ -17,7 +17,7 @@
                         <div class="col-sm-5">
                             <a class="btn btn-primary mb-2" href="{{ route('admin.suppliers.create')}}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
-                                Add Supplier
+                                Thêm
                             </a>
                         </div>
                         <div class="col-sm-7">
@@ -75,9 +75,9 @@
                         previous: "<i class='mdi mdi-chevron-left'>",
                         next: "<i class='mdi mdi-chevron-right'>"
                     },
-                    processing: "Processing...",
-                    search: "Search:",
-                    searchPlaceholder: "Keywords...",
+                    processing: "Đang xử lý...",
+                    search: "Tìm kiếm:",
+                    searchPlaceholder: "Từ khoá...",
                     info: "Hiện thị từ _START_ đến _END_ trên _TOTAL_",
                     lengthMenu: 'Show <select class=\'form-select form-select-sm ms-1 me-1\'><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="-1">All</option></select>'
                 },

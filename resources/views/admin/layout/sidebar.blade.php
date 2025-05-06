@@ -37,7 +37,7 @@
                 <div class="collapse" id="sidebarDevice" style="">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="{{ route('admin.product.index') }}">
+                            <a href="{{ route('admin.products.index') }}">
                                 Laptop
                             </a>
                         </li>
@@ -52,7 +52,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/">
+                            <a href="{{ route('admin.categoryProducts.index') }}">
                                 Category product
                             </a>
                         </li>

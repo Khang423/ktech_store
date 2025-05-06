@@ -8,6 +8,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\CategoryProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,8 +40,8 @@ Route::group([
     });
     // Product route
     Route::group([
-        'prefix' => 'product',
-        'as' => 'product.'
+        'prefix' => 'products',
+        'as' => 'products.'
     ], function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::post('/getList', [ProductController::class, 'getList'])->name('getList');
@@ -101,5 +102,19 @@ Route::group([
         Route::get('/edit/{supplier:slug}', [SupplierController::class, 'edit'])->name('edit');
         Route::put('/edit/{supplier:slug}', [SupplierController::class, 'update'])->name('update');
         Route::delete('/delete', [SupplierController::class, 'delete'])->name('delete');
+    });
+
+    // categoryProduct product route
+    Route::group([
+        'prefix' => 'categoryProducts',
+        'as' => 'categoryProducts.'
+    ], function () {
+        Route::get('/', [CategoryProductController::class, 'index'])->name('index');
+        Route::post('/getList', [CategoryProductController::class, 'getList'])->name('getList');
+        Route::get('/create', [CategoryProductController::class, 'create'])->name('create');
+        Route::post('/store', [CategoryProductController::class, 'store'])->name('store');
+        Route::get('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'edit'])->name('edit');
+        Route::put('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'update'])->name('update');
+        Route::delete('/delete', [CategoryProductController::class, 'delete'])->name('delete');
     });
 });

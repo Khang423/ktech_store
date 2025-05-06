@@ -2,14 +2,14 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Brands
+            Thương hiệu
         </span>
         <i class="mdi mdi-chevron-right"></i>
         <span class="text-primary">
-            List
+            Danh sách
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Add
+        Thêm
     </div>
 @endsection
 @section('content')
@@ -47,9 +47,9 @@
                                     <div class="col-lg-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <lable class="text-dark header-title font-16 fw-bold">
+                                                <label class="text-dark header-title font-16 fw-bold">
                                                     Thumbnail
-                                                </lable>
+                                                </label>
                                                 <div class="d-flex justify-content-center mb-2 mt-2">
                                                     <div id="preview-thumbnail"></div>
                                                 </div>

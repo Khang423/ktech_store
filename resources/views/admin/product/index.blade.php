@@ -2,10 +2,10 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Member
+            Sản phẩm
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Member list
+        Danh sách
     </div>
 @endsection
 @section('content')
@@ -15,9 +15,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.members.create')}}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.products.create')}}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
-                                Invite Member
+                                Thêm
                             </a>
                         </div>
                         <div class="col-sm-7">
@@ -37,10 +37,10 @@
                                         </div>
                                     </th>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Avatar</th>
-                                    <th>Tel</th>
-                                    <th>Email</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Ảnh </th>
+                                    <th>Đơn giá</th>
+                                    <th>Status</th>
                                     <th>Created at</th>
                                     <th style="width: 80px;">Actions</th>
                                 </tr>
@@ -59,7 +59,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('admin.members.getList') }}",
+                    url: "{{ route('admin.products.getList') }}",
                     type: "POST",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -111,19 +111,19 @@
                         }
                     },
                     {
-                        data: 'avatar',
-                        name: 'avatar',
+                        data: 'thumbnail',
+                        name: 'thumbnail',
                         orderable: false,
                         searchable: false,
                         render: function(data) {
                             return `
-                                <img src="{{ asset('asset/admin/members') }}/${data.avatar}" class="rounded-circle me-3" height="60" width="60">
+                                <img src="{{ asset('asset/admin/products') }}/${data.avatar}" class="rounded-circle me-3" height="60" width="60">
                             `;
                         }
                     },
                     {
-                        data: 'phone',
-                        name: 'phone',
+                        data: 'price',
+                        name: 'price',
                         orderable: false,
                         searchable: false,
                         render: function(data) {
@@ -135,8 +135,8 @@
                         }
                     },
                     {
-                        data: 'email',
-                        name: 'email',
+                        data: 'status',
+                        name: 'status',
                         orderable: false,
                         searchable: false,
                         render: function(data) {
@@ -196,28 +196,6 @@
                 rowCallback: function(row, data, index) {
                     $('td:eq(1)', row).html(index + 1 + this.api().page.info().start);
                 }
-            });
-
-            $(document).on('click', '.destroy', function(e) {
-                e.preventDefault();
-                let form = $(this).parents('form');
-
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'DELETE',
-                    dataType: 'json',
-                    data: form.serialize(),
-                    success: function() {
-                        toast('Xóa thành công.');
-                        table.draw();
-                    },
-                    error: function(data) {
-                        let datas = data.responseJSON;
-                        datas.messages ?
-                            toast(datas.messages, 'error') :
-                            toast(datas.errors.id, 'error');
-                    }
-                });
             });
         });
     </script>

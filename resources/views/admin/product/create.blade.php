@@ -1,172 +1,473 @@
 @extends('admin.layout.master')
+@section('title')
+    <div class="text-dark">
+        <span class="text-primary">
+            Sản phẩm
+        </span>
+        <i class="mdi mdi-chevron-right"></i>
+        <span class="text-primary">
+            <a href="{{ route('admin.products.index') }}">Danh sách</a>
+        </span>
+        <i class="mdi mdi-chevron-right"></i>
+        Thêm
+    </div>
+@endsection
 @section('content')
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div class="tab-pane show active" id="custom-styles-preview">
-                            <form action="{{ route('admin.members.store') }}" method="post" enctype="multipart/form-data"
-                                autocomplete="off">
-                                @csrf
-                                <h4 class="header-title mb-3">Information</h4>
+    <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data" autocomplete="off"
+        id="form-store">
+        @csrf
+        <div class="row">
+            <div class="col-8">
+                {{--                Information --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Thông tin</h4>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Name"
-                                                name="name" required>
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Tên sản phẩm</label>
+                                            <input type="text" class="form-control" id="name"
+                                                placeholder="Tên sản phẩm" name="name">
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="phone">Tel</label>
-                                            <input type="text" class="form-control" id="phone"
-                                                placeholder="Tel" name="phone" required>
-                                            <div class="text-danger mt-1 error-phone"></div>
+                                        <div class="mb-2">
+                                            <label for="supplier_id" class="form-label">Nhà cung cấp</label>
+                                            <input type="text" class="form-control" id="supplier_id"
+                                                placeholder="Nhà cung cấp" name="supplier_id">
+                                            <div class="text-danger mt-1 error-supplier_id"></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="email">Email</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="email" class="form-control" id="email"
-                                                    placeholder="Email" aria-describedby="inputGroupPrepend" required
-                                                    name="email">
-                                            </div>
-                                            <div class="text-danger mt-1 error-email"></div>
+                                        <div class="mb-2">
+                                            <label for="price" class="form-label">Đơn Giá</label>
+                                            <input type="text" class="form-control" id="price"
+                                                placeholder="Số điện thoại" name="price">
+                                            <div class="text-danger mt-1 error-price"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="category_product_id" class="form-label">Danh mục </label>
+                                            <input type="text" class="form-control" id="category_product_id"
+                                                placeholder="" name="category_product_id">
+                                            <div class="text-danger mt-1 error-category_product_id"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-2">
+                                            <label for="brand_id" class="form-label">Thương hiệu </label>
+                                            <input type="text" class="form-control" id="brand_id"
+                                                placeholder="Thương hiệu" name="brand_id">
+                                            <div class="text-danger mt-1 error-brand_id"></div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{--                // Description --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Mô tả sản phẩm</h4>
+                                <textarea class="form-control tinymce-editor" name="description" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{--                    cpu and gpu --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Bộ xử lý và Đồ hoạ</h4>
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label for="gender" class="form-label">Gender</label>
-                                            <select class="form-select" id="gender" name="gender" style="height: 48px">
-                                                <option value="" hidden>Change Gender</option>
-                                                <option value="0">Male</option>
-                                                <option value="1">Female</option>
-                                                <option value="2">Other</option>
+                                            <label for="gpu" class="form-label">Card Đồ hoạ</label>
+                                            <input type="text" class="form-control" id="gpu"
+                                                placeholder="Card Đồ hoạ" name="gpu">
+                                            <div class="text-danger mt-1 error-gpu"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="cpu" class="form-label">CPU</label>
+                                            <input type="text" class="form-control" id="cpu" placeholder="CPU"
+                                                name="cpu">
+                                            <div class="text-danger mt-1 error-cpu"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{--                Memory and Storage --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Bộ nhớ ram và ổ cứng</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="ram_size" class="form-label">Dung lượng RAM</label>
+                                            <input type="text" class="form-control" id="ram_size"
+                                                placeholder="Dung lượng ram" name="ram_size">
+                                            <div class="text-danger mt-1 error-ram_size"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="ram_type" class="form-label">Loại RAM</label>
+                                            <input type="text" class="form-control" id="ram_type"
+                                                placeholder="Loại RAM" name="ram_type">
+                                            <div class="text-danger mt-1 error-ram_type"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="ram_type" class="form-label">Số khe RAM</label>
+                                            <input type="text" class="form-control" id="ram_type"
+                                                placeholder="Số khe RAM" name="ram_type">
+                                            <div class="text-danger mt-1 error-ram_type"></div>
+                                        </div>
 
-                                            </select>
-                                            <div class="text-danger mt-1 error-gender"></div>
-                                        </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">Password</label>
-                                            <div class="input-group input-group-merge">
-                                                <input type="password" id="password" class="form-control"
-                                                    placeholder="Password" required name="password">
-                                                <div class="input-group-text" data-password="false">
-                                                    <span class="password-eye"></span>
-                                                </div>
-                                            </div>
-                                            <div class="text-danger mt-1 error-password"></div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="storage_size" class="form-label">Dung lượng bộ nhớ</label>
+                                            <input type="text" class="form-control" id="storage_size"
+                                                placeholder="Dung lượng bộ nhớ" name="storage_size">
+                                            <div class="text-danger mt-1 error-storage_size"></div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label fw-semibold">Birthday</label>
-                                            <input type="text" id="datepicker" class="form-control" name="birthday"
-                                                placeholder="Birthday">
-                                            <div class="text-danger mt-1 error-birthday"></div>
+                                        <div class="mb-2">
+                                            <label for="storage_type" class="form-label">Loại bộ nhớ</label>
+                                            <input type="text" class="form-control" id="storage_type"
+                                                placeholder="Loại bộ nhớ" name="storage_type">
+                                            <div class="text-danger mt-1 error-storage_type"></div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{--                Display --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Màn hình</h4>
                                 <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="ward" class="form-label">Address</label>
-                                            <div class="input-group">
-                                                <textarea class="form-control" placeholder="Address" id="address" style="height: 100px" name="address"></textarea>
-                                            </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="refresh_rate" class="form-label">Tần số quét</label>
+                                            <input type="text" class="form-control" id="refresh_rate"
+                                                placeholder="Tần số quét" name="refresh_rate">
+                                            <div class="text-danger mt-1 error-refresh_rate"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="display_panel" class="form-label">Chất liệu tấm nền</label>
+                                            <input type="text" class="form-control" id="display_panel"
+                                                placeholder="Chất liệu tấm nền" name="display_panel">
+                                            <div class="text-danger mt-1 error-display_panel"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="display_size" class="form-label">Kích thước màn hình</label>
+                                            <input type="text" class="form-control" id="display_size"
+                                                placeholder="Kích thước màn hình" name="display_size">
+                                            <div class="text-danger mt-1 error-display_size"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-8">
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="avatar">Choose Avatar</label>
-                                                    <input class="form-control" type="file" id="avatar"
-                                                        name="avatar">
-                                                    <div class="text-danger mt-1 error-avatar"></div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <img id="preview-avatar"
-                                                        src="{{ asset('asset/admin/systemImage/avatar.png') }}" alt="image"
-                                                        class="img-fluid avatar-lg rounded-circle">
-                                                </div>
-                                            </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="display_technolory" class="form-label">Công nghệ màn
+                                                hình</label>
+                                            <input type="text" class="form-control" id="display_technolory"
+                                                placeholder="Công nghệ màn hình" name="display_technolory">
+                                            <div class="text-danger mt-1 error-display_technolory"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="display_resolution" class="form-label">Độ phân giải màn
+                                                hình</label>
+                                            <input type="text" class="form-control" id="display_resolution"
+                                                placeholder="Độ phân giải màn hình" name="display_resolution">
+                                            <div class="text-danger mt-1 error-display_resolution"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary" id="btn-store">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- Sound and Batery --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Âm thanh và Pin</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="audio_technology" class="form-label">Công nghệ âm
+                                                thanh</label>
+                                            <input type="text" class="form-control" id="audio_technology"
+                                                placeholder="Công nghệ âm thanh" name="audio_technology">
+                                            <div class="text-danger mt-1 error-audio_technology"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="battery" class="form-label">Dung lượng pin</label>
+                                            <input type="text" class="form-control" id="battery"
+                                                placeholder="Dung lượng pin" name="battery">
+                                            <div class="text-danger mt-1 error-battery"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{--    dimension and weigth --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Kích thước và trọng luượng</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="material" class="form-label">Chất liệu</label>
+                                            <input type="text" class="form-control" id="material"
+                                                placeholder="Chất liệu" name="material">
+                                            <div class="text-danger mt-1 error-material"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="weight" class="form-label">Trọng lượng</label>
+                                            <input type="text" class="form-control" id="weight"
+                                                placeholder="Trọng lượng" name="weight">
+                                            <div class="text-danger mt-1 error-weight"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="dimensions" class="form-label">Kích thước</label>
+                                            <input type="text" class="form-control" id="dimensions"
+                                                placeholder="Kích thước" name="dimensions">
+                                            <div class="text-danger mt-1 error-dimensions"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{--    utilities and other feature --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Tiện ích và tính năng khác</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="security" class="form-label">Bảo mật</label>
+                                            <input type="text" class="form-control" id="security"
+                                                placeholder="Bảo mật" name="security">
+                                            <div class="text-danger mt-1 error-security"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="operating_system" class="form-label">Hệ điều hành</label>
+                                            <input type="text" class="form-control" id="operating_system"
+                                                placeholder="Hệ điều hành" name="operating_system">
+                                            <div class="text-danger mt-1 error-operating_system"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="keyboard_type" class="form-label">Loại bàn phím </label>
+                                            <input type="text" class="form-control" id="keyboard_type"
+                                                placeholder="Loại bàn phím " name="keyboard_type">
+                                            <div class="text-danger mt-1 error-keyboard_type"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="wifi" class="form-label">Wifi</label>
+                                            <input type="text" class="form-control" id="wifi" placeholder="Wifi"
+                                                name="wifi">
+                                            <div class="text-danger mt-1 error-wifi"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="memory_card_slot" class="form-label">Khe cắm thẻ nhớ</label>
+                                            <input type="text" class="form-control" id="memory_card_slot"
+                                                placeholder="Khe cắm thẻ nhớ" name="memory_card_slot">
+                                            <div class="text-danger mt-1 error-memory_card_slot"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="webcam" class="form-label">Camera</label>
+                                            <input type="text" class="form-control" id="webcam"
+                                                placeholder="Camera" name="webcam">
+                                            <div class="text-danger mt-1 error-webcam"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{--    port connect --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Các cổng kết nối</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="usb_ports" class="form-label">Công kết nối</label>
+                                            <input type="text" class="form-control" id="usb_ports"
+                                                placeholder="Công kết nối" name="usb_ports">
+                                            <div class="text-danger mt-1 error-usb_ports"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="bluetooth_version" class="form-label">Bluetooth</label>
+                                            <input type="text" class="form-control" id="bluetooth_version"
+                                                placeholder="Bluetooth" name="bluetooth_version">
+                                            <div class="text-danger mt-1 error-bluetooth_version"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="wifi" class="form-label">Wifi</label>
+                                            <input type="text" class="form-control" id="wifi" placeholder="Wifi"
+                                                name="wifi">
+                                            <div class="text-danger mt-1 error-wifi"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <label class="text-dark header-title font-16 fw-bold">
+                            Ảnh trưng bày
+                        </label>
+                        <div class="d-flex justify-content-center mb-2 mt-2">
+                            <div id="preview-thumbnail"></div>
+                        </div>
+                        <input name="thumbnail" type="file" id="img_thumbnail" style="display: none" />
+                        <div class="thumbnail text-center dropzone">
+                            <i class="h1 text-muted uil-upload-alt"></i>
+                            <h3>Chọn ảnh </h3>
+                        </div>
+                        <div class="error-thumbnail text-center text-danger"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <lable class="text-dark header-title font-16 fw-bold">
+                            Ảnh chi tiết
+                        </lable>
+                        <div class="d-flex justify-content-center mb-2 mt-2">
+                            <div id="preview-image"></div>
+                        </div>
+                        <div class="mt-2">
+                            <input name="image[]" type="file" id="imgInput" style="display: none" multiple>
+                            <div class="dz-message-image text-center dropzone">
+                                <i class="h1 text-muted uil-upload-alt"></i>
+                                <h3>Chọn nhiều ảnh</h3>
+                            </div>
+                        </div>
+                        <div class="error-new-image text-center text-danger"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active">
+                                <button class="btn btn-primary" id="btn-store" onclick="tinymce.triggerSave()">
                                     <i class="mdi mdi-plus-circle me-2"></i>
-                                    <span>Invite Member</span>
+                                    <span>Thêm</span>
                                 </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 @endsection
 @push('css')
-    <link href="{{ asset('css/libraries/select2/custom_select2.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/libraries/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endpush
 @push('js')
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-    <script src="{{ asset('js/libraries/select2/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#datepicker').datepicker({
-                uiLibrary: 'bootstrap5'
+            // init
+            const $form = $('#form-store');
+            const $inputs = $form.find('input');
+            $routeStore = '{{ route('admin.products.store') }}';
+            $routeIndex = '{{ route('admin.products.index') }}';
+
+            $(".thumbnail").on("click", function() {
+                $("#img_thumbnail").click();
             });
-            $('.select2').select2();
 
-            $('#avatar').on('change', function() {
-                const file = event.target.files[0];
-                if(file) {
-                    const previewUrl = URL.createObjectURL(file);
-                    $('#preview-avatar').attr('src', previewUrl);
-                }
-            })
+            $("#img_thumbnail").change(function() {
+                let preview_thumbnail = $("#preview-thumbnail");
+                preview_thumbnail.empty();
+                let fileList = Array.from(this.files).map(file => {
+                    let img = $("<img class='img-fluid img-thumbnail' width='250' height='auto'>")
+                        .attr("src", URL.createObjectURL(file));
+                    img.on("load", function() {
+                        URL.revokeObjectURL(img.attr("src"));
+                    });
 
-            $('#btn-store').click(function(e) {
-                e.preventDefault();
-                let form = $(this).parents('form');
-                let form_data = new FormData(form[0]);
-
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    success: function() {
-                        window.location.href = '{{ route('admin.members.index') }}';
-                    },
-                    error: function(data) {
-                        $('.text-danger').text('');
-                        if (data.responseJSON && data.responseJSON.errors) {
-                            let errors = data.responseJSON.errors;
-                            for (let field in errors) {
-                                if (errors.hasOwnProperty(field)) {
-                                    $(`.error-${field}`).text(errors[field][0]);
-                                }
-                            }
-                        }
-                    }
+                    let sizeText = $("<div class='text-center text-dark'>" + formatBytes(file
+                        .size) + "</div>");
+                    return $("<div class='d-inline-block text-center'></div>").append(img,
+                        sizeText);
                 });
+                preview_thumbnail.append(fileList);
             });
 
+            $(".dz-message-image").on("click", function() {
+                $("#imgInput").click();
+            });
+
+            $("#imgInput").change(function() {
+                let preview_image = $("#preview-image");
+                preview_image.empty();
+
+                let fileList = Array.from(this.files).map(file => {
+                    let img = $(
+                            "<img class='img-fluid img-thumbnail me-3' width='170' height='auto'>")
+                        .attr("src", URL.createObjectURL(file));
+                    img.on("load", function() {
+                        URL.revokeObjectURL(img.attr("src"));
+                    });
+
+                    let sizeText = $("<div class='text-center text-dark'>" + formatBytes(file
+                        .size) + "</div>");
+                    return $("<div class='d-inline-block text-center'></div>").append(img,
+                    sizeText);
+                });
+
+                preview_image.append(fileList);
+            });
+
+            // function handle post data
+            store($routeStore, $routeIndex);
+            deleteAlertValidation($inputs);
         });
     </script>
 @endpush
