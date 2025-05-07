@@ -15,6 +15,7 @@
     <link href="{{ asset('css/libraries/datatable/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/admin/hyper/app-saas.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
     <link href="{{ asset('css/admin/hyper/icons.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     @stack('css')
 </head>
 
@@ -65,6 +66,8 @@
 {{--tinymce js--}}
 <script src="{{ asset('vendor/tinymce/tinymce.js') }}"></script>
 <script src="{{ asset('vendor/tinymce/config.js') }}"></script>
+
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
 @stack('js')
 </body>
 </html>

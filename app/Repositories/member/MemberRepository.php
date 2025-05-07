@@ -2,6 +2,7 @@
 
 namespace App\Repositories\member;
 
+use App\Enums\GenderEnum;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Config\Repository;
@@ -31,6 +32,15 @@ class MemberRepository extends Repository implements MemberInterface
             ->editColumn('index', function ($object) {
                 static $i = 0;
                 return ++$i;
+            })
+            ->editColumn('gender', function ($object) {
+                if ($object->gender === GenderEnum::MALE) {
+                    return 'Name';
+                } elseif ($object->gender === GenderEnum::FEMALE) {
+                    return 'Nữ';
+                } else {
+                    return 'Khác';
+                }
             })
             ->editColumn('avatar', function ($object) {
                 return [

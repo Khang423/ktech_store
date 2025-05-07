@@ -1,36 +1,39 @@
 <div class="leftside-menu">
     <a href="{{ env('APP_URL') }}" class="logo logo-light">
         <span class="logo-lg">
-            <img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="Hytertech" style="width: 50px;height: 50px">
+            <img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="Hytertech"
+                style="width: 50px;height: 50px">
         </span>
         <span class="logo-sm">
-            <img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="Hytertech" style="height:30px;width:30px">
+            <img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="Hytertech"
+                style="height:30px;width:30px">
         </span>
     </a>
     <div class="h-100" id="leftside-menu-container" data-simplebar>
 
         <ul class="side-nav">
             <li class="side-nav-title">
-                Control
+                Điều khiển
             </li>
             <li class="side-nav-item">
                 <a href="{{ route('admin.dashboard') }}" class="side-nav-link">
-                    <i class="uil-calender"></i>
+                    <i class=" uil-chart-line"></i>
+                    <span class="badge bg-success float-end">5</span>
                     <span>
-                        Dashboard
+                        Bảng điều khiển
                     </span>
                 </a>
             </li>
 
             <li class="side-nav-title">
-                Management
+                Quản lý chức năng
             </li>
             <li class="side-nav-item">
                 <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarDevice" aria-expanded="false"
                     aria-controls="sidebarDevice">
                     <i class="uil-desktop"></i>
                     <span>
-                        Products
+                        Sản phẩm
                     </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -43,38 +46,30 @@
                         </li>
                         <li>
                             <a href="/">
-                                Phone
+                                Điện thoại
                             </a>
                         </li>
                         <li>
                             <a href="/">
-                                Accessories
+                                Phụ kiện
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('admin.categoryProducts.index') }}">
-                                Category product
+                                Danh mục sản phẩm
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
 
-            <li class="side-nav-item">
-                <a href="{{ route('admin.members.index') }}" class="side-nav-link">
-                    <i class="u uil-users-alt"></i>
-                    <span>
-                        Members
-                    </span>
-                </a>
-            </li>
 
             <li class="side-nav-item">
                 <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarRoles" aria-expanded="false"
                     aria-controls="sidebarDevice">
                     <i class="uil-label"></i>
                     <span>
-                        Roles
+                        Vai trò
                     </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -82,12 +77,12 @@
                     <ul class="side-nav-second-level">
                         <li>
                             <a href="/">
-                                Permissions
+                                Quyền
                             </a>
                         </li>
                         <li>
                             <a href="/">
-                                Member Role
+                                Phân quyền
                             </a>
                         </li>
                     </ul>
@@ -98,7 +93,7 @@
                 <a href="{{ route('admin.suppliers.index') }}" class="side-nav-link">
                     <i class="uil-truck"> </i>
                     <span>
-                        Suplliers
+                        Nhà cung cấp
                     </span>
                 </a>
             </li>
@@ -107,9 +102,70 @@
                 <a href="{{ route('admin.brands.index') }}" class="side-nav-link">
                     <i class="uil-circuit"></i>
                     <span>
-                        Brands
+                        Thương hiệu
                     </span>
                 </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="\" class="side-nav-link">
+                    <i class=" uil-bill"></i>
+                    <span>
+                        Hoá đơn
+                    </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="\" class="side-nav-link">
+                    <i class=" uil-home-alt"></i>
+                    <span>
+                        Kho hàng
+                    </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="\" class="side-nav-link">
+                    <i class=" uil-usd-circle"></i>
+                    <span>
+                        Giảm giá
+                    </span>
+                </a>
+            </li>
+            <li class="side-nav-title">
+                Hệ thống
+            </li>
+            <li class="side-nav-item">
+                <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarAccount"
+                    aria-expanded="false" aria-controls="sidebarAccount">
+                    <i class="uil-desktop"></i>
+                    <span>
+                        Tài khoản
+                    </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="sidebarAccount" style="">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('admin.members.index') }}">
+                                Nhân viên sale
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/">
+                                Nhân viên kho hàng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/">
+                                Khách hàng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.categoryProducts.index') }}">
+                                Danh mục sản phẩm
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="clearfix"></div>

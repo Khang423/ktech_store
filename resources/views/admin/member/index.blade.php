@@ -2,10 +2,10 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Member
+            Tài khoản
         </span>
         <i class="mdi mdi-chevron-right"></i>
-            List
+            Danh sách
     </div>
 @endsection
 @section('content')
@@ -17,7 +17,7 @@
                         <div class="col-sm-5">
                             <a class="btn btn-primary mb-2" href="{{ route('admin.members.create')}}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
-                                Invite Member
+                                Thêm
                             </a>
                         </div>
                         <div class="col-sm-7">
@@ -37,13 +37,13 @@
                                         </div>
                                     </th>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Avatar</th>
-                                    <th>Gender</th>
-                                    <th>Tel</th>
+                                    <th>Tài khoản</th>
+                                    <th>Ảnh đại diện</th>
+                                    <th>Giới tính</th>
+                                    <th>Số điện thoại</th>
                                     <th>Email</th>
-                                    <th>Created at</th>
-                                    <th style="width: 80px;">Actions</th>
+                                    <th>Ngày tạo</th>
+                                    <th style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
                         </table>
@@ -212,27 +212,8 @@
                 }
             });
 
-            $(document).on('click', '.destroy', function(e) {
-                e.preventDefault();
-                let form = $(this).parents('form');
-
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'DELETE',
-                    dataType: 'json',
-                    data: form.serialize(),
-                    success: function() {
-                        toast('Xóa thành công.');
-                        table.draw();
-                    },
-                    error: function(data) {
-                        let datas = data.responseJSON;
-                        datas.messages ?
-                            toast(datas.messages, 'error') :
-                            toast(datas.errors.id, 'error');
-                    }
-                });
-            });
+            $routeDelete = '{{ route('admin.members.delete') }}';
+            destroy($routeDelete,table);
         });
     </script>
 @endpush

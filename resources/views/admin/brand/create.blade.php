@@ -120,34 +120,14 @@
                 preview_thumbnail.append(fileList);
             });
 
-            $('#btn-store').click(function(e) {
-                e.preventDefault();
-                let form = $(this).parents('form');
-                let form_data = new FormData(form[0]);
-
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    success: function() {
-                        window.location.href = '{{ route('admin.brands.index') }}';
-                    },
-                    error: function(data) {
-                        $('.text-danger').text('');
-                        if (data.responseJSON && data.responseJSON.errors) {
-                            let errors = data.responseJSON.errors;
-                            for (let field in errors) {
-                                if (errors.hasOwnProperty(field)) {
-                                    $(`.error-${field}`).text(errors[field][0]);
-                                }
-                            }
-                        }
-                    }
-                });
-            });
+            // init
+            const $form = $('#form-store');
+            const $inputs = $form.find('input');
+            $routeStore = '{{ route('admin.brands.store') }}';
+            $routeIndex = '{{ route('admin.brands.index') }}';
+            // function handle
+            store($routeStore,$routeIndex);
+            deleteAlertValidation($inputs);
 
         });
     </script>
