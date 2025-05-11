@@ -4,6 +4,7 @@ namespace App\Repositories\brand;
 
 use App\Enums\StatusEnum;
 use App\Models\Brand;
+use App\Models\Member;
 use App\Traits\ImageTrait;
 use Illuminate\Config\Repository;
 use Illuminate\Database\Eloquent\Model;
@@ -98,7 +99,7 @@ class BrandRepository extends Repository implements BrandInterface
                 $thumbnailNew = $thumbnailName;
 
                 if ($thumbnailNew) {
-                    $result = $this->imageTrait->deleteImage($request->thumbnail_old,$folderName);
+                    $result = $this->imageTrait->deleteImage($request->thumbnail_old,$folderName,null);
                     if($result){
                         $updateData['logo'] = $thumbnailNew;
                     }
@@ -121,14 +122,18 @@ class BrandRepository extends Repository implements BrandInterface
     {
         DB::beginTransaction();
         try {
+            $brand = Brand::find($request->id);
+            $this->imageTrait->deleteImage($brand->logo,'brands',null);
             $this->model
                 ->query()
                 ->where('id', $request->id)
                 ->delete();
             DB::commit();
+            return true;
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            return false;
         }
     }
 }

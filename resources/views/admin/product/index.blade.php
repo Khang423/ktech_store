@@ -117,7 +117,7 @@
                         searchable: false,
                         render: function(data) {
                             return `
-                                <img src="{{ asset('asset/admin/products') }}/${data.avatar}" class="rounded-circle me-3" height="60" width="60">
+                                <img src="{{ asset('asset/admin/products') }}/${data.id}/${data.thumbnail}" class=" me-3" height="100" width="100">
                             `;
                         }
                     },
@@ -197,6 +197,9 @@
                     $('td:eq(1)', row).html(index + 1 + this.api().page.info().start);
                 }
             });
+
+            $routeDelete = '{{ route('admin.products.delete') }}';
+            destroy($routeDelete, table);
         });
     </script>
 @endpush

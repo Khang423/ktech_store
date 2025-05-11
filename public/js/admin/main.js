@@ -78,10 +78,10 @@ function destroy ($routeDelete,$table){
                 $table.draw();
             },
             error: function (data) {
-                let datas = data.responseJSON;
-                datas.messages ?
-                    toast(datas.messages, 'error') :
-                    toast(datas.errors.id, 'error');
+                // let datas = data.responseJSON;
+                // datas.messages ?
+                //     toast(datas.messages, 'error') :
+                //     toast(datas.errors.id, 'error');
             }
         });
     });

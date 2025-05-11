@@ -47,9 +47,9 @@ class Brand extends Model
         switch($value)
             {
                 case StatusEnum::ON:
-                    return 'On';
+                    return 'Hoạt động';
                 case StatusEnum::OFF:
-                    return 'Off';
+                    return 'Ngưng hoạt động';
                 default:
                     return ' ';
             }

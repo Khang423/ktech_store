@@ -1,8 +1,8 @@
 <div class="leftside-menu">
-    <a href="{{ env('APP_URL') }}" class="logo logo-light">
-        <span class="logo-lg">
+    <a href="{{ env('APP_URL') }}" class="logo logo-light ">
+        <span class="logo-lg mt-3">
             <img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="Hytertech"
-                style="width: 50px;height: 50px">
+                style="width: 100px;height: 100px">
         </span>
         <span class="logo-sm">
             <img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="Hytertech"
@@ -41,17 +41,12 @@
                     <ul class="side-nav-second-level">
                         <li>
                             <a href="{{ route('admin.products.index') }}">
-                                Laptop
+                                Danh sách sản phẩm
                             </a>
                         </li>
                         <li>
                             <a href="/">
-                                Điện thoại
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Phụ kiện
+                                Loại sản phẩm
                             </a>
                         </li>
                         <li>

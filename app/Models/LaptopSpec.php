@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LaptopSpec extends Model
 {
-    protected $filable = [
+    protected $fillable = [
         'product_id',
         'gpu',
         'cpu',
@@ -16,14 +16,13 @@ class LaptopSpec extends Model
         'storage_size',
         'display_size',
         'display_resolution',
-        'display_technolory',
+        'display_technology',
         'display_panel',
         'refresh_rate',
         'audio_technology',
         'memory_card_slot',
         'wifi',
         'bluetooth_version',
-        'usb_ports',
         'dimensions',
         'weight',
         'material',
@@ -33,6 +32,7 @@ class LaptopSpec extends Model
         'keyboard_type',
         'other_feature',
         'security',
+        'release_date',
         'created_at',
         'updated_at'
     ];

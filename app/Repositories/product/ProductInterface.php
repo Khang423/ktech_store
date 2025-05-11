@@ -7,4 +7,5 @@ interface ProductInterface {
     public function getList();
     public function update($request,$member);
     public function delete($parameters);
+    public function delete_image($parameters);
 }

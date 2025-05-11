@@ -57,7 +57,10 @@ class BrandController extends Controller
     }
     public function delete(Request $request)
     {
-        $this->brandInterface->delete($request);
-        return $this->successResponse();
+        $result = $this->brandInterface->delete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }

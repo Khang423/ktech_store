@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\product\StoreRequest;
+use App\Http\Requests\Admin\product\UpdateRequest;
+use App\Models\Brand;
+use App\Models\CategoryProduct;
+use App\Models\LaptopSpec;
+use App\Models\PhoneSpec;
 use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\ProductVersion;
+use App\Models\Supplier;
 use App\Repositories\product\ProductInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class ProductController extends Controller
 {
@@ -17,8 +27,7 @@ class ProductController extends Controller
     public function __construct(
         ProductInterface $productInterface,
         ProductInterface $productRepository
-    )
-    {
+    ) {
         $this->productInterface = $productInterface;
         $this->productRepository = $productRepository;
     }
@@ -35,26 +44,71 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.product.create');
+        $category_product = CategoryProduct::query()->select(['id', 'name'])->get();
+        $brand = Brand::query()->select(['id', 'name'])->get();
+        $Supplier = Supplier::query()->select(['id', 'name'])->get();
+        return view('admin.product.create', [
+            'category_product' => $category_product,
+            'brand' => $brand,
+            'supplier' => $Supplier,
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        dd($request);
+        $result = $this->productInterface->store($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 
-    public function edit()
+    public function edit(ProductVersion $productVersion)
     {
-        return view('admin.product.edit');
+        $category_product = CategoryProduct::query()->select(['id', 'name'])->get();
+        $brand = Brand::query()->select(['id', 'name'])->get();
+        $Supplier = Supplier::query()->select(['id', 'name'])->get();
+        $laptop = LaptopSpec::query()->where('product_id', $productVersion->id)->first();
+        $phone = PhoneSpec::query()->where('product_id', $productVersion->id)->first();
+        $product = Product::query()->find($productVersion->product_id);
+        $product_image = ProductImage::query()->where('product_id', $productVersion->id)->get();
+        return view('admin.product.edit', [
+            'productVersion' => $productVersion,
+            'product' => $product,
+            'category_product' => $category_product,
+            'brand' => $brand,
+            'supplier' => $Supplier,
+            'laptop' => $laptop,
+            'phone' => $phone,
+            'product_image' => $product_image,
+        ]);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateRequest $request, ProductVersion $productVersion)
     {
-
+        $result = $this->productInterface->update($request, $productVersion);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
+
 
     public function delete(Request $request)
     {
+        $result = $this->productInterface->delete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
+    }
 
+    public function destroy_image(Request $request)
+    {
+        $result = $this->productInterface->delete_image($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 }

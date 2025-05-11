@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('storage_size')->nullable();
             $table->string('display_size')->nullable();
             $table->string('display_resolution')->nullable();
-            $table->string('display_technolory')->nullable();
+            $table->string('display_technology')->nullable();
             $table->string('display_panel')->nullable();
             $table->string('refresh_rate')->nullable();
             $table->string('audio_technology')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('wifi')->nullable();
             $table->string('bluetooth_version')->nullable();
             $table->string('usb_ports')->nullable();
-            $table->string('dimensions')->nullable();
+            $table->string('dimension')->nullable();
             $table->string('weight')->nullable();
             $table->string('material')->nullable();
             $table->string('operating_system')->nullable();
@@ -38,6 +38,7 @@ return new class extends Migration
             $table->string('keyboard_type')->nullable();
             $table->string('other_feature')->nullable();
             $table->string('security')->nullable();
+            $table->string('release_date')->nullable();
             $table->timestamps();
         });
     }

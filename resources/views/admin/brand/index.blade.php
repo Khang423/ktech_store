@@ -211,28 +211,8 @@
                     $('td:eq(1)', row).html(index + 1 + this.api().page.info().start);
                 }
             });
-
-            $(document).on('click', '.destroy', function(e) {
-                e.preventDefault();
-                let form = $(this).parents('form');
-
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'DELETE',
-                    dataType: 'json',
-                    data: form.serialize(),
-                    success: function() {
-                        toast('Xóa thành công.');
-                        table.draw();
-                    },
-                    error: function(data) {
-                        let datas = data.responseJSON;
-                        datas.messages ?
-                            toast(datas.messages, 'error') :
-                            toast(datas.errors.id, 'error');
-                    }
-                });
-            });
+            $routeDelete = '{{ route('admin.brands.delete') }}';
+            destroy($routeDelete, table);
         });
     </script>
 @endpush

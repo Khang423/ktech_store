@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('display_refresh_rate')->nullable();
             $table->string('display_features')->nullable();
             $table->string('rear_camera')->nullable();
+            $table->string('front_camera')->nullable();
             $table->string('camera_features')->nullable();
             $table->string('chipset')->nullable();
             $table->string('gpu')->nullable();
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->string('charging_port')->nullable();
             $table->string('operating_system')->nullable();
             $table->string('weight')->nullable();
+            $table->string('dimension')->nullable();
             $table->string('frame_material')->nullable();
             $table->string('water_dust_resistance')->nullable();
             $table->string('audio_technology')->nullable();
@@ -40,6 +42,7 @@ return new class extends Migration
             $table->string('other_sensors')->nullable();
             $table->string('wifi_technology')->nullable();
             $table->string('bluetooth_technology')->nullable();
+            $table->string('release_date')->nullable();
             $table->timestamps();
         });
     }

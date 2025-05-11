@@ -47,8 +47,9 @@ Route::group([
         Route::post('/getList', [ProductController::class, 'getList'])->name('getList');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::post('/store', [ProductController::class, 'store'])->name('store');
-        Route::get('/edit/{product:slug}', [ProductController::class, 'edit'])->name('edit');
-        Route::put('/edit/{product:slug}', [ProductController::class, 'update'])->name('update');
+        Route::get('/edit/{productVersion:slug}', [ProductController::class, 'edit'])->name('edit');
+        Route::put('/edit/{productVersion:slug}', [ProductController::class, 'update'])->name('update');
+        Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
         Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
     });
     // Permission route
