@@ -1,0 +1,157 @@
+.header .container .content-mobile {
+    height: 100%;
+    width: 100%;
+}
+.header .container .content-mobile .logo {
+    width: 100%;
+    height: 50%;
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom: -20px;
+}
+.header .container .content-mobile .logo img {
+    width: 7rem;
+    height: 3.5rem;
+    justify-content: center;
+    margin-top: -30px;
+}
+/* css button category Product */
+.header .container .content-mobile .category-product {
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
+}
+.header .container .content-mobile .category-product .content .btn-menu{
+    cursor: pointer;
+}
+.header .container .content-mobile .category-product .content .btn-menu img {
+    width: 26px;
+    height: 26px;
+    padding-bottom: 3px;
+    margin-left: 5px;
+}
+
+/* css search bar */
+.header .container .content-mobile .search-bar {
+    height: 40px;
+    width: 100%;
+    position: relative;
+}
+.header .container .content-mobile .search-bar input {
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    padding-top: 3px;
+    padding-left: 15px;
+    color: lightgray;
+}
+.header .container .content-mobile .search-bar .circle-icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    background-color: #18abef41;
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    padding: 2px;
+    padding-left: 5px;
+}
+.header .container .content-mobile .search-bar .circle-icon:hover {
+    background-color: #18abef66;
+    cursor: pointer;
+}
+.header .container .content-mobile .search-bar #icon-search {
+    font-size: 18px;
+    color: #1867ef;
+}
+/* css profile and cart */
+.header .container .content-mobile .cart {
+    height: 100%;
+    width: 100%;
+}
+.header .container .content-mobile .cart .circle-cart {
+    height: 40px;
+    width: 40px;
+    margin-top: 8px;
+    margin-left: -100%;
+    background-color: #090d1466;
+    border-radius: 50px;
+    position: relative;
+}
+.header .container .content-mobile .cart .circle-cart:hover {
+    background-color: #090d148a;
+    cursor: pointer;
+}
+
+.header .container .content-mobile .cart .circle-cart img {
+    height: 23px;
+    width: 23px;
+    position: absolute;
+    top: 10px;
+    left: 7px;
+}
+.header .container .content-mobile .cart .circle-cart .quantity-item-cart {
+    font-size: 10px;
+    position: absolute;
+    height: 13px;
+    width: 13px;
+    background-color: #18abef;
+    color: #fff;
+    border-radius: 25px;
+    padding-left: 3.5px;
+    padding-bottom: 1.5px;
+    top: 5px;
+    left: 20px;
+}
+/* menu */
+.header .container .menu-mobile{
+    position: fixed;
+    top: 0px;
+    left: -100vw;
+    width: 100vw;
+    height: 100vh;
+    transition: left 0.3s ease;
+    background-color:#fff;
+}
+
+.menu-mobile .header-bar{
+    position: fixed;
+    height: 5rem;
+    width: 100vw;
+    background-color: #18abef;
+    justify-content: start;
+}
+.menu-mobile .logo{
+    height: 100%;
+    width: 12rem;
+}
+.menu-mobile .logo img{
+    height: 4rem;
+    width: 12rem;
+    margin: 0px;
+    margin-top: 0.5rem;
+}
+
+.menu-mobile #btn-close{
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    font-size: 30px;
+    color: #fff;
+}
+.menu-mobile #btn-close:hover{
+    color: gray;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .header .container .content-mobile .cart {
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        margin-left: -18px;
+    }
+}

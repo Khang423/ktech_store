@@ -1,0 +1,198 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+/* header bar */
+.header {
+    width: 100%;
+    height: 5rem;
+    background-color: #18abef;
+}
+.header .container {
+    width: 70%;
+    height: 100%;
+}
+/* css logo */
+.header .container .content .logo {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    cursor: pointer;
+}
+.header .container .content .logo img {
+    width: 12rem;
+    height: 3.5rem;
+    margin-left: -30%;
+}
+/* css button category Product */
+.header .container .content .category-product {
+    height: 100%;
+    width: 100%;
+    padding-top: 20px;
+}
+.header .container .content .category-product .content {
+    height: 40px;
+    width: 140px;
+    padding: 10px;
+    margin-left: 0px;
+    background-color: #090d1466;
+    border-radius: 50px;
+}
+.header .container .content .category-product .content:hover {
+    cursor: pointer;
+    background-color: #090d148a;
+}
+.header .container .content .category-product .content .menu img {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 3px;
+    margin-left: 5px;
+}
+
+.header .container .content .category-product .content .title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 15px;
+    color: #fff;
+}
+/* css search bar */
+.header .container .content .search-bar {
+    height: 100%;
+    width: 100%;
+    padding-top: 20px;
+}
+.header .container .content .search-bar .content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.header .container .content .search-bar .content input {
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    padding-top: 3px;
+    padding-left: 15px;
+    color: lightgray;
+}
+.header .container .content .search-bar .content .circle-icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    background-color: #18abef41;
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    padding: 2px;
+    padding-left: 5px;
+}
+.header .container .content .search-bar .content .circle-icon:hover {
+    background-color: #18abef66;
+    cursor: pointer;
+}
+.header .container .content .search-bar .content #icon-search {
+    font-size: 18px;
+    color: #1867ef;
+}
+/* css profile and cart */
+.header .container .content .profile {
+    height: 100%;
+    width: 75%;
+    padding-top: 20px;
+    margin-left: 25%;
+}
+.header .container .content .profile .user {
+    height: 100%;
+    width: 70px;
+    position: relative;
+}
+.header .container .content .profile .user .circle-user {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    background-color: #090d1466;
+}
+.header .container .content .profile .user .circle-user:hover {
+    background-color: #090d148a;
+    cursor: pointer;
+}
+.header .container .content .profile .user .circle-user img {
+    position: absolute;
+    top: 7px;
+    left: 8px;
+}
+
+.header .container .content .cart {
+    height: 100%;
+    width: 100%;
+    padding-top: 20px;
+}
+.header .container .content .cart {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.header .container .content .cart .border-cart {
+    height: 40px;
+    width: 100%;
+    background-color: #090d1466;
+    position: absolute;
+    border-radius: 50px;
+    padding: 7px;
+    padding-left: 18px;
+    top: 0px;
+}
+
+.header .container .content .cart .border-cart:hover {
+    cursor: pointer;
+    background-color: #090d148a;
+}
+.header .container .content .cart .content .icon-cart img {
+    height: 26px;
+    width: 26px;
+}
+.header .container .content .cart .content .title {
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.header .container .content .cart .content .circle-quantity-item-cart {
+    height: 15px;
+    width: 15px;
+    background-color: #18abef;
+    position: absolute;
+    color: #fff;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 3.8px;
+    padding-bottom: 3.5px;
+    top: 5px;
+    left: 35px;
+}
+/* css mobile */
+.header .container .content-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .header .container .content {
+        display: none;
+    }
+    .header .container .content-mobile {
+        display: block;
+    }
+    .header .container {
+    width: 100%;
+    height: 100%;
+    }
+    .header {
+        width: 100%;
+        height: 7rem;
+        background-color: #18abef;
+    }
+}
