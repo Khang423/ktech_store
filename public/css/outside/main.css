@@ -1,0 +1,112 @@
+body{
+    background-color: rgb(242, 242, 242);
+}
+.empty{
+    margin-top: 5rem;
+}
+#section-slide{
+    height: 400px;
+    width: 100%;
+    background-color: aqua;
+}
+/* css section laptop */
+#section-laptop{
+    height: 400px;
+    width: 100%;
+}
+#section-laptop .card-product{
+    width: 20%;
+    height: 100%;
+    border-radius: 10px;
+    padding:15px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+#section-laptop .card-product .product-content{
+    width: 100%;
+    height: 100%;
+}
+#section-laptop .card-product .product-discount {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    position: relative;
+}
+#section-laptop .card-product .product-discount img{
+    height: 100%;
+    width: 100px;
+    position: absolute;
+    top: -15px;
+    left: -20px;
+}
+#section-laptop .card-product .product-discount .percent-discount{
+    font-size: 17px;
+    font-weight: bold;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    color: #fff;
+}
+#section-laptop .card-product .product-thumbnail {
+    height: 185px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+#section-laptop .card-product .product-thumbnail img{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#section-laptop .card-product .product-title {
+    height: 65px;
+    margin-top: 1%;
+    width: 100%;
+    font-size: 15px;
+    color: #000;
+    font-weight: 400;
+    overflow-wrap: break-word;
+}
+
+#section-laptop .card-product .product-price {
+    height: 30px;
+    width: 100%;
+    font-size: 20px;
+    color: #1880ef;
+    font-weight: 400;
+    overflow-wrap: break-word;
+}
+#section-laptop .card-product .product-rate {
+    height:30px;
+    width: 100%;
+    padding-top: 5px;
+    position: relative;
+}
+#section-laptop .card-product .product-rate img {
+    height:20px;
+    width: 20px;
+}
+#section-laptop .card-product .product-rate .icon-heart {
+    background-image: url('/asset/outside/icon/heart.png');
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+#section-laptop .card-product .product-rate .icon-heart:hover {
+    background-image: url('/asset/outside/icon/heart-red.png');
+    cursor: pointer;
+}
+
+#section-laptop .card-product .product-rate .title-heart {
+    position: absolute;
+    bottom: 3px;
+    right: 30px;
+    font-size: 15px;
+    color: rgb(255, 72, 72);
+}

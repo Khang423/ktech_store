@@ -16,18 +16,19 @@
     <link href="{{ asset('css/admin/hyper/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/outside/header.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/outside/header-mobile.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/outside/main.css') }}" rel="stylesheet" type="text/css" />
     @stack('css')
 </head>
 
 <body>
-    <div class="wrapper">
-        @include('outside.layout.header')
-        <div class="content-page">
 
-
+    @include('outside.layout.header')
+    <div class="container">
+        <div class="main-content">
+            @yield('content')
         </div>
-        @include('outside.layout.footer')
     </div>
+    @include('outside.layout.footer')
     <script src="{{ asset('js/libraries/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('js/admin/hyper/hyper-config.js') }}"></script>
     <script src="{{ asset('js/admin/hyper/vendor.min.js') }}"></script>

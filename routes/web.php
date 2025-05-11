@@ -9,11 +9,18 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryProductController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('outside.layout.master');
+// route home
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::group([
+    'prefix' => 'home',
+    'as' => 'home.'
+], function () {
+
 });
+// route admin
 Route::get('/admin', [AuthController::class, 'index'])->name('admin.index');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login');
 Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
