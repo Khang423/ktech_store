@@ -1,29 +1,58 @@
-body{
+body {
     background-color: rgb(242, 242, 242);
 }
-.empty{
-    margin-top: 5rem;
+.empty {
+    margin-top: 7rem;
 }
-#section-slide{
+#section-slide {
     height: 400px;
     width: 100%;
-    background-color: aqua;
+}
+#section-slide .swiper-banner {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#section-slide .swiper-banner .swiper-slide {
+    height: 100%;
+    width: 100%;
+}
+#section-slide .swiper-banner .swiper-slide img {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#section-slide .swiper-banner .swiper-pagination {
+    position: absolute;
+    bottom: 30px;
 }
 /* css section laptop */
-#section-laptop{
-    height: 400px;
+#section-laptop {
+    height: 420px;
     width: 100%;
 }
-#section-laptop .card-product{
-    width: 20%;
+#section-laptop .swiper-product-item {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 9px;
+}
+#section-laptop .card-product {
+    width: 100%;
     height: 100%;
     border-radius: 10px;
-    padding:15px;
+    padding: 15px;
     background-color: #fff;
+    cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-#section-laptop .card-product .product-content{
+#section-laptop .card-product .product-content {
     width: 100%;
     height: 100%;
 }
@@ -33,14 +62,14 @@ body{
     border-radius: 10px;
     position: relative;
 }
-#section-laptop .card-product .product-discount img{
+#section-laptop .card-product .product-discount img {
     height: 100%;
     width: 100px;
     position: absolute;
     top: -15px;
     left: -20px;
 }
-#section-laptop .card-product .product-discount .percent-discount{
+#section-laptop .card-product .product-discount .percent-discount {
     font-size: 17px;
     font-weight: bold;
     position: absolute;
@@ -50,48 +79,50 @@ body{
 }
 #section-laptop .card-product .product-thumbnail {
     height: 185px;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    width: 85%;
+    margin-left: 7.5%;
     border-radius: 10px;
 }
-#section-laptop .card-product .product-thumbnail img{
+#section-laptop .card-product .product-thumbnail img {
     height: 100%;
     width: 100%;
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 #section-laptop .card-product .product-title {
     height: 65px;
     margin-top: 1%;
     width: 100%;
-    font-size: 15px;
+    font-size: 16px;
     color: #000;
-    font-weight: 400;
+    font-weight: 600;
     overflow-wrap: break-word;
 }
 
 #section-laptop .card-product .product-price {
     height: 30px;
     width: 100%;
-    font-size: 20px;
-    color: #1880ef;
-    font-weight: 400;
+    font-size: 18px;
+    color: #ff0101;
+    font-weight: 600;
     overflow-wrap: break-word;
 }
 #section-laptop .card-product .product-rate {
-    height:30px;
+    margin-top: 20px;
+    height: 30px;
     width: 100%;
     padding-top: 5px;
     position: relative;
 }
 #section-laptop .card-product .product-rate img {
-    height:20px;
+    height: 20px;
     width: 20px;
 }
 #section-laptop .card-product .product-rate .icon-heart {
-    background-image: url('/asset/outside/icon/heart.png');
+    background-image: url("/asset/outside/icon/heart.png");
     height: 25px;
     width: 25px;
     position: absolute;
@@ -99,7 +130,7 @@ body{
     right: 0px;
 }
 #section-laptop .card-product .product-rate .icon-heart:hover {
-    background-image: url('/asset/outside/icon/heart-red.png');
+    background-image: url("/asset/outside/icon/heart-red.png");
     cursor: pointer;
 }
 
@@ -109,4 +140,129 @@ body{
     right: 30px;
     font-size: 15px;
     color: rgb(255, 72, 72);
+}
+
+/* css section category product */
+#section-category-product {
+    margin-top: 30px;
+    height: 240px;
+    width: 100%;
+    display: flex;
+}
+#section-category-product .swiper-category-product {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 9px;
+}
+#section-category-product .category-product-card {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 0px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+#section-category-product .category-product-card .category-product-content {
+    height: 100%;
+    width: 100%;
+}
+#section-category-product
+    .category-product-card
+    .category-product-content
+    .category-product-thumbnail {
+    height: 80%;
+    width: 100%;
+}
+
+#section-category-product
+    .category-product-card
+    .category-product-content
+    .category-product-thumbnail
+    img {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#section-category-product
+    .category-product-card
+    .category-product-content
+    .category-product-name {
+    height: 20%;
+    width: 100%;
+    padding: 10px 0px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+}
+@media (max-width: 480px) {
+    #section-laptop .card-product .product-title {
+        height: 65px;
+        margin-top: 1%;
+        width: 100%;
+        font-size: 12px;
+        color: #000;
+        font-weight: 600;
+        overflow-wrap: break-word;
+    }
+
+    #section-laptop .card-product .product-price {
+        height: 30px;
+        width: 100%;
+        font-size: 15px;
+        color: #ff0101;
+        font-weight: 600;
+        overflow-wrap: break-word;
+    }
+    #section-laptop .card-product .product-rate {
+        margin-top: 30px;
+        height: 30px;
+        width: 100%;
+        padding-top: 5px;
+        position: relative;
+    }
+    #section-laptop .card-product .product-rate img {
+        height: 12px;
+        width: 12px;
+    }
+    #section-laptop .card-product .product-rate .icon-heart {
+        background-image: url("/asset/outside/icon/heart.png");
+        background-size: cover;
+        height: 16px;
+        width: 16px;
+        position: absolute;
+        top: 5px;
+        right: 0px;
+    }
+    #section-laptop .card-product .product-rate .icon-heart:hover {
+        background-image: url("/asset/outside/icon/heart-red.png");
+        cursor: pointer;
+    }
+
+    #section-laptop .card-product .product-rate .title-heart {
+        position: absolute;
+        top: 6px;
+        right: 20px;
+        font-size: 10px;
+        color: rgb(255, 72, 72);
+    }
+
+    /* section slide */
+    #section-slide {
+        height: 200px;
+        width: 100%;
+    }
+    .empty {
+        margin-top: 9.8rem;
+    }
+    #section-slide .swiper-banner .swiper-slide img {
+        border-radius: 10px;
+    }
+    body {
+        background-color: rgb(255, 255, 255);
+    }
 }

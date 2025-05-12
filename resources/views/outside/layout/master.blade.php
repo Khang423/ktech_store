@@ -15,9 +15,13 @@
     <link href="{{ asset('css/admin/hyper/app-saas.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
     <link href="{{ asset('css/admin/hyper/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/outside/header.css') }}" rel="stylesheet" type="text/css" />
+    {{-- swiper css --}}
+    <link href="{{ asset('css/libraries/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/outside/header-mobile.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/outside/main.css') }}" rel="stylesheet" type="text/css" />
+
     @stack('css')
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 
 <body>
@@ -34,6 +38,9 @@
     <script src="{{ asset('js/admin/hyper/vendor.min.js') }}"></script>
     <script src="{{ asset('js/admin/hyper/app.min.js') }}"></script>
     <script src="{{ asset('js/admin/main.js') }}"></script>
+
+    {{-- swiper js  --}}
+    <script src="{{ asset('js/libraries/swiper/swiper-bundle.min.js') }}"></script>
 
     <script src="{{ asset('js/libraries/sweetalert/sweetalert2.js') }}"></script>
     <script src="{{ asset('js/libraries/sweetalert/confirm_toast.js') }}"></script>

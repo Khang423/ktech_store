@@ -8,6 +8,13 @@ body {
     top: 0px;
     background-color: #18abef;
     position: fixed;
+    z-index: 9999999;
+}
+.header .contact {
+    width: 100vw;
+    height: 2rem;
+    background-color: #efabab;
+    position: fixed;
 }
 .header .container {
     padding-left: 30px;
