@@ -21,7 +21,7 @@
     width: 100%;
     margin-top: 15px;
 }
-.header .container .content-mobile .category-product .content .btn-menu{
+.header .container .content-mobile .category-product .content .btn-menu {
     cursor: pointer;
 }
 .header .container .content-mobile .category-product .content .btn-menu img {
@@ -106,48 +106,93 @@
     left: 20px;
 }
 /* menu */
-.header .container .menu-mobile{
+.header .container .menu-mobile {
     position: fixed;
     top: 0px;
-    left: -100vw;
+    left: 0px;
     width: 100vw;
     height: 100vh;
     transition: left 0.3s ease;
-    background-color:#fff;
+    background-color: #fff;
+    overflow-x: auto;
     z-index: 9999999;
 }
 
-.menu-mobile .header-bar{
+.menu-mobile .header-bar {
     position: fixed;
     height: 5rem;
     width: 100vw;
-    background-color: #18abef;
+    background-color: #2a52be;
     justify-content: start;
 }
-.menu-mobile .logo{
+.menu-mobile .logo {
     height: 100%;
     width: 12rem;
 }
-.menu-mobile .logo img{
+.menu-mobile .logo img {
     height: 4rem;
-    width: 12rem;
+    width: 90%;
     margin: 0px;
     margin-top: 0.5rem;
 }
 
-.menu-mobile #btn-close{
+.menu-mobile #btn-close {
     position: absolute;
     right: 30px;
     top: 20px;
     font-size: 30px;
     color: #fff;
 }
-.menu-mobile #btn-close:hover{
+.menu-mobile #btn-close:hover {
     color: gray;
     cursor: pointer;
 }
-
-@media (max-width: 480px) {
+/* meunu mobile content */
+.header .menu-mobile .mobile-content {
+    margin-top: 5rem;
+    height: 100%;
+    width: 100%;
+    background-color: #ecf3ff;
+}
+.header .menu-mobile .mobile-content .header-content {
+    height: 7rem;
+    width: 100%;
+}
+/* header content left */
+.header .menu-mobile .mobile-content .header-content .content-left {
+    height: 100%;
+    width: 65%;
+    padding: 15px;
+    gap:5px;
+}
+.header .menu-mobile .mobile-content .header-content .content-left .btn-register{
+    height: 60%;
+    width: 40%;
+    background-color: #ecf3ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    color: #2a52be;
+    font-size:15px;
+    font-weight: 500;
+    border: 2px solid #2a52be;
+}
+.header .menu-mobile .mobile-content .header-content .content-left .btn-login{
+    height: 60%;
+    width: 60%;
+    background-color: #ecf3ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    color: #fff;
+    font-size:15px;
+    font-weight: 500;
+    border:none;
+    background-color: #2a52be;
+}
+@media (max-width: 760px) {
     .header .container .content-mobile .cart {
         height: 100%;
         width: 100%;
