@@ -29,6 +29,14 @@
                 Quản lý chức năng
             </li>
             <li class="side-nav-item">
+                <a href="{{ route('admin.banners.index') }}" class="side-nav-link">
+                    <i class="uil uil-presentation-play"> </i>
+                    <span>
+                        Trình chiếu slide
+                    </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
                 <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarDevice" aria-expanded="false"
                     aria-controls="sidebarDevice">
                     <i class="uil-desktop"></i>
@@ -162,7 +170,10 @@
                     </ul>
                 </div>
             </li>
+            <li class="side-nav-title">
+            </li>
+            <li class="side-nav-title">
+            </li>
         </ul>
-        <div class="clearfix"></div>
     </div>
 </div>

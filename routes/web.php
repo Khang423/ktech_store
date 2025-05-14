@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MemberController;
@@ -124,5 +125,19 @@ Route::group([
         Route::get('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'edit'])->name('edit');
         Route::put('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'update'])->name('update');
         Route::delete('/delete', [CategoryProductController::class, 'delete'])->name('delete');
+    });
+
+    // categoryProduct
+    Route::group([
+        'prefix' => 'banner',
+        'as' => 'banners.'
+    ], function () {
+        Route::get('/', [BannerController::class, 'index'])->name('index');
+        Route::post('/getList', [BannerController::class, 'getList'])->name('getList');
+        Route::get('/create', [BannerController::class, 'create'])->name('create');
+        Route::post('/store', [BannerController::class, 'store'])->name('store');
+        Route::get('/edit/{banner:slug}', [BannerController::class, 'edit'])->name('edit');
+        Route::put('/edit/{banner:slug}', [BannerController::class, 'update'])->name('update');
+        Route::delete('/delete', [BannerController::class, 'delete'])->name('delete');
     });
 });

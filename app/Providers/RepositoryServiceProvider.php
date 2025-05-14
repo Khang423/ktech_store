@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Member;
 use App\Repositories\auth\AuthInterface;
 use App\Repositories\auth\AuthRepository;
+use App\Repositories\banner\BannerInterface;
+use App\Repositories\banner\BannerRepository;
 use App\Repositories\brand\BrandInterface;
 use App\Repositories\brand\BrandRepository;
 use App\Repositories\categoryProduct\CategoryProductInterface;
@@ -30,6 +32,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(BrandInterface::class, BrandRepository::class);
         $this->app->singleton(SupplierInterface::class, SupplierRepository::class);
         $this->app->singleton(CategoryProductInterface::class, CategoryProductRepository::class);
+        $this->app->singleton(BannerInterface::class, BannerRepository::class);
     }
 
     /**

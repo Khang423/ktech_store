@@ -124,7 +124,18 @@
                         <img src="https://fptshop.com.vn/img/login_mobile.png?w=360&q=75" alt="">
                     </div>
                 </div>
-                <div class="main-content">
+                <div class="main-content d-flex flex-column">
+                    @for ($i = 0; $i < 5; $i++)
+                        <div class="item d-flex">
+                                <div class="item-icon">
+                                    <img src="{{ asset('asset/outside/icon/fire.png') }}"
+                                        alt="">
+                                </div>
+                                <div class="item-name d-flex ">
+                                    Iphone
+                                </div>
+                            </div>
+                    @endfor
                 </div>
             </div>
         </div>

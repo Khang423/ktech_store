@@ -176,7 +176,7 @@ class ProductRepository extends Repository implements ProductInterface
                 ->where('id', $productVersion_id)
                 ->update([
                     'thumbnail' => $thumbnailName
-                ]);
+                ]);     
 
             // image[]
 
