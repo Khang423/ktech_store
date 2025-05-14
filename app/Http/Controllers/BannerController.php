@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Repositories\banner\BannerInterface;
 use App\Repositories\banner\BannerRepository;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
@@ -12,7 +13,7 @@ class BannerController extends Controller
 {
     protected $bannerInterface;
     protected $bannerRepository;
-
+    use ApiResponse;
     public function __construct(
         BannerInterface $bannerInterface,
         BannerRepository $bannerRepository
@@ -34,7 +35,11 @@ class BannerController extends Controller
     }
 
     public function store(Request $request){
-        dd($request);
+        $result = $this->bannerRepository->store($request);
+        if($result){
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 
     public function edit(Banner $banner) {
@@ -45,5 +50,13 @@ class BannerController extends Controller
 
     public function update(Request $request, Banner $banner){
         return $this->bannerInterface->update($request,$banner);
+    }
+
+    public function delete(Request $request){
+        $result = $this->bannerRepository->delete($request);
+        if($result){
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 }

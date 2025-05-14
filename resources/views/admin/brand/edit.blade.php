@@ -19,8 +19,8 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="custom-styles-preview">
-                            <form action="{{ route('admin.brands.update', $brand->slug) }}"
-                                enctype="multipart/form-data" autocomplete="off">
+                            <form action="{{ route('admin.brands.update', $brand->slug) }}" enctype="multipart/form-data"
+                                autocomplete="off">
                                 @csrf
                                 @method('PUT')
                                 <h4 class="header-title mb-3">Information</h4>
@@ -59,7 +59,8 @@
                                                             style="border:2px solid gray">
                                                     </div>
                                                 </div>
-                                                <input name="thumbnail_old" type="hidden" value="{{ $brand->logo }}" id="thumbnail_old"/>
+                                                <input name="thumbnail_old" type="hidden" value="{{ $brand->logo }}"
+                                                    id="thumbnail_old" />
                                                 <input name="thumbnail_new" type="file" id="thumbnail_new"
                                                     style="display: none" />
                                                 <div class="thumbnail text-center dropzone">

@@ -4,18 +4,11 @@
     <section id="section-slide">
         <div class="swiper-banner">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img
-                        src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/iphone-16-pro-max-thu-cu-moi-home.jpg">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/s25-home-moi.png"
-                        alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/vivo-v50-home.png"
-                        alt="">
-                </div>
+                @foreach ($banners as $item)
+                    <div class="swiper-slide">
+                        <img src="{{ asset('asset/admin/banners') }}/{{ $item->banner }}" alt="{{ $item->slug }}">
+                    </div>
+                @endforeach
             </div>
             <div class="swiper-pagination">
             </div>
