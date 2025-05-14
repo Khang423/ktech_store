@@ -109,7 +109,7 @@
 .header .container .menu-mobile {
     position: fixed;
     top: 0px;
-    left: 0px;
+    left: -100vw;
     width: 100vw;
     height: 100vh;
     transition: left 0.3s ease;
