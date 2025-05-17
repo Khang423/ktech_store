@@ -23,7 +23,7 @@ class LaptopSpec extends Model
         'memory_card_slot',
         'wifi',
         'bluetooth_version',
-        'dimensions',
+        'dimension',
         'weight',
         'material',
         'operating_system',
@@ -79,9 +79,8 @@ class LaptopSpec extends Model
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
-
     public function productVersions()
     {
-        return $this->belongsTo(ProductVersion::class, 'product_id', 'id');
+        return $this->belongsTo(ProductVersion::class, 'id', 'product_id');
     }
 }

@@ -8,13 +8,22 @@ $(document).ready(function () {
         $(".menu-mobile").animate({ left: "-100vw" }, 200);
     });
     // hide/show modal menu
-    $('#button-category-product').on('click', function () {
-        $('.modal-nemnu-overlay').removeClass('d-none');
+    $("#button-category-product").on("click", function () {
+        $(".modal-nemnu-overlay").removeClass("d-none");
         $(".modal-menu-category").animate({ top: "19.6rem" }, 200);
     });
 
-    $('#button-close-category-product').on('click', function () {
-        $('.modal-nemnu-overlay').addClass('d-none');
+    $("#button-close-category-product").on("click", function () {
+        $(".modal-nemnu-overlay").addClass("d-none");
         $(".modal-menu-category").animate({ top: "28.6rem" });
+    });
+
+    $(".btn-info-detail").on("click", function () {
+        $(".product-info-detail-overlay").removeClass('d-none');
+        $(".product-info-detail").animate({ right: "0px" }, 200);
+    });
+    $(".btn-product-info-detail-close").on("click", function () {
+        $(".product-info-detail-overlay").addClass('d-none');
+        $(".product-info-detail").animate({ right: "-30vw" }, 200);
     });
 });

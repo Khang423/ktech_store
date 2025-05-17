@@ -59,7 +59,15 @@ $(document).ready(function () {
         },
     });
 
-    $('.category-product-card').on('click', function () {
+    $(".category-product-card").on("click", function () {
         console.log(data_id);
     });
+
+    $(".card-product").on("click", function () {
+        let product_id = $(this).data("id");
+        let product_slug = $(this).data("slug");
+        window.location.href = "/product/" + product_slug;
+    });
+
+
 });

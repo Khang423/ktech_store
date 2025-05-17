@@ -110,7 +110,7 @@ class ProductRepository extends Repository implements ProductInterface
                     $dataLaptop['wifi'] = $request->wifi_laptop;
                     $dataLaptop['bluetooth_version'] = $request->bluetooth_version;
                     $dataLaptop['usb_ports'] = $request->usb_ports;
-                    $dataLaptop['dimensions'] = $request->dimension;
+                    $dataLaptop['dimension'] = $request->dimension;
                     $dataLaptop['weight'] = $request->weight_laptop;
                     $dataLaptop['material'] = $request->material;
                     $dataLaptop['operating_system'] = $request->operating_system;
@@ -176,7 +176,7 @@ class ProductRepository extends Repository implements ProductInterface
                 ->where('id', $productVersion_id)
                 ->update([
                     'thumbnail' => $thumbnailName
-                ]);     
+                ]);
 
             // image[]
 
@@ -249,7 +249,7 @@ class ProductRepository extends Repository implements ProductInterface
                     $dataLaptop['wifi'] = $request->wifi_laptop;
                     $dataLaptop['bluetooth_version'] = $request->bluetooth_version;
                     $dataLaptop['usb_ports'] = $request->usb_ports;
-                    $dataLaptop['dimensions'] = $request->dimension;
+                    $dataLaptop['dimension'] = $request->dimension;
                     $dataLaptop['weight'] = $request->weight_laptop;
                     $dataLaptop['material'] = $request->material;
                     $dataLaptop['operating_system'] = $request->operating_system;

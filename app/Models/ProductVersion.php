@@ -40,13 +40,16 @@ class ProductVersion extends Model
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
 
-    public function product(){
-        return $this->belongsTo(Product::class,'product_id','id');
+    public function products(){
+        return $this->belongsTo(Product::class,'product_id', 'id');
     }
     public function phoneSpecs(){
-        return $this->hasOne(PhoneSpec::class,'id', 'product_id');
+        return $this->hasOne(PhoneSpec::class,'product_id','id');
+    }
+     public function productImages(){
+        return $this->hasMany(ProductImage::class,'product_id','product_id');
     }
     public function laptopSpecs(){
-        return $this->hasOne(PhoneSpec::class,'id', 'product_id');
+        return $this->hasOne(LaptopSpec::class,'product_id', 'id');
     }
 }

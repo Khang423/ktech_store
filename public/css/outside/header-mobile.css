@@ -115,7 +115,7 @@
     transition: left 0.3s ease;
     background-color: #fff;
     overflow-x: auto;
-    z-index: 9999999;
+    z-index: 999;
 }
 
 .menu-mobile .header-bar {

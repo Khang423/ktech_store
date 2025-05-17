@@ -37,4 +37,8 @@ class Product extends Model
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
+
+    public function productVersions(){
+        return $this->hasMany(ProductVersion::class,'id','product_id');
+    }
 }

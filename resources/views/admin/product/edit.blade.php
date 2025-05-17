@@ -146,7 +146,8 @@
                                             <div class="mb-3">
                                                 <label for="gpu_laptop" class="form-label">Card Đồ hoạ</label>
                                                 <input type="text" class="form-control" id="gpu_laptop"
-                                                    placeholder="Card Đồ hoạ" name="gpu_laptop">
+                                                    placeholder="Card Đồ hoạ" name="gpu_laptop"
+                                                    value="{{ $laptop->gpu ?? '' }}">
                                                 <div class="text-danger mt-1 error-gpu_laptop"></div>
                                             </div>
                                         </div>
@@ -154,7 +155,7 @@
                                             <div class="mb-3">
                                                 <label for="cpu" class="form-label">CPU</label>
                                                 <input type="text" class="form-control" id="cpu"
-                                                    placeholder="CPU" name="cpu">
+                                                    placeholder="CPU" name="cpu" value="{{ $laptop->cpu ?? '' }}">
                                                 <div class="text-danger mt-1 error-cpu"></div>
                                             </div>
                                         </div>
@@ -174,19 +175,22 @@
                                             <div class="mb-2">
                                                 <label for="ram_size_laptop" class="form-label">Dung lượng RAM</label>
                                                 <input type="text" class="form-control" id="ram_size_laptop"
-                                                    placeholder="Dung lượng ram" name="ram_size_laptop">
+                                                    placeholder="Dung lượng ram" name="ram_size_laptop"
+                                                    value="{{ $laptop->ram_size ?? '' }}">
                                                 <div class="text-danger mt-1 error-ram_size_laptop"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="ram_type" class="form-label">Loại RAM</label>
                                                 <input type="text" class="form-control" id="ram_type"
-                                                    placeholder="Loại RAM" name="ram_type">
+                                                    placeholder="Loại RAM" name="ram_type"
+                                                    value="{{ $laptop->ram_type ?? '' }}">
                                                 <div class="text-danger mt-1 error-ram_type"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="ram_type" class="form-label">Số khe RAM</label>
                                                 <input type="text" class="form-control" id="ram_type"
-                                                    placeholder="Số khe RAM" name="ram_type">
+                                                    placeholder="Số khe RAM" name="ram_type"
+                                                    value="{{ $laptop->ram_type ?? '' }}">
                                                 <div class="text-danger mt-1 error-ram_type"></div>
                                             </div>
 
@@ -196,13 +200,15 @@
                                                 <label for="storage_size_laptop" class="form-label">Dung lượng bộ
                                                     nhớ</label>
                                                 <input type="text" class="form-control" id="storage_size_laptop"
-                                                    placeholder="Dung lượng bộ nhớ" name="storage_size_laptop">
+                                                    placeholder="Dung lượng bộ nhớ" name="storage_size_laptop"
+                                                    value="{{ $laptop->storage_size ?? '' }}">
                                                 <div class="text-danger mt-1 error-storage_size_laptop"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="storage_type" class="form-label">Loại bộ nhớ</label>
                                                 <input type="text" class="form-control" id="storage_type"
-                                                    placeholder="Loại bộ nhớ" name="storage_type">
+                                                    placeholder="Loại bộ nhớ" name="storage_type"
+                                                    value="{{ $laptop->storage_type ?? '' }}">
                                                 <div class="text-danger mt-1 error-storage_type"></div>
                                             </div>
                                         </div>
@@ -222,20 +228,23 @@
                                             <div class="mb-2">
                                                 <label for="refresh_rate" class="form-label">Tần số quét</label>
                                                 <input type="text" class="form-control" id="refresh_rate"
-                                                    placeholder="Tần số quét" name="refresh_rate">
+                                                    placeholder="Tần số quét" name="refresh_rate"
+                                                    value="{{ $laptop->refresh_rate ?? '' }}">
                                                 <div class="text-danger mt-1 error-refresh_rate"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="display_panel" class="form-label">Chất liệu tấm nền</label>
                                                 <input type="text" class="form-control" id="display_panel"
-                                                    placeholder="Chất liệu tấm nền" name="display_panel">
+                                                    placeholder="Chất liệu tấm nền" name="display_panel"
+                                                    value="{{ $laptop->display_panel ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_panel"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="display_size_laptop" class="form-label">Kích thước màn
                                                     hình</label>
                                                 <input type="text" class="form-control" id="display_size_laptop"
-                                                    placeholder="Kích thước màn hình" name="display_size_laptop">
+                                                    placeholder="Kích thước màn hình" name="display_size_laptop"
+                                                    value="{{ $laptop->display_size ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_size_laptop"></div>
                                             </div>
                                         </div>
@@ -244,14 +253,16 @@
                                                 <label for="display_technology" class="form-label">Công nghệ màn
                                                     hình</label>
                                                 <input type="text" class="form-control" id="display_technology"
-                                                    placeholder="Công nghệ màn hình" name="display_technology">
+                                                    placeholder="Công nghệ màn hình" name="display_technology"
+                                                    value="{{ $laptop->display_technology ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_technology"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="display_resolution_laptop" class="form-label">Độ phân giải màn
                                                     hình</label>
                                                 <input type="text" class="form-control" id="display_resolution_laptop"
-                                                    placeholder="Độ phân giải màn hình" name="display_resolution_laptop">
+                                                    placeholder="Độ phân giải màn hình" name="display_resolution_laptop"
+                                                    value="{{ $laptop->display_resolution ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_resolution_laptop"></div>
                                             </div>
                                         </div>
@@ -272,7 +283,8 @@
                                                 <label for="audio_technology_laptop" class="form-label">Công nghệ âm
                                                     thanh</label>
                                                 <input type="text" class="form-control" id="audio_technology_laptop"
-                                                    placeholder="Công nghệ âm thanh" name="audio_technology_laptop">
+                                                    placeholder="Công nghệ âm thanh" name="audio_technology_laptop"
+                                                    value="{{ $laptop->audio_technology ?? '' }}">
                                                 <div class="text-danger mt-1 error-audio_technology_laptop"></div>
                                             </div>
                                         </div>
@@ -280,7 +292,8 @@
                                             <div class="mb-2">
                                                 <label for="battery" class="form-label">Dung lượng pin</label>
                                                 <input type="text" class="form-control" id="battery"
-                                                    placeholder="Dung lượng pin" name="battery">
+                                                    placeholder="Dung lượng pin" name="battery"
+                                                    value="{{ $laptop->battery ?? '' }}">
                                                 <div class="text-danger mt-1 error-battery"></div>
                                             </div>
                                         </div>
@@ -300,22 +313,25 @@
                                             <div class="mb-2">
                                                 <label for="material" class="form-label">Chất liệu</label>
                                                 <input type="text" class="form-control" id="material"
-                                                    placeholder="Chất liệu" name="material">
+                                                    placeholder="Chất liệu" name="material"
+                                                    value="{{ $laptop->material ?? '' }}">
                                                 <div class="text-danger mt-1 error-material"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="weight_laptop" class="form-label">Trọng lượng</label>
                                                 <input type="text" class="form-control" id="weight_laptop"
-                                                    placeholder="Trọng lượng" name="weight_laptop">
+                                                    placeholder="Trọng lượng" name="weight_laptop"
+                                                    value="{{ $laptop->weight ?? '' }}">
                                                 <div class="text-danger mt-1 error-weight_laptop"></div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-2">
                                                 <label for="dimensions" class="form-label">Kích thước</label>
-                                                <input type="text" class="form-control" id="dimensions"
-                                                    placeholder="Kích thước" name="dimensions">
-                                                <div class="text-danger mt-1 error-dimensions"></div>
+                                                <input type="text" class="form-control" id="dimension"
+                                                    placeholder="Kích thước" name="dimension"
+                                                    value="{{ $laptop->dimension ?? '' }}">
+                                                <div class="text-danger mt-1 error-dimension"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -335,20 +351,23 @@
                                             <div class="mb-2">
                                                 <label for="security" class="form-label">Bảo mật</label>
                                                 <input type="text" class="form-control" id="security"
-                                                    placeholder="Bảo mật" name="security">
+                                                    placeholder="Bảo mật" name="security"
+                                                    value="{{ $laptop->security ?? '' }}">
                                                 <div class="text-danger mt-1 error-security"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="operating_system_laptop" class="form-label">Hệ điều
                                                     hành</label>
                                                 <input type="text" class="form-control" id="operating_system_laptop"
-                                                    placeholder="Hệ điều hành" name="operating_system_laptop">
+                                                    placeholder="Hệ điều hành" name="operating_system_laptop"
+                                                    value="{{ $laptop->operating_system ?? '' }}">
                                                 <div class="text-danger mt-1 error-operating_system_laptop"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="keyboard_type" class="form-label">Loại bàn phím </label>
                                                 <input type="text" class="form-control" id="keyboard_type"
-                                                    placeholder="Loại bàn phím " name="keyboard_type">
+                                                    placeholder="Loại bàn phím " name="keyboard_type"
+                                                    value="{{ $laptop->keyboard_type ?? ''}}">
                                                 <div class="text-danger mt-1 error-keyboard_type"></div>
                                             </div>
                                         </div>
@@ -356,19 +375,22 @@
                                             <div class="mb-2">
                                                 <label for="wifi_laptop" class="form-label">Wifi</label>
                                                 <input type="text" class="form-control" id="wifi_laptop"
-                                                    placeholder="Wifi" name="wifi_laptop">
+                                                    placeholder="Wifi" name="wifi_laptop"
+                                                    value="{{ $laptop->wifi ?? ''}}">
                                                 <div class="text-danger mt-1 error-wifi_laptop"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="memory_card_slot" class="form-label">Khe cắm thẻ nhớ</label>
                                                 <input type="text" class="form-control" id="memory_card_slot"
-                                                    placeholder="Khe cắm thẻ nhớ" name="memory_card_slot">
+                                                    placeholder="Khe cắm thẻ nhớ" name="memory_card_slot"
+                                                    value="{{ $laptop->memory_card_slot ?? ''}}">
                                                 <div class="text-danger mt-1 error-memory_card_slot"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="webcam" class="form-label">Camera</label>
                                                 <input type="text" class="form-control" id="webcam"
-                                                    placeholder="Camera" name="webcam">
+                                                    placeholder="Camera" name="webcam"
+                                                    value="{{ $laptop->webcam ?? ''}}">
                                                 <div class="text-danger mt-1 error-webcam"></div>
                                             </div>
                                         </div>
@@ -389,13 +411,15 @@
                                             <div class="mb-2">
                                                 <label for="usb_ports" class="form-label">Công kết nối</label>
                                                 <input type="text" class="form-control" id="usb_ports"
-                                                    placeholder="Công kết nối" name="usb_ports">
+                                                    placeholder="Công kết nối" name="usb_ports"
+                                                    value="{{ $laptop->usb_ports ?? ''}}">
                                                 <div class="text-danger mt-1 error-usb_ports"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="release_date" class="form-label">Ngày phát hành</label>
                                                 <input type="text" class="form-control" id="release_date"
-                                                    placeholder="Ngày phát hành" name="release_date">
+                                                    placeholder="Ngày phát hành" name="release_date"
+                                                    value="{{ $laptop->release_date ?? ''}}">
                                                 <div class="text-danger mt-1 error-release_date"></div>
                                             </div>
                                         </div>
@@ -403,7 +427,8 @@
                                             <div class="mb-2">
                                                 <label for="bluetooth_version" class="form-label">Bluetooth</label>
                                                 <input type="text" class="form-control" id="bluetooth_version"
-                                                    placeholder="Bluetooth" name="bluetooth_version">
+                                                    placeholder="Bluetooth" name="bluetooth_version"
+                                                    value="{{ $laptop->bluetooth_version ?? ''}}">
                                                 <div class="text-danger mt-1 error-bluetooth_version"></div>
                                             </div>
                                         </div>
@@ -413,6 +438,9 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- laptop specs --}}
+
                 <div class="phone d-none">
                     {{-- display --}}
                     <div class="card">
@@ -427,7 +455,7 @@
                                                     hình</label>
                                                 <input type="text" class="form-control" id="display_size_phone"
                                                     placeholder="Kích thước màn hình" name="display_size_phone"
-                                                    value="{{ $phone->display_size }}">
+                                                    value="{{ $phone->display_size ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_size_phone"></div>
                                             </div>
                                         </div>
@@ -436,7 +464,7 @@
                                                 <label for="display_type" class="form-label">Loại màn hình</label>
                                                 <input type="text" class="form-control" id="display_type"
                                                     placeholder="Loại màn hình" name="display_type"
-                                                    value="{{ $phone->display_type }}">
+                                                    value="{{ $phone->display_type ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_type"></div>
                                             </div>
                                         </div>
@@ -448,7 +476,7 @@
                                                     hình</label>
                                                 <input type="text" class="form-control" id="display_resolution_phone"
                                                     placeholder="Độ phân giải màn hình" name="display_resolution_phone"
-                                                    value="{{ $phone->display_resolution }}">
+                                                    value="{{ $phone->display_resolution ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_resolution_phone"></div>
                                             </div>
                                         </div>
@@ -457,7 +485,7 @@
                                                 <label for="display_refresh_rate" class="form-label">Tần số quét</label>
                                                 <input type="text" class="form-control" id="display_refresh_rate"
                                                     placeholder="Tần số quét" name="display_refresh_rate"
-                                                    value="{{ $phone->display_refresh_rate }}">
+                                                    value="{{ $phone->display_refresh_rate ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_refresh_rate"></div>
                                             </div>
                                         </div>
@@ -469,7 +497,7 @@
                                                     hình</label>
                                                 <input type="text" class="form-control" id="display_features"
                                                     placeholder="Tính năng màn hình" name="display_features"
-                                                    value="{{ $phone->display_features }}">
+                                                    value="{{ $phone->display_features ?? '' }}">
                                                 <div class="text-danger mt-1 error-display_features"></div>
                                             </div>
                                         </div>
@@ -490,7 +518,7 @@
                                         <div class="mb-2">
                                             <label for="rear_camera" class="form-label">Camera Sau</label>
                                             <textarea class="form-control" id="rear_camera" name="rear_camera" rows="3">
-                                                  {{$phone->rear_camera }}
+                                                  {{ $phone->rear_camera ?? '' }}
                                                 </textarea>
                                             <div class="text-danger mt-1 error-rear_camera"></div>
                                         </div>
@@ -499,7 +527,7 @@
                                             <label for="front_camera" class="form-label">Camera Trước</label>
                                             <input type="text" class="form-control" id="front_camera"
                                                 placeholder="Camera Trước" name="front_camera"
-                                                value="{{ $phone->front_camera }}">
+                                                value="{{ $phone->front_camera ?? '' }}">
                                             <div class="text-danger mt-1 error-front_camera"></div>
                                         </div>
 
@@ -508,7 +536,7 @@
                                         <div class="mb-2">
                                             <label for="camera_features" class="form-label">Tính năng camera</label>
                                             <textarea class="form-control" id="camera_features" name="camera_features" rows="3">
-                                                     {{ $phone->camera_features }}
+                                                     {{ $phone->camera_features ?? '' }}
                                                 </textarea>
                                             <div class="text-danger mt-1 error-camera_features"></div>
                                         </div>
@@ -528,7 +556,8 @@
                                             <div class="mb-2">
                                                 <label for="chipset" class="form-label">Chipset</label>
                                                 <input type="text" class="form-control" id="chipset"
-                                                    placeholder="Chipset" name="chipset" value="{{ $phone->chipset }}">
+                                                    placeholder="Chipset" name="chipset"
+                                                    value="{{ $phone->chipset ?? '' }}">
                                                 <div class="text-danger mt-1 error-chipset"></div>
                                             </div>
 
@@ -537,7 +566,8 @@
                                             <div class="mb-2">
                                                 <label for="gpu_phone" class="form-label">Chip Đồ hoạ</label>
                                                 <input type="text" class="form-control" id="gpu_phone"
-                                                    placeholder="Đồ hoạ" name="gpu_phone" value="{{ $phone->gpu }}">
+                                                    placeholder="Đồ hoạ" name="gpu_phone"
+                                                    value="{{ $phone->gpu ?? '' }}">
                                                 <div class="text-danger mt-1 error-gpu_phone"></div>
                                             </div>
                                         </div>
@@ -558,7 +588,7 @@
                                                 <label for="nfc_support" class="form-label">Công nghệ NFC</label>
                                                 <input type="text" class="form-control" id="nfc_support"
                                                     placeholder="Công nghệ NFC" name="nfc_support"
-                                                    value="{{ $phone->nfc_support }}">
+                                                    value="{{ $phone->nfc_support ?? '' }}">
                                                 <div class="text-danger mt-1 error-nfc_support"></div>
                                             </div>
                                         </div>
@@ -567,7 +597,7 @@
                                                 <label for="sim_type" class="form-label">Thẻ sim</label>
                                                 <input type="text" class="form-control" id="sim_type"
                                                     placeholder="Thẻ sim" name="sim_type"
-                                                    value="{{ $phone->sim_type }}">
+                                                    value="{{ $phone->sim_type ?? '' }}">
                                                 <div class="text-danger mt-1 error-sim_type"></div>
                                             </div>
                                         </div>
@@ -578,7 +608,7 @@
                                                 <label for="network_support" class="form-label">Hỗ trợ mạng</label>
                                                 <input type="text" class="form-control" id="network_support"
                                                     placeholder="Hỗ trợ mạng" name="network_support"
-                                                    value="{{ $phone->network_support }}">
+                                                    value="{{ $phone->network_support ?? '' }}">
                                                 <div class="text-danger mt-1 error-network_support"></div>
                                             </div>
                                         </div>
@@ -587,7 +617,7 @@
                                                 <label for="gps_support" class="form-label">GPS</label>
                                                 <input type="text" class="form-control" id="gps_support"
                                                     placeholder="GPS" name="gps_support"
-                                                    value="{{ $phone->gps_support }}">
+                                                    value="{{ $phone->gps_support ?? '' }}">
                                                 <div class="text-danger mt-1 error-gps_support"></div>
                                             </div>
                                         </div>
@@ -608,7 +638,7 @@
                                                 <label for="ram_size_phone" class="form-label">Dung lượng Ram</label>
                                                 <input type="text" class="form-control" id="ram_size_phone"
                                                     placeholder="Dung lượng Ram" name="ram_size_phone"
-                                                    value="{{ $phone->ram_size }}">
+                                                    value="{{ $phone->ram_size ?? '' }}">
                                                 <div class="text-danger mt-1 error-ram_size_phone"></div>
                                             </div>
                                         </div>
@@ -617,7 +647,7 @@
                                                 <label for="storage_size_phone" class="form-label">Bộ nhớ trong</label>
                                                 <input type="text" class="form-control" id="storage_size_phone"
                                                     placeholder="Bộ nhớ trong" name="storage_size_phone"
-                                                    value="{{ $phone->storage_size }}">
+                                                    value="{{ $phone->storage_size ?? '' }}">
                                                 <div class="text-danger mt-1 error-storage_size_phone"></div>
                                             </div>
                                         </div>
@@ -638,14 +668,14 @@
                                                 <label for="battery_capacity" class="form-label">Dung lượng pin</label>
                                                 <input type="text" class="form-control" id="battery_capacity"
                                                     placeholder="Dung lượng pin" name="battery_capacity"
-                                                    value="{{ $phone->battery_capacity }}">
+                                                    value="{{ $phone->battery_capacity ?? '' }}">
                                                 <div class="text-danger mt-1 error-battery_capacity"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="charging_port" class="form-label">Cổng sạc</label>
                                                 <input type="text" class="form-control" id="charging_port"
                                                     placeholder="Cổng sạc" name="charging_port"
-                                                    value="{{ $phone->charging_port }}">
+                                                    value="{{ $phone->charging_port ?? '' }}">
                                                 <div class="text-danger mt-1 error-charging_port"></div>
                                             </div>
 
@@ -654,7 +684,7 @@
                                             <div class="mb-2">
                                                 <label for="charging_technology" class="form-label">Công nghệ sạc</label>
                                                 <textarea class="form-control" name="charging_technology" id="charging_technology" rows="5">
-                                                     {!! $phone->charging_technology !!}
+                                                     {!! $phone->charging_technology ?? '' !!}
                                                     </textarea>
                                                 <div class="text-danger mt-1 error-charging_technology"></div>
                                             </div>
@@ -676,7 +706,7 @@
                                                 <label for="weight_phone" class="form-label">Trọng lượng</label>
                                                 <input type="text" class="form-control" id="weight_phone"
                                                     placeholder="Trọng lượng" name="weight_phone"
-                                                    value="{{ $phone->weight }}">
+                                                    value="{{ $phone->weight ?? '' }}">
                                                 <div class="text-danger mt-1 error-weight_phone"></div>
                                             </div>
                                             <div class="mb-2">
@@ -684,7 +714,7 @@
                                                     viền</label>
                                                 <input type="text" class="form-control" id="frame_material"
                                                     placeholder="Chất liệu khung viền" name="frame_material"
-                                                    value="{{ $phone->frame_material }}">
+                                                    value="{{ $phone->frame_material ?? '' }}">
                                                 <div class="text-danger mt-1 error-frame_material"></div>
                                             </div>
                                         </div>
@@ -693,7 +723,7 @@
                                                 <label for="dimension" class="form-label">Kích thước</label>
                                                 <input type="text" class="form-control" id="dimension"
                                                     placeholder="Kích thước" name="dimension"
-                                                    value="{{ $phone->dimension }}">
+                                                    value="{{ $phone->dimension ?? '' }}">
                                                 <div class="text-danger mt-1 error-dimension"></div>
                                             </div>
                                         </div>
@@ -715,7 +745,7 @@
                                                     hành</label>
                                                 <input type="text" class="form-control" id="operating_system_phone"
                                                     placeholder="Hệ điều hành" name="operating_system_phone"
-                                                    value="{{ $phone->operating_system }}">
+                                                    value="{{ $phone->operating_system ?? '' }}">
                                                 <div class="text-danger mt-1 error-operating_system_phone"></div>
                                             </div>
                                             <div class="mb-2">
@@ -723,7 +753,7 @@
                                                     bụi,nước</label>
                                                 <input type="text" class="form-control" id="water_dust_resistance"
                                                     placeholder="Chỉ số kháng bụi,nước" name="water_dust_resistance"
-                                                    value="{{ $phone->water_dust_resistance }}">
+                                                    value="{{ $phone->water_dust_resistance ?? '' }}">
                                                 <div class="text-danger mt-1 error-water_dust_resistance"></div>
                                             </div>
                                         </div>
@@ -733,7 +763,7 @@
                                                     thanh</label>
                                                 <input type="text" class="form-control" id="audio_technology_phone"
                                                     placeholder="Công nghệ âm thanh" name="audio_technology_phone"
-                                                    value="{{ $phone->audio_technology }}">
+                                                    value="{{ $phone->audio_technology ?? '' }}">
                                                 <div class="text-danger mt-1 error-audio_technology_phone"></div>
                                             </div>
                                         </div>
@@ -755,21 +785,21 @@
                                                     tay</label>
                                                 <input type="text" class="form-control" id="fingerprint_sensor"
                                                     placeholder="Cảm biến vân tay" name="fingerprint_sensor"
-                                                    value="{{ $phone->fingerprint_sensor }}">
+                                                    value="{{ $phone->fingerprint_sensor ?? '' }}">
                                                 <div class="text-danger mt-1 error-fingerprint_sensor"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="other_sensors" class="form-label">Cảm biến khác</label>
                                                 <input type="text" class="form-control" id="other_sensors"
                                                     placeholder="Cảm biến khác" name="other_sensors"
-                                                    value="{{ $phone->other_sensors }}">
+                                                    value="{{ $phone->other_sensors ?? '' }}">
                                                 <div class="text-danger mt-1 error-other_sensors"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="release_date" class="form-label">Ngày phát hành</label>
                                                 <input type="text" class="form-control" id="release_date"
                                                     placeholder="Ngày phát hành" name="release_date_phone"
-                                                    value="{{ $phone->release_date }}">
+                                                    value="{{ $phone->release_date ?? '' }}">
                                                 <div class="text-danger mt-1 error-release_date"></div>
                                             </div>
                                         </div>
@@ -778,14 +808,14 @@
                                                 <label for="wifi_technology" class="form-label">Wifi</label>
                                                 <input type="text" class="form-control" id="wifi_technology"
                                                     placeholder="Wifi" name="wifi_technology"
-                                                    value="{{ $phone->wifi_technology }}">
+                                                    value="{{ $phone->wifi_technology ?? '' }}">
                                                 <div class="text-danger mt-1 error-wifi_technology"></div>
                                             </div>
                                             <div class="mb-2">
                                                 <label for="bluetooth_technology" class="form-label">Bluetooth</label>
                                                 <input type="text" class="form-control" id="bluetooth_technology"
                                                     placeholder="Bluetooth" name="bluetooth_technology"
-                                                    value="{{ $phone->bluetooth_technology }}">
+                                                    value="{{ $phone->bluetooth_technology ?? '' }}">
                                                 <div class="text-danger mt-1 error-bluetooth_technology"></div>
                                             </div>
                                         </div>
@@ -810,7 +840,8 @@
                                         width="250" height="auto" class="img-fluid img-thumbnail mt-2 mb-2">
                                 </div>
                             </div>
-                            <input name="thumbnail_old" type="hidden"style="display: none"  value="{{$productVersion->thumbnail}}"/>
+                            <input name="thumbnail_old" type="hidden"style="display: none"
+                                value="{{ $productVersion->thumbnail }}" />
                             <input name="thumbnail_new" type="file" id="img_thumbnail" style="display: none" />
                             <div class="thumbnail text-center dropzone">
                                 <i class="h1 text-muted uil-upload-alt"></i>
@@ -960,7 +991,7 @@
                 preview_image.append(fileList);
             });
 
-            $('.destroy-image').click(function () {
+            $('.destroy-image').click(function() {
                 let button = $(this).parent();
                 let error_image = $(this).data('id');
 
@@ -978,12 +1009,12 @@
                         image: image,
                         _token: '{{ csrf_token() }}'
                     },
-                    success: function () {
+                    success: function() {
                         $(this).next('.old-img').hide();
                         button.remove();
                     },
-                    error: function (data) {
-                        $.each(data.responseJSON.errors, function (key, value) {
+                    error: function(data) {
+                        $.each(data.responseJSON.errors, function(key, value) {
                             // console.log(key + ': ' + value);
                             $('#error-img' + error_image).text(value);
                         });

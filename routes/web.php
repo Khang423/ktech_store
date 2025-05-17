@@ -14,13 +14,14 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 // route home
-Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::group([
-    'prefix' => 'home',
     'as' => 'home.'
 ], function () {
-
+    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/product/{productVersion:slug}', [HomeController::class, 'product_detail'])->name('product_detail');
 });
+
+
 // route admin
 Route::get('/admin', [AuthController::class, 'index'])->name('admin.index');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login');

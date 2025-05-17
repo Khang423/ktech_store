@@ -8,7 +8,7 @@ body {
     top: 0px;
     background-color: #2a52be;
     position: fixed;
-    z-index: 9999999;
+    z-index: 999;
 }
 
 .header .container {

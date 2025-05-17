@@ -88,6 +88,6 @@ class PhoneSpec extends Model
     }
 
     public function productVersions(){
-        return $this->belongsTo(ProductVersion::class, 'product_id','id');
+        return $this->belongsTo(ProductVersion::class, 'id','product_id');
     }
 }
