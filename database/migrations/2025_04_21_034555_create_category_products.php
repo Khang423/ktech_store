@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('category_products', function (Blueprint $table) {
@@ -16,6 +13,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('description')->nullable();
+            $table->smallInteger('product_type')->default(0);
+            $table->text('thumbnail')->nullable();
             $table->timestamps();
         });
     }

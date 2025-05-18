@@ -15,6 +15,7 @@ if (!function_exists('getLaptopSpecs')) {
             'cpu' => $product->laptopSpecs->cpu ?? null,
             'ram_size' => $product->laptopSpecs->ram_size ?? null,
             'ram_type' => $product->laptopSpecs->ram_type ?? null,
+            'ram_slot' => $product->laptopSpecs->ram_slot ?? null,
             'storage_type' => $product->laptopSpecs->storage_type ?? null,
             'storage_size' => $product->laptopSpecs->storage_size ?? null,
             'display_size' => $product->laptopSpecs->display_size ?? null,

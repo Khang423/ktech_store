@@ -90,12 +90,12 @@
             ĐIỆN THOẠI
         </h2>
     </div>
-    <section id="section-laptop">
+     <section id="section-laptop">
         <div class="swiper-product-item">
             <div class="swiper-wrapper">
-                @for ($i = 0; $i < 9; $i++)
+                @foreach ($product as $item)
                     <div class="swiper-slide">
-                        <div class="card-product ">
+                        <div class="card-product" data-id="{{ $item->id}}" data-slug="{{ $item->slug}}">
                             <div class="product-content" data-id="product-id">
                                 <div class="product-discount d-flex">
                                     <img src="{{ asset('asset/outside/icon/sale.png') }}" alt="Icon sale">
@@ -104,14 +104,14 @@
                                     </div>
                                 </div>
                                 <div class="product-thumbnail">
-                                    <img src="{{ asset('asset/admin/products/2/thumbnail_6820050d6115b.webp') }}"
-                                        alt="Product Image">
+                                    <img src="{{ asset('asset/admin/products') . '/' . $item->id . '/' . $item->thumbnail }}"
+                                        alt="">
                                 </div>
                                 <div class="product-title ">
-                                    iPhone 16 Pro Max 256GB | Chính hãng VN/A
+                                    {{ $item->name}}
                                 </div>
                                 <div class="product-price">
-                                    30.000.000đ
+                                    {{ formatPriceToVND($item->price)}}
                                 </div>
                                 <div class="product-note">
                                     Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn 3-6 tháng
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </section>

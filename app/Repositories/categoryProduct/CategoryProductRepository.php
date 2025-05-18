@@ -3,6 +3,7 @@
 namespace App\Repositories\categoryProduct;
 
 use App\Models\CategoryProduct;
+use App\Traits\ImageTrait;
 use Illuminate\Config\Repository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +13,12 @@ use Yajra\DataTables\DataTables;
 class CategoryProductRepository extends Repository implements CategoryProductInterface
 {
     private Model $model;
-
-    public function __construct(CategoryProduct $categoryProduct)
+    private $imageTrait;
+    public function __construct(CategoryProduct $categoryProduct, ImageTrait $imageTrait)
     {
         parent::__construct();
         $this->model = $categoryProduct;
+        $this->imageTrait = $imageTrait;
     }
 
     public function getList()
@@ -28,6 +30,24 @@ class CategoryProductRepository extends Repository implements CategoryProductInt
             ->editColumn('index', function ($object) {
                 static $i = 0;
                 return ++$i;
+            })
+            ->editColumn('thumbnail', function ($object) {
+                return [
+                    'thumbnail' => $object->thumbnail,
+                ];
+            })
+            ->editColumn('product_type', function ($object) {
+                if ($object->product_type == 0) {
+                    return 'Laptop';
+                } else if ($object->product_type == 1) {
+                    return 'Điện thoại';
+                }else if ($object->product_type == 2) {
+                    return 'Bàn phím';
+                }else if ($object->product_type == 3) {
+                    return 'Chuột';
+                }else {
+                    return 'Tai nghe';
+                }
             })
             ->addColumn('actions', function ($object) {
                 return [
@@ -47,6 +67,13 @@ class CategoryProductRepository extends Repository implements CategoryProductInt
             $dataStore['name'] = $request->name;
             $dataStore['description'] = $request->description;
             $dataStore['slug'] = Str::slug($request->name);
+            $dataStore['product_type'] = $request->product_type;
+            if ($request->hasFile('thumbnail')) {
+                $name_image = $this->imageTrait->convertToWebpAndStore($request->thumbnail, 'categoryProducts');
+                $dataStore['thumbnail'] = $name_image;
+                $this->model->query()->create($dataStore);
+                return true;
+            }
             $this->model->query()->create($dataStore);
             DB::commit();
             return true;
@@ -65,6 +92,13 @@ class CategoryProductRepository extends Repository implements CategoryProductInt
             $dataStore['description'] = $request->description;
             $dataStore['slug'] = Str::slug($request->name);
 
+            if ($request->hasFile('thumbnail_new')) {
+                $name_image = $this->imageTrait->convertToWebpAndStore($request->thumbnail, 'categoryProducts');
+                $dataStore['thumbnail'] = $name_image;
+                if ($request->hashFile('thumbnail_old')) {
+                    $result = $this->imageTrait->deleteImage($request->thumbnail_old, 'categoryProducts', null);
+                }
+            }
             $this->model
                 ->query()
                 ->where('id', $categoryProduct->id)

@@ -6,7 +6,7 @@
 @endpush
 @section('content')
     <div class="empty"></div>
-    <div class="breadcrumb">
+    <div class="breadcrumb1">
         <a href="{{ route('home.index') }}">
             <span class="text-primary">
                 Trang chủ
@@ -44,7 +44,7 @@
                                 TECNO CAMON 40 Pro 8GB 256GB
                             </div>
                             <div class="product-version-price">
-                                {{ formatPriceToVND(12223) }}
+                                {{ formatPriceToVND(122200003) }}
                             </div>
                         </div>
                     </div>
@@ -339,7 +339,10 @@
                     <div class="title text-dark">
                         THÔNG SỐ NỔI BẬT
                     </div>
-                    <div class="btn-product-info-detail-close ">
+                    <div class="btn-product-info-detail-close">
+                        <i class="uil-multiply"></i>
+                    </div>
+                    <div class="btn-product-info-detail-close-mobile">
                         <i class="uil-multiply"></i>
                     </div>
                 </div>

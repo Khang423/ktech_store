@@ -16,6 +16,8 @@ class CategoryProductSoreRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'description' => 'required|max:255',
+            'thumbnail' => 'required',
+            'product_type' => 'required',
         ];
     }
 }

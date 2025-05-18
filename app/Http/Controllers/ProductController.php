@@ -70,7 +70,7 @@ class ProductController extends Controller
         $Supplier = Supplier::query()->select(['id', 'name'])->get();
         $laptop = LaptopSpec::query()->where('product_id', $productVersion->id)->first();
         $phone = PhoneSpec::query()->where('product_id', $productVersion->id)->first();
-        $product = Product::query()->find($productVersion->product_id);
+        $product = ProductVersion::with(['laptopSpecs','products','phoneSpecs'])->find($productVersion->product_id);
         $product_image = ProductImage::query()->where('product_id', $productVersion->id)->get();
         return view('admin.product.edit', [
             'productVersion' => $productVersion,
@@ -78,14 +78,13 @@ class ProductController extends Controller
             'category_product' => $category_product,
             'brand' => $brand,
             'supplier' => $Supplier,
-            'laptop' => $laptop,
-            'phone' => $phone,
             'product_image' => $product_image,
         ]);
     }
 
     public function update(UpdateRequest $request, ProductVersion $productVersion)
     {
+
         $result = $this->productInterface->update($request, $productVersion);
         if ($result) {
             return $this->successResponse();

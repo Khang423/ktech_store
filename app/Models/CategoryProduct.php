@@ -11,6 +11,8 @@ class CategoryProduct extends Model
         'name',
         'slug',
         'description',
+        'product_type',
+        'thumbnail',
         'created_at',
         'updated_at',
     ];
@@ -22,6 +24,8 @@ class CategoryProduct extends Model
             'name',
             'slug',
             'description',
+            'product_type',
+             'thumbnail',
             'created_at',
             'updated_at',
         ];

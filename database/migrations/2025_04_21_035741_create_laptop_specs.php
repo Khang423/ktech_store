@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('cpu')->nullable();
             $table->string('ram_size')->nullable();
             $table->string('ram_type')->nullable();
+            $table->string('ram_slot')->nullable();
             $table->string('storage_type')->nullable();
             $table->string('storage_size')->nullable();
             $table->string('display_size')->nullable();

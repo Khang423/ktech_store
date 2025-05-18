@@ -24,6 +24,10 @@ $(document).ready(function () {
     });
     $(".btn-product-info-detail-close").on("click", function () {
         $(".product-info-detail-overlay").addClass('d-none');
-        $(".product-info-detail").animate({ right: "-30vw" }, 200);
+        $(".product-info-detail").animate({ right: "-100vw" }, 200);
+    });
+    $(".btn-product-info-detail-close-mobile").on("click", function () {
+        $(".product-info-detail-overlay").addClass('d-none');
+        $(".product-info-detail").animate({ right: "-100vw" }, 200);
     });
 });

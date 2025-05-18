@@ -180,12 +180,11 @@
                                                 <div class="text-danger mt-1 error-ram_type"></div>
                                             </div>
                                             <div class="mb-2">
-                                                <label for="ram_type" class="form-label">Số khe RAM</label>
-                                                <input type="text" class="form-control" id="ram_type"
-                                                    placeholder="Số khe RAM" name="ram_type">
-                                                <div class="text-danger mt-1 error-ram_type"></div>
+                                                <label for="ram_slot" class="form-label">Số khe RAM</label>
+                                                <input type="text" class="form-control" id="ram_slot"
+                                                    placeholder="Số khe RAM" name="ram_slot">
+                                                <div class="text-danger mt-1 error-ram_slot"></div>
                                             </div>
-
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-2">
@@ -389,7 +388,7 @@
                                                 <div class="text-danger mt-1 error-usb_ports"></div>
                                             </div>
                                             <div class="mb-2">
-                                                <label for="release_date" class="form-label">Ngày phát hành</label>
+                                                <label for="release_date_laptop" class="form-label">Ngày phát hành</label>
                                                 <input type="text" class="form-control" id="release_date"
                                                     placeholder="Ngày phát hành" name="release_date">
                                                 <div class="text-danger mt-1 error-release_date"></div>
@@ -740,7 +739,7 @@
                                                 <div class="text-danger mt-1 error-other_sensors"></div>
                                             </div>
                                             <div class="mb-2">
-                                                <label for="release_date" class="form-label">Ngày phát hành</label>
+                                                <label for="release_date_phone" class="form-label">Ngày phát hành</label>
                                                 <input type="text" class="form-control" id="release_date"
                                                     placeholder="Cảm biến khác" name="release_date">
                                                 <div class="text-danger mt-1 error-release_date"></div>

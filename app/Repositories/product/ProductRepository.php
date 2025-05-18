@@ -98,6 +98,7 @@ class ProductRepository extends Repository implements ProductInterface
                     $dataLaptop['cpu'] = $request->cpu;
                     $dataLaptop['ram_size'] = $request->ram_size_laptop;
                     $dataLaptop['ram_type'] = $request->ram_type;
+                    $dataLaptop['ram_slot'] = $request->ram_slot;
                     $dataLaptop['storage_type'] = $request->storage_type;
                     $dataLaptop['storage_size'] = $request->storage_size_laptop;
                     $dataLaptop['display_size'] = $request->display_size_laptop;
@@ -237,6 +238,7 @@ class ProductRepository extends Repository implements ProductInterface
                     $dataLaptop['cpu'] = $request->cpu;
                     $dataLaptop['ram_size'] = $request->ram_size_laptop;
                     $dataLaptop['ram_type'] = $request->ram_type;
+                    $dataLaptop['ram_slot'] = $request->ram_slot;
                     $dataLaptop['storage_type'] = $request->storage_type;
                     $dataLaptop['storage_size'] = $request->storage_size_laptop;
                     $dataLaptop['display_size'] = $request->display_size_laptop;
@@ -293,7 +295,6 @@ class ProductRepository extends Repository implements ProductInterface
                     $dataPhone['fingerprint_sensor'] = $request->fingerprint_sensor;
                     $dataPhone['other_sensors'] = $request->other_sensors;
                     $dataPhone['wifi_technology'] = $request->wifi_technology;
-                    $dataPhone['bluetooth_technology'] = $request->bluetooth_technology;
                     $dataPhone['bluetooth_technology'] = $request->bluetooth_technology;
                     $dataPhone['release_date'] = $request->release_date_phone;
                     PhoneSpec::query()
