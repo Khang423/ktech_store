@@ -19,8 +19,11 @@ Route::group([
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/product/{productVersion:slug}', [HomeController::class, 'product_detail'])->name('product_detail');
+    Route::get('/login', [HomeController::class, 'login'])->name('login');
+    Route::get('/loginProcess', [HomeController::class, 'loginProcess'])->name('loginProcess');
+    Route::get('/register', [HomeController::class, 'register'])->name('register');
+    Route::get('/registerProcess', [HomeController::class, 'registerProcess'])->name('registerProcess');
 });
-
 
 // route admin
 Route::get('/admin', [AuthController::class, 'index'])->name('admin.index');

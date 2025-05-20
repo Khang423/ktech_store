@@ -2,8 +2,9 @@ body {
     background-color: rgb(242, 242, 242);
 }
 .empty {
-    margin-top: 7rem;
+    margin-top: 8rem;
 }
+
 #section-slide {
     height: 400px;
     width: 100%;
@@ -751,17 +752,17 @@ body {
     margin-top: 10px;
 }
 
-    .section-description
-        .content
-        .product-info-detail
-        .btn-product-info-detail-close-mobile {
-        cursor: pointer;
-        font-size: 25px;
-        position: absolute;
-        right: 15px;
-        top: 10px;
-        display: none;
-    }
+.section-description
+    .content
+    .product-info-detail
+    .btn-product-info-detail-close-mobile {
+    cursor: pointer;
+    font-size: 25px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    display: none;
+}
 @media (max-width: 480px) {
     .section-product-info {
         flex-wrap: wrap;
@@ -977,5 +978,97 @@ body {
         right: 15px;
         top: 10px;
         display: block;
+    }
+}
+/* css login page */
+.login-section {
+    height: auto;
+    width: 100%;
+    padding-top: 40px;
+}
+
+.login-section .main-login {
+    height: 100%;
+    width: 100%;
+    justify-items: center;
+}
+
+.login-section .logo-login {
+    height: 120px;
+    width: 120px;
+}
+
+.login-section .logo-login img {
+    height: 100%;
+    width: 100%;
+}
+
+.login-section .main-login .title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+}
+
+.login-section .main-login .form-login {
+    margin-top: 20px;
+    height: auto;
+    width: 60%;
+}
+
+.login-section .main-login .form-login .form-input {
+    height: 40px;
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid lightgray;
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.login-section .main-login .form-login .form-input::placeholder {
+    color: rgb(146, 144, 144);
+}
+ .login-section .main-login .form-login .btn-login {
+    height: 45px;
+    width: 100%;
+}
+
+.login-section .main-login .form-login .btn-login button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: #2a52be;
+    font-size: 18px;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.login-section .main-login .form-login .btn-login button:hover {
+    background-color: #305dd8;
+}
+.login-section .main-login .login-with {
+    font-size: 18px;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-section .main-login .link-register {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.login-section .main-login .link-register a {
+    color: #2a52be;
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+    .login-section .main-login .form-login {
+        width: 80%;
     }
 }

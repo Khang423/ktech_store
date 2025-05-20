@@ -30,4 +30,12 @@ class HomeController extends Controller
             'product' => $product,
         ]);
     }
+
+    public function login() {
+        return view('outside.login');
+    }
+
+    public function register() {
+        return view('outside.register');
+    }
 }

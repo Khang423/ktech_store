@@ -68,6 +68,4 @@ $(document).ready(function () {
         let product_slug = $(this).data("slug");
         window.location.href = "/product/" + product_slug;
     });
-
-
 });
