@@ -68,4 +68,11 @@ $(document).ready(function () {
         let product_slug = $(this).data("slug");
         window.location.href = "/product/" + product_slug;
     });
+
+    $(".btn-login").click(function() {
+        window.location.href = '/login';
+    });
+    $(".btn-register").click(function() {
+        window.location.href = '/register';
+    });
 });

@@ -5,7 +5,9 @@
             <div class="row">
                 <div class="col-2">
                     <div class="logo">
-                        <img src="{{ asset('asset/outside/logo.svg') }}" alt="Logo Ktech">
+                        <a href="{{ route('home.index')}}">
+                            <img src="{{ asset('asset/outside/logo.svg') }}" alt="Logo Ktech">
+                        </a>
                     </div>
                 </div>
                 <div class="col-7">
@@ -38,7 +40,7 @@
                 <div class="col-3">
                     <div class="profile d-flex">
                         <div class="user">
-                            <div class="circle-user">
+                            <div class="circle-user" id="btn-user">
                                 <img src="{{ asset('asset/outside/icon/user.png') }}" alt="Icon user">
                             </div>
                         </div>
@@ -184,6 +186,27 @@
                                 </div>
                             </div>
                         @endfor
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-action d-none">
+        <div class="modal-action-overlay">
+            <div class="modal-action-content">
+                <span class="modal-action-close"><i class="uil-multiply"></i></span>
+                <div class="logo">
+                    <img src="{{ asset('asset/admin/systemImage/ktech-dark.svg')}}" alt="Logo Ktech">
+                </div>
+                <div class="text-review">
+                    Để sử dụng các chức năng của K-Tech vui lòng đăng nhập
+                </div>
+                <div class="btn-action">
+                    <div class="btn-register">
+                        Đăng ký
+                    </div>
+                    <div class="btn-login">
+                        Đăng nhập
                     </div>
                 </div>
             </div>

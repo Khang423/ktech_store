@@ -373,3 +373,93 @@ body {
         display: none;
     }
 }
+/* css modal action */
+.header .modal-action .modal-action-overlay{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền tối trong suốt */
+    z-index: 99; /* thấp hơn modal */
+}
+.header .modal-action .modal-action-content {
+    height: 300px;
+    width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #f2efef;
+    padding: 15px;
+    border-radius:10px ;
+}
+.header .modal-action .modal-action-content .logo {
+    height: 40%;
+    width: 50%;
+    margin-left: 25%;
+}
+.header .modal-action .modal-action-content .logo img {
+    height: 100%;
+    width: 100%;
+}
+.header .modal-action .modal-action-content .text-review {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3d3d3d;
+    text-align: center;
+    height: 25%;
+    color: #3d3d3d;
+    padding: 5px;
+}
+.header .modal-action .modal-action-content .btn-action{
+    height: 35%;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    padding-top: 35px;
+}
+
+.header .modal-action .modal-action-content .btn-register {
+    height: 60px;
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    color: #3d3d3d;
+    align-items: center;
+    border: 2px solid #2a52be;
+    cursor: pointer;
+}
+.header .modal-action .modal-action-content .btn-login {
+    height: 60px;
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    color: #ffffff;
+    align-items: center;
+    background-color: #2a52be;
+    cursor: pointer;
+}
+.header .modal-action .modal-action-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 20px;
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    cursor: pointer;
+}
+.header .modal-action .modal-action-close:hover{
+        background-color: rgb(179, 179, 179);
+}

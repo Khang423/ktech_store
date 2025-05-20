@@ -19,15 +19,22 @@ $(document).ready(function () {
     });
 
     $(".btn-info-detail").on("click", function () {
-        $(".product-info-detail-overlay").removeClass('d-none');
+        $(".product-info-detail-overlay").removeClass("d-none");
         $(".product-info-detail").animate({ right: "0px" }, 200);
     });
     $(".btn-product-info-detail-close").on("click", function () {
-        $(".product-info-detail-overlay").addClass('d-none');
+        $(".product-info-detail-overlay").addClass("d-none");
         $(".product-info-detail").animate({ right: "-100vw" }, 200);
     });
     $(".btn-product-info-detail-close-mobile").on("click", function () {
-        $(".product-info-detail-overlay").addClass('d-none');
+        $(".product-info-detail-overlay").addClass("d-none");
         $(".product-info-detail").animate({ right: "-100vw" }, 200);
+    });
+
+    $("#btn-user").on("click", function () {
+        $(".modal-action").removeClass("d-none");
+    });
+    $(".modal-action-close").on("click", function () {
+        $(".modal-action").addClass("d-none");
     });
 });
