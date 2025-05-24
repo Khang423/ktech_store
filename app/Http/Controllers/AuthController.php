@@ -30,13 +30,30 @@ class AuthController extends Controller
         $success = $this->authInterface->login($request);
 
         if (!$success) {
-            return $this->errorResponse('error','messages.login_error');
+            return $this->errorResponse('error', 'messages.login_error');
         }
-        return $this->successResponse('success','messages.login_success');
+        return $this->successResponse('success', 'messages.login_success');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('admin.index');
+    }
+
+    public function customerLogin(LoginRequest $request)
+    {
+        dd($request);
+        // $success = $this->authInterface->customerLogin($request);
+        // if (!$success) {
+        //     return $this->errorResponse('error', 'messages.login_error');
+        // }
+        // return $this->successResponse('success', 'messages.login_success');
+    }
+
+    public function customerLogout()
+    {
+        Auth::logout();
+        return redirect()->route('home.index');
     }
 }

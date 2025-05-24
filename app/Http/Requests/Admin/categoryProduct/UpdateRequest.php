@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\supplier;
+namespace App\Http\Requests\Admin\categoryProduct;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SupplierUpdateRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,11 +18,7 @@ class SupplierUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'phone' => 'required|max:10',
-            'hotline' => 'max:10',
-            'address' => 'required|string',
-            'website' => 'required',
-            'email' => 'required|string'
+            'description' => 'required|max:255',
         ];
     }
 }

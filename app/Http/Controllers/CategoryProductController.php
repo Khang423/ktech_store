@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Admin\categoryProduct\CategoryProductSoreRequest;
-use App\Http\Requests\Admin\categoryProduct\CategoryProductUpdateRequest;
+use App\Http\Requests\Admin\categoryProduct\SoreRequest;
+use App\Http\Requests\Admin\categoryProduct\UpdateRequest;
 use App\Models\CategoryProduct;
 use App\Repositories\categoryProduct\CategoryProductInterface;
 use App\Repositories\categoryProduct\CategoryProductRepository;
@@ -39,7 +39,7 @@ class CategoryProductController extends Controller
         return view('admin.categoryProduct.create');
     }
 
-    public function store(CategoryProductSoreRequest $request)
+    public function store(SoreRequest $request)
     {
         $result = $this->categoryProductInterface->store($request);
         if($result){
@@ -55,7 +55,7 @@ class CategoryProductController extends Controller
         ]);
     }
 
-    public function update(CategoryProductUpdateRequest $request, CategoryProduct $categoryProduct)
+    public function update(UpdateRequest $request, CategoryProduct $categoryProduct)
     {
         $result = $this->categoryProductInterface->update($request,$categoryProduct);
         if($result){

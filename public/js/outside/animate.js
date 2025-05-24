@@ -37,4 +37,18 @@ $(document).ready(function () {
     $(".modal-action-close").on("click", function () {
         $(".modal-action").addClass("d-none");
     });
+
+    let hideTimeout;
+
+    $("#btn-user-logged-in, .user-dropdown").hover(
+        function () {
+            clearTimeout(hideTimeout);
+            $(".user-dropdown").removeClass("d-none");
+        },
+        function () {
+            hideTimeout = setTimeout(function () {
+                $(".user-dropdown").addClass("d-none");
+            }, 200);
+        }
+    );
 });

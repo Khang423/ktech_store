@@ -1,0 +1,15 @@
+   {{-- jquery js  --}}
+   <script src="{{ asset('js/libraries/jquery/jquery.min.js') }}"></script>
+   <script src="{{ asset('js/admin/hyper/hyper-config.js') }}"></script>
+   <script src="{{ asset('js/admin/hyper/vendor.min.js') }}"></script>
+   {{-- app js --}}
+   <script src="{{ asset('js/admin/hyper/app.min.js') }}"></script>
+   {{-- swiper js  --}}
+   <script src="{{ asset('js/libraries/swiper/swiper-bundle.min.js') }}"></script>
+   {{-- main js  --}}
+   <script src="{{ asset('js/outside/main.js') }}"></script>
+   {{-- animate js --}}
+   <script src="{{ asset('js/outside/animate.js') }}"></script>
+   {{-- toast js  --}}
+   <script src="{{ asset('js/libraries/sweetalert/sweetalert2.js') }}"></script>
+   <script src="{{ asset('js/libraries/sweetalert/confirm_toast.js') }}"></script>

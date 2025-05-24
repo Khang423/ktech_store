@@ -11,7 +11,7 @@
             <span class="text-primary">
                 Trang chủ
             </span>
-        </a>
+        </a>we
         <i class=" uil-angle-right-b"></i>
         <span class="text-primary">Sản phẩm</span>
         <i class=" uil-angle-right-b"></i>

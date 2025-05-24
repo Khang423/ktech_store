@@ -115,6 +115,8 @@ body {
     width: 40px;
     border-radius: 50px;
     background-color: #090d1466;
+    position: absolute;
+    left: 20px;
 }
 .header .container .content .profile .user .circle-user:hover {
     background-color: #090d148a;
@@ -124,6 +126,43 @@ body {
     position: absolute;
     top: 7px;
     left: 8px;
+}
+.header .container .content .profile .user-dropdown {
+    height: auto;
+    width: 215px;
+    background-color: #1867ef;
+    z-index: 99;
+    position: fixed;
+    top: 70px;
+    color: #3d3d3d;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #fff;
+}
+.header .container .content .profile .user-dropdown .item {
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #3d3d3d;
+    font-weight: 600;
+}
+.header .container .content .profile .user-dropdown .item:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.header .container .content .profile .user-dropdown .item:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.header .container .content .profile .user-dropdown .item:hover {
+    background-color: #e6e6e6;
+    cursor: pointer;
 }
 
 .header .container .content .cart {
@@ -139,13 +178,15 @@ body {
 
 .header .container .content .cart .border-cart {
     height: 40px;
-    width: 100%;
+    width: 150px;
     background-color: #090d1466;
     position: absolute;
     border-radius: 50px;
     padding: 7px;
     padding-left: 18px;
+    padding-right: 18px;
     top: 0px;
+    right: 10px;
 }
 
 .header .container .content .cart .border-cart:hover {
@@ -247,7 +288,7 @@ body {
     padding: 30px 7.5px 15px 15px;
 }
 
-.menu-category-content .child-category .child-category-name{
+.menu-category-content .child-category .child-category-name {
     font-size: 20px;
     font-weight: 600;
     padding-left: 20px;
@@ -255,7 +296,7 @@ body {
     position: absolute;
     top: 30px;
 }
-.menu-category-content .child-category .child-category-name img{
+.menu-category-content .child-category .child-category-name img {
     height: 30px;
     width: 30px;
     margin-right: 5px;
@@ -278,7 +319,9 @@ body {
     padding: 10px;
 }
 .menu-category-content .child-category .child-category-content .item:hover {
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+        rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+        rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 .menu-category-content
     .child-category
@@ -339,7 +382,8 @@ body {
     width: 70%;
     margin-left: 15%;
     padding: 7.5px;
-    justify-content: space-between;
+    gap: 10px;
+    overflow: hidden;
 }
 
 .header .contact .contact-content .contact-item {
@@ -369,12 +413,12 @@ body {
         height: 7rem;
         background-color: #2a52be;
     }
-    .modal-nemnu-overlay{
+    .modal-nemnu-overlay {
         display: none;
     }
 }
 /* css modal action */
-.header .modal-action .modal-action-overlay{
+.header .modal-action .modal-action-overlay {
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -389,10 +433,10 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background-color: #f2efef;
     padding: 15px;
-    border-radius:10px ;
+    border-radius: 10px;
 }
 .header .modal-action .modal-action-content .logo {
     height: 40%;
@@ -412,7 +456,7 @@ body {
     color: #3d3d3d;
     padding: 5px;
 }
-.header .modal-action .modal-action-content .btn-action{
+.header .modal-action .modal-action-content .btn-action {
     height: 35%;
     width: 100%;
     display: flex;
@@ -460,6 +504,6 @@ body {
     background-color: lightgray;
     cursor: pointer;
 }
-.header .modal-action .modal-action-close:hover{
-        background-color: rgb(179, 179, 179);
+.header .modal-action .modal-action-close:hover {
+    background-color: rgb(179, 179, 179);
 }

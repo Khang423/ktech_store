@@ -2,6 +2,7 @@
 
 namespace App\Repositories\auth;
 
+use App\Models\Customer;
 use App\Models\Member;
 use App\Traits\Toast;
 use Illuminate\Config\Repository;
@@ -31,6 +32,19 @@ class AuthRepository extends Repository implements AuthInterface
         return false;
     }
 
+    public function customerLogin($request){
+        $username = $request->email_or_phone;
+        $password = $request->password;
+        $customer = Customer::where('email',$username)->orWhere('tel',$username)->first();
+        if($customer){
+            if(Hash::check($password,$customer->password)){
+                Auth::guard('customers')->login($customer);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
     public function logout(){
 
     }

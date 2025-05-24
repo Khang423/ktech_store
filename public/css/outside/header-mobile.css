@@ -1,6 +1,7 @@
 .header .container .content-mobile {
     height: 100%;
     width: 100%;
+    padding: 0px 15px;
 }
 .header .container .content-mobile .logo {
     width: 100%;
@@ -197,6 +198,14 @@
     font-weight: 500;
     border: none;
     background-color: #2a52be;
+}
+.header .menu-mobile .mobile-content .header-content .content-left .user-name {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3d433d;
 }
 /* mobile main content  */
 .header .menu-mobile .mobile-content .main-content{

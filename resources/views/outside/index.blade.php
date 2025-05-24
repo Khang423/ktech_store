@@ -45,7 +45,7 @@
             <div class="swiper-wrapper">
                 @foreach ($product as $item)
                     <div class="swiper-slide">
-                        <div class="card-product" data-id="{{ $item->id}}" data-slug="{{ $item->slug}}">
+                        <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
                             <div class="product-content" data-id="product-id">
                                 <div class="product-discount d-flex">
                                     <img src="{{ asset('asset/outside/icon/sale.png') }}" alt="Icon sale">
@@ -58,10 +58,10 @@
                                         alt="">
                                 </div>
                                 <div class="product-title ">
-                                    {{ $item->name}}
+                                    {{ $item->name }}
                                 </div>
                                 <div class="product-price">
-                                    {{ formatPriceToVND($item->price)}}
+                                    {{ formatPriceToVND($item->price) }}
                                 </div>
                                 <div class="product-note">
                                     Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn 3-6 tháng
@@ -90,12 +90,12 @@
             ĐIỆN THOẠI
         </h2>
     </div>
-     <section id="section-laptop">
+    <section id="section-laptop">
         <div class="swiper-product-item">
             <div class="swiper-wrapper">
                 @foreach ($product as $item)
                     <div class="swiper-slide">
-                        <div class="card-product" data-id="{{ $item->id}}" data-slug="{{ $item->slug}}">
+                        <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
                             <div class="product-content" data-id="product-id">
                                 <div class="product-discount d-flex">
                                     <img src="{{ asset('asset/outside/icon/sale.png') }}" alt="Icon sale">
@@ -108,10 +108,10 @@
                                         alt="">
                                 </div>
                                 <div class="product-title ">
-                                    {{ $item->name}}
+                                    {{ $item->name }}
                                 </div>
                                 <div class="product-price">
-                                    {{ formatPriceToVND($item->price)}}
+                                    {{ formatPriceToVND($item->price) }}
                                 </div>
                                 <div class="product-note">
                                     Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn 3-6 tháng
@@ -132,6 +132,54 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+        </div>
+    </section>
+    <section class="support-section mt-5">
+        <div class="content d-flex">
+            <div class="item">
+                <div class="icon">
+                    <img src="{{ asset('asset/outside/icon/policy3.svg') }}" alt="">
+                </div>
+                <div class="title">
+                    Thương hiệu đảm bảo
+                </div>
+                <div class="description">
+                    Nhập khẩu, bảo hành chính hãng
+                </div>
+            </div>
+            <div class="item">
+                <div class="icon">
+                    <img src="{{ asset('asset/outside/icon/policy1.svg') }}" alt="">
+                </div>
+                <div class="title">
+                    Đổi trả dễ dàng
+                </div>
+                <div class="description">
+                    Theo chính sách đổi trả tại FPT Shop
+                </div>
+            </div>
+            <div class="item">
+                <div class="icon">
+                    <img src="{{ asset('asset/outside/icon/policy4.svg') }}" alt="">
+                </div>
+                <div class="title">
+                    Sản phẩm chất lượng
+                </div>
+                <div class="description">
+                    Đảm bảo tương thích và độ bền cao
+                </div>
+            </div>
+            <div class="item">
+                <div class="icon">
+                    <img src="{{ asset('asset/outside/icon/policy2.svg') }}" alt="">
+                </div>
+                <div class="title">
+                    Giao hàng tận nơi
+                </div>
+                <div class="description">
+                    Tại 63 tỉnh thành
+                </div>
             </div>
         </div>
     </section>

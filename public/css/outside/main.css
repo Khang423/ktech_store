@@ -2,12 +2,19 @@ body {
     background-color: rgb(242, 242, 242);
 }
 .empty {
-    margin-top: 8rem;
+    margin-top: 7rem;
 }
-
+.breadcrumb1 {
+    height: 30px;
+    font-size: 15px;
+    padding-top: 13px;
+}
 #section-slide {
     height: 400px;
-    width: 100%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 #section-slide .swiper-banner {
     height: 100%;
@@ -1030,12 +1037,12 @@ body {
 .login-section .main-login .form-login .form-input::placeholder {
     color: rgb(146, 144, 144);
 }
- .login-section .main-login .form-login .btn-login {
+.login-section .main-login .form-login .btn-login-customer {
     height: 45px;
     width: 100%;
 }
 
-.login-section .main-login .form-login .btn-login button {
+.login-section .main-login .form-login .btn-login-customer button {
     height: 100%;
     width: 100%;
     border: none;
@@ -1045,7 +1052,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
 }
-.login-section .main-login .form-login .btn-login button:hover {
+.login-section .main-login .form-login .btn-login-customer button:hover {
     background-color: #305dd8;
 }
 .login-section .main-login .login-with {
@@ -1070,4 +1077,30 @@ body {
     .login-section .main-login .form-login {
         width: 80%;
     }
+}
+/* support css */
+.support-section {
+    height: 200px;
+    width: 100%;
+}
+.support-section .content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+.support-section .content .item {
+    height: 100%;
+    width: 25%;
+    justify-items: center;
+}
+/* footer css */
+.footer-main {
+    height: 400px;
+    width: 100%;
+}
+.footer-main .container  {
+    height: 100%;
+    width: 100%;
+    padding: 15px;
 }

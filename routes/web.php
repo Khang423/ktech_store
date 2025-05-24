@@ -15,25 +15,46 @@ use Illuminate\Support\Facades\Route;
 
 // route home
 Route::group([
-    'as' => 'home.'
+    'as' => 'home.',
 ], function () {
+    // page home
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    // product detail
     Route::get('/product/{productVersion:slug}', [HomeController::class, 'product_detail'])->name('product_detail');
+    // login
     Route::get('/login', [HomeController::class, 'login'])->name('login');
-    Route::get('/loginProcess', [HomeController::class, 'loginProcess'])->name('loginProcess');
+    Route::post('/loginProcess', [HomeController::class, 'loginProcess'])->name('loginProcess');
+    // register
     Route::get('/register', [HomeController::class, 'register'])->name('register');
-    Route::get('/registerProcess', [HomeController::class, 'registerProcess'])->name('registerProcess');
+    Route::post('/registerProcess', [HomeController::class, 'registerProcess'])->name('registerProcess');
+    // logout
+    Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+    // search product
+    Route::post('/search', [HomeController::class, 'searchProcess'])->name('searchProcess');
+    Route::get('/search-result', [HomeController::class, 'searchResult'])->name('searchResult');
 });
 
-// route admin
+Route::group([
+    'as' => 'home.',
+    'middleware' => 'customer'
+], function () {});
+
+
+// route page login admin
 Route::get('/admin', [AuthController::class, 'index'])->name('admin.index');
+// login process
 Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login');
+// logout
 Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+
+// admin
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
     'middleware' => 'admin'
 ], function () {
+    // route dashboard
     Route::group([], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     });

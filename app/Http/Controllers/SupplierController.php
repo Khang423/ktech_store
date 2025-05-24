@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Admin\supplier\SupplierStoreRequest;
-use App\Http\Requests\Admin\supplier\SupplierUpdateRequest;
+use App\Http\Requests\Admin\supplier\StoreRequest;
+use App\Http\Requests\Admin\supplier\UpdateRequest;
 use App\Models\Supplier;
 use App\Repositories\supplier\SupplierInterface;
 use App\Repositories\supplier\SupplierRepository;
@@ -41,7 +41,7 @@ class SupplierController extends Controller
         return view('admin.supplier.create');
     }
 
-    public function store(SupplierStoreRequest $request)
+    public function store(StoreRequest $request)
     {
         $result = $this->supplierInterface->store($request);
         if($result){
@@ -57,7 +57,7 @@ class SupplierController extends Controller
         ]);
     }
 
-    public function update(SupplierUpdateRequest $request, Supplier $supplier)
+    public function update(UpdateRequest $request, Supplier $supplier)
     {
         $result = $this->supplierInterface->update($request,$supplier);
         if($result){

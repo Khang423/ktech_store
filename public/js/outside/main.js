@@ -69,10 +69,26 @@ $(document).ready(function () {
         window.location.href = "/product/" + product_slug;
     });
 
-    $(".btn-login").click(function() {
-        window.location.href = '/login';
+    $(".btn-login").click(function () {
+        window.location.href = "/login";
     });
-    $(".btn-register").click(function() {
-        window.location.href = '/register';
+    $(".btn-register").click(function () {
+        window.location.href = "/register";
+    });
+
+    $(".circle-icon").click(function () {
+        const keyword = $(".input-search-bar").val();
+        $.ajax({
+            url: searchRoute,
+            type: "POST",
+            dataType: "json",
+            data: {
+                keyword,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (data) {
+                window.location.href = data.redirect;
+            },
+        });
     });
 });
