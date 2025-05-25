@@ -2,10 +2,10 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Member
+            Vai trò
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Member list
+        Danh sách
     </div>
 @endsection
 @section('content')
@@ -15,9 +15,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.members.create')}}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.roles.create') }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
-                                Invite Member
+                                Thêm
                             </a>
                         </div>
                         <div class="col-sm-7">
@@ -30,19 +30,11 @@
                         <table class="table table-centered w-100 dt-responsive nowrap" id="datatable">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="all" style="width: 20px;">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="customCheck1">
-                                            <label class="form-check-label" for="customCheck1">&nbsp;</label>
-                                        </div>
-                                    </th>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Avatar</th>
-                                    <th>Tel</th>
-                                    <th>Email</th>
-                                    <th>Created at</th>
-                                    <th style="width: 80px;">Actions</th>
+                                    <th>Vai trò</th>
+                                    <th>Slug</th>
+                                    <th>Ngày tạo</th>
+                                    <th style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
                         </table>
@@ -59,7 +51,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('admin.members.getList') }}",
+                    url: "{{ route('admin.roles.getList') }}",
                     type: "POST",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -81,19 +73,6 @@
                 },
                 pageLength: 20,
                 columns: [{
-                        data: null,
-                        orderable: false,
-                        searchable: false,
-                        render: function(e, l, a, o) {
-                            return e = "display" === l ?
-                                '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>' :
-                                e
-                        },
-                        checkboxes: {
-                            selectAllRender: '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>'
-                        }
-                    },
-                    {
                         data: 'index',
                         name: 'index',
                         orderable: false,
@@ -111,37 +90,13 @@
                         }
                     },
                     {
-                        data: 'avatar',
-                        name: 'avatar',
+                        data: 'slug',
+                        name: 'slug',
                         orderable: false,
                         searchable: false,
                         render: function(data) {
                             return `
-                                <img src="{{ asset('asset/admin/members') }}/${data.avatar}" class="rounded-circle me-3" height="60" width="60">
-                            `;
-                        }
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data) {
-                            return `
-                                <span class='text-dark'>
-                                    ${data}
-                                </span>
-                            `;
-                        }
-                    },
-                    {
-                        data: 'email',
-                        name: 'email',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data) {
-                            return `
-                                <span class='text-dark'>
+                                <span class='text-dark badge bg-light font-15'>
                                     ${data}
                                 </span>
                             `;
@@ -194,31 +149,12 @@
                         })
                 },
                 rowCallback: function(row, data, index) {
-                    $('td:eq(1)', row).html(index + 1 + this.api().page.info().start);
+                    $('td:eq(0)', row).html(index + 1 + this.api().page.info().start);
                 }
             });
 
-            $(document).on('click', '.destroy', function(e) {
-                e.preventDefault();
-                let form = $(this).parents('form');
-
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'DELETE',
-                    dataType: 'json',
-                    data: form.serialize(),
-                    success: function() {
-                        toast('Xóa thành công.');
-                        table.draw();
-                    },
-                    error: function(data) {
-                        let datas = data.responseJSON;
-                        datas.messages ?
-                            toast(datas.messages, 'error') :
-                            toast(datas.errors.id, 'error');
-                    }
-                });
-            });
+            $routeDelete = '{{ route('admin.roles.delete') }}';
+            destroy($routeDelete, table);
         });
     </script>
 @endpush

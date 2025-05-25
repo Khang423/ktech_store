@@ -91,4 +91,19 @@ $(document).ready(function () {
             },
         });
     });
+    $("#circle-icon").click(function () {
+        const keyword = $("#input-search-bar").val();
+        $.ajax({
+            url: searchRoute,
+            type: "POST",
+            dataType: "json",
+            data: {
+                keyword,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (data) {
+                window.location.href = data.redirect;
+            },
+        });
+    });
 });

@@ -113,7 +113,7 @@
                     <div class="search-bar">
                         <input type="text" name="keyword" id="input-search-bar"
                             placeholder="Nhập tên điện thoại, laptop, phụ kiền... cần tìm">
-                        <div class="circle-icon">
+                        <div class="circle-icon" id="circle-icon">
                             <i class="uil-search" id="icon-search"></i>
                         </div>
                     </div>

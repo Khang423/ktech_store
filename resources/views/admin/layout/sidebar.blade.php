@@ -53,39 +53,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/">
-                                Loại sản phẩm
-                            </a>
-                        </li>
-                        <li>
                             <a href="{{ route('admin.categoryProducts.index') }}">
                                 Danh mục sản phẩm
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-            <li class="side-nav-item">
-                <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarRoles" aria-expanded="false"
-                    aria-controls="sidebarDevice">
-                    <i class="uil-label"></i>
-                    <span>
-                        Vai trò
-                    </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarRoles" style="">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="/">
-                                Quyền
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Phân quyền
                             </a>
                         </li>
                     </ul>
@@ -137,39 +106,38 @@
                 Hệ thống
             </li>
             <li class="side-nav-item">
-                <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarAccount"
-                    aria-expanded="false" aria-controls="sidebarAccount">
-                    <i class="uil-desktop"></i>
+                <a href="{{ route('admin.members.index') }}" class="side-nav-link">
+                    <i class=" uil uil-users-alt"></i>
                     <span>
-                        Tài khoản
+                       Tài khoản
+                    </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarRoles" aria-expanded="false"
+                    aria-controls="sidebarDevice">
+                    <i class="uil-label"></i>
+                    <span>
+                        Vai trò
                     </span>
                     <span class="menu-arrow"></span>
                 </a>
-                <div class="collapse" id="sidebarAccount" style="">
+                <div class="collapse" id="sidebarRoles" style="">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="{{ route('admin.members.index') }}">
-                                Nhân viên sale
+                            <a href="{{ route('admin.roles.index') }}">
+                                Danh sách
                             </a>
                         </li>
                         <li>
-                            <a href="/">
-                                Nhân viên kho hàng
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Khách hàng
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.categoryProducts.index') }}">
-                                Danh mục sản phẩm
+                            <a href="">
+                                Đặt quyền
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
+
             <li class="side-nav-title">
             </li>
             <li class="side-nav-title">

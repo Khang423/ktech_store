@@ -14,7 +14,7 @@
             </div>
         </div>
     </section>
-    <section id="section-category-product">
+    {{-- <section id="section-category-product">
         <div class="swiper-category-product">
             <div class="swiper-wrapper">
                 @for ($i = 0; $i < 10; $i++)
@@ -34,7 +34,7 @@
                 @endfor
             </div>
         </div>
-    </section>
+    </section> --}}
     <div class="product-title mt-3">
         <h2 class="text-dark">
             LAPTOP

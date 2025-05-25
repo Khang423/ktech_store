@@ -15,6 +15,8 @@ use App\Repositories\member\MemberInterface;
 use App\Repositories\member\MemberRepository;
 use App\Repositories\product\ProductInterface;
 use App\Repositories\product\ProductRepository;
+use App\Repositories\role\RoleInterface;
+use App\Repositories\role\RoleRepository;
 use App\Repositories\supplier\SupplierRepository;
 use App\Repositories\supplier\SupplierInterface;
 use Illuminate\Support\ServiceProvider;
@@ -33,6 +35,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(SupplierInterface::class, SupplierRepository::class);
         $this->app->singleton(CategoryProductInterface::class, CategoryProductRepository::class);
         $this->app->singleton(BannerInterface::class, BannerRepository::class);
+        $this->app->singleton(RoleInterface::class,RoleRepository::class);
     }
 
     /**

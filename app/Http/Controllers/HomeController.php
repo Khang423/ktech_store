@@ -71,8 +71,13 @@ class HomeController extends Controller
         return view('outside.register');
     }
 
-    public function registerProcess(RegisterRequest $request){
-        dd($request);
+    public function registerProcess(RegisterRequest $request)
+    {
+        $success = $this->authInterface->customerRegister($request);
+        if (!$success) {
+            return $this->errorResponse('error', 'messages.register_error');
+        }
+        return $this->successResponse('success', 'messages.register_success');
     }
 
     public function logout()

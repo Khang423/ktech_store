@@ -6,4 +6,5 @@ interface AuthInterface {
     public function login($parameters);
     public function logout();
     public function customerLogin($request);
+    public function customerRegister($request);
 }

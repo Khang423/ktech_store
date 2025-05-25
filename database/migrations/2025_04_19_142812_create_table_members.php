@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('address_id')->nullable()->constrained('address')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug')->nullable();
             $table->text('avatar')->nullable();

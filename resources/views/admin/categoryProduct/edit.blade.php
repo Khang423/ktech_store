@@ -52,7 +52,7 @@
                                 </div>
                                 <button class="btn btn-primary" id="btn-update">
                                     <i class="mdi mdi-plus-circle me-2"></i>
-                                    <span>Thêm</span>
+                                    <span>Cập nhật</span>
                                 </button>
                             </form>
                         </div>

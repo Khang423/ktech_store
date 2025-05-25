@@ -27,6 +27,8 @@ return [
 
     'login_success' => 'Đăng nhập thành công.',
     'login_error' => 'Tài khoản hoặc mật khẩu không đúng.',
+    'register_error' => 'Đăng ký tài khoản không thành công.',
+    'register_success' => 'Đăng ký tài khoản thành công.',
 
     'auth_admin_error' => 'Bạn chưa đăng nhập.',
 

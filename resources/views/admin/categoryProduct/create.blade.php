@@ -117,6 +117,7 @@
                 });
                 preview_thumbnail.append(fileList);
             });
+
             const $form = $('#form-store');
             const $inputs = $form.find('input');
             $routeStore = '{{ route('admin.categoryProducts.store') }}';

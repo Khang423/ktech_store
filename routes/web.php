@@ -71,6 +71,7 @@ Route::group([
         Route::put('/edit/{member:slug}', [MemberController::class, 'update'])->name('update');
         Route::delete('/delete', [MemberController::class, 'delete'])->name('delete');
     });
+
     // Product route
     Route::group([
         'prefix' => 'products',
@@ -84,19 +85,6 @@ Route::group([
         Route::put('/edit/{productVersion:slug}', [ProductController::class, 'update'])->name('update');
         Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
         Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
-    });
-    // Permission route
-    Route::group([
-        'prefix' => 'permissions',
-        'as' => 'permissions.'
-    ], function () {
-        Route::get('/', [PermissionController::class, 'index'])->name('index');
-        Route::post('/getList', [PermissionController::class, 'getList'])->name('getList');
-        Route::get('/create', [PermissionController::class, 'create'])->name('create');
-        Route::post('/store', [PermissionController::class, 'store'])->name('store');
-        Route::get('/edit/{product:slug}', [PermissionController::class, 'edit'])->name('edit');
-        Route::put('/edit/{product:slug}', [PermissionController::class, 'update'])->name('update');
-        Route::delete('/delete', [PermissionController::class, 'delete'])->name('delete');
     });
     // Role route
     Route::group([

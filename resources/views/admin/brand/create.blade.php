@@ -22,23 +22,23 @@
                             <form action="{{ route('admin.brands.store') }}" method="post" enctype="multipart/form-data"
                                 autocomplete="off">
                                 @csrf
-                                <h4 class="header-title mb-3">Information</h4>
+                                <h4 class="header-title mb-3">Thông tin</h4>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label for="name" class="form-label">Name</label>
+                                            <label for="name" class="form-label">Tên </label>
                                             <input type="text" class="form-control" id="name" placeholder="Name"
                                                 name="name" required>
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="country" class="form-label">Country</label>
+                                            <label for="country" class="form-label">Quốc gia</label>
                                             <input type="text" class="form-control" id="country" placeholder="Country"
                                                 name="country" required>
                                             <div class="text-danger mt-1 error-country"></div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="website_link" class="form-label">Website URL</label>
+                                            <label for="website_link" class="form-label">Link website</label>
                                             <input type="text" class="form-control" id="website_link"
                                                 placeholder="Website URL" name="website_link" required>
                                             <div class="text-danger mt-1 error-website_link"></div>
@@ -48,7 +48,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <label class="text-dark header-title font-16 fw-bold">
-                                                    Thumbnail
+                                                    Ảnh logo
                                                 </label>
                                                 <div class="d-flex justify-content-center mb-2 mt-2">
                                                     <div id="preview-thumbnail"></div>
@@ -57,7 +57,7 @@
                                                     style="display: none" />
                                                 <div class="thumbnail text-center dropzone">
                                                     <i class="h1 text-muted uil-upload-alt"></i>
-                                                    <h3>Chose Image</h3>
+                                                    <h3>Chọn ảnh</h3>
                                                 </div>
                                                 <div class="error-thumbnail text-center text-danger"></div>
                                             </div>
@@ -67,7 +67,7 @@
                                 <div>
                                     <button class="btn btn-primary" id="btn-store">
                                         <i class="mdi mdi-plus-circle me-2"></i>
-                                        <span>Invite Member</span>
+                                        <span>Thêm</span>
                                     </button>
                                 </div>
                             </form>
@@ -78,14 +78,7 @@
         </div>
     </div>
 @endsection
-@push('css')
-    <link href="{{ asset('css/libraries/select2/custom_select2.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/libraries/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-@endpush
 @push('js')
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-    <script src="{{ asset('js/libraries/select2/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
 

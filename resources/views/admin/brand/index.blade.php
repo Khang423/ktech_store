@@ -2,10 +2,10 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Brands
+            Thương hiệu
         </span>
         <i class="mdi mdi-chevron-right"></i>
-            List
+        Danh sách
     </div>
 @endsection
 @section('content')
@@ -15,9 +15,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.brands.create')}}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.brands.create') }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
-                                Add Brand
+                                Thêm
                             </a>
                         </div>
                         <div class="col-sm-7">
@@ -30,20 +30,14 @@
                         <table class="table table-centered w-100 dt-responsive nowrap" id="datatable">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="all" style="width: 20px;">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="customCheck1">
-                                            <label class="form-check-label" for="customCheck1">&nbsp;</label>
-                                        </div>
-                                    </th>
                                     <th>#</th>
-                                    <th>Name</th>
+                                    <th>Thương hiệu</th>
                                     <th>Logo</th>
-                                    <th>Country</th>
+                                    <th>Quốc gia</th>
                                     <th>Website</th>
-                                    <th>Status</th>
-                                    <th>Created at</th>
-                                    <th style="width: 80px;">Actions</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
                         </table>
@@ -81,19 +75,7 @@
                     lengthMenu: 'Show <select class=\'form-select form-select-sm ms-1 me-1\'><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="-1">All</option></select>'
                 },
                 pageLength: 20,
-                columns: [{
-                        data: null,
-                        orderable: false,
-                        searchable: false,
-                        render: function(e, l, a, o) {
-                            return e = "display" === l ?
-                                '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>' :
-                                e
-                        },
-                        checkboxes: {
-                            selectAllRender: '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>'
-                        }
-                    },
+                columns: [
                     {
                         data: 'index',
                         name: 'index',
@@ -208,7 +190,7 @@
                         })
                 },
                 rowCallback: function(row, data, index) {
-                    $('td:eq(1)', row).html(index + 1 + this.api().page.info().start);
+                    $('td:eq(0)', row).html(index + 1 + this.api().page.info().start);
                 }
             });
             $routeDelete = '{{ route('admin.brands.delete') }}';

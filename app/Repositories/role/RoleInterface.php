@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\product;
+namespace App\Repositories\role;
 
-interface ProductInterface {
+interface RoleInterface {
     public function store($parameters);
     public function getList();
     public function update($request,$member);
