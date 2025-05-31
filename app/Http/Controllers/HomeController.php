@@ -6,6 +6,8 @@ use App\Enums\StatusEnum;
 use App\Http\Requests\auth\LoginRequest;
 use App\Http\Requests\auth\RegisterRequest;
 use App\Models\Banner;
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -39,6 +41,7 @@ class HomeController extends Controller
             'banners' => Banner::query()->where('status', StatusEnum::ON)->get(),
             'product' => $product,
             'category_product' => $category_product,
+            'title' => 'K-tech'
         ]);
     }
 
@@ -47,14 +50,18 @@ class HomeController extends Controller
         $product = ProductVersion::with(['products', 'phoneSpecs', 'productImages', 'laptopSpecs'])
             ->where('id', $productVersion->id)
             ->first();
+        $title = $product->name;
         return view('outside.product_detail', [
             'product' => $product,
+            'title' => $title
         ]);
     }
 
     public function login()
     {
-        return view('outside.login');
+        return view('outside.login', [
+            'title' => 'Đăng nhập'
+        ]);
     }
 
     public function loginProcess(LoginRequest $request)
@@ -68,7 +75,9 @@ class HomeController extends Controller
 
     public function register()
     {
-        return view('outside.register');
+        return view('outside.register', [
+            'title' => 'Đăng ký'
+        ]);
     }
 
     public function registerProcess(RegisterRequest $request)
@@ -99,7 +108,33 @@ class HomeController extends Controller
         $result = ProductVersion::where('name', 'like', '%' . $keyword . '%')->get();
         return view('outside.search-result', [
             'product' => $result,
-            'keyword' => $keyword
+            'keyword' => $keyword,
+            'title' => 'Kết quả tìm kiếm'
         ]);
+    }
+
+    public function cart()
+    {
+        $customer_id = Auth::guard('customers')->user()->id;
+        $cart = Cart::where('customer_id', $customer_id)->first('id');
+        $cart_item = CartItem::where('cart_id', $cart->id)
+            ->with('productVersion')
+            ->get();
+        return view('outside.cart', [
+            'title' => 'Giỏ hàng của tôi',
+            'cart_item' => $cart_item
+        ]);
+    }
+
+    public function transferGuestCartToCustomer($customer_id)
+    {
+        if (session()->has('guest_id')) {
+            $guest_id = session('guest_id');
+
+            CartItem::where('customer_id', $guest_id)
+                ->update(['customer_id' => $customer_id]);
+
+            session()->forget('guest_id'); // Xoá guest session sau khi chuyển
+        }
     }
 }

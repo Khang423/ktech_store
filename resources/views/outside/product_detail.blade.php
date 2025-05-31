@@ -11,9 +11,15 @@
             <span class="text-primary">
                 Trang chủ
             </span>
-        </a>we
+        </a>
         <i class=" uil-angle-right-b"></i>
-        <span class="text-primary">Sản phẩm</span>
+        <span class="text-primary">
+            @if ($product->laptopSpecs)
+                Laptop
+            @elseif ($product->phoneSpecs)
+                Điện thoại
+            @endif
+        </span>
         <i class=" uil-angle-right-b"></i>
         <span>{{ $product->name }}</span>
     </div>
@@ -61,7 +67,7 @@
                             MUA NGAY
                         </span>
                     </div>
-                    <div class="btn-add_to_cart">
+                    <div class="btn-add_to_cart" data-product-id={{ $product->id }}>
                         <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
                         <span>
                             Thêm vào giỏ
@@ -578,7 +584,7 @@
                             <div class="title-item">
                                 <span>Pin & Công nghệ sạc</span>
                             </div>
-                             @if ($laptopSpecs['battery'])
+                            @if ($laptopSpecs['battery'])
                                 <div class="item">
                                     <div class="name-item">
                                         <span>Pin</span>
@@ -589,9 +595,9 @@
                                 </div>
                             @endif
                             <div class="title-item">
-                                <span>Kích thước  & Trọng lượng</span>
+                                <span>Kích thước & Trọng lượng</span>
                             </div>
-                             @if ($laptopSpecs['dimension'])
+                            @if ($laptopSpecs['dimension'])
                                 <div class="item">
                                     <div class="name-item">
                                         <span>Kích thước</span>
@@ -601,7 +607,7 @@
                                     </div>
                                 </div>
                             @endif
-                             @if ($laptopSpecs['weight'])
+                            @if ($laptopSpecs['weight'])
                                 <div class="item">
                                     <div class="name-item">
                                         <span>Trọng lượng</span>
@@ -750,7 +756,7 @@
                                     </div>
                                 </div>
                             @endif
-                             <div class="title-item">
+                            <div class="title-item">
                                 <span>Giao tiếp & Kết nối</span>
                             </div>
                             @if ($phoneSpecs['nfc_support'])
@@ -991,17 +997,8 @@
     <script src="{{ asset('js/libraries/fancybox/carousel.thumbs.umd.js') }}"></script>
     <script src="{{ asset('js/libraries/fancybox/config_fancybox.js') }}"></script>
     <script src="{{ asset('js/libraries/fancybox/config_carousel.js') }}"></script>
+    <script src="{{ asset('js/outside/product_detail.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            init_fancybox();
-            new Carousel(document.getElementById("product-image-carousel"), {
-                Dots: false,
-                Thumbs: {
-                    type: "classic",
-                },
-            }, {
-                Thumbs
-            });
-        });
+        const routeAddItemToCart = "{{ route('home.addItemToCart') }}";
     </script>
 @endpush

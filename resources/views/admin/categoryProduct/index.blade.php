@@ -30,12 +30,6 @@
                         <table class="table table-centered w-100 dt-responsive nowrap" id="datatable">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="all" style="width: 20px;">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="customCheck1">
-                                            <label class="form-check-label" for="customCheck1">&nbsp;</label>
-                                        </div>
-                                    </th>
                                     <th>#</th>
                                     <th>Ảnh</th>
                                     <th>Danh mục</th>
@@ -79,19 +73,7 @@
                     lengthMenu: 'Show <select class=\'form-select form-select-sm ms-1 me-1\'><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="-1">All</option></select>'
                 },
                 pageLength: 20,
-                columns: [{
-                        data: null,
-                        orderable: false,
-                        searchable: false,
-                        render: function(e, l, a, o) {
-                            return e = "display" === l ?
-                                '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>' :
-                                e
-                        },
-                        checkboxes: {
-                            selectAllRender: '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>'
-                        }
-                    },
+                columns: [
                     {
                         data: 'index',
                         name: 'index',
@@ -178,13 +160,11 @@
                         })
                 },
                 rowCallback: function(row, data, index) {
-                    $('td:eq(1)', row).html(index + 1 + this.api().page.info().start);
+                    $('td:eq(0)', row).html(index + 1 + this.api().page.info().start);
                 }
             });
-
             $routeDelete = '{{ route('admin.categoryProducts.delete') }}';
             destroy($routeDelete, table);
-
         });
     </script>
 @endpush

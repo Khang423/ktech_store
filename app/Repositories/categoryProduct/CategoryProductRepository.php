@@ -71,8 +71,6 @@ class CategoryProductRepository extends Repository implements CategoryProductInt
             if ($request->hasFile('thumbnail')) {
                 $name_image = $this->imageTrait->convertToWebpAndStore($request->thumbnail, 'categoryProducts');
                 $dataStore['thumbnail'] = $name_image;
-                $this->model->query()->create($dataStore);
-                return true;
             }
             $this->model->query()->create($dataStore);
             DB::commit();

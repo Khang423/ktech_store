@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                {{--                // Description --}}
+                {{-- Description --}}
                 <div class="card">
                     <div class="card-body">
                         <div class="tab-content">

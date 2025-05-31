@@ -61,12 +61,17 @@
                         </div>
                         <div class="cart">
                             <div class="content">
-                                <div class="border-cart d-flex">
+                                <div class="border-cart d-flex" id="btn-cart">
                                     <div class="icon-cart">
                                         <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
                                     </div>
                                     <div class="circle-quantity-item-cart">
-                                        2
+                                        {{-- {{ countItemCart() ? countItemCart() : '0'  }} --}}
+                                        {{-- @if(countItemCart()) {
+                                           {{ countItemCart() }}
+                                        }@else{
+                                            0
+                                        }@endif --}}
                                     </div>
                                     <div class="title">
                                         Giỏ hàng
@@ -239,5 +244,6 @@
 @push('js')
     <script>
         const searchRoute = "{{ route('home.searchProcess') }}";
+
     </script>
 @endpush

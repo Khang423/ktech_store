@@ -74,7 +74,7 @@ class ProductRepository extends Repository implements ProductInterface
             $dataProduct['supplier_id'] = $request->supplier_id;
             $dataProduct['brand_id'] = $request->brand_id;
             $dataProduct['status'] = StatusEnum::ON;
-            Product::query()->create($dataProduct);
+            Product::create($dataProduct);
             // product_id
             $product_id = Product::query()->max('id');
             // insert product version
@@ -85,7 +85,7 @@ class ProductRepository extends Repository implements ProductInterface
             $dataProductVersion['price'] = $request->price;
             $dataProductVersion['description'] = $request->description;
 
-            ProductVersion::query()->create($dataProductVersion);
+            ProductVersion::create($dataProductVersion);
             //productversion_id
             $productVersion_id = ProductVersion::query()->max('id');
 
@@ -167,7 +167,6 @@ class ProductRepository extends Repository implements ProductInterface
                 case ProductTypeEnum::HEADPHONE:
                     break;
             }
-
 
             // thumbnail
             if ($request->hasFile('thumbnail')) {

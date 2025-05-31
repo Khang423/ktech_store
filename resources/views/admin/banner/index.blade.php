@@ -103,7 +103,7 @@
                         name: 'banner',
                         render: function(data) {
                             return `
-                                <img src="{{ asset('asset/admin/banners')}}/${data}"  height="100" width="120" loading="lazy">
+                                <img src="{{ asset('asset/admin/banners')}}/${data}"  height="150" width="250" loading="lazy">
                             `;
                         }
                     },

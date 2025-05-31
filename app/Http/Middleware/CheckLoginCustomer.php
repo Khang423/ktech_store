@@ -16,7 +16,6 @@ class CheckLoginCustomer
         if(Auth::guard('customers')->check()){
             return $next($request);
         }
-        $this->errorToast('messages.auth_admin_error');
         return redirect()->route('home.index');
     }
 }

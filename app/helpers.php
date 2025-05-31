@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Cart;
+use App\Models\CartItem;
+use Illuminate\Support\Facades\Auth;
+
 if (!function_exists('formatPriceToVND')) {
     function formatPriceToVND($price)
     {
@@ -76,5 +80,22 @@ if (!function_exists('getPhoneSpecs')) {
             'release_date' => $product->laptopSpecs->release_date ?? null,
             'bluetooth_technology' => $product->phoneSpecs->bluetooth_technology ?? null,
         ];
+    }
+}
+if (!function_exists('countItemCart')) {
+    function countItemCart()
+    {
+        $customer_id = Auth::guard('customers')->user()->id;
+        $cart = Cart::where('customer_id', $customer_id)->first('id');
+        return CartItem::where('cart_id', $cart->id)->count();
+    }
+}
+if (!function_exists('createSessionForGuest')) {
+    function createSessionForGuest()
+    {
+        if (!session()->has('guest_id')) {
+            $guestId = uniqid('guest_', true);
+            session(['guest_id' => $guestId]);
+        }
     }
 }

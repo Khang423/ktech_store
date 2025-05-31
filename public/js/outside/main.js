@@ -91,6 +91,7 @@ $(document).ready(function () {
             },
         });
     });
+
     $("#circle-icon").click(function () {
         const keyword = $("#input-search-bar").val();
         $.ajax({
@@ -105,5 +106,9 @@ $(document).ready(function () {
                 window.location.href = data.redirect;
             },
         });
+    });
+
+    $("#btn-cart").click(function () {
+        window.location.href = '/cart';
     });
 });

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id')->nullable();
+            $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->string('session_id')->nullable();
             $table->double('total_price')->default(0);
-            $table->string('tax');
-            $table->string('shipping_cost');
+            $table->string('tax')->nullable();
+            $table->string('shipping_cost')->nullable();
             $table->timestamps();
         });
     }

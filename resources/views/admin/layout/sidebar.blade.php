@@ -49,12 +49,12 @@
                     <ul class="side-nav-second-level">
                         <li>
                             <a href="{{ route('admin.products.index') }}">
-                                Danh sách sản phẩm
+                                Danh sách
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('admin.categoryProducts.index') }}">
-                                Danh mục sản phẩm
+                                Danh mục
                             </a>
                         </li>
                     </ul>
@@ -107,7 +107,7 @@
             </li>
             <li class="side-nav-item">
                 <a href="{{ route('admin.members.index') }}" class="side-nav-link">
-                    <i class=" uil uil-users-alt"></i>
+                    <i class="uil uil-users-alt"></i>
                     <span>
                        Tài khoản
                     </span>
@@ -130,14 +130,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="/">
                                 Đặt quyền
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-
             <li class="side-nav-title">
             </li>
             <li class="side-nav-title">

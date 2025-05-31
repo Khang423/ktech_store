@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PermissionController;
@@ -37,7 +38,11 @@ Route::group([
 Route::group([
     'as' => 'home.',
     'middleware' => 'customer'
-], function () {});
+], function () {
+    // cart
+    Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
+    Route::post('/addItemToCart', [CartController::class, 'addItemToCart'])->name('addItemToCart');
+});
 
 
 // route page login admin

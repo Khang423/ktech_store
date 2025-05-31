@@ -9,6 +9,8 @@ use App\Repositories\banner\BannerInterface;
 use App\Repositories\banner\BannerRepository;
 use App\Repositories\brand\BrandInterface;
 use App\Repositories\brand\BrandRepository;
+use App\Repositories\cart\CartInterface;
+use App\Repositories\cart\CartRepository;
 use App\Repositories\categoryProduct\CategoryProductInterface;
 use App\Repositories\categoryProduct\CategoryProductRepository;
 use App\Repositories\member\MemberInterface;
@@ -36,6 +38,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(CategoryProductInterface::class, CategoryProductRepository::class);
         $this->app->singleton(BannerInterface::class, BannerRepository::class);
         $this->app->singleton(RoleInterface::class,RoleRepository::class);
+        $this->app->singleton(CartInterface::class,CartRepository::class);
     }
 
     /**
