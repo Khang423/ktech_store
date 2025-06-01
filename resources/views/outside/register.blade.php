@@ -35,11 +35,11 @@
                         <div class="text-danger mt-1 error-birthday"></div>
                     </div>
                     <div class="password-input mb-2 ">
-                        <input type="text" class="form-input" name="password" id="password" placeholder="Nhập mật khẩu">
+                        <input type="password" class="form-input" name="password" id="password" placeholder="Nhập mật khẩu">
                         <div class="text-danger mt-1 error-password"></div>
                     </div>
                     <div class="re_password-input ">
-                        <input type="text" class="form-input" name="re_password" id="re_password"
+                        <input type="password" class="form-input" name="re_password" id="re_password"
                             placeholder="Nhập lại mật khẩu">
                             <div class="text-danger mt-1 error-re_password"></div>
                     </div>

@@ -39,17 +39,17 @@
                     </div>
                 </div>
                 <div class="action">
-                    <div class="btn-delete">
+                    <div class="btn-delete" data-product-id="{{ $item->id }}">
                         <i class="uil uil-trash-alt"></i>
                     </div>
                     <div class="product-quantity mt-1">
-                        <div class="quantity-reduce">
+                        <div class="quantity-reduce" data-product-id="{{ $item->product_id }}">
                             <i class="uil uil-minus"></i>
                         </div>
                         <div class="quantity">
                             {{ $item->quantity }}
                         </div>
-                        <div class="quantity-increase">
+                        <div class="quantity-increase" data-product-id="{{ $item->product_id }}">
                             <i class="uil uil-plus"></i>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                 Tạm tính : 0₫
             </div>
             <div class="btn-buy">
-                <a href="#">
+                <a href="#" class="content">
                     Mua Ngay(0)
                 </a>
             </div>
@@ -70,4 +70,8 @@
 @endsection
 @push('js')
     <script src="{{ asset('js/outside/cart.js') }}"></script>
+    <script>
+        const RouteCartItemUpdate = "{{ route('home.cartItemUpdate') }}";
+        const RouteCartItemDelete = "{{ route('home.detleItemCart') }}";
+    </script>
 @endpush

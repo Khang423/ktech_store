@@ -42,6 +42,8 @@ Route::group([
     // cart
     Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
     Route::post('/addItemToCart', [CartController::class, 'addItemToCart'])->name('addItemToCart');
+    Route::post('/cartItemUpdate', [CartController::class, 'update'])->name('cartItemUpdate');
+    Route::post('/detleItemCart', [CartController::class, 'delete'])->name('detleItemCart');
 });
 
 

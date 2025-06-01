@@ -6,6 +6,6 @@ interface CartInterface {
     public function store($parameters);
     public function getList();
     public function createCart();
-    public function update($request,$member);
+    public function update($request);
     public function delete($parameters);
 }

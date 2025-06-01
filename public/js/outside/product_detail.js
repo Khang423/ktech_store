@@ -24,19 +24,12 @@ $(".btn-add_to_cart").click(function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function () {
-            window.location.href = $routeIndex;
-            toast("Thêm vào giỏ hàng thành công", "success");
+            toast("Đã thêm vào giỏ hàng", "success");
+            location.reload();
         },
         error: function (data) {
-            $(".text-danger").text("");
-            if (data.responseJSON && data.responseJSON.errors) {
-                let errors = data.responseJSON.errors;
-                for (let field in errors) {
-                    if (errors.hasOwnProperty(field)) {
-                        $(`.error-${field}`).text(errors[field][0]);
-                    }
-                }
-            }
+            let errors = data.responseJSON.errors;
+            console.log(errors);
         },
     });
 });

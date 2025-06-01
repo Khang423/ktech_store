@@ -77,23 +77,58 @@ class CartRepository extends Repository implements CartInterface
         }
     }
 
-    public function update($request, $member) {}
+    public function update($request)
+    {
+        DB::beginTransaction();
+        try {
+            $product_id = $request->productId;
+            $action = $request->action;
+
+            $customer_id = Auth::guard('customers')->user()->id;
+            $cart = $this->model::where('customer_id', $customer_id)->firstOrFail();
+
+            $product_old = CartItem::where('cart_id', $cart->id)
+                ->where('product_id', $product_id)
+                ->first();
+
+            if ($product_old) {
+                if ($action === 'increase') {
+                    $product_old->quantity += 1;
+                    $product_old->save();
+                } elseif ($action === 'reduce') {
+                    if ($product_old->quantity > 1) {
+                        $product_old->quantity -= 1;
+                        $product_old->save();
+                    } else {
+                        $product_old->delete();
+                    }
+                }
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
 
     public function delete($request)
     {
         DB::beginTransaction();
         try {
-            $this->model
-                ->query()
-                ->where('id', $request->id)
+            CartItem::query()
+                ->where('id', $request->productId)
                 ->delete();
             DB::commit();
+            return true;
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            return false;
         }
     }
-                                        
+
     public function createCart()
     {
         $customer_id = Auth::guard('customers')->user()->id;

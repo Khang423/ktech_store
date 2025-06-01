@@ -90,6 +90,7 @@ if (!function_exists('countItemCart')) {
         return CartItem::where('cart_id', $cart->id)->count();
     }
 }
+// create session
 if (!function_exists('createSessionForGuest')) {
     function createSessionForGuest()
     {
