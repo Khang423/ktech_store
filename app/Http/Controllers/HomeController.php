@@ -126,15 +126,9 @@ class HomeController extends Controller
         ]);
     }
 
-    public function transferGuestCartToCustomer($customer_id)
-    {
-        if (session()->has('guest_id')) {
-            $guest_id = session('guest_id');
-
-            CartItem::where('customer_id', $guest_id)
-                ->update(['customer_id' => $customer_id]);
-
-            session()->forget('guest_id'); // Xoá guest session sau khi chuyển
-        }
+    public function order(){
+        return view('outside.order',[
+            'title' => 'Ktech Cart'
+        ]);
     }
 }

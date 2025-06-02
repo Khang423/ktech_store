@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(242, 242, 242);
+    background-color: rgb(255, 255, 255);
 }
 .empty {
     margin-top: 7rem;
@@ -57,7 +57,8 @@ body {
     padding: 15px;
     background-color: #fff;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 #section-laptop .card-product .product-content {
@@ -474,7 +475,8 @@ body {
     padding: 15px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 .section-product-info .product-detail-info .product-price .btn-price {
     background-color: #fff;
@@ -568,7 +570,8 @@ body {
     width: 70%;
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     padding: 20px 30px;
 }
 
@@ -584,7 +587,8 @@ body {
     width: 30%;
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     padding: 15px;
 }
 
@@ -1277,4 +1281,66 @@ body {
         gap: 5px;
         font-size: 14px;
     }
+}
+/* page order */
+.section-order {
+    height: 750px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.section-order .main {
+    height: 100%;
+    width: 45%;
+}
+.section-order .main .page-title {
+    height: auto;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    padding: 0px 10px;
+    color: #919eab;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.section-order .main .page-title .info {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid #919eab;
+    font-weight: 600;
+}
+.section-order .main .page-title .payment {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid #919eab;
+    font-weight: 600;
+}
+.section-order .main .product-list{
+    height: 200px;
+    width: 100%;
+    margin:15px 0px ;
+}
+.section-order .main .product-list .item{
+    display: flex;
+    gap: 10px;
+    background-color: #25449a;
+    border-radius: 10px;
+    padding: 10px;
+}
+.section-order .main .product-list .thumbnail {
+    height: 100%;
+    width: 30%;
+}
+.section-order .main .product-list .product-info {
+    height: 100%;
+    width: 50%;
+}
+.section-order .main .product-list .product-quantity {
+    height: 100%;
+    width: 20%;
 }

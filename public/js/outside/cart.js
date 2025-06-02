@@ -115,3 +115,7 @@ $(".btn-delete").click(function () {
         },
     });
 });
+
+$("btn-buy").click(function () {
+    window.location.href = RouteOrder;
+});

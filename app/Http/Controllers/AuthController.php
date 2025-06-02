@@ -56,4 +56,11 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('home.index');
     }
+
+    public function authCheck() {
+        return response()->json([
+            'auth' => Auth::guard('customers')->check(),
+            'user' => Auth::guard('customers')->user(),
+        ]);
+    }
 }

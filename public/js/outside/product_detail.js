@@ -11,7 +11,6 @@ new Carousel(
         Thumbs,
     }
 );
-
 // xử lý nút thêm sản phẩm vào giỏ hàng
 $(".btn-add_to_cart").click(function () {
     const productId = $(this).data("productId");
@@ -25,11 +24,11 @@ $(".btn-add_to_cart").click(function () {
         },
         success: function () {
             toast("Đã thêm vào giỏ hàng", "success");
-            location.reload();
         },
-        error: function (data) {
-            let errors = data.responseJSON.errors;
-            console.log(errors);
-        },
+        error: function (data) {},
     });
+});
+
+$("#guest-add-to-cart").click(function () {
+    $(".modal-action").removeClass("d-none");
 });

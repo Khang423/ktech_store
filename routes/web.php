@@ -33,6 +33,8 @@ Route::group([
     // search product
     Route::post('/search', [HomeController::class, 'searchProcess'])->name('searchProcess');
     Route::get('/search-result', [HomeController::class, 'searchResult'])->name('searchResult');
+    // check auth status
+    Route::post('/auth-status', [AuthController::class, 'authCheck'])->name('authStatus');
 });
 
 Route::group([
@@ -44,6 +46,8 @@ Route::group([
     Route::post('/addItemToCart', [CartController::class, 'addItemToCart'])->name('addItemToCart');
     Route::post('/cartItemUpdate', [CartController::class, 'update'])->name('cartItemUpdate');
     Route::post('/detleItemCart', [CartController::class, 'delete'])->name('detleItemCart');
+    // order
+    Route::get('cart/payment-info', [HomeController::class, 'order'])->name('order');
 });
 
 

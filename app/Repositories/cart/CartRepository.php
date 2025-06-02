@@ -47,7 +47,6 @@ class CartRepository extends Repository implements CartInterface
 
     public function store($request)
     {
-
         DB::beginTransaction();
         try {
             $product_id = $request->productId;
@@ -73,7 +72,6 @@ class CartRepository extends Repository implements CartInterface
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
-            return false;
         }
     }
 

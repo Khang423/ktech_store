@@ -61,7 +61,7 @@
                 Tạm tính : 0₫
             </div>
             <div class="btn-buy">
-                <a href="#" class="content">
+                <a href="{{ route('home.order') }}" class="content">
                     Mua Ngay(0)
                 </a>
             </div>

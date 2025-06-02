@@ -67,12 +67,21 @@
                             MUA NGAY
                         </span>
                     </div>
-                    <div class="btn-add_to_cart" data-product-id={{ $product->id }}>
-                        <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
-                        <span>
-                            Thêm vào giỏ
-                        </span>
-                    </div>
+                    @if (Auth::guard('customers')->check())
+                        <div class="btn-add_to_cart" data-product-id={{ $product->id }}>
+                            <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
+                            <span>
+                                Thêm vào giỏ
+                            </span>
+                        </div>
+                    @else
+                        <div class="btn-add_to_cart" id="guest-add-to-cart">
+                            <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
+                            <span>
+                                Thêm vào giỏ
+                            </span>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

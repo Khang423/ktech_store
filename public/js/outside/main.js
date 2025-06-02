@@ -108,7 +108,24 @@ $(document).ready(function () {
         });
     });
 
-    $("#btn-cart").click(function () {
-        window.location.href = '/cart';
+    $(".btn-cart").click(function () {
+        $.ajax({
+            url: authCheckStatus,
+            type: "POST",
+            dataType: "json",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Bắt buộc nếu là POST
+            },
+            success: function (data) {
+                if (data.auth) {
+                    window.location.href = "/cart";
+                } else {
+                    toast('Bạn chưa đăng nhập','warning');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Lỗi ajax:", error);
+            },
+        });
     });
 });

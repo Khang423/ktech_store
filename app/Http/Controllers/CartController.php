@@ -6,6 +6,7 @@ use App\Repositories\cart\CartInterface;
 use App\Repositories\cart\CartRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
 class CartController extends Controller
@@ -37,13 +38,15 @@ class CartController extends Controller
         }
         return $this->errorResponse();
     }
+
     public function addItemToCart(Request $request)
     {
         $result = $this->cartInterface->store($request);
         if ($result) {
             return $this->successResponse();
+        } else {
+            return $this->errorResponse();
         }
-        return $this->errorResponse();
     }
 
     public function delete(Request $request)
