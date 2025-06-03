@@ -14,6 +14,8 @@ use App\Models\ProductImage;
 use App\Models\ProductVersion;
 use App\Repositories\auth\AuthInterface;
 use App\Repositories\auth\AuthRepository;
+use App\Repositories\city\CityInterface;
+use App\Repositories\city\CityRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,13 +25,18 @@ class HomeController extends Controller
 {
     protected $authInterface;
     protected $authRepository;
+    protected $cityInterface;
+    protected $cityRepository;
     use ApiResponse;
 
     public function __construct(
         AuthInterface $authInterface,
-        AuthRepository $authRepository
+        AuthRepository $authRepository,
+        CityInterface $cityInterface,
+        CityRepository $cityRepository
     ) {
         $this->authInterface = $authInterface;
+        $this->cityInterface = $cityInterface;
     }
 
 
@@ -126,9 +133,12 @@ class HomeController extends Controller
         ]);
     }
 
-    public function order(){
-        return view('outside.order',[
-            'title' => 'Ktech Cart'
+    public function order()
+    {
+        $city = $this->cityInterface->get_all();
+        return view('outside.order', [
+            'title' => 'Ktech Cart',
+            'city' => $city
         ]);
     }
 }

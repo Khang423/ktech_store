@@ -82,21 +82,3 @@ if (!function_exists('getPhoneSpecs')) {
         ];
     }
 }
-if (!function_exists('countItemCart')) {
-    function countItemCart()
-    {
-        $customer_id = Auth::guard('customers')->user()->id;
-        $cart = Cart::where('customer_id', $customer_id)->first('id');
-        return CartItem::where('cart_id', $cart->id)->count();
-    }
-}
-// create session
-if (!function_exists('createSessionForGuest')) {
-    function createSessionForGuest()
-    {
-        if (!session()->has('guest_id')) {
-            $guestId = uniqid('guest_', true);
-            session(['guest_id' => $guestId]);
-        }
-    }
-}

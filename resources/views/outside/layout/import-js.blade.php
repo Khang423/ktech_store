@@ -13,3 +13,5 @@
    {{-- toast js  --}}
    <script src="{{ asset('js/libraries/sweetalert/sweetalert2.js') }}"></script>
    <script src="{{ asset('js/libraries/sweetalert/confirm_toast.js') }}"></script>
+   {{-- select 2  --}}
+   <script src="{{ asset('js/libraries/select2/select2.min.js') }}"></script>
