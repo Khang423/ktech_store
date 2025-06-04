@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\role\StoreRequest;
 use App\Models\Role;
 use App\Repositories\role\RoleInterface;
 use App\Repositories\role\RoleRepository;
+use App\Services\RoleService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
@@ -14,16 +15,13 @@ class RoleController extends Controller
 {
     use ApiResponse;
 
-    protected $roleInterface;
-    protected $roleRepository;
+    protected $roleService;
 
     public function __construct(
-        RoleInterface  $roleInterface,
-        RoleRepository $roleRepository
+        RoleService  $roleService,
     )
     {
-        $this->roleInterface = $roleInterface;
-        $this->roleRepository = $roleRepository;
+        $this->roleService = $roleService;
     }
 
     public function index()
@@ -33,7 +31,7 @@ class RoleController extends Controller
 
     public function getList()
     {
-        return $this->roleInterface->getList();
+        return $this->roleService->getList();
     }
 
     public function create()
@@ -43,7 +41,7 @@ class RoleController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $result = $this->roleInterface->store($request);
+        $result = $this->roleService->store($request);
         if($result){
             return $this->successResponse();
         }
@@ -59,7 +57,7 @@ class RoleController extends Controller
 
     public function update(UpdateRequest $request, Role $Role)
     {
-        $result = $this->roleInterface->update($request,$Role);
+        $result = $this->roleService->update($request,$Role);
         if($result){
             return $this->successResponse();
         }
@@ -68,7 +66,7 @@ class RoleController extends Controller
 
     public function delete(Request $request)
     {
-        $result = $this->roleInterface->delete($request);
+        $result = $this->roleService->delete($request);
         if($result){
             return $this->successResponse();
         }

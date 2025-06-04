@@ -7,21 +7,19 @@ use App\Http\Requests\Admin\categoryProduct\UpdateRequest;
 use App\Models\CategoryProduct;
 use App\Repositories\categoryProduct\CategoryProductInterface;
 use App\Repositories\categoryProduct\CategoryProductRepository;
+use App\Services\CategoryProductService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class CategoryProductController extends Controller
 {
     use ApiResponse;
-    protected $categoryProductInterface;
-    protected $categoryProductRepository;
+    protected $categoryProductService;
     public function __construct(
-        CategoryProductInterface  $categoryProductInterface,
-        CategoryProductRepository $categoryProductRepository
+        CategoryProductService  $categoryProductService,
     )
     {
-        $this->categoryProductInterface = $categoryProductInterface;
-        $this->categoryProductRepository = $categoryProductRepository;
+        $this->categoryProductService = $categoryProductService;
     }
 
     public function index()
@@ -31,7 +29,7 @@ class CategoryProductController extends Controller
 
     public function getList()
     {
-        return $this->categoryProductInterface->getList();
+        return $this->categoryProductService->getList();
     }
 
     public function create()
@@ -41,7 +39,7 @@ class CategoryProductController extends Controller
 
     public function store(SoreRequest $request)
     {
-        $result = $this->categoryProductInterface->store($request);
+        $result = $this->categoryProductService->store($request);
         if($result){
             return $this->successResponse();
         }
@@ -57,7 +55,7 @@ class CategoryProductController extends Controller
 
     public function update(UpdateRequest $request, CategoryProduct $categoryProduct)
     {
-        $result = $this->categoryProductInterface->update($request,$categoryProduct);
+        $result = $this->categoryProductService->update($request,$categoryProduct);
         if($result){
             return $this->successResponse();
         }
@@ -66,7 +64,7 @@ class CategoryProductController extends Controller
 
     public function delete(Request $request)
     {
-        $result = $this->categoryProductInterface->delete($request);
+        $result = $this->categoryProductService->delete($request);
         if($result){
             return $this->successResponse();
         }

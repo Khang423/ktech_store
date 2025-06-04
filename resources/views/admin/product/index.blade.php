@@ -40,9 +40,9 @@
                                     <th>Sản phẩm</th>
                                     <th>Ảnh </th>
                                     <th>Đơn giá</th>
-                                    <th>Status</th>
-                                    <th>Created at</th>
-                                    <th style="width: 80px;">Actions</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
                         </table>

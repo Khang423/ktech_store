@@ -8,17 +8,17 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\auth\LoginRequest;
+use App\Services\AuthService;
 
 class AuthController extends Controller
 {
     use ApiResponse;
-    private $authInterface;
-    private $authRepository;
+    private $authService;
 
-    public function __construct(AuthInterface $authInterface, AuthRepository $authRepository)
-    {
-        $this->authInterface = $authInterface;
-        $this->authRepository = $authRepository;
+    public function __construct(
+        AuthService $authService,
+    ) {
+        $this->authService = $authService;
     }
     public function index()
     {
@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $success = $this->authInterface->login($request);
+        $success = $this->authService->login($request);
 
         if (!$success) {
             return $this->errorResponse('error', 'messages.login_error');
@@ -41,23 +41,8 @@ class AuthController extends Controller
         return redirect()->route('admin.index');
     }
 
-    public function customerLogin(LoginRequest $request)
+    public function authCheck()
     {
-        dd($request);
-        // $success = $this->authInterface->customerLogin($request);
-        // if (!$success) {
-        //     return $this->errorResponse('error', 'messages.login_error');
-        // }
-        // return $this->successResponse('success', 'messages.login_success');
-    }
-
-    public function customerLogout()
-    {
-        Auth::logout();
-        return redirect()->route('home.index');
-    }
-
-    public function authCheck() {
         return response()->json([
             'auth' => Auth::guard('customers')->check(),
             'user' => Auth::guard('customers')->user(),

@@ -5,21 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Repositories\brand\BrandInterface;
 use App\Repositories\brand\BrandRepository;
+use App\Services\BrandService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
     use ApiResponse;
-    private $brandInterface;
-    private $brandRepository;
+    private $brandService;
 
     public function __construct(
-        BrandInterface $brandInterface,
-        BrandRepository $brandRepository
+        BrandService $brandService,
     ) {
-        $this->brandInterface = $brandInterface;
-        $this->brandRepository = $brandRepository;
+        $this->brandService = $brandService;
     }
     public function index()
     {
@@ -27,7 +25,7 @@ class BrandController extends Controller
     }
     public function getList()
     {
-        return $this->brandInterface->getList();
+        return $this->brandService->getList();
     }
     public function create()
     {
@@ -35,7 +33,7 @@ class BrandController extends Controller
     }
     public function store(Request $request)
     {
-        $result =  $this->brandInterface->store($request);
+        $result =  $this->brandService->store($request);
         if ($result) {
             return $this->successResponse();
         }
@@ -49,7 +47,7 @@ class BrandController extends Controller
     }
     public function update(Request $request, Brand $brand)
     {
-        $result = $this->brandInterface->update($request, $brand);
+        $result = $this->brandService->update($request, $brand);
         if ($result) {
             return $this->successResponse();
         }
@@ -57,7 +55,7 @@ class BrandController extends Controller
     }
     public function delete(Request $request)
     {
-        $result = $this->brandInterface->delete($request);
+        $result = $this->brandService->delete($request);
         if ($result) {
             return $this->successResponse();
         }

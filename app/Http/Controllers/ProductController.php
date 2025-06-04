@@ -13,6 +13,7 @@ use App\Models\ProductImage;
 use App\Models\ProductVersion;
 use App\Models\Supplier;
 use App\Repositories\product\ProductInterface;
+use App\Services\ProductService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Intervention\Image\Colors\Rgb\Channels\Red;
@@ -21,15 +22,13 @@ class ProductController extends Controller
 {
     use ApiResponse;
 
-    protected $productInterface;
-    protected $productRepository;
+    protected $productService;
 
     public function __construct(
-        ProductInterface $productInterface,
-        ProductInterface $productRepository
+        ProductService $productService,
+
     ) {
-        $this->productInterface = $productInterface;
-        $this->productRepository = $productRepository;
+        $this->productService = $productService;
     }
 
     public function index()
@@ -39,7 +38,7 @@ class ProductController extends Controller
 
     public function getList()
     {
-        return $this->productInterface->getList();
+        return $this->productService->getList();
     }
 
     public function create()
@@ -56,7 +55,7 @@ class ProductController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $result = $this->productInterface->store($request);
+        $result = $this->productService->store($request);
         if ($result) {
             return $this->successResponse();
         }
@@ -85,7 +84,7 @@ class ProductController extends Controller
     public function update(UpdateRequest $request, ProductVersion $productVersion)
     {
 
-        $result = $this->productInterface->update($request, $productVersion);
+        $result = $this->productService->update($request, $productVersion);
         if ($result) {
             return $this->successResponse();
         }
@@ -95,7 +94,7 @@ class ProductController extends Controller
 
     public function delete(Request $request)
     {
-        $result = $this->productInterface->delete($request);
+        $result = $this->productService->delete($request);
         if ($result) {
             return $this->successResponse();
         }
@@ -104,7 +103,7 @@ class ProductController extends Controller
 
     public function destroy_image(Request $request)
     {
-        $result = $this->productInterface->delete_image($request);
+        $result = $this->productService->delete_image($request);
         if ($result) {
             return $this->successResponse();
         }

@@ -5,21 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Repositories\member\MemberInterface;
 use App\Repositories\member\MemberRepository;
+use App\Services\MemberService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
     use ApiResponse;
-    private $memberInterface;
-    private $memberRepository;
+    private $memberService;
 
     public function __construct(
-        MemberInterface $memberInterface,
-        MemberRepository $memberRepository
+        MemberService $memberService,
     ) {
-        $this->memberInterface = $memberInterface;
-        $this->memberRepository = $memberRepository;
+        $this->memberService = $memberService;
     }
 
     public function index()
@@ -30,7 +28,7 @@ class MemberController extends Controller
 
     public function getList()
     {
-        return $this->memberInterface->getList();
+        return $this->memberService->getList();
     }
 
     public function create()
@@ -40,7 +38,7 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-        $this->memberInterface->store($request);
+        $this->memberService->store($request);
         return true;
     }
 
@@ -53,12 +51,12 @@ class MemberController extends Controller
 
     public function update(Request $request, Member $member)
     {
-        $this->memberInterface->update($request, $member);
+        $this->memberService->update($request, $member);
         return 1;
     }
     public function delete(Request $request)
     {
-        $this->memberInterface->delete($request);
+        $this->memberService->delete($request);
         return $this->successResponse();
     }
 }

@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Admin\supplier\StoreRequest;
 use App\Http\Requests\Admin\supplier\UpdateRequest;
 use App\Models\Supplier;
-use App\Repositories\supplier\SupplierInterface;
-use App\Repositories\supplier\SupplierRepository;
+use App\Services\SupplierService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
@@ -14,16 +13,13 @@ class SupplierController extends Controller
 {
     use ApiResponse;
 
-    protected $supplierInterface;
-    protected $supplierRepository;
+    protected $supplierService;
 
     public function __construct(
-        SupplierInterface  $supplierInterface,
-        SupplierRepository $supplierRepository
+        SupplierService  $supplierService,
     )
     {
-        $this->supplierInterface = $supplierInterface;
-        $this->supplierRepository = $supplierRepository;
+        $this->supplierService = $supplierService;
     }
 
     public function index()
@@ -33,7 +29,7 @@ class SupplierController extends Controller
 
     public function getList()
     {
-        return $this->supplierInterface->getList();
+        return $this->supplierService->getList();
     }
 
     public function create()
@@ -43,7 +39,7 @@ class SupplierController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $result = $this->supplierInterface->store($request);
+        $result = $this->supplierService->store($request);
         if($result){
             return $this->successResponse();
         }
@@ -59,7 +55,7 @@ class SupplierController extends Controller
 
     public function update(UpdateRequest $request, Supplier $supplier)
     {
-        $result = $this->supplierInterface->update($request,$supplier);
+        $result = $this->supplierService->update($request,$supplier);
         if($result){
             return $this->successResponse();
         }
@@ -68,7 +64,7 @@ class SupplierController extends Controller
 
     public function delete(Request $request)
     {
-        $result = $this->supplierInterface->delete($request);
+        $result = $this->supplierService->delete($request);
         if($result){
             return $this->successResponse();
         }

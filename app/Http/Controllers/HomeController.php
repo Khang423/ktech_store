@@ -9,34 +9,25 @@ use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\CategoryProduct;
-use App\Models\Product;
-use App\Models\ProductImage;
 use App\Models\ProductVersion;
-use App\Repositories\auth\AuthInterface;
-use App\Repositories\auth\AuthRepository;
-use App\Repositories\city\CityInterface;
-use App\Repositories\city\CityRepository;
+use App\Services\AuthService;
+use App\Services\CityService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class HomeController extends Controller
 {
-    protected $authInterface;
-    protected $authRepository;
-    protected $cityInterface;
-    protected $cityRepository;
+    protected $authService;
+    protected $cityService;
     use ApiResponse;
 
     public function __construct(
-        AuthInterface $authInterface,
-        AuthRepository $authRepository,
-        CityInterface $cityInterface,
-        CityRepository $cityRepository
+        AuthService $authService,
+        CityService $cityService,
     ) {
-        $this->authInterface = $authInterface;
-        $this->cityInterface = $cityInterface;
+        $this->authService = $authService;
+        $this->cityService = $cityService;
     }
 
 
@@ -73,7 +64,7 @@ class HomeController extends Controller
 
     public function loginProcess(LoginRequest $request)
     {
-        $success = $this->authInterface->customerLogin($request);
+        $success = $this->authService->customerLogin($request);
         if (!$success) {
             return $this->errorResponse('error', 'messages.login_error');
         }
@@ -89,7 +80,7 @@ class HomeController extends Controller
 
     public function registerProcess(RegisterRequest $request)
     {
-        $success = $this->authInterface->customerRegister($request);
+        $success = $this->authService->customerRegister($request);
         if (!$success) {
             return $this->errorResponse('error', 'messages.register_error');
         }
@@ -135,7 +126,7 @@ class HomeController extends Controller
 
     public function order()
     {
-        $city = $this->cityInterface->get_all();
+        $city = $this->cityService->get_all();
         return view('outside.order', [
             'title' => 'Ktech Cart',
             'city' => $city

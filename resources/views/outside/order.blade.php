@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="mb-3">
+                            <div class="mb-3" >
                                 <label for="tel" class="form-label">SĐT NGƯỜI NHẬN</label>
                                 <input type="text" class="tel form-control" id="tel" name="tel">
                             </div>
@@ -126,7 +126,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div
     </section>
 @endsection
 @push('js')

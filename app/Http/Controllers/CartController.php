@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\cart\CartInterface;
 use App\Repositories\cart\CartRepository;
+use App\Services\CartService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,19 +12,16 @@ use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
 class CartController extends Controller
 {
-    protected $cartInterface;
-    protected $cartRepository;
+    protected $cartService;
     use ApiResponse;
     public function __construct(
-        CartInterface $cartInterface,
-        CartRepository $cartRepository
+        CartService $cartService,
     ) {
-        $this->cartInterface  = $cartInterface;
-        $this->cartRepository  = $cartRepository;
+        $this->cartService  = $cartService;
     }
     public function createCart()
     {
-        $result = $this->cartInterface->createCart();
+        $result = $this->cartService->createCart();
         if ($result) {
             return $this->successResponse();
         }
@@ -32,7 +30,7 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
-        $result = $this->cartInterface->update($request);
+        $result = $this->cartService->update($request);
         if ($result) {
             return $this->successResponse();
         }
@@ -41,7 +39,7 @@ class CartController extends Controller
 
     public function addItemToCart(Request $request)
     {
-        $result = $this->cartInterface->store($request);
+        $result = $this->cartService->store($request);
         if ($result) {
             return $this->successResponse();
         } else {
@@ -51,7 +49,7 @@ class CartController extends Controller
 
     public function delete(Request $request)
     {
-        $result = $this->cartInterface->delete($request);
+        $result = $this->cartService->delete($request);
         if ($result) {
             return $this->successResponse();
         }
