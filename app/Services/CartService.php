@@ -16,31 +16,7 @@ class CartService extends Controller
 
     public function __construct(Cart $cart)
     {
-        parent::__construct();
         $this->model = $cart;
-    }
-
-    public function getList()
-    {
-        // return DataTables::of(
-        //     $this->model::query()
-        //         ->get($this->model->getInfo())
-        // )
-        //     ->editColumn('index', function ($object) {
-        //         static $i = 0;
-        //         return ++$i;
-        //     })
-        //     ->editColumn('name', function ($object) {
-        //         return $object->name;
-        //     })
-        //     ->addColumn('actions', function ($object) {
-        //         return [
-        //             'id' => $object->id,
-        //             'destroy' => route('admin.roles.delete'),
-        //             'edit' => route('admin.roles.edit', $object),
-        //         ];
-        //     })
-        //     ->make(true);
     }
 
     public function store($request)

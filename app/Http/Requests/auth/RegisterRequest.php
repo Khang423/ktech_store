@@ -21,7 +21,7 @@ class RegisterRequest extends FormRequest
             'password' => 'required',
             're_password' => ['required_with:new_password', 'same:password'],
             'tel' => 'required|unique:customers|string|max:10',
-            'email' => 'unique:customers|max:255',
+            'email' => 'unique:customers|max:255|nullable',
             'birthday' => 'nullable',
         ];
     }

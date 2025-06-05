@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 // route home
@@ -48,6 +49,7 @@ Route::group([
     Route::post('/detleItemCart', [CartController::class, 'delete'])->name('detleItemCart');
     // order
     Route::get('cart/payment-info', [HomeController::class, 'order'])->name('order');
+    Route::post('cart/addOrderItem', [OrderController::class, 'addOrderItem'])->name('addOrderItem');
 });
 
 

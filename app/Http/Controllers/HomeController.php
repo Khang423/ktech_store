@@ -82,9 +82,9 @@ class HomeController extends Controller
     {
         $success = $this->authService->customerRegister($request);
         if (!$success) {
-            return $this->errorResponse('error', 'messages.register_error');
+            return $this->errorResponse('success', 'messages.register_success');
         }
-        return $this->successResponse('success', 'messages.register_success');
+        return $this->successResponse('error', 'messages.register_error');
     }
 
     public function logout()

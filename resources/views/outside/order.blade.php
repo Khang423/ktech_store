@@ -28,24 +28,6 @@
                 </div>
             </div>
             <div class="product-list">
-                @for ($i = 0; $i < 4; $i++)
-                    <div class="item">
-                        <div class="thumbnail">
-                            <img src="{{ asset('asset/admin/products/1/thumbnail_6829439552bbf.webp') }}" alt="">
-                        </div>
-                        <div class="product-info">
-                            <div class="name">
-                                OPPO Reno10 Pro Plus 5G 12GB 256GB - Tím
-                            </div>
-                            <div class="price">
-                                {{ formatPriceToVND(36599000) }}
-                            </div>
-                        </div>
-                        <div class="product-quantity">
-                            Số lượng : 1
-                        </div>
-                    </div>
-                @endfor
             </div>
             <div class="title">
                 Thông tin khách hàng

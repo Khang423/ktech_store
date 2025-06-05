@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // Initialize Swiper for banners
     new Swiper(".swiper-banner", {
         loop: true,
         pagination: {
@@ -8,74 +9,50 @@ $(document).ready(function () {
         slidesPerView: 1,
     });
 
+    // Initialize Swiper for product items with responsive breakpoints
     new Swiper(".swiper-product-item", {
         loop: true,
         slidesPerView: 5,
         spaceBetween: 15,
-
         breakpoints: {
-            360: {
-                slidesPerView: 2,
-            },
-            // Khi >= 640px
-            640: {
-                slidesPerView: 2,
-            },
-            // Khi >= 768px
-            768: {
-                slidesPerView: 3,
-            },
-            // Khi >= 1024px
-            1024: {
-                slidesPerView: 4,
-            },
-            1280: {
-                slidesPerView: 5,
-            },
+            360: { slidesPerView: 2 },
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+            1280: { slidesPerView: 5 },
         },
     });
 
+    // Initialize Swiper for category products with responsive breakpoints
     new Swiper(".swiper-category-product", {
         loop: true,
         slidesPerView: 5,
         spaceBetween: 15,
-
         breakpoints: {
-            400: {
-                slidesPerView: 2,
-            },
-            // Khi >= 640px
-            640: {
-                slidesPerView: 3,
-            },
-            // Khi >= 768px
-            768: {
-                slidesPerView: 4,
-            },
-            // Khi >= 1024px
-            1024: {
-                slidesPerView: 5,
-            },
+            400: { slidesPerView: 2 },
+            640: { slidesPerView: 3 },
+            768: { slidesPerView: 4 },
+            1024: { slidesPerView: 5 },
         },
     });
 
-    $(".category-product-card").on("click", function () {
-        console.log(data_id);
-    });
-
+    // Handle product card click - redirect to product detail page
     $(".card-product").on("click", function () {
-        let product_id = $(this).data("id");
-        let product_slug = $(this).data("slug");
+        const product_id = $(this).data("id");
+        const product_slug = $(this).data("slug");
         window.location.href = "/product/" + product_slug;
     });
 
+    // Redirect login and register buttons
     $(".btn-login").click(function () {
         window.location.href = "/login";
     });
+
     $(".btn-register").click(function () {
         window.location.href = "/register";
     });
 
+    // Search action - using input with class .input-search-bar
     $(".circle-icon").click(function () {
         const keyword = $(".input-search-bar").val();
         $.ajax({
@@ -89,9 +66,13 @@ $(document).ready(function () {
             success: function (data) {
                 window.location.href = data.redirect;
             },
+            error: function(xhr) {
+                console.error('Search ajax error:', xhr);
+            }
         });
     });
 
+    // Search action - using input with id #input-search-bar
     $("#circle-icon").click(function () {
         const keyword = $("#input-search-bar").val();
         $.ajax({
@@ -105,26 +86,30 @@ $(document).ready(function () {
             success: function (data) {
                 window.location.href = data.redirect;
             },
+            error: function(xhr) {
+                console.error('Search ajax error:', xhr);
+            }
         });
     });
 
+    // Handle Cart button click with authentication check
     $(".btn-cart").click(function () {
         $.ajax({
             url: authCheckStatus,
             type: "POST",
             dataType: "json",
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Bắt buộc nếu là POST
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (data) {
                 if (data.auth) {
                     window.location.href = "/cart";
                 } else {
-                    toast('Bạn chưa đăng nhập','warning');
+                    toast('You are not logged in', 'warning');
                 }
             },
             error: function (xhr, status, error) {
-                console.log("Lỗi ajax:", error);
+                console.error("Ajax error:", error);
             },
         });
     });

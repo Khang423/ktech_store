@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Member;
 use App\Traits\Toast;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService extends Controller
@@ -51,18 +52,21 @@ class AuthService extends Controller
 
     public function customerRegister($request)
     {
-        $dataCustomer = $request->only(['name', 'tel', 'email', 'birthday']);
-        $dataCustomer['password'] = Hash::make($request->password);
-        Customer::create($dataCustomer);
-        $customer_id = Customer::max()->get('id');
-        $check_carted = Cart::where('customer_id', $customer_id)->get();
-        if ($check_carted) {
-            return false;
-        } else {
+
+        DB::beginTransaction();
+        try {
+            $dataCustomer = $request->only(['name', 'tel', 'email', 'birthday']);
+            $dataCustomer['password'] = Hash::make($request->password);
+            Customer::create($dataCustomer);
+            $customer_id = Customer::max('id');
             Cart::create(['customer_id' => $customer_id]);
+            DB::commit();
             return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
         }
-        return true;
     }
 
     public function logout() {}

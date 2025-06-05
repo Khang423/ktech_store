@@ -21,7 +21,9 @@
         @foreach ($cart_item as $item)
             <div class="item mb-2">
                 <div class="product-checkbox">
-                    <input type="checkbox" data-price="{{ $item->unit_price }}" class="form-check-input product-check"
+                    <input type="checkbox" data-price="{{ $item->unit_price }}" data-id="{{ $item->productVersion->id }}"
+                        data-quantity="{{ $item->quantity }}" data-thumbnail="{{ $item->productVersion->thumbnail }}"
+                        data-name="{{ $item->productVersion->name }}" class="form-check-input product-check"
                         id="product-check">
                 </div>
                 <div class="product-thumbnail">
@@ -61,9 +63,9 @@
                 Tạm tính : 0₫
             </div>
             <div class="btn-buy">
-                <a href="{{ route('home.order') }}" class="content">
-                    Mua Ngay(0)
-                </a>
+                <div class="content" id="btn-buy">
+                    <span id="count-buy"> Mua ngay </span>
+                </div>
             </div>
         </div>
     </section>
@@ -73,5 +75,7 @@
     <script>
         const RouteCartItemUpdate = "{{ route('home.cartItemUpdate') }}";
         const RouteCartItemDelete = "{{ route('home.detleItemCart') }}";
+        const RouteAddOrderItem = "{{ route('home.addOrderItem') }}";
+        const RouteOrder = "{{ route('home.order') }}";
     </script>
 @endpush

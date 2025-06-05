@@ -1233,6 +1233,7 @@ body {
     display: flex;
     justify-content: end;
     align-items: center;
+    cursor: pointer;
 }
 .view-price .btn-buy .content {
     background-color: #2a52be;
@@ -1376,17 +1377,17 @@ body {
     padding: 15px;
     border-radius: 10px;
 }
-.section-order .main .customer-info .title-name-and-tel{
+.section-order .main .customer-info .title-name-and-tel {
     height: 40%;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.section-order .main .customer-info .title-name-and-tel .name{
+.section-order .main .customer-info .title-name-and-tel .name {
     font-size: 16px;
     color: #3d3d3d;
 }
-.section-order .main .customer-info .title-name-and-tel .tel{
+.section-order .main .customer-info .title-name-and-tel .tel {
     font-size: 16px;
     color: #3d3d3d;
 }
@@ -1397,7 +1398,7 @@ body {
     flex-direction: column;
     gap: 10px;
 }
-.section-order .main .customer-info .email input{
+.section-order .main .customer-info .email input {
     outline: none;
     height: 50px;
     border: none;
@@ -1426,10 +1427,32 @@ body {
     border-bottom: 1px solid lightgray;
     outline: none;
 }
-.section-order .main .address-receiver label{
+.section-order .main .address-receiver label {
     font-size: 12px;
     font-weight: 400;
 }
 .section-order .main .address-receiver input:focus {
     border-bottom: 1px solid #25449a;
+}
+@media (max-width: 768px) {
+    .section-order .main {
+        width: 95%;
+    }
+    .section-order .main .product-list .item {
+        height: 100px;
+        padding: 8px;
+    }
+    .section-order .main .product-list .product-info{
+        width: 55%;
+    }
+    .section-order .main .product-list .product-info .name {
+        font-size: 14px;
+    }
+    .section-order .main .product-list .product-info .price {
+        font-size: 14px;
+    }
+    .section-order .main .product-list .product-quantity {
+        font-size: 12px;
+        width: 25%;
+    }
 }

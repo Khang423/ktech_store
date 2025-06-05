@@ -11,9 +11,10 @@ use BenSampo\Enum\Enum;
  */
 final class OrderStatusEnum extends Enum
 {
-    const PENDING = 0; // Chờ xác nhận
-    const PROCCESSING = 1; // Đang xử lý
-    const SHIPED = 2; // Đang giao hàng
-    const DELIVERED = 3; // Đã giao hàng
-    const CANCELLED = 4; // Đã hủy
+    const DEFAULT = 0; // Chờ xác nhận
+    const PENDING = 1; // Đang xử lý
+    const PROCCESSING = 2; // Đang giao hàng
+    const SHIPED = 3; // Đã giao hàng
+    const DELIVERED = 4; // Đã hủy
+    const CANCELLED = 5; // Đã hủy
 }
