@@ -32,31 +32,33 @@
             <div class="title">
                 Thông tin khách hàng
             </div>
-            <div class="customer-info">
-                <div class="title-name-and-tel">
-                    <div class="name">
-                        Vo Vi Khang
+            <form id="form-store" method="post">
+                @csrf
+                <div class="customer-info">
+                    <div class="title-name-and-tel">
+                        <div class="name">
+                            {{ $customer->name }}
+                        </div>
+                        <div class="tel">
+                            {{ $customer->tel }}
+                        </div>
                     </div>
-                    <div class="tel">
-                        0799599040
+                    <div class="email">
+                        <label for="email ">Email</label>
+                        <input type="text" name="email_receiver" id="email_receiver" placeholder="NguyenVanA@gmail.com" value="{{ $customer->email }}">
+                        <div class="text-danger mt-1 error-email_receiver"></div>
                     </div>
                 </div>
-                <div class="email">
-                    <label for="email ">Email</label>
-                    <input type="text" name="email-receiver" id="email-receiver" value="vovykhag@gmail.com">
+                <div class="title mt-3 mb-2">
+                    Thông tin nhận hàng
                 </div>
-            </div>
-            <div class="title mt-3 mb-2">
-                Thông tin nhận hàng
-            </div>
-            <div class="address-receiver">
-                <form action="" id="form-store">
-                    @csrf
+                <div class="address-receiver">
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="name" class="form-label">TÊN NGƯỜI NHẬN</label>
-                                <input type="text" class="name form-control" id="name" name="name">
+                                <input type="text" class="name form-control" id="name" name="name" value="{{ $customer->name }}">
+                                <div class="text-danger mt-1 error-name"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="city" class="form-label">Tỉnh/thành phố </label>
@@ -69,7 +71,6 @@
                                 </select>
                                 <div class="text-danger mt-1 error-city"></div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="ward" class="form-label">Xã/phường/thị trấn
                                 </label>
@@ -80,9 +81,10 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="mb-3" >
+                            <div class="mb-3">
                                 <label for="tel" class="form-label">SĐT NGƯỜI NHẬN</label>
-                                <input type="text" class="tel form-control" id="tel" name="tel">
+                                <input type="text" class="tel form-control" id="tel" name="tel" value="{{ $customer->tel }}">
+                                <div class="text-danger mt-1 error-tel"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="district" class="form-label">Quận/huyện
@@ -101,17 +103,32 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-1">
-                                <label for="name" class="form-label">GHI CHÚ</label>
-                                <input type="text" class="name form-control" id="name" name="name">
+                                <label for="note" class="form-label">GHI CHÚ</label>
+                                <input type="text" class="form-control" id="note" name="note">
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+            </form>
+            <div style="height:100px"></div>
+            <div class="bottom-bar">
+                <div class="temporary-price">
+                    Tổng thanh toán : <span class="total-price"></span>
+                </div>
+                <div class="btn-buy">
+                    <div class="content" id="btn-order-now">
+                        <span id="count-buy"> Đặt ngay </span>
+                    </div>
+                </div>
             </div>
-        </div
+        </div>
     </section>
 @endsection
 @push('js')
     <script src="{{ asset('js/outside/order.js') }}"></script>
-    <script></script>
+    <script>
+        const RouteGetDistrict = "{{ route('address.getDistricts') }}";
+        const RouteGetWard = "{{ route('address.getWards') }}";
+        const RouteOrderStore = "{{ route('home.orderStore') }}";
+    </script>
 @endpush

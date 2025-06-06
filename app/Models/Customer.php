@@ -16,7 +16,7 @@ class Customer extends Authenticatable
         'updated_at',
     ];
 
-    public function getInfo()
+    public static function getInfo()
     {
         return [
             'name',

@@ -1434,6 +1434,48 @@ body {
 .section-order .main .address-receiver input:focus {
     border-bottom: 1px solid #25449a;
 }
+.section-order .main .bottom-bar {
+    height: 80px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.section-order .main .bottom-bar .temporary-price {
+    height: 100%;
+    width: 60%;
+    padding: 15px;
+    font-size: 18px;
+    color: #3d3d3d;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.section-order .main .bottom-bar .btn-buy {
+    height: 100%;
+    width: 40%;
+    padding: 15px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    cursor: pointer;
+}
+.section-order .main .bottom-bar .btn-buy .content {
+    background-color: #2a52be;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    color: #fff;
+}
 @media (max-width: 768px) {
     .section-order .main {
         width: 95%;
@@ -1442,7 +1484,7 @@ body {
         height: 100px;
         padding: 8px;
     }
-    .section-order .main .product-list .product-info{
+    .section-order .main .product-list .product-info {
         width: 55%;
     }
     .section-order .main .product-list .product-info .name {

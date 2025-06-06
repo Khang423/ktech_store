@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
@@ -49,7 +50,15 @@ Route::group([
     Route::post('/detleItemCart', [CartController::class, 'delete'])->name('detleItemCart');
     // order
     Route::get('cart/payment-info', [HomeController::class, 'order'])->name('order');
-    Route::post('cart/addOrderItem', [OrderController::class, 'addOrderItem'])->name('addOrderItem');
+    Route::post('cart/order/store', [OrderController::class, 'store'])->name('orderStore');
+});
+
+Route::group([
+    'prefix' => 'address',
+    'as' => 'address.',
+], function () {
+    Route::post('/getDistricts', [AddressController::class, 'getDistricts'])->name('getDistricts');
+    Route::post('/getWards', [AddressController::class, 'getWards'])->name('getWards');
 });
 
 

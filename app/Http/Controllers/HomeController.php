@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\CategoryProduct;
+use App\Models\Customer;
 use App\Models\ProductVersion;
 use App\Services\AuthService;
 use App\Services\CityService;
@@ -82,9 +83,9 @@ class HomeController extends Controller
     {
         $success = $this->authService->customerRegister($request);
         if (!$success) {
-            return $this->errorResponse('success', 'messages.register_success');
+            return $this->errorResponse('error', 'messages.register_error');
         }
-        return $this->successResponse('error', 'messages.register_error');
+        return $this->successResponse('success', 'messages.register_success');
     }
 
     public function logout()
@@ -127,9 +128,12 @@ class HomeController extends Controller
     public function order()
     {
         $city = $this->cityService->get_all();
+        $customer_id = Auth::guard('customers')->user()->id;
+        $customer = Customer::where('id',$customer_id)->first(Customer::getInfo());
         return view('outside.order', [
-            'title' => 'Ktech Cart',
-            'city' => $city
+            'title' => 'Ktech Order',
+            'city' => $city,
+            'customer' => $customer
         ]);
     }
 }

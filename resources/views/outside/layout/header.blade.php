@@ -169,7 +169,7 @@
         <div class="contact-content d-flex">
             @for ($i = 1; $i < 10; $i++)
                 <div class="contact-item">
-                    Hiper
+                    Ktech
                 </div>
             @endfor
         </div>

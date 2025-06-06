@@ -13,29 +13,27 @@ class DistrictService extends Controller
 
     public function __construct(District $district)
     {
-        parent::__construct();
         $this->model = $district;
     }
 
-    public function get_district_belongsto_city_api($request)
+    public function getDistrictsByCityApi($request)
     {
         return $this->model->query()
-            ->where('city_id', $request->validated())
+            ->where('city_id', $request->city_id)
             ->get($this->model->getInfo());
     }
 
-    public function get_district_belongsto_city($city_id)
+    public function getDistrictsByCity($cityId)
     {
         return $this->model->query()
-            ->where('city_id', $city_id)
+            ->where('city_id', $cityId)
             ->get($this->model->getInfo());
     }
 
-    public function find($params)
+    public function findById($id)
     {
-        return $this->model
-            ->query()
-            ->where('id', $params)
+        return $this->model->query()
+            ->where('id', $id)
             ->first([
                 'id',
                 'name',

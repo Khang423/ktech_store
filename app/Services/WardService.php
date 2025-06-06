@@ -12,34 +12,30 @@ class WardService extends Controller
 
     public function __construct(Ward $ward)
     {
-        parent::__construct();
         $this->model = $ward;
     }
 
-    public function get_ward_belongsto_district_api($request)
+    public function getWardsByDistrictApi($request)
     {
         return $this->model
-            ->query()
-            ->where('district_id', $request->validated())
+            ->where('district_id', $request->district_id)
             ->get($this->model->getInfo());
     }
 
-    public function get_ward_belongsto_district($district_id)
+    public function getWardsByDistrict($districtId)
     {
         return $this->model->query()
-            ->where('district_id', $district_id)
+            ->where('district_id', $districtId)
             ->get($this->model->getInfo());
     }
 
-    public function find($params)
+    public function findById($id)
     {
         return $this->model
-            ->query()
-            ->where('id', $params)
+            ->where('id', $id)
             ->first([
                 'id',
                 'name',
             ]);
     }
 }
-

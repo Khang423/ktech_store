@@ -57,9 +57,8 @@ class AuthService extends Controller
         try {
             $dataCustomer = $request->only(['name', 'tel', 'email', 'birthday']);
             $dataCustomer['password'] = Hash::make($request->password);
-            Customer::create($dataCustomer);
-            $customer_id = Customer::max('id');
-            Cart::create(['customer_id' => $customer_id]);
+            $customer = Customer::create($dataCustomer);
+            Cart::create(['customer_id' => $customer->id]);
             DB::commit();
             return true;
         } catch (\Exception $e) {

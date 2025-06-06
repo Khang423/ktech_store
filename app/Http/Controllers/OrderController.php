@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\order\StoreRequest;
 use App\Services\OrderService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -17,9 +18,9 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function addOrderItem(Request $request)
+    public function store(StoreRequest $request)
     {
-        $result = $this->orderService->addOrderItem($request);
+        $result = $this->orderService->store($request);
         if ($result) {
             return $this->successResponse();
         }
