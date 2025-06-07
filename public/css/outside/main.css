@@ -473,10 +473,10 @@ body {
     height: 175px;
     width: 100%;
     padding: 15px;
+    margin-top: 20px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border: 1px solid lightgray;
 }
 .section-product-info .product-detail-info .product-price .btn-price {
     background-color: #fff;
@@ -519,7 +519,7 @@ body {
     .product-price
     .product-buy
     .btn-buy:hover {
-    background-color: #506cb8;
+    background-color: #466fdede;
     cursor: pointer;
 }
 .section-product-info
@@ -570,45 +570,50 @@ body {
     width: 70%;
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border: 1px solid lightgray;
     padding: 20px 30px;
 }
 
 .section-description .content .product-description .title {
     font-size: 25px;
-    font-weight: 600;
+    font-weight: 400;
     display: flex;
+    color: #3d3d3d;
     justify-content: center;
     margin-bottom: 20px;
 }
 .section-description .content .product-info {
-    height: 700px;
+    height: auto;
     width: 30%;
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border: 1px solid lightgray;
     padding: 15px;
 }
 
 .section-description .content .product-info .title {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 400;
     display: flex;
     justify-content: center;
-    height: 5.7%;
+    height: 40px;
+    color: #3d3d3d;
 }
 .section-description .content .product-info .content {
-    height: 85.3%;
+    height: auto;
     width: 100%;
     border: 2px solid lightgray;
-    overflow-x: auto;
+    padding: 0px 10px;
 }
 .section-description .content .product-info .content .item {
     height: auto;
     width: 100%;
     display: flex;
+    color: #3d3d3d;
+    border-bottom: 1px dashed lightgray;
+}
+.section-description .content .product-info .content .item:last-child {
+    border-bottom: none;
 }
 .section-description .content .product-info .content .item .name-item {
     height: auto;
@@ -627,23 +632,22 @@ body {
     flex-wrap: wrap;
 }
 .section-description .content .product-info .btn-info-detail {
-    height: 8%;
+    height: 45px;
     width: 100%;
     background-color: #fff;
     margin-top: 10px;
     color: #000;
-    font-size: 15px;
-    border-radius: 15px;
+    font-size: 18px;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 .section-description .content .product-info .btn-info-detail:hover {
-    background-color: #2a51be8c;
+    background-color: #f4f4f4;
     cursor: pointer;
-    border: 2px solid #2a52be;
-    color: #fff;
 }
 .section-description .content .product-info-detail {
     height: 100vh;
@@ -699,8 +703,8 @@ body {
     .info-detail-main
     .product-thumbnail {
     height: 30%;
-    width: 50%;
-    margin: 0 25%;
+    width: 70%;
+    margin: 0 15%;
 }
 .section-description
     .content
@@ -710,6 +714,9 @@ body {
     img {
     height: 100%;
     width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 .section-description .content .product-info-detail .info-detail-main .content {
     height: auto;
@@ -855,8 +862,6 @@ body {
         width: 100%;
         padding: 15px;
         background-color: #fff;
-        border-radius: 10px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
     .section-product-info .product-detail-info .product-price .btn-price {
         background-color: #fff;
@@ -919,21 +924,28 @@ body {
         width: 100%;
         background-color: #ffffff;
         border-radius: 15px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         padding: 20px 30px;
         overflow-x: hidden;
+    }
+    .section-description .content .product-description .title {
+        font-size: 16px;
     }
     .section-description .content .product-description img {
         height: 200px;
         width: 100%;
     }
     .section-description .content .product-info {
-        height: auto;
+        height: 120px;
         width: 100%;
         background-color: #ffffff;
         border-radius: 15px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border: 1px solid lightgray;
         padding: 15px;
+    }
+    .section-description .content .product-info .title {
+        font-size: 16px;
+        font-weight: 400;
+        height: 30px;
     }
     .section-description .content .product-info .content {
         height: auto;
@@ -943,18 +955,11 @@ body {
         display: none;
     }
     .section-description .content .product-info .btn-info-detail {
-        height: 60px;
+        height: 45px;
         width: 100%;
         background-color: #fff;
-        margin-top: 30px;
-        color: #000;
+        color: #3d3d3d;
         font-size: 15px;
-        border-radius: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
     .section-description .content .product-info-detail {
         height: 100vh;
@@ -1437,7 +1442,8 @@ body {
 .section-order .main .bottom-bar {
     height: 80px;
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     position: fixed;
@@ -1497,4 +1503,192 @@ body {
         font-size: 12px;
         width: 25%;
     }
+}
+/* profile css */
+.section-profile {
+    height: auto;
+    width: 100%;
+}
+.section-profile .main {
+    height: 100%;
+    width: 100%;
+}
+
+.section-profile .main .header-profile {
+    height: 140px;
+    background-color: #ffffff;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    padding: 10px 0px;
+    display: flex;
+    gap: 10px;
+}
+.section-profile .customer-info {
+    height: 100%;
+    width: 33%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-profile .customer-info .avatar {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-profile .customer-info .avatar .avatar-circle {
+    height: 80px;
+    width: 80px;
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    padding: 10px;
+}
+.section-profile .customer-info .avatar img {
+    height: 100%;
+    width: 100%;
+}
+.section-profile .customer-info .information {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.section-profile .customer-info .information .name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3d3d3d;
+}
+.section-profile .customer-info .information .tel {
+    font-size: 16px;
+    color: gray;
+}
+.section-profile .sum-ordered {
+    height: 100%;
+    width: 33%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 5px solid #25449a;
+}
+.section-profile .sum-ordered .icon-order {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-profile .sum-ordered .icon-order .order-circle {
+    height: 80px;
+    width: 80px;
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    padding: 15px;
+}
+.section-profile .sum-ordered .icon-order .order-circle img {
+    height: 100%;
+    width: 100%;
+}
+.section-profile .information {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.section-profile .sum-ordered .information .quantity {
+    font-size: 20px;
+    font-weight: 600;
+    color: #3d3d3d;
+}
+.section-profile .sum-ordered .information .title {
+    font-size: 16px;
+    color: gray;
+}
+
+.section-profile .total-price {
+    height: 100%;
+    width: 33%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 5px solid #25449a;
+}
+.section-profile .total-price .icon-invoice {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-profile .total-price .icon-invoice .invoice-circle {
+    height: 80px;
+    width: 80px;
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    padding: 15px;
+}
+.section-profile .total-price .icon-invoice .invoice-circle img {
+    height: 100%;
+    width: 100%;
+}
+.section-profile .total-price .information {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.section-profile .total-price .information .sum-total {
+    font-size: 20px;
+    font-weight: 600;
+    color: #3d3d3d;
+}
+.section-profile .total-price .information .title {
+    font-size: 16px;
+    color: gray;
+}
+.section-profile .dashboard {
+    height: auto;
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+}
+.section-profile .sidebar {
+    height: auto;
+    width: 25%;
+    border-radius: 15px;
+    padding-top: 10px;
+    border: 1px solid lightgray;
+}
+.section-profile .sidebar .item {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #3d3d3d;
+    padding-left: 25px;
+    gap: 10px;
+}
+.section-profile .sidebar .item .icon {
+    font-size: 25px;
+}
+.section-profile .sidebar .item:hover {
+    border-left: 4px solid #25449a;
+    background-color: #25449a41;
+}
+.section-profile .dashboard .content{
+    height: 400px;
+    width: 75%;
+    border: 1px solid lightgray;
+    border-radius: 15px;
 }

@@ -105,7 +105,7 @@ $(document).ready(function () {
                 if (data.auth) {
                     window.location.href = "/cart";
                 } else {
-                    toast('You are not logged in', 'warning');
+                    toast('Bạn chưa đăng nhập', 'warning');
                 }
             },
             error: function (xhr, status, error) {

@@ -101,18 +101,21 @@ body {
 /* css profile and cart */
 .header .container .content .profile {
     height: 100%;
-    width: 75%;
+    width: 100%;
     padding-top: 20px;
-    margin-left: 25%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 .header .container .content .profile .user {
     height: 100%;
-    width: 70px;
+    width: 50%;
     position: relative;
 }
 .header .container .content .profile .user .circle-user {
     height: 40px;
     width: 40px;
+    margin-left: 40%;
     border-radius: 50px;
     background-color: #090d1466;
     position: absolute;
@@ -129,13 +132,16 @@ body {
 }
 .header .container .content .profile .user-dropdown {
     height: auto;
-    width: 215px;
+    width: 150px;
     background-color: #1867ef;
     z-index: 99;
     position: fixed;
-    top: 70px;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-35%);
     color: #3d3d3d;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     background-color: #fff;
 }
@@ -146,9 +152,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 13px;
     color: #3d3d3d;
     font-weight: 600;
+}
+.header .container .content .profile .user-dropdown .item i {
+    font-size: 18px;
 }
 .header .container .content .profile .user-dropdown .item:first-child {
     border-top-left-radius: 10px;
@@ -167,18 +176,13 @@ body {
 
 .header .container .content .cart {
     height: 100%;
-    width: 100%;
-    padding-top: 20px;
-}
-.header .container .content .cart {
-    height: 100%;
-    width: 100%;
+    width: 50%;
     position: relative;
 }
 
 .header .container .content .cart .border-cart {
     height: 40px;
-    width: 150px;
+    width: 100%;
     background-color: #090d1466;
     position: absolute;
     border-radius: 50px;

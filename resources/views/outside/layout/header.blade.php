@@ -45,11 +45,11 @@
                                     <img src="{{ asset('asset/outside/icon/loged-in-user.png') }}" alt="Icon user">
                                 </div>
                                 <div class="user-dropdown d-none">
-                                    <a href="" class="item">
-                                        Thông tin cá nhân
+                                    <a href="{{ route('home.profile') }}" class="item">
+                                       <i class="uil uil-user-square"></i> Cá nhân
                                     </a>
                                     <a href="{{ route('home.logout') }}" class="item">
-                                        Đăng xuất
+                                       <i class="uil uil-sign-out-alt"></i> Đăng xuất
                                     </a>
                                 </div>
                             @endauth

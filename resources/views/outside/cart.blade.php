@@ -14,10 +14,12 @@
     </div>
     <hr>
     <section class="list-item-cart">
-        <div class="form-check mb-2">
-            <input type="checkbox" class="form-check-input" id="check-all-product">
-            <label class="form-check-label text-dark" for="check-all-product">Chọn tất cả</label>
-        </div>
+        @if ($cart_item)
+            <div class="form-check mb-2">
+                <input type="checkbox" class="form-check-input" id="check-all-product">
+                <label class="form-check-label text-dark" for="check-all-product">Chọn tất cả</label>
+            </div>
+        @endif
         @foreach ($cart_item as $item)
             <div class="item mb-2">
                 <div class="product-checkbox">
@@ -75,7 +77,6 @@
     <script>
         const RouteCartItemUpdate = "{{ route('home.cartItemUpdate') }}";
         const RouteCartItemDelete = "{{ route('home.detleItemCart') }}";
-        const RouteAddOrderItem = "{{ route('home.addOrderItem') }}";
         const RouteOrder = "{{ route('home.order') }}";
     </script>
 @endpush
