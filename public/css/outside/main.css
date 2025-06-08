@@ -1,5 +1,6 @@
 body {
     background-color: rgb(255, 255, 255);
+    font-family: Inter, Roboto, Arial, sans-serif;
 }
 .empty {
     margin-top: 7rem;
@@ -1654,14 +1655,19 @@ body {
     color: gray;
 }
 .section-profile .dashboard {
-    height: auto;
+    height: 790px;
+    width: 100%;
+}
+.section-profile .dashboard .main {
+    height: 100%;
     width: 100%;
     display: flex;
     margin-top: 20px;
     gap: 20px;
 }
+
 .section-profile .sidebar {
-    height: auto;
+    height: 220px;
     width: 25%;
     border-radius: 15px;
     padding-top: 10px;
@@ -1675,9 +1681,10 @@ body {
     align-items: center;
     font-size: 16px;
     font-weight: 500;
-    color: #3d3d3d;
+    color: gray;
     padding-left: 25px;
     gap: 10px;
+    cursor: pointer;
 }
 .section-profile .sidebar .item .icon {
     font-size: 25px;
@@ -1685,10 +1692,666 @@ body {
 .section-profile .sidebar .item:hover {
     border-left: 4px solid #25449a;
     background-color: #25449a41;
+    color: #25449a;
+    font-weight: 600;
 }
-.section-profile .dashboard .content{
-    height: 400px;
+.section-profile .sidebar .item.active {
+    border-left: 4px solid #25449a;
+    background-color: #25449a41;
+    color: #25449a;
+    font-weight: 600;
+}
+.section-profile .dashboard .content {
+    height: 100%;
     width: 75%;
     border: 1px solid lightgray;
     border-radius: 15px;
+    padding: 15px;
+}
+.section-profile .dashboard .purchase-history {
+    height: 45px;
+    width: 100%;
+}
+.section-profile .dashboard .purchase-history .order-status {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+.section-profile .dashboard .purchase-history .order-status .item {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: gray;
+}
+.section-profile .dashboard .purchase-history .order-status .item.active {
+    border-bottom: 3px solid #25449a;
+    color: #25449a;
+    font-weight: 600;
+}
+.section-profile .dashboard .purchase-history .search-by-date {
+    height: 45px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+.section-profile .dashboard .purchase-history .search-by-date .title {
+    font-size: 15px;
+    color: #3d3d3d;
+}
+.section-profile .dashboard .purchase-history .search-by-date .date {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-profile .dashboard .purchase-history .search-by-date input {
+    height: 80%;
+    width: 150px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid lightgray;
+}
+.section-profile .dashboard .purchase-history .view {
+    height: 650px;
+    width: 100%;
+    overflow-y: auto;
+}
+.section-profile .dashboard .purchase-history .view .item {
+    height: 120px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+.section-profile .dashboard .purchase-history .view .item .item-header {
+    height: 15%;
+    width: 100%;
+    display: flex;
+}
+.section-profile .dashboard .purchase-history .view .item .item-header .left {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+.section-profile .dashboard .purchase-history .view .item .item-header .right {
+    height: 100%;
+    width: 50%;
+}
+
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-header
+    .right
+    .order-status {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.section-profile .dashboard .purchase-history .view .item .item-content {
+    height: 85%;
+    width: 100%;
+    display: flex;
+}
+.section-profile .dashboard .purchase-history .view .item .item-content .left {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-self: center;
+    gap: 20px;
+}
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-content
+    .left
+    .thumbnail {
+    height: 100%;
+    width: 20%;
+}
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-content
+    .left
+    .thumbnail
+    img {
+    height: 100%;
+    width: 100%;
+}
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-content
+    .left
+    .product-info {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+}
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-content
+    .left
+    .product-info {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+}
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-content
+    .left
+    .product-info
+    .name {
+    font-size: 16px;
+    font-weight: 600;
+}
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-content
+    .left
+    .product-info
+    .price {
+    font-size: 14px;
+    color: #25449a;
+}
+.section-profile .dashboard .purchase-history .view .item .item-content .right {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+.section-profile
+    .dashboard
+    .purchase-history
+    .view
+    .item
+    .item-content
+    .right
+    .order-detail {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.section-profile .dashboard .account-info {
+    height: 100%;
+    width: 100%;
+}
+
+.section-profile .dashboard .content .account-info .personal-info {
+    height: 220px;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+.section-profile .dashboard .content .account-info .personal-info .info-header {
+    height: 50px;
+    width: 100%;
+    display: flex;
+}
+.section-profile #profile-account-info .personal-info .info-header .left {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3d3d3d;
+}
+.section-profile #profile-account-info .personal-info .info-header .right {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 16px;
+    color: #25449a;
+    cursor: pointer;
+}
+.section-profile #profile-account-info .personal-info .info-content {
+    height: 150px;
+    width: 100%;
+    display: flex;
+    gap: 50px;
+}
+
+.section-profile #profile-account-info .personal-info .info-content .left {
+    height: 100%;
+    width: 50%;
+}
+.section-profile #profile-account-info .personal-info .info-content .right {
+    height: 100%;
+    width: 50%;
+}
+
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .left
+    .item {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+}
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .right
+    .item {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+}
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .left
+    .item:last-child {
+    border-bottom: none;
+}
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .right
+    .item:last-child {
+    border-bottom: none;
+}
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .right
+    .item {
+    height: 50px;
+    width: 100%;
+    display: flex;
+}
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .left
+    .item
+    .title {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 14px;
+    color: gray;
+}
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .right
+    .item
+    .title {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 14px;
+    color: gray;
+}
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .right
+    .item
+    .value {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 14px;
+    color: #3d3d3d;
+}
+
+.section-profile
+    #profile-account-info
+    .personal-info
+    .info-content
+    .left
+    .item
+    .value {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 14px;
+    color: #3d3d3d;
+}
+/* address info */
+.section-profile .dashboard .content .account-info .address-info {
+    height: 320px;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+.section-profile #profile-account-info .address-info .address-header {
+    display: flex;
+    height: 50px;
+    width: 100%;
+}
+.section-profile #profile-account-info .address-info .address-header .title {
+    width: 50%;
+    height: 100%;
+    font: 16px;
+    font-weight: 600;
+    color: #3d3d3d;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-header
+    .btn-add-address {
+    width: 50%;
+    height: 100%;
+    font: 16px;
+    font-weight: 600;
+    color: #25449a;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.section-profile #profile-account-info .address-info .address-content {
+    height: 230px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* overflow-y: auto; */
+}
+.section-profile #profile-account-info .address-info .address-content .item {
+    height: 50%;
+    width: 49.4%;
+    background-color: rgba(221, 221, 221, 0.396);
+    border-radius: 10px;
+    padding: 10px;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-header {
+    display: flex;
+    height: 20%;
+    width: 100%;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-header
+    .left {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d3d3d;
+    width: 50%;
+    height: 100%;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-header
+    .right {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d3d3d;
+    width: 50%;
+    height: 100%;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-content {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-content
+    .basic-info {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 14px;
+    color: #3d3d3d;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-content
+    .basic-info
+    .name {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-content
+    .address-info1 {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 14px;
+    color: rgb(184, 183, 183);
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-footer {
+    height: 30%;
+    width: 100%;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-footer
+    .item-action {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-footer
+    .item-action
+    .right {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-footer
+    .item-action
+    .right
+    .btn-delete {
+    cursor: pointer;
+    color: #db2d2d;
+}
+.section-profile
+    #profile-account-info
+    .address-info
+    .address-content
+    .item
+    .item-footer
+    .item-action
+    .right
+    .btn-update {
+    cursor: pointer;
+    color: #25449a;
+}
+.section-profile #password-and-connect {
+    height: 170px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+.section-profile #password-and-connect .reset-password{
+    height: 100%;
+    width: 50%;
+    border-radius: 10px;
+    padding:10px 20px;
+    border: 1px solid lightgray;
+}
+.section-profile #password-and-connect .linked-accounts{
+    height: 100%;
+    width: 50%;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+}
+
+.section-profile #password-and-connect .reset-password .reset-header{
+   display: flex;
+   height: 50px;
+   width: 100%;
+}
+.section-profile #password-and-connect .reset-password .reset-header .title{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size:16px ;
+    font-weight: 600;
+    height: 100%;
+    color: #3d3d3d;
+    width: 50%;
+}
+.section-profile #password-and-connect .reset-password .reset-header .btn-update-password{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size:16px ;
+    font-weight: 600;
+    height: 100%;
+    color: #25449a;
+    width: 50%;
+    cursor: pointer;
+}
+.section-profile #password-and-connect .reset-password .reset-content{
+   height: 100px;
+   width: 100%;
+   display: flex;
+}
+
+.section-profile #password-and-connect .reset-password .reset-content .left{
+   height: 100%;
+   width: 50%;
+   display: flex;
+   justify-content: start;
+   align-items:center;
+   font-size: 14px;
+   color: gray;
+}
+.section-profile #password-and-connect .reset-password .reset-content .right{
+   height: 100%;
+   width: 50%;
+   display: flex;
+   justify-content: end;
+   align-items:center;
+   font-size: 14px;
+   color: #3d3d3d;
 }

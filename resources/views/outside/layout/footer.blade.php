@@ -1,9 +1,3 @@
-{{-- <footer>
-    <div class="footer-main">
-        <div class="container">
-            <div class="content">
-                <h1>1dsaf</h1>
-            </div>
-        </div>
-    </div>
-</footer> --}}
+<div id="footer mt-2">
+    <h1>footer</h1>
+</div>

@@ -41,17 +41,19 @@
                     <div class="profile d-flex">
                         <div class="user">
                             @auth('customers')
-                                <div class="circle-user" id="btn-user-logged-in">
-                                    <img src="{{ asset('asset/outside/icon/loged-in-user.png') }}" alt="Icon user">
-                                </div>
-                                <div class="user-dropdown d-none">
+                                <a href="{{ route('home.profile') }}">
+                                    <div class="circle-user" id="btn-user-logged-in">
+                                        <img src="{{ asset('asset/outside/icon/loged-in-user.png') }}" alt="Icon user">
+                                    </div>
+                                </a>
+                                {{-- <div class="user-dropdown d-none">
                                     <a href="{{ route('home.profile') }}" class="item">
                                        <i class="uil uil-user-square"></i> Cá nhân
                                     </a>
                                     <a href="{{ route('home.logout') }}" class="item">
                                        <i class="uil uil-sign-out-alt"></i> Đăng xuất
                                     </a>
-                                </div>
+                                </div> --}}
                             @endauth
                             @guest('customers')
                                 <div class="circle-user" id="btn-user">
@@ -61,7 +63,7 @@
                         </div>
                         <div class="cart">
                             <div class="content">
-                                <div class="border-cart btn-cart d-flex" >
+                                <div class="border-cart btn-cart d-flex">
                                     <div class="icon-cart">
                                         <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
                                     </div>

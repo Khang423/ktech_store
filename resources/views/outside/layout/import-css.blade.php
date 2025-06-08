@@ -4,6 +4,7 @@
    <link href="{{ asset('css/libraries/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
 
    <link href="{{ asset('css/outside/header.css') }}" rel="stylesheet" type="text/css" />
+   <link href="{{ asset('css/outside/footer.css') }}" rel="stylesheet" type="text/css" />
    <link href="{{ asset('css/outside/header-mobile.css') }}" rel="stylesheet" type="text/css" />
    <link href="{{ asset('css/outside/main.css') }}" rel="stylesheet" type="text/css" />
    {{-- select2 --}}
