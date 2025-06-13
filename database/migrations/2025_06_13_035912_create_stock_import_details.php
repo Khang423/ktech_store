@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('stock_import_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('stock_import_id')->constrained('stock_imports')->cascadeOnDelete();  
             $table->foreignId('product_version_id')->constrained('product_versions')->cascadeOnDelete();
-            $table->integer('stock_quantity');
+            $table->integer('quantity')->default(0);
+            $table->double('price')->default(0);
+            $table->double('total_price')->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('stock_import_details');
     }
 };

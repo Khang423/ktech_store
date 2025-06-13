@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('stock_imports', function (Blueprint $table) {
             $table->id();
+            $table->string('ref_code')->unique();
             $table->foreignId('inventory_id')->constrained('inventory')->cascadeOnDelete();
             $table->foreignId('supplier_id')->constrained('suppliers')->cascadeOnDelete();
-            $table->integer('quantity_imported');
-            $table->integer('quantity_remaining');
-            $table->double('import_price');
-            $table->string('import_date');
+            $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
+            $table->string('note')->nullable();
+            $table->double('total_amount');
+            $table->smallInteger('status')->default(0);
             $table->timestamps();
         });
     }

@@ -52,5 +52,8 @@ $(document).ready(function () {
         }
     );
 
-
 });
+
+function goToPageProfile() {
+    window.location.href = routeProfile;
+}

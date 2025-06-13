@@ -68,10 +68,6 @@
                                 </div>
                                 <div class="product-rate d-flex">
                                     <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                    <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                    <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                    <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                    <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
                                     <div class="title-heart">
                                         Yêu thích
                                     </div>

@@ -14,6 +14,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,7 +53,11 @@ Route::group([
     // order
     Route::get('cart/payment-info', [HomeController::class, 'order'])->name('order');
     Route::post('cart/order/store', [OrderController::class, 'store'])->name('orderStore');
+    // profile
     Route::get('customer/profile', [CustomerController::class, 'profile'])->name('profile');
+    Route::post('customer/add-address', [CustomerController::class, 'addAddress'])->name('addAddress');
+    // detele address
+    Route::post('customer/delete-address', [CustomerController::class, 'deleteAddress'])->name('deleteAddress');
 });
 
 Route::group([
@@ -176,5 +181,17 @@ Route::group([
         Route::get('/edit/{banner:slug}', [BannerController::class, 'edit'])->name('edit');
         Route::put('/edit/{banner:slug}', [BannerController::class, 'update'])->name('update');
         Route::delete('/delete', [BannerController::class, 'delete'])->name('delete');
+    });
+    // Inventory route
+    Route::group([
+        'prefix' => 'inventories',
+        'as' => 'inventories.'
+    ], function () {
+        Route::get('/', [InventoryController::class, 'index'])->name('index');
+        Route::post('/getList', [InventoryController::class, 'getList'])->name('getList');
+        Route::get('/create', [InventoryController::class, 'create'])->name('create');
+        Route::post('/store', [InventoryController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [InventoryController::class, 'edit'])->name('edit');
+        Route::delete('/delete', [InventoryController::class, 'delete'])->name('delete');
     });
 });

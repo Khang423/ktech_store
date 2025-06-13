@@ -9,9 +9,7 @@ class Product extends Model
     protected $fillable = [
         'id',
         'category_product_id',
-        'supplier_id',
         'brand_id',
-        'price',
         'status',
         'created_at',
         'updated_at',
@@ -22,7 +20,6 @@ class Product extends Model
         return [
             'id',
             'category_product_id',
-            'supplier_id',
             'brand_id',
             'status',
             'created_at',

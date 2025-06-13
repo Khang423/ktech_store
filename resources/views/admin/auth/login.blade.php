@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Login | K-Tech Admin Dashboard</title>
+    <title>Đăng nhập | K - Tech Trang quản trị</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('asset/admin/systemImage/laravel.png') }}">
+    <link rel="shortcut icon" href="{{ asset('asset/admin/systemImage/short_icon_ktech.svg') }}">
     {{-- App Css --}}
     <link href="{{ asset('css/admin/hyper/app-saas.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
     {{-- Icon Css --}}
@@ -18,15 +18,6 @@
 
 <body class="authentication-bg position-relative">
     <div class="position-absolute start-0 end-0 start-0 bottom-0 w-100 h-100">
-        <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 800 800'>
-            <g fill-opacity='0.22'>
-                <circle style="fill: rgba(var(--ct-primary-rgb), 0.1);" cx='400' cy='400' r='600' />
-                <circle style="fill: rgba(var(--ct-primary-rgb), 0.2);" cx='400' cy='400' r='500' />
-                <circle style="fill: rgba(var(--ct-primary-rgb), 0.3);" cx='400' cy='400' r='300' />
-                <circle style="fill: rgba(var(--ct-primary-rgb), 0.4);" cx='400' cy='400' r='200' />
-                <circle style="fill: rgba(var(--ct-primary-rgb), 0.5);" cx='400' cy='400' r='100' />
-            </g>
-        </svg>
     </div>
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
         <div class="container">
@@ -45,7 +36,7 @@
                         <div class="card-body p-4">
 
                             <div class="text-center w-75 m-auto mb-4">
-                                <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
+                                <h4 class="text-dark-50 text-center pb-0 fw-bold">Đăng nhập</h4>
                             </div>
 
                             <form action="{{ route('admin.login') }}" method="post" id="form-login">
@@ -53,8 +44,8 @@
                                 <div class="mb-3">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="floatingInput"
-                                            name="email_or_phone" placeholder="name@example.com of number phone" />
-                                        <label for="floatingInput">Email or Number phone</label>
+                                            name="email_or_phone" placeholder="name@example.com of number phone"  autocomplete="off"/>
+                                        <label for="floatingInput">Email hoặc Số điện thoại</label>
                                         <div class="text-danger mt-1 error-email_or_phone"></div>
                                     </div>
                                 </div>
@@ -63,21 +54,22 @@
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control" name="password"
                                             id="floatingPassword" placeholder="Password" />
-                                        <label for="floatingPassword">Password</label>
+                                        <label for="floatingPassword">Mật khẩu</label>
                                         <div class="text-danger mt-1 error-password"></div>
                                     </div>
                                 </div>
 
-                                <div class="mb-3 mb-3">
+                                {{-- <div class="mb-3 mb-3">
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" name="remember"
                                             id="checkbox-signin" checked>
                                         <label class="form-check-label" for="checkbox-signin">Remember me</label>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="mb-3 mb-0 text-center">
-                                    <button class="btn" style="background-color: #2a52be;color: #fff" type="button" id="login-submit"> Log In</button>
+                                    <button class="btn" style="background-color: #2a52be;color: #fff" type="button"
+                                        id="login-submit"> Đăng nhập</button>
                                 </div>
 
                             </form>

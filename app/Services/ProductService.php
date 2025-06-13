@@ -73,9 +73,9 @@ class ProductService extends Controller
             $dataProduct['supplier_id'] = $request->supplier_id;
             $dataProduct['brand_id'] = $request->brand_id;
             $dataProduct['status'] = StatusEnum::ON;
-            Product::create($dataProduct);
+            $product = Product::create($dataProduct);
             // product_id
-            $product_id = Product::query()->max('id');
+            $product_id = $product->id;
             // insert product version
             $dataProductVersion = [];
             $dataProductVersion['product_id'] = $product_id;
@@ -84,9 +84,9 @@ class ProductService extends Controller
             $dataProductVersion['price'] = $request->price;
             $dataProductVersion['description'] = $request->description;
 
-            ProductVersion::create($dataProductVersion);
+            $productVersion =  ProductVersion::create($dataProductVersion);
             //productversion_id
-            $productVersion_id = ProductVersion::query()->max('id');
+            $productVersion_id =  $productVersion->id;
 
             switch ($request->product_type) {
                 case ProductTypeEnum::LAPTOP:
@@ -296,8 +296,8 @@ class ProductService extends Controller
                     $dataPhone['bluetooth_technology'] = $request->bluetooth_technology;
                     $dataPhone['release_date'] = $request->release_date_phone;
                     PhoneSpec::query()
-                    ->where('product_id', $productVersion_id)
-                    ->update($dataPhone);
+                        ->where('product_id', $productVersion_id)
+                        ->update($dataPhone);
                     break;
                 case ProductTypeEnum::MOUSE:
                     break;

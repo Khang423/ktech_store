@@ -41,23 +41,23 @@
                     <div class="profile d-flex">
                         <div class="user">
                             @auth('customers')
-                                <a href="{{ route('home.profile') }}">
-                                    <div class="circle-user" id="btn-user-logged-in">
-                                        <img src="{{ asset('asset/outside/icon/loged-in-user.png') }}" alt="Icon user">
+                                @php
+                                    $account_name = Auth::guard('customers')->user()->name ?? '';
+                                    $last_name = collect(explode(' ', $account_name))->last();
+                                @endphp
+                                <div class="circle-user" onclick="goToPageProfile()">
+                                    <div class="thumbnail">
+                                        <img src="{{ asset('asset/outside/icon/user.png') }}" alt="Icon user">
                                     </div>
-                                </a>
-                                {{-- <div class="user-dropdown d-none">
-                                    <a href="{{ route('home.profile') }}" class="item">
-                                       <i class="uil uil-user-square"></i> Cá nhân
-                                    </a>
-                                    <a href="{{ route('home.logout') }}" class="item">
-                                       <i class="uil uil-sign-out-alt"></i> Đăng xuất
-                                    </a>
-                                </div> --}}
+                                    <span class="account-name">Hi , {{  $last_name }}</span>
+                                </div>
                             @endauth
                             @guest('customers')
                                 <div class="circle-user" id="btn-user">
-                                    <img src="{{ asset('asset/outside/icon/user.png') }}" alt="Icon user">
+                                    <div class="thumbnail">
+                                        <img src="{{ asset('asset/outside/icon/user.png') }}" alt="Icon user">
+                                    </div>
+                                    <span class="account-name">Đăng Nhập</span>
                                 </div>
                             @endguest
                         </div>
@@ -69,9 +69,6 @@
                                     </div>
                                     <div class="circle-quantity-item-cart">
                                         1
-                                    </div>
-                                    <div class="title">
-                                        Giỏ hàng
                                     </div>
                                 </div>
                             </div>
@@ -242,5 +239,6 @@
     <script>
         const searchRoute = "{{ route('home.searchProcess') }}";
         const authCheckStatus = "{{ route('home.authStatus') }}";
+        const routeProfile = "{{ route('home.profile') }}";
     </script>
 @endpush

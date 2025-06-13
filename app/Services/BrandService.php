@@ -18,7 +18,6 @@ class BrandService extends Controller
 
     public function __construct(Brand $brand, ImageTrait $imageHelper)
     {
-        parent::__construct();
         $this->model = $brand;
         $this->imageTrait = $imageHelper;
     }

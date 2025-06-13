@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
-class BannerSerivce extends Controller
+class BannerService extends Controller
 {
     private Model $model;
     private $imageTrait;

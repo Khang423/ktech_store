@@ -16,7 +16,6 @@ $(document).ready(function () {
         spaceBetween: 15,
         breakpoints: {
             360: { slidesPerView: 2 },
-            640: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
             1024: { slidesPerView: 4 },
             1280: { slidesPerView: 5 },

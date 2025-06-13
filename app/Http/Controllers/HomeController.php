@@ -67,7 +67,7 @@ class HomeController extends Controller
     {
         $success = $this->authService->customerLogin($request);
         if (!$success) {
-            return $this->errorResponse('error', 'messages.login_error');
+            return $this->errorResponse('errors', 'messages.login_error');
         }
         return $this->successResponse('success', 'messages.login_success');
     }

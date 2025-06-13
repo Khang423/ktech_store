@@ -2,6 +2,7 @@
 
 namespace App\Models\address;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
@@ -13,10 +14,15 @@ class City extends Model
         'name',
     ];
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return [
             'id',
             'name',
         ];
+    }
+    public function address()
+    {
+        return  $this->hasMany(Address::class, 'customer_id', 'id');
     }
 }

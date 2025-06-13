@@ -1,4 +1,3 @@
-
 /* header bar */
 .header {
     width: 100vw;
@@ -100,95 +99,71 @@
 .header .container .content .profile {
     height: 100%;
     width: 100%;
-    padding-top: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+.header .container .content .profile .user {
+    height: 100%;
+    width: 60%;
     display: flex;
     justify-content: end;
     align-items: center;
 }
-.header .container .content .profile .user {
-    height: 100%;
-    width: 50%;
-    position: relative;
-}
 .header .container .content .profile .user .circle-user {
-    height: 40px;
-    width: 40px;
-    margin-left: 40%;
-    border-radius: 50px;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #090d1466;
-    position: absolute;
-    left: 20px;
+    padding: 5px;
+    border-radius: 50px;
+    padding: 0px 10px;
+    gap: 5px;
 }
 .header .container .content .profile .user .circle-user:hover {
     background-color: #090d148a;
     cursor: pointer;
 }
-.header .container .content .profile .user .circle-user img {
-    position: absolute;
-    top: 7px;
-    left: 8px;
-}
-.header .container .content .profile .user-dropdown {
-    height: auto;
-    width: 150px;
-    background-color: #1867ef;
-    z-index: 99;
-    position: fixed;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-35%);
-    color: #3d3d3d;
-    border-radius: 5px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    background-color: #fff;
-}
-.header .container .content .profile .user-dropdown .item {
-    height: 40px;
-    width: 100%;
-    padding: 10px;
+.header .container .content .profile .user .circle-user .thumbnail {
+    height: 60%;
+    width: 30%;
+    border-radius: 50px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 13px;
-    color: #3d3d3d;
+    align-items: center;
+}
+.header .container .content .profile .user .circle-user .account-name {
+    height: 60%;
+    width: 70%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #fff;
     font-weight: 600;
-}
-.header .container .content .profile .user-dropdown .item i {
-    font-size: 18px;
-}
-.header .container .content .profile .user-dropdown .item:first-child {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.header .container .content .profile .user-dropdown .item:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.header .container .content .profile .user-dropdown .item:hover {
-    background-color: #e6e6e6;
-    cursor: pointer;
 }
 
 .header .container .content .cart {
     height: 100%;
-    width: 50%;
-    position: relative;
+    width: 30%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .header .container .content .cart .border-cart {
-    height: 40px;
+    height: 50%;
     width: 100%;
     background-color: #090d1466;
-    position: absolute;
     border-radius: 50px;
     padding: 7px;
     padding-left: 18px;
     padding-right: 18px;
-    top: 0px;
-    right: 10px;
+    position: relative;
 }
 
 .header .container .content .cart .border-cart:hover {
@@ -198,12 +173,6 @@
 .header .container .content .cart .content .icon-cart img {
     height: 26px;
     width: 26px;
-}
-.header .container .content .cart .content .title {
-    font-size: 18px;
-    margin-left: 10px;
-    font-weight: 400;
-    color: #fff;
 }
 
 .header .container .content .cart .content .circle-quantity-item-cart {
@@ -394,7 +363,7 @@
     font-weight: 600;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
     .header .container {
         padding-left: 0px;
         padding-right: 0px;

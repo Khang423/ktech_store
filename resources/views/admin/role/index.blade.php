@@ -30,11 +30,11 @@
                         <table class="table table-centered w-100 dt-responsive nowrap" id="datatable">
                             <thead class="table-light">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Vai trò</th>
-                                    <th>Slug</th>
-                                    <th>Ngày tạo</th>
-                                    <th style="width: 80px;">Hành động</th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Vai trò</th>
+                                    <th class="text-center">Slug</th>
+                                    <th class="text-center">Ngày tạo</th>
+                                    <th class="text-center" style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
                         </table>
@@ -47,111 +47,69 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            let table = $("#datatable").DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: "{{ route('admin.roles.getList') }}",
-                    type: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
+            const columns = [{
+                    data: 'index',
+                    name: 'index',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
                 },
-                language: {
-                    paginate: {
-                        previous: "<i class='mdi mdi-chevron-left'>",
-                        next: "<i class='mdi mdi-chevron-right'>"
-                    },
-                    processing: "Đang xử lý...",
-                    search: "Search:",
-                    searchPlaceholder: "Keywords...",
-                    info: "Hiện thị từ _START_ đến _END_ trên _TOTAL_",
-                    lengthMenu: 'Show <select class=\'form-select form-select-sm ms-1 me-1\'><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="-1">All</option></select>'
+                {
+                    data: 'name',
+                    name: 'name',
+                    className: 'text-center',
+                    render: (data) => `
+            <span class='text-dark badge bg-light font-15'>${data}</span>
+        `
                 },
-                pageLength: 20,
-                columns: [{
-                        data: 'index',
-                        name: 'index',
-                        orderable: false,
-                        searchable: false,
-                    },
-                    {
-                        data: 'name',
-                        name: 'name',
-                        render: function(data) {
-                            return `
-                                <span class='text-dark badge bg-light font-15'>
-                                    ${data}
-                                </span>
-                            `;
-                        }
-                    },
-                    {
-                        data: 'slug',
-                        name: 'slug',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data) {
-                            return `
-                                <span class='text-dark badge bg-light font-15'>
-                                    ${data}
-                                </span>
-                            `;
-                        }
-                    },
-                    {
-                        orderable: false,
-                        searchable: false,
-                        data: 'created_at',
-                        name: 'created_at',
-                        render: function(data) {
-                            return `
-                                <span class='text-dark'>
-                                    ${data}
-                                </span>
-                            `;
-                        }
-                    },
-                    {
-                        data: 'actions',
-                        name: 'actions',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data, type, row) {
-                            return `
-                                <span class='table-action'>
-                                    <a href="${data.edit}">
-                                        <i class="edit text-primary uil-edit action-icon">
-                                        </i>
-                                    </a>
+                {
+                    data: 'slug',
+                    name: 'slug',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    render: (data) => `
+            <span class='text-dark badge bg-light font-15'>${data}</span>
+        `
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    render: (data) => `
+            <span class='text-dark'>${data}</span>
+        `
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    render: (data) => `
+            <span class='table-action d-flex justify-content-center gap-2'>
+                <a href="${data.edit}">
+                    <i class="edit text-primary uil-edit action-icon"></i>
+                </a>
 
-                                    <form action="${data.destroy}" method="POST" class="action-icon">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" class="form-control" readonly value="${data.id}">
-                                        <i class="destroy text-danger uil-trash-alt" type="button"></i>
-                                    </form>
-                                </span>
-                            `;
-                        }
-                    }
-                ],
-                drawCallback: () => {
-                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $(
-                            "#products-datatable_length label").addClass("form-label"), document
-                        .querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6")
-                        .forEach(function(e) {
-                            e.classList.add("col-sm-6"), e.classList.remove("col-sm-12"), e
-                                .classList.remove("col-md-6")
-                        })
-                },
-                rowCallback: function(row, data, index) {
-                    $('td:eq(0)', row).html(index + 1 + this.api().page.info().start);
+                <form action="${data.destroy}" method="POST" class="d-inline action-icon" onsubmit="return confirm('Bạn có chắc muốn xóa?')">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="id" value="${data.id}">
+                    <button type="submit" class="btn p-0 border-0 bg-transparent">
+                        <i class="destroy text-danger uil-trash-alt"></i>
+                    </button>
+                </form>
+            </span>
+        `
                 }
-            });
+            ];
+
+            let table = $('#datatable').DataTable(
+                customerDatatable("{{ route('admin.roles.getList') }}", columns)
+            );
 
             $routeDelete = '{{ route('admin.roles.delete') }}';
             destroy($routeDelete, table);

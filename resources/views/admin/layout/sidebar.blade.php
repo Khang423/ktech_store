@@ -87,12 +87,33 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="\" class="side-nav-link">
+                <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarInventory"
+                    aria-expanded="false" aria-controls="sidebarInventory">
                     <i class=" uil-home-alt"></i>
                     <span>
                         Kho hàng
                     </span>
+                    <span class="menu-arrow"></span>
                 </a>
+                <div class="collapse" id="sidebarInventory" style="">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('admin.inventories.index') }}">
+                                Danh sách
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Nhập kho
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Xuất kho
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="side-nav-item">
                 <a href="\" class="side-nav-link">
@@ -109,7 +130,7 @@
                 <a href="{{ route('admin.members.index') }}" class="side-nav-link">
                     <i class="uil uil-users-alt"></i>
                     <span>
-                       Tài khoản
+                        Tài khoản
                     </span>
                 </a>
             </li>

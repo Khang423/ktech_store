@@ -24,10 +24,10 @@
                     </div>
                     <div class="information">
                         <div class="name">
-                            khang
+                            {{ $customer->name }}
                         </div>
                         <div class="tel">
-                            07995990500
+                            {{ $customer->tel }}
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="information">
                         <div class="quantity">
-                            2
+                            {{ $order }}
                         </div>
                         <div class="title">
                             Tổng số đơn hàng đã mua
@@ -54,7 +54,7 @@
                     </div>
                     <div class="information">
                         <div class="sum-total">
-                            0đ
+                            {{ formatPriceToVND($total_price) }}
                         </div>
                         <div class="title">
                             Tổng tiền tích lũy Từ 01/01/2025
@@ -200,7 +200,7 @@
                                                 Họ và tên :
                                             </div>
                                             <div class="value">
-                                                Võ Vĩ Khang
+                                                {{ $customer->name }}
                                             </div>
                                         </div>
                                         <div class="item">
@@ -216,7 +216,7 @@
                                                 Ngày sinh :
                                             </div>
                                             <div class="value">
-                                                04/02/2003
+                                                {{ $customer->birthday }}
                                             </div>
                                         </div>
                                     </div>
@@ -226,7 +226,7 @@
                                                 Số điện thoại :
                                             </div>
                                             <div class="value">
-                                                0799599040
+                                                {{ $customer->tel }}
                                             </div>
                                         </div>
                                         <div class="item">
@@ -234,7 +234,7 @@
                                                 Email:
                                             </div>
                                             <div class="value">
-                                                vovykhag@gmail.com
+                                                {{ $customer->email }}
                                             </div>
                                         </div>
                                         <div class="item">
@@ -258,11 +258,11 @@
                                     </div>
                                 </div>
                                 <div class="address-content">
-                                    @for ($i = 0; $i < 3; $i++)
-                                        <div class="item">
+                                    @foreach ($address as $i)
+                                        <div class="item" data-id="{{ $i->id }}">
                                             <div class="item-header">
                                                 <div class="left">
-                                                    Địa chỉ nhà ở an biên
+                                                    {{ $i->customer->name }}
                                                 </div>
                                                 <div class="right">
                                                     Nhà
@@ -271,20 +271,20 @@
                                             <div class="item-content">
                                                 <div class="basic-info">
                                                     <div class="name">
-                                                        Võ Vĩ Khang
+                                                        {{ $i->customer->name }}
                                                     </div>
                                                     <div class="tel">
-                                                        0799599040
+                                                        {{ $i->customer->tel }}
                                                     </div>
                                                 </div>
                                                 <div class="address-info1">
-                                                    Võ Vĩ Khang, 7 Chợ, Đông thái, An biên, Kiên Giang
+                                                    {{ $i->note . ',' . $i->full_address }}
                                                 </div>
                                             </div>
                                             <div class="item-footer">
                                                 <div class="item-action">
                                                     <div class="right">
-                                                        <div class="btn-delete">
+                                                        <div class="btn-delete" data-id="{{ $i->id }}">
                                                             Xoá
                                                         </div>
                                                         <div class="btn-update">
@@ -294,7 +294,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endfor
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="other" id="password-and-connect">
@@ -342,8 +342,75 @@
                     </div>
                 </div>
             </div>
+            <div class="modal-add-address d-none">
+                <div class="overlay">
+                    <div class="modal-content">
+                        <div class="header-content">
+                            <div class="title">
+                                Thêm địa chỉ
+                            </div>
+                            <div class="btn-close-modal-address" id="btn-close-modal-add-address">
+                                <i class="uil-multiply"></i>
+                            </div>
+                        </div>
+                        <div class="main-content">
+                            <div class="title">
+                                Địa chỉ nhận hàng
+                            </div>
+                            <div class="list-item">
+                                <form id="form-store" method="post">
+                                    @csrf
+                                    <div class="item">
+                                        <label for="city" class="form-label">Tỉnh/thành phố </label>
+                                        <select class="city form-select" id="city" name="city" required>
+                                            <option selected>Chọn Tỉnh/Thành Phố</option>
+                                            @foreach ($city as $i)
+                                                <option value={{ $i->id }}>{{ $i->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="item">
+                                        <label for="district" class="form-label">Quận/huyện
+                                        </label>
+                                        <select class="district form-select" id="district" name="district"
+                                            name="ward" required> required>
+                                        </select>
+                                        <div class="text-danger mt-1 error-district"></div>
+                                    </div>
+                                    <div class="item">
+                                        <label for="ward" class="form-label">Xã/phường
+                                        </label>
+                                        <select class="ward form-select" id="ward" name="ward" required>
+                                        </select>
+                                        <div class="text-danger mt-1 error-ward"></div>
+                                    </div>
+                                    <div class="item">
+                                        <label for="city" class="form-label">Địa chỉ </label>
+                                        <input type="text" class="form-control" name="address"
+                                            placeholder="Nhập địa chỉ nhà">
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="footer-content">
+                            <div class="content">
+                                <div id="btn-add-address">
+                                    Thêm địa chỉ mới
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
 @endsection
 @push('js')
     <script src="{{ asset('js/outside/profile.js') }}"></script>
+    <script>
+        const RouteGetDistrict = "{{ route('address.getDistricts') }}";
+        const RouteGetWard = "{{ route('address.getWards') }}";
+        const RouteAddAddress = "{{ route('home.addAddress') }}";
+        const RouteDeleteAddress = "{{ route('home.deleteAddress') }}";
+    </script>
 @endpush

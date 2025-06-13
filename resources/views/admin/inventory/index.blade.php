@@ -2,10 +2,10 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Trình chiếu slide
+            Kho hàng
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Danh sách
+        Danh sách sản phẩm
     </div>
 @endsection
 @section('content')
@@ -15,9 +15,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.banners.create') }}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.inventories.create') }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
-                                Thêm
+                                Nhập kho
                             </a>
                         </div>
                         <div class="col-sm-7">
@@ -31,11 +31,12 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">Ảnh banner</th>
-                                    <th class="text-center">Tiêu đề</th>
-                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center">Sản phẩm</th>
+                                    <th class="text-center">Ảnh đại diện</th>
+                                    <th class="text-center">Tồn kho</th>
+                                    <th class="text-center">Đơn giá</th>
                                     <th class="text-center">Ngày tạo</th>
-                                    <th class="text-center" style="width: 80px;">Actions</th>
+                                    <th style="width: 80px;" class="text-center">Thao tác</th>
                                 </tr>
                             </thead>
                         </table>
@@ -53,78 +54,81 @@
                     data: 'index',
                     name: 'index',
                     className: 'text-center',
+                },
+                {
+                    data: 'product_version_id',
+                    name: 'product_version_id',
+                    className: 'text-center',
+                    render: (data) => `
+                    <span class='text-dark badge bg-light font-15'>${data}</span>
+                `
+                },
+                {
+                    data: 'avatar',
+                    name: 'avatar',
+                    className: 'text-center',
                     orderable: false,
                     searchable: false,
-                },
-                {
-                    data: 'banner',
-                    name: 'banner',
-                    className: 'text-center',
                     render: (data) => `
-            <img src="{{ asset('asset/admin/banners') }}/${data}" height="150" width="250" loading="lazy">
-        `
+                    <img src="{{ asset('asset/admin/members') }}/${data}" class="rounded-circle me-3" height="60" width="60" alt="avatar">
+                `
                 },
                 {
-                    data: 'name',
-                    name: 'name',
+                    data: 'stock_quantity',
+                    name: 'stock_quantity',
                     className: 'text-center',
-                    render: (data) => `
-            <span class='text-dark badge bg-light font-15'>${data}</span>
-        `
+                    orderable: false,
+                    searchable: false,
+                    render: (data) => `<span class='text-dark'>${data}</span>`
                 },
                 {
-                    data: 'status',
-                    name: 'status',
+                    data: 'unit_price',
+                    name: 'unit_price',
                     className: 'text-center',
-                    render: (data, type, row) => {
-                        const checked = data === true || data === '1' || data === 1 ? 'checked' : '';
-                        const switchId = `switch-status-${row.id}`;
-                        return `
-                <input type="checkbox" id="${switchId}" ${checked} data-switch="success"/>
-                <label for="${switchId}" data-on-label="Bật" data-off-label="Tắt"></label>
-            `;
-                    }
+                    orderable: false,
+                    searchable: false,
+                    render: (data) => `<span class='text-dark'>${data}</span>`
                 },
                 {
                     data: 'created_at',
                     name: 'created_at',
+                    className: 'text-center',
                     orderable: false,
                     searchable: false,
-                    className: 'text-center',
-                    render: (data) => `
-                        <span class='text-dark'>${data}</span>
-                    `
+                    render: (data) => `<span class='text-dark'>${data}</span>`
                 },
                 {
                     data: 'actions',
                     name: 'actions',
+                    className: 'text-center',
                     orderable: false,
                     searchable: false,
-                    className: 'text-center',
                     render: (data) => `
-                    <span class='table-action'>
+                    <span class='table-action d-flex justify-content-center gap-2'>
+                        <a href="javascript:void(0)" class="action-view" data-id="${data.id}">
+                            <i class="edit text-info uil-eye action-icon"></i>
+                        </a>
                         <a href="${data.edit}">
                             <i class="edit text-primary uil-edit action-icon"></i>
                         </a>
-                        <form action="${data.destroy}" method="POST" class="action-icon">
+                        <form action="${data.destroy}" method="POST" class="d-inline action-icon" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?')">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="${data.id}">
-                            <i class="destroy text-danger uil-trash-alt" type="button"></i>
+                            <button type="submit" class="btn p-0 border-0 bg-transparent">
+                                <i class="destroy text-danger uil-trash-alt"></i>
+                            </button>
                         </form>
                     </span>
-                `;
+        `
                 }
             ];
 
-
             let table = $('#datatable').DataTable(
-                customerDatatable("{{ route('admin.banners.getList') }}", columns)
+                customerDatatable("{{ route('admin.inventories.getList') }}", columns)
             );
-
-            $routeDelete = '{{ route('admin.banners.delete') }}';
+            $routeDelete = '{{ route('admin.members.delete') }}';
             destroy($routeDelete, table);
-
         });
     </script>
 @endpush

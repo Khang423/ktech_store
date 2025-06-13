@@ -63,8 +63,12 @@
                         window.location.href = '{{ route('home.index') }}';
                     },
                     error: function(data) {
+
                         toast('Đăng nhập thất bại', 'error');
                         $('.text-danger').text('');
+                        if (data.responseJSON?.message) {
+                            $(`.error-password`).text(data.responseJSON?.message);
+                        }
                         if (data.responseJSON?.errors) {
                             Object.entries(data.responseJSON.errors).forEach(([field, messages]) => {
                                 $(`.error-${field}`).text(messages[0]);

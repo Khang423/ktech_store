@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVersion extends Model
 {
     protected $fillable = [
-        'id',
+        'sku',
         'product_id',
         'name',
         'slug',
@@ -21,6 +21,7 @@ class ProductVersion extends Model
     {
         return [
             'id',
+            'sku',
             'product_id',
             'name',
             'slug',
@@ -60,5 +61,10 @@ class ProductVersion extends Model
     public function cartItems()
     {
         return  $this->hasMany(CartItem::class, 'product_id', 'id');
+    }
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class, 'product_version_id', 'id');
     }
 }

@@ -13,18 +13,16 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('address_id')->nullable()->constrained('address')->cascadeOnDelete();
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('tel');
-            $table->string('avatar')->nullable();
             $table->string('password', 60);
             $table->string('address')->nullable();
             $table->string('birthday')->nullable();
             $table->timestamps();
         });
     }
-
+ 
     /**
      * Reverse the migrations.
      */
