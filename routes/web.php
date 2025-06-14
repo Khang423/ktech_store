@@ -193,5 +193,12 @@ Route::group([
         Route::post('/store', [InventoryController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [InventoryController::class, 'edit'])->name('edit');
         Route::delete('/delete', [InventoryController::class, 'delete'])->name('delete');
+
+        Route::get('/histories-import', [InventoryController::class, 'historiesImport'])->name('historiesImport');
+        Route::get('/histories-export', [InventoryController::class, 'historiesExport'])->name('historiesExport');
+
+        Route::post('/getList-import', [InventoryController::class, 'getListImport'])->name('getListImport');
+        Route::post('/getList-export', [InventoryController::class, 'getListExport'])->name('getListExport');
+
     });
 });

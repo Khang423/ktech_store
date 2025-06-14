@@ -65,6 +65,6 @@ class ProductVersion extends Model
 
     public function inventories()
     {
-        return $this->hasMany(Inventory::class, 'product_version_id', 'id');
+        return $this->hasMany(Inventories::class, 'product_version_id', 'id');
     }
 }

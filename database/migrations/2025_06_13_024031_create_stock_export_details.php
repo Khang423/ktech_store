@@ -27,6 +27,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stock_export');
+        // Nếu muốn chắc chắn rollback không lỗi, nên xoá foreign keys trước
+        Schema::table('stock_export_details', function (Blueprint $table) {
+            $table->dropForeign(['stock_export_id']);
+            $table->dropForeign(['product_version_id']);
+        });
+
+        Schema::dropIfExists('stock_export_details');
     }
 };

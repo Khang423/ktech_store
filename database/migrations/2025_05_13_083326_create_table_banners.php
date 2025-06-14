@@ -28,6 +28,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('banners', function (Blueprint $table) {
+            // Nếu muốn chắc chắn không lỗi khi rollback (xoá khoá ngoại trước)
+            $table->dropForeign(['member_id']);
+        });
+
         Schema::dropIfExists('banners');
     }
 };

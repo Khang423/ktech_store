@@ -24,6 +24,11 @@ return new class extends Migration
 
     public function down(): void
     {
+        Schema::table('stock_import_details', function (Blueprint $table) {
+            $table->dropForeign(['stock_import_id']);
+            $table->dropForeign(['product_version_id']);
+        });
+
         Schema::dropIfExists('stock_import_details');
     }
 };

@@ -12,19 +12,16 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-2">
                             <div class="category-product" id="button-category-product">
                                 <div class="content d-flex">
                                     <div class="menu">
                                         <img src="{{ asset('asset/outside/icon/menu.svg') }}" alt="">
                                     </div>
-                                    <div class="title">
-                                        Danh mục
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-9">
+                        <div class="col-10">
                             <div class="search-bar">
                                 <div class="content">
                                     <input type="text" name="keyword" class="input-search-bar"

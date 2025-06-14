@@ -26,25 +26,22 @@
 }
 /* css button category Product */
 .header .container .content .category-product {
-    height: 100%;
+    height: 60px;
     width: 100%;
     padding-top: 20px;
 }
 .header .container .content .category-product .content {
-    height: 40px;
-    width: 140px;
-    padding: 10px;
+  height: 100%;
+    width: 100%;
     margin-left: 0px;
-    background-color: #090d1466;
-    border-radius: 50px;
-}
-.header .container .content .category-product .content:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    background-color: #090d148a;
 }
 .header .container .content .category-product .content .menu img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     padding-bottom: 3px;
     margin-left: 5px;
 }
@@ -69,7 +66,7 @@
 .header .container .content .search-bar .content input {
     height: 100%;
     width: 100%;
-    border-radius: 50px;
+    border-radius: 5px;
     outline: none;
     border: none;
     font-size: 15px;
@@ -79,8 +76,6 @@
 .header .container .content .search-bar .content .circle-icon {
     height: 30px;
     width: 30px;
-    border-radius: 50px;
-    background-color: #2a52be41;
     position: absolute;
     top: 5px;
     right: 7px;
@@ -119,7 +114,7 @@
     align-items: center;
     background-color: #090d1466;
     padding: 5px;
-    border-radius: 50px;
+    border-radius: 5px;
     padding: 0px 10px;
     gap: 5px;
 }
@@ -158,8 +153,6 @@
 .header .container .content .cart .border-cart {
     height: 50%;
     width: 100%;
-    background-color: #090d1466;
-    border-radius: 50px;
     padding: 7px;
     padding-left: 18px;
     padding-right: 18px;
@@ -168,7 +161,6 @@
 
 .header .container .content .cart .border-cart:hover {
     cursor: pointer;
-    background-color: #090d148a;
 }
 .header .container .content .cart .content .icon-cart img {
     height: 26px;
@@ -178,7 +170,7 @@
 .header .container .content .cart .content .circle-quantity-item-cart {
     height: 15px;
     width: 15px;
-    background-color: #2a52be;
+    background-color: #18abef;
     position: absolute;
     color: #fff;
     border-radius: 25px;

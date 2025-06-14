@@ -48,82 +48,62 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label class="form-label" for="email">Email</label>
+                                            <label class="form-label" for="price">Đơn giá</label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="email" class="form-control" id="email"
-                                                    placeholder="Email" aria-describedby="inputGroupPrepend" name="email">
+                                                <input type="text" class="form-control" id="price"
+                                                    placeholder="Đơn giá" name="price">
                                             </div>
-                                            <div class="text-danger mt-1 error-email"></div>
+                                            <div class="text-danger mt-1 error-price"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="gender" class="form-label">Giới tính</label>
-                                            <select class="form-select" id="gender" name="gender" style="height: 48px">
-                                                <option value="" hidden>Chọn giới tính</option>
-                                                <option value="0">Nam</option>
-                                                <option value="1">Nữ</option>
-                                                <option value="2">Khác</option>
+                                <button type="button" class="btn btn-success mb-2" id="btn-add-product"
+                                    onclick="addProductToTable()">
+                                    <i class="mdi mdi-plus-circle "></i>
+                                </button>
+                                <div class="mb-3">
+                                    <label class="form-label" for="price">Sản phẩm đã chọn</label>
+                                    <table class="table table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                                <th>Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="product_list">
 
-                                            </select>
-                                            <div class="text-danger mt-1 error-gender"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">Mật khẩu</label>
-                                            <div class="input-group input-group-merge">
-                                                <input type="password" id="password" class="form-control"
-                                                    placeholder="Mật khẩu" name="password">
-                                                <div class="input-group-text" data-password="false">
-                                                    <span class="password-eye"></span>
-                                                </div>
-                                            </div>
-                                            <div class="text-danger mt-1 error-password"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="birthday" class="form-label fw-semibold">Sinh nhật</label>
-                                            <input type="text" id="datepicker" name="birthday" class="form-control"
-                                                name="Sinh nhật" placeholder="Birthday">
-                                            <div class="text-danger mt-1 error-birthday"></div>
-                                        </div>
-                                    </div>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="3" class="text-end">Tổng cộng:</td>
+                                                <td id="total_price">0</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label for="ward" class="form-label">Địa chỉ</label>
-                                            <div class="input-group">
-                                                <textarea class="form-control" placeholder="Địa chỉ" id="address" style="height: 100px" name="address"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="avatar">Chọn ảnh đại diện</label>
-                                                    <input class="form-control" type="file" id="avatar"
-                                                        name="avatar">
-                                                    <div class="text-danger mt-1 error-avatar"></div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <img id="preview-avatar"
-                                                        src="{{ asset('asset/admin/systemImage/avatar.png') }}"
-                                                        alt="image" class="img-fluid avatar-lg rounded-circle">
-                                                </div>
-                                            </div>
+                                            <label for="supplier_id" class="form-label">Nhà cung cấp</label>
+                                            <select class="form-select" id="supplier_id" name="supplier_id"
+                                                style="height: 48px">
+                                                <option value="" hidden>Chọn nhà cung cấp</option>
+                                                @foreach ($suppliers as $item)
+                                                    <option value="{{ $item->id }}">
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <div class="text-danger mt-1 error-supplier_id"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" id="btn-store">
                                     <i class="mdi mdi-plus-circle me-2"></i>
-                                    <span>Thêm</span>
+                                    <span>Nhập</span>
                                 </button>
                             </form>
                         </div>
@@ -134,27 +114,15 @@
     </div>
 @endsection
 @push('js')
+    <script src="{{ asset('js/admin/inventories.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $('#datepicker').datepicker({
-                uiLibrary: 'bootstrap5'
-            });
-
-            $('#avatar').on('change', function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const previewUrl = URL.createObjectURL(file);
-                    $('#preview-avatar').attr('src', previewUrl);
-                }
-            });
-            // init
-            const $form = $('#form-store');
-            const $inputs = $form.find('input');
-            $routeStore = '{{ route('admin.members.store') }}';
-            $routeIndex = '{{ route('admin.members.index') }}';
-            // function handle
-            store($routeStore, $routeIndex);
-            deleteAlertValidation($inputs);
-        });
+        // init
+        const $form = $('#form-store');
+        const $inputs = $form.find('input');
+        $routeStore = '{{ route('admin.inventories.store') }}';
+        $routeIndex = '{{ route('admin.inventories.index') }}';
+        // function handle
+        storeInventory($routeStore, $routeIndex);
+        deleteAlertValidation($inputs);
     </script>
 @endpush

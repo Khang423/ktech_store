@@ -28,6 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('product_versions', function (Blueprint $table) {
+            $table->dropForeign(['product_id']); // 👉 xoá khóa ngoại trước khi xoá bảng
+        });
+
         Schema::dropIfExists('product_versions');
     }
 };

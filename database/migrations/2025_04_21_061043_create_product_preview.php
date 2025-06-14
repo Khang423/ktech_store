@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('comment_text')->nullable();
             $table->integer('rating')->default(0);
             $table->timestamps();
-         });
+        });
     }
 
     /**
@@ -26,6 +26,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_preview');
+        Schema::table('product_previews', function (Blueprint $table) {
+            $table->dropForeign(['product_version_id']);
+            $table->dropForeign(['customer_id']);
+        });
+
+        Schema::dropIfExists('product_previews');
     }
 };
