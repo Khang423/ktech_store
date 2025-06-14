@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stock_import_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('stock_import_id')->constrained('stock_imports')->cascadeOnDelete();  
+            $table->foreignId('stock_import_id')->constrained('stock_imports')->cascadeOnDelete();
             $table->foreignId('product_version_id')->constrained('product_versions')->cascadeOnDelete();
             $table->integer('quantity')->default(0);
             $table->double('price')->default(0);

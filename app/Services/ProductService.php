@@ -67,10 +67,15 @@ class ProductService extends Controller
     {
         DB::beginTransaction();
         try {
+            $category = strtoupper($request->category_product_id); // Ví dụ: LAPTOP
+            $gender = strtoupper($request->brand_id);     // Ví dụ: M
+            $date = now()->format('Ymd');                        // 20250614
+
+            $sku = "{$category}-{$gender}-{$date}";
+
             // insert product
             $dataProduct = [];
             $dataProduct['category_product_id'] = $request->category_product_id;
-            $dataProduct['supplier_id'] = $request->supplier_id;
             $dataProduct['brand_id'] = $request->brand_id;
             $dataProduct['status'] = StatusEnum::ON;
             $product = Product::create($dataProduct);
@@ -79,6 +84,7 @@ class ProductService extends Controller
             // insert product version
             $dataProductVersion = [];
             $dataProductVersion['product_id'] = $product_id;
+            $dataProductVersion['sku'] = $sku;
             $dataProductVersion['name'] = $request->name;
             $dataProductVersion['slug'] = Str::slug($request->name);
             $dataProductVersion['price'] = $request->price;
@@ -206,7 +212,6 @@ class ProductService extends Controller
             // insert product
             $dataProduct = [];
             $dataProduct['category_product_id'] = $request->category_product_id;
-            $dataProduct['supplier_id'] = $request->supplier_id;
             $dataProduct['brand_id'] = $request->brand_id;
             $dataProduct['status'] = StatusEnum::ON;
             Product::query()

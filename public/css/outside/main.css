@@ -822,7 +822,7 @@ body {
         background-color: #fff;
     }
     .section-product-info .product-detail-info .product-versions {
-        height: 300px;
+        height: auto;
         width: 100%;
         display: flex;
         justify-content: center;

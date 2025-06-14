@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stock_export', function (Blueprint $table) {
+        Schema::create('stock_exports', function (Blueprint $table) {
             $table->id();
             $table->string('ref_code')->unique();
-            $table->foreignId('inventory_id')->constrained('inventory')->cascadeOnDelete();
-            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete(); 
-            $table->foreignId('member_id')->constrained('members')->cascadeOnDelete(); 
+            $table->foreignId('inventory_id')->constrained('inventories')->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
             $table->double('total_amount')->default(0);
             $table->smallInteger('status')->default(0); // pending, completed, cancelled
             $table->string('note');

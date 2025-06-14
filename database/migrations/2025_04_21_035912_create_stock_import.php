@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stock_imports', function (Blueprint $table) {
             $table->id();
             $table->string('ref_code')->unique();
-            $table->foreignId('inventory_id')->constrained('inventory')->cascadeOnDelete();
+            $table->foreignId('inventory_id')->constrained('inventories')->cascadeOnDelete();
             $table->foreignId('supplier_id')->constrained('suppliers')->cascadeOnDelete();
             $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
             $table->string('note')->nullable();

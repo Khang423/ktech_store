@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('receiver_email')->nullable();
             $table->foreignId('address_id')->nullable()->constrained('address')->cascadeOnDelete();
             $table->string('note')->nullable();
-            $table->string('shipping_address')->nullable();
             $table->timestamps();
         });
     }

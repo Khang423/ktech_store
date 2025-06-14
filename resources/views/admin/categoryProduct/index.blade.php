@@ -90,18 +90,18 @@
                     searchable: false,
                     className: 'text-center',
                     render: (data) => `
-            <span class='table-action d-flex justify-content-center gap-2'>
-                <a href="${data.edit}">
-                    <i class="uil-edit text-primary action-icon"></i>
-                </a>
-                <form action="${data.destroy}" method="POST" class="d-inline-block">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id" value="${data.id}">
-                    <i class="uil-trash-alt text-danger destroy action-icon" type="button"></i>
-                </form>
-            </span>
-        `
+                    <span class='table-action d-flex justify-content-center gap-2'>
+                        <a href="${data.edit}">
+                            <i class="uil-edit text-primary action-icon"></i>
+                        </a>
+                        <form action="${data.destroy}" method="POST" class="d-inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="${data.id}">
+                            <i class="uil-trash-alt text-danger destroy action-icon" type="button"></i>
+                        </form>
+                    </span>
+                `
                 }
             ];
 

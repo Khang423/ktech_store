@@ -61,8 +61,8 @@
                     name: 'banner',
                     className: 'text-center',
                     render: (data) => `
-            <img src="{{ asset('asset/admin/banners') }}/${data}" height="150" width="250" loading="lazy">
-        `
+                    <img src="{{ asset('asset/admin/banners') }}/${data}" height="150" width="250" loading="lazy">
+                `
                 },
                 {
                     data: 'name',
@@ -113,10 +113,9 @@
                             <i class="destroy text-danger uil-trash-alt" type="button"></i>
                         </form>
                     </span>
-                `;
+                `
                 }
             ];
-
 
             let table = $('#datatable').DataTable(
                 customerDatatable("{{ route('admin.banners.getList') }}", columns)

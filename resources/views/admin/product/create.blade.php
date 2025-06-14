@@ -25,32 +25,32 @@
                             <div class="tab-pane show active" id="custom-styles-preview">
                                 <h4 class="header-title mb-3">Thông tin</h4>
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-2">
                                             <label for="name" class="form-label">Tên sản phẩm</label>
                                             <input type="text" class="form-control" id="name"
                                                 placeholder="Tên sản phẩm" name="name">
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
+
                                         <div class="mb-2">
-                                            <label for="supplier_id" class="form-label">Nhà cung cấp</label>
-                                            <select class="form-select" id="supplier_id" name="supplier_id"
-                                                style="height: 48px">
-                                                <option value="" hidden>Chọn nhà cung cấp</option>
-                                                @foreach ($supplier as $item)
+                                            <label for="brand_id" class="form-label">Thương hiệu </label>
+                                            <select class="form-select" id="brand_id" name="brand_id" style="height: 48px">
+                                                <option value="" hidden>Chọn thương hiệu</option>
+                                                @foreach ($brand as $item)
                                                     <option value="{{ $item->id }}">
                                                         {{ $item->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <div class="text-danger mt-1 error-supplier_id"></div>
+                                            <div class="text-danger mt-1 error-brand_id"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-2">
                                             <label for="price" class="form-label">Đơn Giá</label>
                                             <input type="text" class="form-control" id="price"
-                                                placeholder="Số điện thoại" name="price">
+                                                placeholder="Đơn giá" name="price">
                                             <div class="text-danger mt-1 error-price"></div>
                                         </div>
                                         <div class="mb-2">
@@ -68,18 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <div class="mb-2">
-                                            <label for="brand_id" class="form-label">Thương hiệu </label>
-                                            <select class="form-select" id="brand_id" name="brand_id" style="height: 48px">
-                                                <option value="" hidden>Chọn thương hiệu</option>
-                                                @foreach ($brand as $item)
-                                                    <option value="{{ $item->id }}">
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <div class="text-danger mt-1 error-brand_id"></div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

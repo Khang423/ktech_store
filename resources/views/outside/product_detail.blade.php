@@ -42,7 +42,7 @@
         </div>
         <div class="product-detail-info">
             <div class="product-versions">
-                @for ($i = 1; $i < 9; $i++)
+                @for ($i = 1; $i < 3; $i++)
                     <div class="version-card">
                         <span class="card-active"><i class="uil-check"></i></span>
                         <div class="content-card">
@@ -59,7 +59,7 @@
             <hr>
             <div class="product-price">
                 <div class="btn-price">
-                    {{ formatPriceToVND(23880000) }}
+                    {{ formatPriceToVND($product->price) }}
                 </div>
                 <div class="product-buy mt-2">
                     <div class="btn-buy">

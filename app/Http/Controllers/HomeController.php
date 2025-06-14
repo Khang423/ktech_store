@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $product = ProductVersion::join('products', 'product_versions.product_id', 'products.id')->get();
+        $product = ProductVersion::with('products')->get();
         $category_product = CategoryProduct::get();
         return view('outside.index', [
             'banners' => Banner::query()->where('status', StatusEnum::ON)->get(),
