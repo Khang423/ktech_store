@@ -16,6 +16,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StockExportController;
+use App\Http\Controllers\StockImportController;
 use Illuminate\Support\Facades\Route;
 
 // route home
@@ -189,16 +191,27 @@ Route::group([
     ], function () {
         Route::get('/', [InventoryController::class, 'index'])->name('index');
         Route::post('/getList', [InventoryController::class, 'getList'])->name('getList');
-        Route::get('/create', [InventoryController::class, 'create'])->name('create');
-        Route::post('/store', [InventoryController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [InventoryController::class, 'edit'])->name('edit');
-        Route::delete('/delete', [InventoryController::class, 'delete'])->name('delete');
+    });
 
-        Route::get('/histories-import', [InventoryController::class, 'historiesImport'])->name('historiesImport');
-        Route::get('/histories-export', [InventoryController::class, 'historiesExport'])->name('historiesExport');
-
-        Route::post('/getList-import', [InventoryController::class, 'getListImport'])->name('getListImport');
-        Route::post('/getList-export', [InventoryController::class, 'getListExport'])->name('getListExport');
-
+    // Inventory histories import
+    Route::group([
+        'prefix' => 'stockImports',
+        'as' => 'stockImports.'
+    ], function () {
+        Route::get('/', [StockImportController::class, 'index'])->name('index');
+        Route::post('/getList', [StockImportController::class, 'getList'])->name('getList');
+        Route::get('/create', [StockImportController::class, 'create'])->name('create');
+        Route::post('/store', [StockImportController::class, 'store'])->name('store');
+        Route::get('/details', [StockImportController::class, 'detail'])->name('detail');
+        Route::get('/invoice/{id}', [StockImportController::class, 'exportPDF'])->name('exportPDF');
+    });
+    // Inventory histories export
+    Route::group([
+        'prefix' => 'stockExports',
+        'as' => 'stockExports.'
+    ], function () {
+        Route::get('/', [StockExportController::class, 'index'])->name('index');
+        Route::post('/getList', [StockExportController::class, 'getList'])->name('getList');
+        Route::get('/export-details', [StockExportController::class, 'exportDetail'])->name('exportDetail');
     });
 });

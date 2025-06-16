@@ -119,8 +119,8 @@
         // init
         const $form = $('#form-store');
         const $inputs = $form.find('input');
-        $routeStore = '{{ route('admin.inventories.store') }}';
-        $routeIndex = '{{ route('admin.inventories.index') }}';
+        $routeStore = '{{ route('admin.stockImports.store') }}';
+        $routeIndex = '{{ route('admin.stockImports.index') }}';
         // function handle
         storeInventory($routeStore, $routeIndex);
         deleteAlertValidation($inputs);

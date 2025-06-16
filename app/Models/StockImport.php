@@ -32,4 +32,13 @@ class StockImport extends Model
     {
         return $this->hasMany(StockImportDetail::class);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date(' H:i:s d/m/Y', strtotime($value));
+    }
+    public function getUpdatedAtAttribute($value)
+    {
+        return date(' H:i:s d/m/Y', strtotime($value));
+    }
 }
