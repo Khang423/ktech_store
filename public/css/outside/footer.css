@@ -1,4 +1,22 @@
- #footer{
-    height: 400px;
+ .footer-page{
+    height: auto;
     width: 100%;
+    background-color: #2a52be;
+    padding: 30px 20px;
+    margin-top: 100px;
  }
+
+.footer-page li {
+    list-style: none;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+.footer-page li a{
+    color: lightgray;
+}
+.footer-page ul {
+    padding: 0;
+    margin: 0;
+}
