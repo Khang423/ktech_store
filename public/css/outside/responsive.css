@@ -18,6 +18,20 @@
         padding-top: 5px;
         position: relative;
     }
+    #section-laptop .product-discount img {
+        top: -12px;
+        left: -13px;
+        height: 30px;
+        width: 80px;
+    }
+    #section-laptop .percent-discount {
+        font-size: 12px;
+        font-weight: bold;
+        position: absolute;
+        top: -8px;
+        left: -2px;
+        color: #fff;
+    }
     #section-laptop .card-product .product-price {
         height: 8%;
         width: 100%;
