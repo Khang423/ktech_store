@@ -12,6 +12,7 @@ class StockImportDetail extends Model
         'product_version_id',
         'quantity',
         'price',
+        'vat_rate', // Thuế VAT
         'total_price',
     ];
 
@@ -23,6 +24,7 @@ class StockImportDetail extends Model
             'product_version_id',
             'quantity',
             'price',
+            'vat_rate', // Thuế VAT
             'total_price',
         ];
     }

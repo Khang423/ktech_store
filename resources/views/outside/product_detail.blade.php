@@ -59,7 +59,7 @@
             <hr>
             <div class="product-price">
                 <div class="btn-price">
-                    {{ formatPriceToVND($product->price) }}
+                    {{ formatPriceToVND($product->final_price) }}
                 </div>
                 <div class="product-buy mt-2">
                     <div class="btn-buy">

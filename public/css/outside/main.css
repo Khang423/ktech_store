@@ -9,9 +9,10 @@ body {
 
 /* breadcrumb */
 .breadcrumb1 {
-    height: 30px;
+    height: auto;
     font-size: 15px;
-    padding-top: 13px;
+    padding-top: 15px;
+    overflow-wrap: break-word;
 }
 
 /* section slide */
@@ -595,8 +596,8 @@ body {
     .info-detail-main
     .product-thumbnail
     img {
-    height: 100%;
-    width: 100%;
+    height: 90%;
+    width: auto;
     object-fit: cover;
 }
 .section-description .content .product-info-detail .info-detail-main .content {
@@ -767,11 +768,10 @@ body {
     gap: 15px;
     padding: 15px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 3px;
     height: 160px;
     width: 100%;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border: 1px solid lightgray;
 }
 .list-item-cart .item .product-checkbox {
     width: 5%;
@@ -855,8 +855,8 @@ body {
     background-color: #fff;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -875,7 +875,7 @@ body {
 }
 .view-price .btn-buy {
     height: 100%;
-    width: 40%;
+    width: 50%;
     padding: 15px;
     display: flex;
     justify-content: end;
@@ -885,7 +885,7 @@ body {
 .view-price .btn-buy .content {
     background-color: #2a52be;
     height: 40px;
-    border-radius: 5px;
+    border-radius: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -906,7 +906,7 @@ body {
 
 .section-order .main {
     height: 100%;
-    width: 45%;
+    width: 55%;
 }
 .section-order .main .page-title {
     height: auto;
@@ -923,7 +923,8 @@ body {
     width: 50%;
     display: flex;
     justify-content: center;
-    border-bottom: 3px solid #919eab;
+    color: #2a52be;
+    border-bottom: 3px solid #25449a;
     font-weight: 600;
 }
 .section-order .main .page-title .payment {
@@ -940,7 +941,7 @@ body {
     margin: 15px 0px;
     background-color: #fff;
     border: 1px solid lightgray;
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 0px 15px;
 }
 .section-order .main .product-list .item {
@@ -949,6 +950,9 @@ body {
     gap: 10px;
     padding: 10px;
     border-bottom: 1px solid lightgray;
+}
+.section-order .main .product-list .item:last-child {
+    border-bottom: none;
 }
 .section-order .main .product-list .thumbnail {
     height: 100%;
@@ -988,7 +992,7 @@ body {
     border: 1px solid lightgray;
     background-color: #fff;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 3px;
 }
 .section-order .main .customer-info .title-name-and-tel {
     height: 40%;
@@ -1028,7 +1032,7 @@ body {
     height: auto;
     width: 100%;
     border: 1px solid lightgray;
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 15px;
 }
 .section-order .main .address-receiver select {

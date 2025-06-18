@@ -4,14 +4,26 @@ const addProductToTable = () => {
     const productName = $("#product_version_id option:selected").text();
     const quantity = parseInt($("#quantity").val());
     const price = parseFloat($("#price").val());
+    const vat = parseFloat($("#vat").val());
+    let price_vat = (price * vat) / 100;
+    let price_include_vat = price_vat + price;
     if (productId && quantity && price) {
         const productHtml = `
                     <tr>
                         <td hidden>${productId}</td>
-                        <td>${productName}</td>
-                        <td>${quantity}</td>
-                        <td>${formatPriceToVND(price)}</td>
-                        <td>${formatPriceToVND(price * quantity)}</td>
+                        <td hidden>${vat}</td>
+                        <td class="text-center">${productName}</td>
+                        <td class="text-center">${quantity}</td>
+                        <td class="text-center">${formatPriceToVND(price)}</td>
+                        <td class="text-center">${formatPriceToVND(
+                            price_vat
+                        )}</td>
+                        <td class="text-center">${formatPriceToVND(
+                            price_include_vat
+                        )}</td>
+                        <td class="text-center">${formatPriceToVND(
+                            price_include_vat * quantity
+                        )}</td>
                     </tr>
                 `;
         $("#product_list").append(productHtml);
@@ -22,7 +34,7 @@ const addProductToTable = () => {
 
 const formatPriceToVND = (price) => {
     const number = parseFloat(price); // hoặc Number(price)
-    if (isNaN(number)) return "0 12₫";
+    if (isNaN(number)) return "0₫";
     return number.toLocaleString("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -33,11 +45,11 @@ const totalPriceList = () => {
     const products = $("#product_list tr")
         .map((_, row) => {
             const $row = $(row);
-            const quantity = parseInt($row.find("td").eq(2).text().trim());
-            const priceText = $row.find("td").eq(3).text().trim();
-            const price = parseFloat(priceText.replace(/[^\d]/g, ""));
+            const quantity = parseInt($row.find("td").eq(3).text().trim());
+            const price_include_vat_Text = $row.find("td").eq(6).text().trim();
+            const price_include_vat = parseFloat(price_include_vat_Text.replace(/[^\d]/g, ""));
 
-            return quantity * price;
+            return quantity * price_include_vat;
         })
         .get();
 
@@ -51,16 +63,24 @@ const countProducts = () => {
         .map((_, row) => {
             const $row = $(row);
             const productId = parseInt($row.find("td").eq(0).text().trim());
-            const productName = $row.find("td").eq(1).text().trim();
-            const quantity = parseInt($row.find("td").eq(2).text().trim());
-            const price = parseFloat($row.find("td").eq(3).text().trim());
+            const vat_rate = parseInt($row.find("td").eq(1).text().trim());
+            const productName = $row.find("td").eq(2).text().trim();
+            const quantity = parseInt($row.find("td").eq(3).text().trim());
 
+            const price_Text = $row.find("td").eq(4).text().trim();
+            const cleaned = price_Text.replace(/\./g, "").replace(/[^\d]/g, "");
+            const price = parseFloat(cleaned);
+
+            const total_price_Text = $row.find("td").eq(7).text().trim();
+            const total_price_Text_cleaned = total_price_Text.replace(/\./g, "").replace(/[^\d]/g, "");
+            const total_price = parseFloat(total_price_Text_cleaned);
             return {
                 id: productId,
                 name: productName,
                 quantity: quantity,
+                vat_rate: vat_rate,
                 price: price,
-                total: quantity * price,
+                total: total_price,
             };
         })
         .get());

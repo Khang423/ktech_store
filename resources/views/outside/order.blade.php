@@ -110,10 +110,9 @@
                     </div>
                 </div>
             </form>
-            <div style="height:100px"></div>
             <div class="bottom-bar">
                 <div class="temporary-price">
-                    Tổng thanh toán : <span class="total-price"></span>
+                    Tổng :  <span class="total-price"></span>
                 </div>
                 <div class="btn-buy">
                     <div class="content" id="btn-order-now">

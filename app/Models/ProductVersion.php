@@ -12,6 +12,8 @@ class ProductVersion extends Model
         'name',
         'slug',
         'price',
+        'profit_rate',
+        'final_price',
         'thumbnail',
         'created_at',
         'updated_at',
@@ -26,6 +28,8 @@ class ProductVersion extends Model
             'name',
             'slug',
             'price',
+            'profit_rate',
+            'final_price',
             'thumbnail',
             'created_at',
             'updated_at',
@@ -66,5 +70,15 @@ class ProductVersion extends Model
     public function inventories()
     {
         return $this->hasMany(Inventories::class, 'product_version_id', 'id');
+    }
+
+    public function stockImportDetails()
+    {
+        return $this->hasMany(StockImportDetail::class, 'product_version_id', 'id');
+    }
+
+    public function stockExportDetails()
+    {
+        return $this->hasMany(StockExportDetail::class, 'product_version_id', 'id');
     }
 }

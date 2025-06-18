@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\stockImport\StoreRequest;
 use App\Models\ProductVersion;
 use App\Models\StockImport;
 use App\Models\StockImportDetail;
 use App\Models\Supplier;
 use App\Services\StockImportService;
+use App\Traits\ApiResponse;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class StockImportController extends Controller
 {
     private StockImportService $service;
+    use ApiResponse;
     public function __construct(StockImportService $stockImportService)
     {
         $this->service = $stockImportService;
@@ -37,9 +40,13 @@ class StockImportController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        return $this->service->store($request);
+        $result = $this->service->store($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 
     public function detail(Request $request)
@@ -57,5 +64,4 @@ class StockImportController extends Controller
         ]);
         return $pdf->stream("phieu-nhap-hang-{$stockImport->id}.pdf");
     }
-
 }

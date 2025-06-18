@@ -11,6 +11,7 @@ use App\Models\PhoneSpec;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVersion;
+use App\Models\StockImportDetail;
 use App\Models\Supplier;
 use App\Repositories\product\ProductInterface;
 use App\Services\ProductService;
@@ -43,13 +44,10 @@ class ProductController extends Controller
 
     public function create()
     {
-        $category_product = CategoryProduct::query()->select(['id', 'name'])->get();
-        $brand = Brand::query()->select(['id', 'name'])->get();
-        $Supplier = Supplier::query()->select(['id', 'name'])->get();
         return view('admin.product.create', [
-            'category_product' => $category_product,
-            'brand' => $brand,
-            'supplier' => $Supplier,
+            'category_product' => CategoryProduct::select('id', 'name')->get(),
+            'brand'            => Brand::select('id', 'name')->get(),
+            'supplier'         => Supplier::select('id', 'name')->get(),
         ]);
     }
 
@@ -64,26 +62,19 @@ class ProductController extends Controller
 
     public function edit(ProductVersion $productVersion)
     {
-        $category_product = CategoryProduct::query()->select(['id', 'name'])->get();
-        $brand = Brand::query()->select(['id', 'name'])->get();
-        $Supplier = Supplier::query()->select(['id', 'name'])->get();
-        $laptop = LaptopSpec::query()->where('product_id', $productVersion->id)->first();
-        $phone = PhoneSpec::query()->where('product_id', $productVersion->id)->first();
-        $product = ProductVersion::with(['laptopSpecs','products','phoneSpecs'])->find($productVersion->product_id);
-        $product_image = ProductImage::query()->where('product_id', $productVersion->id)->get();
         return view('admin.product.edit', [
-            'productVersion' => $productVersion,
-            'product' => $product,
-            'category_product' => $category_product,
-            'brand' => $brand,
-            'supplier' => $Supplier,
-            'product_image' => $product_image,
+            'productVersion'       => $productVersion,
+            'product'              => ProductVersion::with(['laptopSpecs', 'products', 'phoneSpecs', 'stockImportDetails'])
+                ->find($productVersion->id),
+            'category_product'     => CategoryProduct::select(['id', 'name'])->get(),
+            'brand'                => Brand::select(['id', 'name'])->get(),
+            'product_image'        =>  ProductImage::where('product_id', $productVersion->id)->get(),
+            'stock_import_details' => StockImportDetail::where('product_version_id', $productVersion->id)->first(),
         ]);
     }
 
     public function update(UpdateRequest $request, ProductVersion $productVersion)
     {
-
         $result = $this->productService->update($request, $productVersion);
         if ($result) {
             return $this->successResponse();

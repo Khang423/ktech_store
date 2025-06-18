@@ -25,7 +25,7 @@
                             <div class="tab-pane show active" id="custom-styles-preview">
                                 <h4 class="header-title mb-3">Thông tin</h4>
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-12">
                                         <div class="mb-2">
                                             <label for="name" class="form-label">Tên sản phẩm</label>
                                             <input type="text" class="form-control" id="name"
@@ -33,28 +33,10 @@
                                                 value="{{ $productVersion->name }}">
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
-                                        <div class="mb-2">
-                                            <label for="supplier_id" class="form-label">Nhà cung cấp</label>
-                                            <select class="form-select" id="supplier_id" name="supplier_id"
-                                                style="height: 48px">
-                                                @foreach ($supplier as $item)
-                                                    <option value="{{ $item->id }}"
-                                                        @if ($product->products->supplier_id == $item->id) selected @endif>
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <div class="text-danger mt-1 error-supplier_id"></div>
-                                        </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-2">
-                                            <label for="price" class="form-label">Đơn Giá</label>
-                                            <input type="text" class="form-control" id="price"
-                                                placeholder="Số điện thoại" name="price"
-                                                value="{{ $productVersion->price }}">
-                                            <div class="text-danger mt-1 error-price"></div>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
                                         <div class="mb-2">
                                             <label for="category_product_id" class="form-label">Danh mục sản phẩm</label>
                                             <select class="form-select" id="category_product_id" name="category_product_id"
@@ -69,7 +51,7 @@
                                             <div class="text-danger mt-1 error-category_product_id"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-2">
                                             <label for="brand_id" class="form-label">Thương hiệu </label>
                                             <select class="form-select" id="brand_id" name="brand_id" style="height: 48px">
@@ -81,6 +63,36 @@
                                                 @endforeach
                                             </select>
                                             <div class="text-danger mt-1 error-brand_id"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-2">
+                                            <label for="import_price" class="form-label">Giá nhập</label>
+                                            <input type="text" class="form-control" id="import_price"
+                                                placeholder="Giá nhập" name="import_price"
+                                                value="{{ formatPriceToVND($stock_import_details->price) }}">
+                                            <div class="text-danger mt-1 error-import_price"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="profit_rate" class="form-label">Lợi nhuận (%)</label>
+                                            <input type="text" class="form-control" id="profit_rate"
+                                                placeholder="Lợi nhuận (%)" name="profit_rate" value="{{ $productVersion->profit_rate }}">
+                                            <div class="text-danger mt-1 error-profit_rate"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="final_price" class="form-label">Giá bán</label>
+                                            <input type="text" class="form-control" id="final_price"
+                                                placeholder="Giá bán" name="final_price"
+                                                value="{{ formatPriceToVND($productVersion->final_price) }}">
+                                            <div class="text-danger mt-1 error-final_price"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -923,91 +935,15 @@
 @push('css')
 @endpush
 @push('js')
+    <script src="{{ asset('js/admin/product.js') }}"></script>
     <script>
         $(document).ready(function() {
-
-            $(".thumbnail").on("click", function() {
-                $("#img_thumbnail").click();
-            });
-
-            $("#img_thumbnail").change(function() {
-                let preview_thumbnail = $("#preview-thumbnail");
-                preview_thumbnail.empty();
-                let fileList = Array.from(this.files).map(file => {
-                    let img = $("<img class='img-fluid img-thumbnail' width='250' height='auto'>")
-                        .attr("src", URL.createObjectURL(file));
-                    img.on("load", function() {
-                        URL.revokeObjectURL(img.attr("src"));
-                    });
-
-                    let sizeText = $("<div class='text-center text-dark'>" + formatBytes(file
-                        .size) + "</div>");
-                    return $("<div class='d-inline-block text-center'></div>").append(img,
-                        sizeText);
-                });
-                preview_thumbnail.append(fileList);
-            });
-
-            $(".dz-message-image").on("click", function() {
-                $("#imgInput").click();
-            });
-
-            $("#imgInput").change(function() {
-                let preview_image = $("#preview-image");
-                preview_image.empty();
-
-                let fileList = Array.from(this.files).map(file => {
-                    let img = $(
-                            "<img class='img-fluid img-thumbnail me-3' width='170' height='auto'>")
-                        .attr("src", URL.createObjectURL(file));
-                    img.on("load", function() {
-                        URL.revokeObjectURL(img.attr("src"));
-                    });
-
-                    let sizeText = $("<div class='text-center text-dark'>" + formatBytes(file
-                        .size) + "</div>");
-                    return $("<div class='d-inline-block text-center'></div>").append(img,
-                        sizeText);
-                });
-
-                preview_image.append(fileList);
-            });
-
-            $('.destroy-image').click(function() {
-                let button = $(this).parent();
-                let error_image = $(this).data('id');
-
-                let image = $(this).siblings('input[name^="image_old["]').val();
-                let product_id = $(this).siblings('input[name^="product_id["]').val();
-                let id = $(this).siblings('input[name^="product_image_id["]').val();
-
-                $.ajax({
-                    url: '{{ route('admin.products.destroy-image') }}',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        id: id,
-                        product_id: product_id,
-                        image: image,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function() {
-                        $(this).next('.old-img').hide();
-                        button.remove();
-                    },
-                    error: function(data) {
-                        $.each(data.responseJSON.errors, function(key, value) {
-                            // console.log(key + ': ' + value);
-                            $('#error-img' + error_image).text(value);
-                        });
-                    }
-                });
-            });
             // init
             const $form = $('#form-update');
             const $inputs = $form.find('input');
             $routeUpdate = '{{ route('admin.products.update', $productVersion->slug) }}';
             $routeIndex = '{{ route('admin.products.index') }}';
+            $routedestroy = '{{ route('admin.products.destroy-image') }}';
 
             update($routeUpdate, $routeIndex);
             deleteAlertValidation($inputs);

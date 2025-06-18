@@ -1,5 +1,3 @@
-// Admin
-// function store
 function store($routeStore, $routeIndex) {
     $("#btn-store").click(function (e) {
         e.preventDefault();
@@ -14,8 +12,10 @@ function store($routeStore, $routeIndex) {
             processData: false,
             data: form_data,
             success: function () {
-                window.location.href = $routeIndex;
                 toast("Thêm thành công", "success");
+                setTimeout(() => {
+                    window.location.href = $routeIndex;
+                }, 2000);
             },
             error: function (data) {
                 $(".text-danger").text("");
@@ -46,8 +46,10 @@ function update($routeUpdate, $routeIndex) {
             processData: false,
             data: form_data,
             success: function () {
-                window.location.href = $routeIndex;
                 toast("Cập nhật thành công", "success");
+                setTimeout(() => {
+                    window.location.href = $routeIndex;
+                }, 2000);
             },
             error: function (data) {
                 $(".text-danger").text("");
@@ -78,10 +80,6 @@ function destroy($routeDelete, $table) {
                 $table.draw();
             },
             error: function (data) {
-                // let datas = data.responseJSON;
-                // datas.messages ?
-                //     toast(datas.messages, 'error') :
-                //     toast(datas.errors.id, 'error');
             },
         });
     });

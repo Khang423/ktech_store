@@ -51,7 +51,7 @@ class ProductService extends Controller
                 return 'Ngừng hoạt động';
             })
             ->editColumn('price', function ($object) {
-                return number_format($object->price, 0, ',', '.') . '₫';
+                return number_format($object->final_price, 0, ',', '.') . '₫';
             })
             ->addColumn('actions', function ($object) {
                 return [
@@ -67,9 +67,9 @@ class ProductService extends Controller
     {
         DB::beginTransaction();
         try {
-            $category = strtoupper($request->category_product_id); // Ví dụ: LAPTOP
-            $gender = strtoupper($request->brand_id);     // Ví dụ: M
-            $date = now()->format('Ymd');                        // 20250614
+            $category = strtoupper($request->category_product_id);
+            $gender = strtoupper($request->brand_id);
+            $date = now()->format('Ymd');
 
             $sku = "{$category}-{$gender}-{$date}";
 
@@ -220,12 +220,17 @@ class ProductService extends Controller
             // product_id
             $product_id = $product_version->product_id;
             // insert product version
+            $import_price = (int) preg_replace('/[^\d]/', '', $request->import_price);
+            $final_price  = (int) preg_replace('/[^\d]/', '', $request->final_price);
             $dataProductVersion = [];
             $dataProductVersion['product_id'] = $product_id;
             $dataProductVersion['name'] = $request->name;
             $dataProductVersion['slug'] = Str::slug($request->name);
             $dataProductVersion['price'] = $request->price;
             $dataProductVersion['description'] = $request->description;
+            $dataProductVersion['final_price'] = $final_price;
+            $dataProductVersion['profit_rate'] = $request->profit_rate;
+            $dataProductVersion['price'] = $import_price;
 
             ProductVersion::query()
                 ->where('id', $product_version->id)

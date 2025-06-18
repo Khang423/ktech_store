@@ -1,4 +1,11 @@
 @media (max-width: 480px) {
+    .breadcrumb1 {
+        font-size: 12px;
+        padding-top: 0px;
+    }
+    .header .container .content .profile .user .circle-user .account-name {
+        font-size: 12px;
+    }
     #section-slide {
         margin-top: 20px;
     }
@@ -69,6 +76,22 @@
     }
     body {
         background-color: rgb(255, 255, 255);
+    }
+
+    /* order page */
+    .view-price .btn-buy {
+        font-size: 12px;
+        width: 60%;
+    }
+    .view-price .temporary-price {
+        font-size: 14px;
+    }
+    .section-order .main .bottom-bar .temporary-price {
+        font-size: 14px;
+    }
+    .section-order .main .bottom-bar .btn-buy {
+        width: 60%;
+        font-size: 12px;
     }
 }
 

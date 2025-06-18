@@ -46,7 +46,7 @@
                                     <div class="thumbnail">
                                         <img src="{{ asset('asset/outside/icon/user.png') }}" alt="Icon user">
                                     </div>
-                                    <span class="account-name">Hi , {{  $last_name }}</span>
+                                    <span class="account-name">Hi , {{ $last_name }}</span>
                                 </div>
                             @endauth
                             @guest('customers')
@@ -125,38 +125,18 @@
                     <i class="uil-multiply"></i>
                 </div>
             </div>
-            <div class="mobile-content">
-                <div class="header-content d-flex">
-                    <div class="content-left d-flex">
-                        @auth('customers')
-                            <div class="user-name">
-                                <span>Xin chào, {{ Auth::guard('customers')->user()->name }}</span>
-                            </div>
-                        @endauth
-                        @guest('customers')
-                            <div class="btn-register mt-2">
-                                <span>Đăng ký</span>
-                            </div>
-                            <div class="btn-login mt-2">
-                                <span>Đăng nhập</span>
-                            </div>
-                        @endguest
-                    </div>
-                    <div class="content-right">
-                        <img src="https://fptshop.com.vn/img/login_mobile.png?w=360&q=75" alt="">
-                    </div>
+            <div class="main-content">
+                <div class="profile d-flex gap-2 align-items-center ps-2">
+                    <i class="uil uil-user fs-3 d-flex align-center "></i>
+                    <span class="user-name fs-4 fw-medium">Võ Vĩ Khang</span>
                 </div>
-                <div class="main-content d-flex flex-column">
-                    @for ($i = 0; $i < 5; $i++)
-                        <div class="item d-flex">
-                            <div class="item-icon">
-                                <img src="{{ asset('asset/outside/icon/fire.png') }}" alt="">
-                            </div>
-                            <div class="item-name d-flex ">
-                                Iphone
-                            </div>
-                        </div>
-                    @endfor
+                <div class="item d-flex">
+                    <div class="title fs-4">
+                        Item
+                    </div>
+                    <div class="icon-arrow fs-2">
+                        <i class="uil uil-angle-down"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -168,46 +148,6 @@
                     Ktech
                 </div>
             @endfor
-        </div>
-    </div>
-    <div class="modal-nemnu-overlay d-none">
-        <div class="modal-menu-category">
-            <div class="menu-category-content d-flex">
-                <div id="button-close-category-product">
-                    <i class="uil-multiply"></i>
-                </div>
-                <div class="category-name d-flex flex-column">
-                    @for ($i = 1; $i < 10; $i++)
-                        <div class="item d-flex">
-                            <div class="icon-category">
-                                <i class=" uil-laptop"></i>
-                            </div>
-                            <div class="title-category">
-                                Laptop
-                            </div>
-                        </div>
-                    @endfor
-                </div>
-                <div class="child-category">
-                    <div class="child-category-name d-flex">
-                        <img src="{{ asset('asset/outside/icon/fire.png') }}" alt="">
-                        <span>Gợi ý cho bạn</span>
-                    </div>
-                    <div class="child-category-content ">
-                        @for ($i = 1; $i < 10; $i++)
-                            <div class="item">
-                                <div class="item-thumbnail">
-                                    <img src="{{ asset('asset/admin/products/2/thumbnail_6820050d6115b.webp') }}"
-                                        alt="">
-                                </div>
-                                <div class="item-name d-flex ">
-                                    Iphone
-                                </div>
-                            </div>
-                        @endfor
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="modal-action d-none">

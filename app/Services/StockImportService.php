@@ -49,8 +49,7 @@ class StockImportService extends Controller
     public function store($request)
     {
         $listProducts = json_decode($request->input('products'), true);
-        $member_id = Auth::guard('members')->id(); // ngắn gọn hơn
-
+        $member_id = Auth::guard('members')->id();
         DB::beginTransaction();
         try {
             $stock_import = StockImport::create([
@@ -62,20 +61,23 @@ class StockImportService extends Controller
             ]);
 
             $total_price = 0;
+            $total_amount = 0;
 
             foreach ($listProducts as $item) {
                 $product_version_id = $item['id'];
                 $quantity = $item['quantity'];
                 $price = $item['price'];
-                $item_total = $quantity * $price;
-                $total_price += $item_total;
+                $vat_rate = $item['vat_rate'];
+                $total_price = $item['total'];
+                $total_amount += $total_price;
 
                 StockImportDetail::create([
                     'stock_import_id' => $stock_import->id,
                     'product_version_id' => $product_version_id,
                     'quantity' => $quantity,
                     'price' => $price,
-                    'total_price' => $item_total,
+                    'vat_rate' => $vat_rate,
+                    'total_price' => $total_price,
                 ]);
 
                 $inventory = Inventories::firstOrNew(['product_version_id' => $product_version_id]);
@@ -84,7 +86,7 @@ class StockImportService extends Controller
             }
 
             $stock_import->update([
-                'total_amount' => $total_price,
+                'total_amount' => $total_amount,
             ]);
 
             DB::commit();
