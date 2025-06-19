@@ -52,6 +52,21 @@ $(document).ready(function () {
         }
     );
 
+    $(".toggle-dropdown").on("click", function () {
+        const dropdown = $(this).next(".item-dropdown");
+        dropdown.toggleClass("show");
+        $(this).find(".icon-arrow").toggleClass("rotate");
+    });
+
+    $(".toggle-desktop-menu").on("click", function () {
+        $(".desktop-menu").toggleClass("show");
+
+        if ($(".desktop-menu").hasClass("show")) {
+            $(".desktop-menu").removeClass("d-none");
+        } else {
+            $(".desktop-menu").addClass("d-none");
+        }
+    });
 });
 
 function goToPageProfile() {

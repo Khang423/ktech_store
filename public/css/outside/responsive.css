@@ -69,7 +69,7 @@
         width: 100%;
     }
     .empty {
-        margin-top: 9.8rem;
+        margin-top: 7.8rem;
     }
     #section-slide .swiper-banner .swiper-slide img {
         border-radius: 10px;
@@ -359,5 +359,298 @@
     .section-order .main .product-list .product-quantity {
         font-size: 12px;
         width: 25%;
+    }
+}
+@media (min-width: 480px) and (max-width: 1024px) {
+    .section-profile .main .header-profile {
+        height: 140px;
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 15px;
+        border: 1px solid lightgray;
+        padding: 10px 0px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+@media (max-width: 480px) {
+    .section-profile .main .header-profile {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .section-profile .customer-info {
+        height: 70px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .section-profile .sum-ordered {
+        height: 70px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-left: none;
+    }
+    .section-profile .total-price {
+        height: 70px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-left: none;
+    }
+    .section-profile .main {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .section-profile .dashboard {
+        height: auto;
+        width: 100%;
+    }
+    .section-profile .dashboard .content {
+        width: 100%;
+        height: auto;
+    }
+    .section-profile .sidebar {
+        height: 70px;
+        width: 100vw;
+        position: fixed;
+        bottom: 0px;
+        border-radius: 0px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        left: 0px;
+        display: flex;
+        gap: 10px;
+        background-color: #fff;
+    }
+    .section-profile .sidebar .item .title {
+        display: none;
+    }
+    .section-profile .sidebar .item {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0px;
+    }
+
+    .section-profile .sidebar .item.active {
+        background-color: #25449a41;
+        color: #25449a;
+        border-radius: 5px;
+        border-left: 0px;
+    }
+
+    .section-profile .dashboard .content {
+        height: 100%;
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        padding: 0px;
+    }
+    .section-profile .dashboard .purchase-history .search-by-date .title {
+        font-size: 15px;
+        display: none;
+    }
+    .section-profile .dashboard .purchase-history .order-status {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        overflow-x: auto; /* Scroll ngang */
+        overflow-y: hidden; /* Ẩn scroll dọc nếu không cần */
+        white-space: nowrap; /* Ngăn con bên trong xuống dòng */
+    }
+    .section-profile .dashboard .purchase-history .order-status .item {
+        flex: 0 0 auto;
+        height: 100%;
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 14px;
+        color: gray;
+    }
+    .section-profile .dashboard .purchase-history .search-by-date {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        padding: 0px 0px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        margin-top: 10px;
+        flex-direction: row;
+    }
+    .section-profile .dashboard .purchase-history .view .item {
+        height: auto;
+        width: 100%;
+        border-radius: 3px;
+        border: 1px solid lightgray;
+        padding: 10px;
+    }
+    .section-profile
+        .dashboard
+        .purchase-history
+        .view
+        .item
+        .item-header
+        .left {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: start;
+        gap: 0px;
+    }
+    .section-profile
+        .dashboard
+        .purchase-history
+        .view
+        .item
+        .item-header
+        .right
+        .order-status {
+        display: flex;
+        justify-content: end;
+        align-items: start;
+    }
+
+    .section-profile .dashboard .purchase-history .view .item .item-content {
+        height: 85%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .section-profile
+        .dashboard
+        .purchase-history
+        .view
+        .item
+        .item-content
+        .left {
+        height: 100px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-self: start;
+        gap: 20px;
+    }
+    .section-profile
+        .dashboard
+        .purchase-history
+        .view
+        .item
+        .item-content
+        .left
+        .thumbnail {
+        height: 100%;
+        width: 30%;
+    }
+    .section-profile
+        .dashboard
+        .purchase-history
+        .view
+        .item
+        .item-content
+        .left
+        .product-info {
+        height: 100%;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: flex-start;
+    }
+    .section-profile
+        .dashboard
+        .purchase-history
+        .view
+        .item
+        .item-content
+        .right {
+        height: 40%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .section-profile .dashboard .purchase-history {
+        height: auto;
+        width: 100%;
+    }
+    .section-profile .dashboard .purchase-history .view {
+        height: auto;
+        width: 100%;
+    }
+    .section-profile .main .header-profile {
+        border-radius: 3px;
+    }
+    .section-profile .customer-info .avatar .avatar-circle {
+        height: 55px;
+        width: 55px;
+        border: 1px solid lightgray;
+        border-radius: 50px;
+        padding: 10px;
+    }
+    .section-profile .customer-info .information .name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #3d3d3d;
+    }
+    .section-profile .customer-info .information .tel {
+        font-size: 14px;
+        color: gray;
+    }
+    .section-profile .sum-ordered .icon-order .order-circle {
+        height: 60px;
+        width: 60px;
+        border: 1px solid lightgray;
+        border-radius: 50px;
+        padding: 15px;
+    }
+    .section-profile .total-price .icon-invoice .invoice-circle {
+        height: 60px;
+        width: 60px;
+        border: 1px solid lightgray;
+        border-radius: 50px;
+        padding: 15px;
+    }
+    .section-profile .sum-ordered .information .quantity {
+        font-size: 18px;
+    }
+    .section-profile .sum-ordered .information .title {
+        font-size: 14px;
+    }
+
+    .section-profile .total-price .information .sum-total {
+        font-size: 18px;
+    }
+    .section-profile .total-price .information .title {
+        font-size: 14px;
+    }
+
+    .footer-page .service .content {
+        display: none;
+    }
+    .footer-page .customer-support .content {
+        display: none;
+    }
+    .footer-page .hotline .content {
+        display: none;
     }
 }

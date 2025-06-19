@@ -89,16 +89,15 @@
                                 Thông tin tài khoản
                             </div>
                         </div>
-                        <a href="{{ route('home.logout') }}">
-                            <div class="item">
-                                <div class="icon">
-                                    <i class="uil uil-sign-out-alt"></i>
-                                </div>
-                                <div class="title">
-                                    Đăng xuất
-                                </div>
+                        <div class="item">
+                            <div class="icon">
+                                <i class="uil uil-sign-out-alt"></i>
                             </div>
-                        </a>
+                            <div class="title">
+                                Đăng xuất
+                            </div>
+                        </div>
+
                     </div>
                     <div class="content ">
                         <div class="purchase-history d-none">
@@ -412,5 +411,6 @@
         const RouteGetWard = "{{ route('address.getWards') }}";
         const RouteAddAddress = "{{ route('home.addAddress') }}";
         const RouteDeleteAddress = "{{ route('home.deleteAddress') }}";
+        const RouteProfile = "{{ route('home.profile') }}";
     </script>
 @endpush

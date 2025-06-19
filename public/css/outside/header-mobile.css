@@ -107,7 +107,7 @@
 .header .container .menu-mobile {
     position: fixed;
     top: 0px;
-    left: 0vw;
+    left: -100vw;
     width: 100vw;
     height: 100vh;
     transition: left 0.3s ease;
@@ -153,25 +153,62 @@
     background-color: #ffffff;
     padding: 0px;
 }
-.header .menu-mobile .main-content .profile{
+.header .menu-mobile .main-content .profile {
     height: 50px;
     width: 100%;
     border-bottom: 1px solid lightgray;
 }
-.header .menu-mobile .main-content .item{
+.header .menu-mobile .main-content .item {
     height: 50px;
     width: 100%;
     border-bottom: 1px solid lightgray;
     display: flex;
 }
-.header .menu-mobile .main-content .item .title{
+.header .menu-mobile .main-content .item .title {
     height: 100%;
     width: 100%;
+    padding-left: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
-.header .menu-mobile .main-content .item .icon-arrow{
+.header .menu-mobile .main-content .item .icon-arrow {
     height: 50px;
     width: 50px;
     background-color: rgba(213, 213, 213, 0.584);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header .menu-mobile .main-content .item .icon-arrow i {
+    transition: transform 0.3s ease;
+}
+.header .menu-mobile .main-content .item .icon-arrow.rotate i {
+    transform: rotate(180deg);
+}
+.header .menu-mobile .main-content .item .icon-arrow.rotate {
+    background-color: #2a52be;
+    color: #fff;
+}
+.header .menu-mobile .main-content .item-dropdown {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    max-height: 0;
+    opacity: 0;
+}
+.header .menu-mobile .main-content .item-dropdown.show {
+    max-height: 500px;
+    opacity: 1;
+}
+.header .menu-mobile .main-content .item-dropdown .item {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
 }
 @media (max-width: 760px) {
     .header .container .content-mobile .cart {
@@ -180,4 +217,59 @@
         margin: 0px;
         margin-left: -18px;
     }
+}
+/* desktop menu */
+
+.header .desktop-menu {
+    margin-top: 5rem;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.header .desktop-menu .sidebar {
+    height: 100%;
+    width: 500px;
+    background-color: #fff;
+}
+.header .desktop-menu .overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.489);
+    position: relative;
+}
+.header .desktop-menu .sidebar .item {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    padding: 0px 10px;
+}
+.header .desktop-menu .sidebar .item:hover {
+    background-color: #c9c9c977;
+}
+.header .desktop-menu .sidebar .item .title {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    gap: 10px;
+}
+.header .desktop-menu .sidebar .item .icon-arrow {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.header .desktop-menu .overlay .sidebar-tab {
+    height: 100%;
+    width: 700px;
+    background-color:#fff ;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }

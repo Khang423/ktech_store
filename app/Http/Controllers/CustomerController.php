@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Services\CityService;
 use App\Services\CustomerService;
 use App\Traits\ApiResponse;
@@ -32,7 +33,6 @@ class CustomerController extends Controller
         $customer = Customer::where('id', $customer_id)->first(['id','tel','email','birthday','name']);
         $order = Order::where('customer_id',$customer_id)->count();
         $total_price = Order::where('customer_id',$customer_id)->sum('total_price');
-
         return view('outside.profile', [
             'title' => 'Ktech - Profile',
             'city' => $city,

@@ -4,7 +4,7 @@ body {
 }
 
 .empty {
-    margin-top: 7rem;
+    margin-top: 5rem;
 }
 
 /* breadcrumb */
@@ -1099,6 +1099,7 @@ body {
 .section-profile {
     height: auto;
     width: 100%;
+    margin-bottom: 100px;
 }
 .section-profile .main {
     height: 100%;

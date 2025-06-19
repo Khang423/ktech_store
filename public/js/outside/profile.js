@@ -11,11 +11,13 @@ $(document).ready(function () {
     });
 
     $(".sidebar .item").click(function () {
+        $(".header-profile").removeClass("d-none");
         $(".sidebar .item").removeClass("active");
         $(this).addClass("active");
 
         if ($(this).hasClass("btn-purchase-history")) {
             $(".purchase-history").removeClass("d-none");
+            $(".header-profile").addClass("d-none");
         } else {
             $(".purchase-history").addClass("d-none");
         }
@@ -50,7 +52,22 @@ $(document).ready(function () {
         const address_id = $(this).data("id");
         deleteAddress(address_id);
     });
+    checkUrlProfile();
+    $(window).resize(function () {
+        checkUrlProfile();
+    });
 });
+
+const checkUrlProfile = () => {
+    if (
+        window.location.href.includes(RouteProfile) &&
+        window.innerWidth <= 768
+    ) {
+        $(".footer-page").hide();
+    } else {
+        $(".footer-page").show(); // nên có thêm để hiển thị lại nếu không khớp
+    }
+};
 
 function deleteAddress(id) {
     $.ajax({

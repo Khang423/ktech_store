@@ -15,7 +15,7 @@
                         <div class="col-2">
                             <div class="category-product" id="button-category-product">
                                 <div class="content d-flex">
-                                    <div class="menu">
+                                    <div class="menu toggle-desktop-menu">
                                         <img src="{{ asset('asset/outside/icon/menu.svg') }}" alt="">
                                     </div>
                                 </div>
@@ -74,6 +74,42 @@
                 </div>
             </div>
         </div>
+        <div class="desktop-menu d-none">
+            <div class="sidebar">
+                <div class="item">
+                    <div class="title">
+                        <i class="uil uil-monitor fs-2"></i>
+                        <span>LAPTOP</span>
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-right"></i>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="title">
+                        <i class="uil uil-mobile-android fs-2"></i>
+                        <span>ĐIỆN THOẠI</span>
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-right"></i>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="title">
+                        <i class="uil uil-headphones-alt fs-2"></i>
+                        <span>PHỤ KIỆN</span>
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay">
+                <div class="sidebar-tab">
+
+                </div>
+            </div>
+        </div>
         {{-- mobile --}}
         <div class="content-mobile ">
             <div class="row">
@@ -126,28 +162,72 @@
                 </div>
             </div>
             <div class="main-content">
-                <div class="profile d-flex gap-2 align-items-center ps-2">
-                    <i class="uil uil-user fs-3 d-flex align-center "></i>
-                    <span class="user-name fs-4 fw-medium">Võ Vĩ Khang</span>
+                @auth('customers')
+                    @php
+                        $account_name = Auth::guard('customers')->user()->name ?? '';
+                    @endphp
+                    <a href="{{ route('home.profile') }}" class="text-dark">
+                        <div class="profile d-flex gap-2 align-items-center ps-2">
+                            <i class="uil uil-user fs-3 d-flex align-center "></i>
+                            <span class="user-name fs-4 fw-medium">{{ $account_name }}</span>
+                        </div>
+                    </a>
+                @endauth
+                @guest('customers')
+                    <a href="{{ route('home.login') }}" class="text-dark">
+                        <div class="profile d-flex gap-2 align-items-center ps-2">
+                            <i class="uil uil-sign-in-alt fs-3 d-flex align-center"></i>
+                            <span class="user-name fs-4 fw-medium">Đăng nhập</span>
+                        </div>
+                    </a>
+                @endguest
+                <div class="item d-flex toggle-dropdown">
+                    <div class="title fs-4 fw-bold">
+                        Laptop
+                    </div>
+                    <div class="icon-arrow fs-2">
+                        <i class="uil uil-angle-down"></i>
+                    </div>
                 </div>
-                <div class="item d-flex">
-                    <div class="title fs-4">
-                        Item
+                <div class="item-dropdown">
+                    <div class="item">
+                        DELL
+                    </div>
+                    <div class="item">
+                        LENOVO
+                    </div>
+                    <div class="item">
+                        MSI
+                    </div>
+                </div>
+                <div class="item d-flex toggle-dropdown">
+                    <div class="title fs-4 fw-bold">
+                        Điện thoại
+                    </div>
+                    <div class="icon-arrow fs-2">
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                </div>
+                <div class="item-dropdown">
+                    <div class="item">
+                        APPLE
+                    </div>
+                    <div class="item">
+                        XIAOMI
+                    </div>
+                    <div class="item">
+                        SAMSUNG
+                    </div>
+                </div>
+                <div class="item d-flex toggle-dropdown">
+                    <div class="title fs-4 fw-bold">
+                        Phụ kiện
                     </div>
                     <div class="icon-arrow fs-2">
                         <i class="uil uil-angle-down"></i>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="contact">
-        <div class="contact-content d-flex">
-            @for ($i = 1; $i < 10; $i++)
-                <div class="contact-item">
-                    Ktech
-                </div>
-            @endfor
         </div>
     </div>
     <div class="modal-action d-none">
