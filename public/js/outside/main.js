@@ -65,9 +65,9 @@ $(document).ready(function () {
             success: function (data) {
                 window.location.href = data.redirect;
             },
-            error: function(xhr) {
-                console.error('Search ajax error:', xhr);
-            }
+            error: function (xhr) {
+                console.error("Search ajax error:", xhr);
+            },
         });
     });
 
@@ -85,9 +85,9 @@ $(document).ready(function () {
             success: function (data) {
                 window.location.href = data.redirect;
             },
-            error: function(xhr) {
-                console.error('Search ajax error:', xhr);
-            }
+            error: function (xhr) {
+                console.error("Search ajax error:", xhr);
+            },
         });
     });
 
@@ -104,7 +104,7 @@ $(document).ready(function () {
                 if (data.auth) {
                     window.location.href = "/cart";
                 } else {
-                    toast('Bạn chưa đăng nhập', 'warning');
+                    toast("Bạn chưa đăng nhập", "warning");
                 }
             },
             error: function (xhr, status, error) {
@@ -113,3 +113,5 @@ $(document).ready(function () {
         });
     });
 });
+
+

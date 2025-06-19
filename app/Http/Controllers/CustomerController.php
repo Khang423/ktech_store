@@ -42,7 +42,6 @@ class CustomerController extends Controller
             'total_price' => $total_price,
         ]);
     }
-    // add address for customer
     public function addAddress(Request $request)
     {
         $validated =  $request->validate([

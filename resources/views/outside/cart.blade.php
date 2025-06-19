@@ -2,17 +2,18 @@
 @section('content')
     <div class="empty"></div>
     <div class="breadcrumb1">
-        <a href="{{ route('home.index') }}">
-            <span class="text-primary">
-                Trang chủ
+        <div class="container">
+            <a href="{{ route('home.index') }}">
+                <span style="color: #2a52be">
+                    Trang chủ
+                </span>
+            </a>
+            <i class=" uil-angle-right-b"></i>
+            <span class="text-dark">
+                Giỏ hàng
             </span>
-        </a>
-        <i class=" uil-angle-right-b"></i>
-        <span class="text-primary">
-            Giỏ hàng
-        </span>
+        </div>
     </div>
-    <hr>
     <section class="list-item-cart">
         @if ($cart_item)
             <div class="form-check mb-2">

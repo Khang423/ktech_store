@@ -1,6 +1,6 @@
 @extends('outside.layout.master')
 @section('content')
-    <div class="empty"></div>
+    <div class="empty" style="margin-top: 5rem;"></div>
     <section id="section-slide">
         <div class="swiper-banner">
             <div class="swiper-wrapper">
@@ -96,3 +96,20 @@
         </div>
     </section>
 @endsection
+@push('js')
+    <script>
+        $(document).ready(() => {
+            checkURLHome();
+            $(window).resize(function() {
+                checkURLHome();
+            });
+        });
+        const checkURLHome = () => {
+            if (window.location.href.includes("/") && window.innerWidth <= 768) {
+                $(".empty").css("margin-top", "7.8rem");
+            } else {
+                $(".empty").css("margin-top", "5rem");
+            }
+        };
+    </script>
+@endpush

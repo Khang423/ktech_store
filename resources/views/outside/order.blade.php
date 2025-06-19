@@ -2,29 +2,28 @@
 @section('content')
     <div class="empty"></div>
     <div class="breadcrumb1">
-        <a href="{{ route('home.index') }}">
-            <span class="text-primary">
-                Trang chủ
+        <div class="container">
+            <a href="{{ route('home.index') }}">
+                <span style="color: #2a52be">
+                    Trang chủ
+                </span>
+            </a>
+            <i class=" uil-angle-right-b"></i>
+            <span style="color: #2a52be">
+                Đặt hàng
             </span>
-        </a>
-        <i class=" uil-angle-right-b"></i>
-        <span class="text-primary">
-            Đặt hàng
-        </span>
-        <i class=" uil-angle-right-b"></i>
-        <span class="text-primary">
-            Điền thông tin
-        </span>
+            <i class=" uil-angle-right-b"></i>
+            <span class="text-dark">
+                Thông tin
+            </span>
+        </div>
     </div>
-    <hr>
+
     <section class="section-order">
         <div class="main">
             <div class="page-title">
                 <div class="info">
-                    1.Thông Tin
-                </div>
-                <div class="payment">
-                    2.Thanh toán
+                    Thông tin đặt hàng
                 </div>
             </div>
             <div class="product-list">
@@ -45,7 +44,8 @@
                     </div>
                     <div class="email">
                         <label for="email ">Email</label>
-                        <input type="text" name="email_receiver" id="email_receiver" placeholder="NguyenVanA@gmail.com" value="{{ $customer->email }}">
+                        <input type="text" name="email_receiver" id="email_receiver" placeholder="NguyenVanA@gmail.com"
+                            value="{{ $customer->email }}">
                         <div class="text-danger mt-1 error-email_receiver"></div>
                     </div>
                 </div>
@@ -56,8 +56,9 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="name" class="form-label">TÊN NGƯỜI NHẬN</label>
-                                <input type="text" class="name form-control" id="name" name="name" value="{{ $customer->name }}">
+                                <label for="name" class="form-label">Họ tên</label>
+                                <input type="text" class="name form-control" id="name" name="name"
+                                    value="{{ $customer->name }}">
                                 <div class="text-danger mt-1 error-name"></div>
                             </div>
                             <div class="mb-3">
@@ -82,8 +83,9 @@
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="tel" class="form-label">SĐT NGƯỜI NHẬN</label>
-                                <input type="text" class="tel form-control" id="tel" name="tel" value="{{ $customer->tel }}">
+                                <label for="tel" class="form-label">SĐT</label>
+                                <input type="text" class="tel form-control" id="tel" name="tel"
+                                    value="{{ $customer->tel }}">
                                 <div class="text-danger mt-1 error-tel"></div>
                             </div>
                             <div class="mb-3">
@@ -95,7 +97,7 @@
                                 <div class="text-danger mt-1 error-district"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="address" class="form-label">ĐỊA CHỈ</label>
+                                <label for="address" class="form-label">Địa chỉ</label>
                                 <input type="text" class="form-control" id="address" name="address">
                             </div>
                         </div>
@@ -103,7 +105,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-1">
-                                <label for="note" class="form-label">GHI CHÚ</label>
+                                <label for="note" class="form-label">Ghi chú</label>
                                 <input type="text" class="form-control" id="note" name="note">
                             </div>
                         </div>
@@ -111,8 +113,8 @@
                 </div>
             </form>
             <div class="bottom-bar">
-                <div class="temporary-price">
-                    Tổng :  <span class="total-price"></span>
+                <div class="temporary-price fw-bold">
+                    Tổng : <span class="total-price ps-1"></span>
                 </div>
                 <div class="btn-buy">
                     <div class="content" id="btn-order-now">
@@ -129,5 +131,6 @@
         const RouteGetDistrict = "{{ route('address.getDistricts') }}";
         const RouteGetWard = "{{ route('address.getWards') }}";
         const RouteOrderStore = "{{ route('home.orderStore') }}";
+        const RouteOrder = "{{ route('home.order') }}";
     </script>
 @endpush

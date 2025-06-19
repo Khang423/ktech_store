@@ -40,4 +40,7 @@ $(document).ready(function () {
     $("#guest-add-to-cart").click(function () {
         $(".modal-action").removeClass("d-none");
     });
+    $("#guest-btn-buy").click(function () {
+        $(".modal-action").removeClass("d-none");
+    });
 });

@@ -35,6 +35,7 @@ $(document).ready(function () {
 
         submitOrder(formData);
     });
+    $('.footer-page').addClass('d-none');
 });
 
 // Render selected products from sessionStorage to the DOM
@@ -52,8 +53,8 @@ function renderSelectedProducts(products) {
                     <img src="${thumbnailPath}" alt="${name}">
                 </div>
                 <div class="product-info">
-                    <div class="name">${name}</div>
-                    <div class="price">${formatPriceToVND(price)}</div>
+                    <div class="name fw-bold">${name}</div>
+                    <div class="price fw-bold">${formatPriceToVND(price)}</div>
                 </div>
                 <div class="product-quantity">Số lượng: ${quantity}</div>
             </div>

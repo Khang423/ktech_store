@@ -2,17 +2,18 @@
 @section('content')
     <div class="empty"></div>
     <div class="breadcrumb1">
-        <a href="{{ route('home.index') }}">
-            <span class="text-primary">
-                Trang chủ
+        <div class="container">
+            <a href="{{ route('home.index') }}">
+                <span style="color: #2a52be">
+                    Trang chủ
+                </span>
+            </a>
+            <i class=" uil-angle-right-b"></i>
+            <span class="text-dark">
+                Tài khoản cá nhân
             </span>
-        </a>
-        <i class=" uil-angle-right-b"></i>
-        <span class="text-primary">
-            Thông tin cá nhân
-        </span>
+        </div>
     </div>
-    <hr>
     <section class="section-profile">
         <div class="main">
             <div class="header-profile">
@@ -89,7 +90,7 @@
                                 Thông tin tài khoản
                             </div>
                         </div>
-                        <div class="item">
+                        <div class="item btn-logout">
                             <div class="icon">
                                 <i class="uil uil-sign-out-alt"></i>
                             </div>
@@ -412,5 +413,7 @@
         const RouteAddAddress = "{{ route('home.addAddress') }}";
         const RouteDeleteAddress = "{{ route('home.deleteAddress') }}";
         const RouteProfile = "{{ route('home.profile') }}";
+        const RouteLogout = "{{ route('home.logout') }}";
+      
     </script>
 @endpush

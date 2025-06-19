@@ -7,23 +7,24 @@
 @section('content')
     <div class="empty"></div>
     <div class="breadcrumb1">
-        <a href="{{ route('home.index') }}">
-            <span class="text-primary">
-                Trang chủ
+        <div class="container">
+            <a href="{{ route('home.index') }}">
+                <span style="color:#2a52be">
+                    Trang chủ
+                </span>
+            </a>
+            <i class=" uil-angle-right-b"></i>
+            <span style="color:#2a52be">
+                @if ($product->laptopSpecs)
+                    Laptop
+                @elseif ($product->phoneSpecs)
+                    Điện thoại
+                @endif
             </span>
-        </a>
-        <i class=" uil-angle-right-b"></i>
-        <span class="text-primary">
-            @if ($product->laptopSpecs)
-                Laptop
-            @elseif ($product->phoneSpecs)
-                Điện thoại
-            @endif
-        </span>
-        <i class=" uil-angle-right-b"></i>
-        <span>{{ $product->name }}</span>
+            <i class=" uil-angle-right-b"></i>
+            <span class="text-dark">{{ $product->name }}</span>
+        </div>
     </div>
-    <hr>
     <section class="section-product-info">
         <div class="product-image">
             <div class="f-carousel" id="product-image-carousel">
@@ -62,12 +63,12 @@
                     {{ formatPriceToVND($product->final_price) }}
                 </div>
                 <div class="product-buy mt-2">
-                    <div class="btn-buy">
-                        <span>
-                            MUA NGAY
-                        </span>
-                    </div>
                     @if (Auth::guard('customers')->check())
+                        <div class="btn-buy">
+                            <span>
+                                MUA NGAY
+                            </span>
+                        </div>
                         <div class="btn-add_to_cart" data-product-id={{ $product->id }}>
                             <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
                             <span>
@@ -75,6 +76,11 @@
                             </span>
                         </div>
                     @else
+                        <div class="btn-buy" id="guest-btn-buy">
+                            <span>
+                                MUA NGAY
+                            </span>
+                        </div>
                         <div class="btn-add_to_cart" id="guest-add-to-cart">
                             <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
                             <span>
@@ -1009,5 +1015,6 @@
     <script src="{{ asset('js/outside/product_detail.js') }}"></script>
     <script>
         const routeAddItemToCart = "{{ route('home.addItemToCart') }}";
+        const RouteCart = "{{ route('home.cart') }}";
     </script>
 @endpush

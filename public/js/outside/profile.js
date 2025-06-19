@@ -24,6 +24,7 @@ $(document).ready(function () {
 
         if ($(this).hasClass("btn-account-info")) {
             $(".account-info").removeClass("d-none");
+            $(".header-profile").addClass("d-none");
         } else {
             $(".account-info").addClass("d-none");
         }
@@ -55,6 +56,10 @@ $(document).ready(function () {
     checkUrlProfile();
     $(window).resize(function () {
         checkUrlProfile();
+    });
+
+    $('.btn-logout').on('click', () => {
+        window.location.href = RouteLogout;
     });
 });
 

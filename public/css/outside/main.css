@@ -4,15 +4,22 @@ body {
 }
 
 .empty {
-    margin-top: 5rem;
+    margin-top: 9rem;
 }
 
 /* breadcrumb */
 .breadcrumb1 {
-    height: auto;
+    height: 3rem;
     font-size: 15px;
     padding-top: 15px;
     overflow-wrap: break-word;
+    width: 100%;
+    background-color: #ffffff;
+    position: absolute;
+    top: 5rem;
+    left: 0px;
+    border-bottom: 1px solid lightgray;
+    font-weight: 600;
 }
 
 /* section slide */
@@ -902,6 +909,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 100px;
 }
 
 .section-order .main {
@@ -913,14 +921,14 @@ body {
     width: 100%;
     display: flex;
     gap: 20px;
-    padding: 0px 10px;
+
     color: #919eab;
     text-transform: uppercase;
     font-size: 18px;
 }
 .section-order .main .page-title .info {
     height: 100%;
-    width: 50%;
+    width: 100%;
     display: flex;
     justify-content: center;
     color: #2a52be;
@@ -1043,10 +1051,11 @@ body {
     border: none;
     border-bottom: 1px solid lightgray;
     outline: none;
+    border-radius: 0px;
 }
 .section-order .main .address-receiver label {
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
 }
 .section-order .main .address-receiver input:focus {
     border-bottom: 1px solid #25449a;
@@ -1056,8 +1065,8 @@ body {
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
         rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     position: fixed;
     bottom: 0;
     left: 50%;
