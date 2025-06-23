@@ -672,4 +672,11 @@
     .footer-page .hotline .content {
         display: none;
     }
+
+    .section-order .method-payment .other-option span{
+        display: none;
+    }
+    .section-order .method-payment .other-option{
+        justify-content: end;
+    }
 }

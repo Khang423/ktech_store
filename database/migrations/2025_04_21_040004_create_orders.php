@@ -14,22 +14,30 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('status')->default(0);
+            $table->integer('city_id')->nullable();
+            $table->integer('district_id')->nullable();
+            $table->integer('ward_id')->nullable();
             $table->double('total_price')->default(0);
             $table->string('receiver_name')->nullable();
             $table->string('receiver_tel')->nullable();
             $table->string('receiver_email')->nullable();
-            $table->foreignId('address_id')->nullable()->constrained('address')->cascadeOnDelete();
             $table->string('note')->nullable();
+            $table->string('ship')->nullable();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     public function down(): void
-{
-    Schema::table('orders', function (Blueprint $table) {
-        $table->dropForeign(['address_id']);
-    });
+    {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign(['city_id']);
+            $table->dropForeign(['district_id']);
+            $table->dropForeign(['ward_id']);
+        });
 
-    Schema::dropIfExists('orders');
-}
+        Schema::dropIfExists('orders');
+    }
 };

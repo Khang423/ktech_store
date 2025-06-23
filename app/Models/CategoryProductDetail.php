@@ -4,28 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryProduct extends Model
+class CategoryProductDetail extends Model
 {
     protected $fillable = [
         'id',
+        'catogory_product_id',
         'name',
         'slug',
-        'description',
-        'created_at',
-        'updated_at',
     ];
 
     public function getInfo()
     {
         return [
             'id',
+            'catogory_product_id',
             'name',
             'slug',
-            'description',
             'created_at',
-            'updated_at',
+            'updated_at'
         ];
     }
+
     public function getCreatedAtAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
@@ -33,10 +32,10 @@ class CategoryProduct extends Model
     public function getUpdatedAtAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
-    }
 
-    public function categoryProductDetails()
+    }
+    public function categoryProduct()
     {
-        return $this->hasMany(CategoryProductDetail::class, 'catogory_product_id', 'id');
+        return $this->belongsTo(CategoryProduct::class, 'catogory_product_id', 'id');
     }
 }

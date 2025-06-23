@@ -2,11 +2,11 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Danh mục sản phẩm
+            Danh mục: {{ $categoryProduct->name }}
         </span>
         <i class="mdi mdi-chevron-right"></i>
         <span class="text-primary">
-            <a href="{{ route('admin.suppliers.index') }}">Danh sách</a>
+            Danh sách
         </span>
         <i class="mdi mdi-chevron-right"></i>
         Thêm
@@ -22,23 +22,29 @@
                             <form method="post" enctype="multipart/form-data" autocomplete="off" id="form-store">
                                 @csrf
                                 <h4 class="header-title mb-3">Thông tin</h4>
-                                <div class="row">
+                                <div class="row" hidden>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label for="name" class="form-label">Tên Danh mục</label>
-                                            <input type="text" class="form-control" id="name"
-                                                placeholder="Tên Danh mục" name="name">
-                                            <div class="text-danger mt-1 error-name"></div>
+                                            <label for="catogory_product_id" class="form-label">Danh mục sản phẩm</label>
+                                            <select class="form-select" id="catogory_product_id" name="catogory_product_id"
+                                                style="height: 48px">
+                                                <option value="{{ $categoryProduct->id }}">
+                                                    {{ $categoryProduct->name }}
+                                                </option>
+                                            </select>
+                                            <div class="text-danger mt-1 error-catogory_product_id"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label for="description" class="form-label">Mô tả</label>
-                                            <input type="text" class="form-control" id="description" placeholder="Mô tả"
-                                                name="description">
-                                            <div class="text-danger mt-1 error-description"></div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Tên danh mục chi tiết</label>
+                                                <input type="text" class="form-control" id="name"
+                                                    placeholder="Tên danh mục chi tiết" name="name">
+                                                <div class="text-danger mt-1 error-name"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -84,8 +90,9 @@
 
             const $form = $('#form-store');
             const $inputs = $form.find('input');
-            $routeStore = '{{ route('admin.categoryProducts.store') }}';
-            $routeIndex = '{{ route('admin.categoryProducts.index') }}';
+            $routeStore =
+                "{{ route('admin.categoryProducts.details.store', ['categoryProduct' => $slug]) }}";
+            $routeIndex = "{{ route('admin.categoryProducts.detail', ['categoryProduct' => $slug]) }}";
             // function handle
             store($routeStore, $routeIndex);
             deleteAlertValidation($inputs);

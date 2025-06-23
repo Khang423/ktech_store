@@ -12,6 +12,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryProductController;
+use App\Http\Controllers\CategoryProductDetailController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
@@ -169,9 +170,22 @@ Route::group([
         Route::get('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'edit'])->name('edit');
         Route::put('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'update'])->name('update');
         Route::delete('/delete', [CategoryProductController::class, 'delete'])->name('delete');
+        Route::get('/detail/{categoryProduct:slug}', [CategoryProductController::class, 'detail'])->name('detail');
+        Route::post('/getListDetail/{categoryProduct:slug}', [CategoryProductController::class, 'getListDetail'])->name('getListDetail');
+        // CategoryProduct detail
+        Route::group([
+            'prefix' => '{categoryProduct:slug}',
+            'as' => 'details.'
+        ], function () {
+            Route::get('/create', [CategoryProductController::class, 'createDetail'])->name('create');
+            Route::post('/store', [CategoryProductController::class, 'storeDetail'])->name('store');
+            Route::get('/edit/{categoryProductDetail:slug}', [CategoryProductController::class, 'editDetail'])->name('edit');
+            Route::put('/edit/{categoryProductDetail:slug}', [CategoryProductController::class, 'updateDetail'])->name('update');
+            Route::delete('/delete', [CategoryProductController::class, 'deleteDetail'])->name('delete');
+        });
     });
 
-    // categoryProduct
+    // banner
     Route::group([
         'prefix' => 'banner',
         'as' => 'banners.'
@@ -184,6 +198,7 @@ Route::group([
         Route::put('/edit/{banner:slug}', [BannerController::class, 'update'])->name('update');
         Route::delete('/delete', [BannerController::class, 'delete'])->name('delete');
     });
+
     // Inventory route
     Route::group([
         'prefix' => 'inventories',

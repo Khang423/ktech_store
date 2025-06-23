@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\CategoryProduct;
+use App\Models\CategoryProductDetail;
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -30,29 +31,36 @@ class CategoryProductService extends Controller
                 static $i = 0;
                 return ++$i;
             })
-            ->editColumn('thumbnail', function ($object) {
-                return [
-                    'thumbnail' => $object->thumbnail,
-                ];
-            })
-            ->editColumn('product_type', function ($object) {
-                if ($object->product_type == 0) {
-                    return 'Laptop';
-                } else if ($object->product_type == 1) {
-                    return 'Điện thoại';
-                } else if ($object->product_type == 2) {
-                    return 'Bàn phím';
-                } else if ($object->product_type == 3) {
-                    return 'Chuột';
-                } else {
-                    return 'Tai nghe';
-                }
-            })
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
                     'destroy' => route('admin.categoryProducts.delete'),
+                    'preview' => route('admin.categoryProducts.detail', $object),
                     'edit' => route('admin.categoryProducts.edit', $object),
+                ];
+            })
+            ->make(true);
+    }
+
+    public function getListDetail($categoryProduct)
+    {
+        return DataTables::of(
+            CategoryProductDetail::where('catogory_product_id', $categoryProduct->id)
+                ->select((new CategoryProductDetail)->getInfo())->get()
+        )
+            ->editColumn('index', function ($object) {
+                static $i = 0;
+                return ++$i;
+            })
+            ->addColumn('actions', function ($object) {
+                $categoryProduct = CategoryProduct::where('id', $object->catogory_product_id)->first();
+                return [
+                    'id' => $object->id,
+                    'destroy' => ' ',
+                    'edit' => route('admin.categoryProducts.details.edit', [
+                        'categoryProduct' => $categoryProduct->slug,
+                        'categoryProductDetail' => $object,
+                    ]),
                 ];
             })
             ->make(true);
@@ -66,17 +74,30 @@ class CategoryProductService extends Controller
             $dataStore['name'] = $request->name;
             $dataStore['description'] = $request->description;
             $dataStore['slug'] = Str::slug($request->name);
-            $dataStore['product_type'] = $request->product_type;
-            if ($request->hasFile('thumbnail')) {
-                $name_image = $this->imageTrait->convertToWebpAndStore($request->thumbnail, 'categoryProducts');
-                $dataStore['thumbnail'] = $name_image;
-            }
-            $this->model->query()->create($dataStore);
+
             DB::commit();
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+        }
+    }
+
+    public function storeDetail($request)
+    {
+        DB::beginTransaction();
+        try {
+            CategoryProductDetail::create([
+                'name' => $request->name,
+                'catogory_product_id' => $request->catogory_product_id,
+                'slug' => Str::slug($request->name),
+            ]);
+
+            DB::commit();
+            return true; // trả về true nếu tạo thành công
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return false; // lỗi gì cũng trả false
         }
     }
 
@@ -89,13 +110,6 @@ class CategoryProductService extends Controller
             $dataStore['description'] = $request->description;
             $dataStore['slug'] = Str::slug($request->name);
 
-            if ($request->hasFile('thumbnail_new')) {
-                $name_image = $this->imageTrait->convertToWebpAndStore($request->thumbnail, 'categoryProducts');
-                $dataStore['thumbnail'] = $name_image;
-                if ($request->hashFile('thumbnail_old')) {
-                    $result = $this->imageTrait->deleteImage($request->thumbnail_old, 'categoryProducts', null);
-                }
-            }
             $this->model
                 ->query()
                 ->where('id', $categoryProduct->id)
@@ -105,6 +119,41 @@ class CategoryProductService extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+        }
+    }
+
+
+    public function updateDetail($request, $categoryProductDetail)
+    {
+        DB::beginTransaction();
+        try {
+            CategoryProductDetail::where('id', $categoryProductDetail->id)
+                ->update([
+                    'name' => $request->name,
+                    'slug' => Str::slug($request->name),
+                ]);
+
+            DB::commit();
+            return true;
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
+
+
+    public function deleteDetail($request)
+    {
+        DB::beginTransaction();
+        try {
+            CategoryProductDetail::where('id', $request->id)
+                ->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
         }
     }
 

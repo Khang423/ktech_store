@@ -112,6 +112,7 @@
                     </div>
                 </div>
             </form>
+            {{-- bar --}}
             <div class="bottom-bar">
                 <div class="temporary-price fw-bold">
                     Tổng : <span class="total-price ps-1"></span>
@@ -120,6 +121,72 @@
                     <div class="content" id="btn-order-now">
                         <span id="count-buy"> Đặt ngay </span>
                     </div>
+                </div>
+            </div>
+            <div class="title mt-3 mb-2">
+                Phương thức thanh toán
+            </div>
+            <div class="method-payment selected" id="btn-select-method">
+                <div class="method-icon">
+                    <img src="{{ asset('asset/icon/cod.png') }}" alt="">
+                </div>
+                <div class="method-name">
+                    Thanh toán khi nhận hàng
+                </div>
+                <div class="other-option">
+                    <span>thay đổi</span><i class="uil uil-angle-right fs-2"></i>
+                </div>
+            </div>
+            <div class="overlay">
+                <div class="modal-method d-none">
+                    <div class="method-header">
+                        <div class="title">
+                            Chọn phương thức thanh toán
+                        </div>
+                        <div class="btn-method-close">
+                            <i class="uil uil-multiply"></i>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <div class="method-payment mb-1 cod" data-id="1" id="">
+                            <div class="method-icon">
+                                <img src="{{ asset('asset/icon/cod.png') }}" alt="">
+                            </div>
+                            <div class="method-name">
+                                Thanh toán khi nhận hàng
+                            </div>
+                        </div>
+                        <div class="method-payment mb-1 bank_transfer" data-id="2">
+                            <div class="method-icon">
+                                <img src="{{ asset('asset/icon/qr_code.png') }}" alt="">
+                            </div>
+                            <div class="method-name">
+                                Chuyển khoản ngân hàng qua mã QR
+                            </div>
+                        </div>
+                        <div class="method-payment momo mb-1" data-id="3">
+                            <div class="method-icon">
+                                <img src="{{ asset('asset/icon/momo.png') }}" alt="">
+                            </div>
+                            <div class="method-name">
+                                Ví MoMo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="title mt-3 mb-2">
+                Phí vận chuyển
+            </div>
+            <div class="payment-content mt-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('asset/icon/viettel_post.png') }}" alt="">
+                </div>
+                <div class="title">
+                    Viettel Post
+                </div>
+                <div class="fee-ship">
+                    {{ formatPriceToVND(30000) }}
                 </div>
             </div>
         </div>

@@ -15,9 +15,8 @@ class SoreRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'description' => 'required|max:255',
-            'thumbnail' => 'required',
-            'product_type' => 'required',
+            'description' => 'nullable|max:255',
+            'catogory_product_id' => 'nullable|max:255',
         ];
     }
     public function attributes(): array
@@ -25,8 +24,7 @@ class SoreRequest extends FormRequest
         return [
             'name' => 'Tên danh mục',
             'description' => 'Mô tả',
-            'thumbnail' => 'Ảnh bìa',
-            'product_type' => 'Loại sản phẩm',
+            'catogory_product_id' => 'Danh mục sản phẩm',
         ];
     }
 

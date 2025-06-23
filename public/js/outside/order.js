@@ -1,44 +1,71 @@
 $(document).ready(function () {
+    // Lấy dữ liệu sản phẩm từ cart
     const storedProducts =
         JSON.parse(sessionStorage.getItem("selectedProducts")) || [];
 
+    // Hiển thị sản phẩm đã chọn ra giao diện
     renderSelectedProducts(storedProducts);
+
+    // Cập nhật chiều rộng của thanh bottom-bar
     updateBottomBarWidth();
 
-    // Update bottom bar width when window resizes
-    $(window).on("resize", updateBottomBarWidth);
+    // Khi thay đổi kích thước cửa sổ, cập nhật lại kích thước thanh bottom-bar và modal phương thức thanh toán
+    $(window).on("resize", () => {
+        updateBottomBarWidth();
+        updateModalOptionMethodPaymentWidth();
+    });
 
-    // Initialize Select2 plugin
+    // Khởi tạo toggle cho modal chọn phương thức thanh toán
+    toggleModalMethod();
+
+    // Khởi tạo plugin Select2 cho các select-box
     $(".select2").select2();
 
-    // Load districts when city changes
+    // Khi thay đổi tỉnh/thành phố, load danh sách quận/huyện
     $(".city").change(function () {
         const cityId = $(this).val();
         if (cityId) loadDistrictsByCity(cityId);
     });
 
-    // Load wards when district changes
+    // Khi thay đổi quận/huyện, load danh sách phường/xã
     $(".district").change(function () {
         const districtId = $(this).val();
         if (districtId) loadWardsByDistrict(districtId);
     });
 
-    // Handle order submission
+    // Sự kiện click nút "Đặt hàng ngay"
     $("#btn-order-now").click(function () {
         const form = $("#form-store")[0];
         const formData = new FormData(form);
 
         const storedProducts =
             JSON.parse(sessionStorage.getItem("selectedProducts")) || [];
+
         formData.append("productSelected", JSON.stringify(storedProducts));
         formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
 
         submitOrder(formData);
     });
-    $('.footer-page').addClass('d-none');
+
+    // Ẩn footer trong giao diện mobile nếu cần
+    $(".footer-page").addClass("d-none");
+
+    // Khởi tạo xử lý chọn phương thức thanh toán
+    selectMethodPayment();
 });
 
-// Render selected products from sessionStorage to the DOM
+// Mở hoặc đóng modal chọn phương thức thanh toán
+const toggleModalMethod = () => {
+    $("#btn-select-method").on("click", () => {
+        $(".modal-method").removeClass("d-none");
+    });
+
+    $(".btn-method-close").on("click", () => {
+        $(".modal-method").addClass("d-none");
+    });
+};
+
+// Hiển thị danh sách sản phẩm đã chọn từ sessionStorage ra HTML
 function renderSelectedProducts(products) {
     let html = "";
     let totalPrice = 0;
@@ -67,7 +94,7 @@ function renderSelectedProducts(products) {
         .css("color", "#25449a");
 }
 
-// Format number to Vietnamese currency
+// Format số tiền thành đơn vị VNĐ
 function formatPriceToVND(price) {
     return price.toLocaleString("vi-VN", {
         style: "currency",
@@ -75,7 +102,7 @@ function formatPriceToVND(price) {
     });
 }
 
-// Dynamically load districts by selected city
+// Load danh sách quận/huyện theo tỉnh/thành
 function loadDistrictsByCity(cityId) {
     const $district = $(".district").empty();
     const $ward = $(".ward").empty();
@@ -102,7 +129,7 @@ function loadDistrictsByCity(cityId) {
     });
 }
 
-// Dynamically load wards by selected district
+// Load danh sách xã/phường theo quận/huyện
 function loadWardsByDistrict(districtId) {
     const $ward = $(".ward").empty();
     addDefaultOption($ward, "--- Xã/Phường ---");
@@ -126,7 +153,7 @@ function loadWardsByDistrict(districtId) {
     });
 }
 
-// Add default option to a select box
+// Thêm tuỳ chọn mặc định cho select-box
 function addDefaultOption($select, text) {
     $select.append(
         $("<option>", {
@@ -137,12 +164,19 @@ function addDefaultOption($select, text) {
     );
 }
 
-// Adjust the width of bottom bar to match its parent
+// Cập nhật chiều rộng thanh bottom-bar để phù hợp giao diện responsive
 function updateBottomBarWidth() {
     const parentWidth = $(".main").outerWidth();
     $(".bottom-bar").css("width", `${parentWidth}px`);
 }
 
+// Cập nhật chiều rộng modal chọn phương thức thanh toán
+const updateModalOptionMethodPaymentWidth = () => {
+    const parentWidth = $(".main").outerWidth();
+    $(".modal-method").css("width", `${parentWidth}px`);
+};
+
+// Gửi đơn hàng về server thông qua Ajax
 function submitOrder(formData) {
     $.ajax({
         url: RouteOrderStore,
@@ -156,7 +190,7 @@ function submitOrder(formData) {
             window.location.href = "/cart";
         },
         error: function (data) {
-            $(".text-danger").text(""); // Clear all old error texts
+            $(".text-danger").text("");
 
             const errors = data.responseJSON?.errors || {};
             Object.entries(errors).forEach(([field, messages]) => {
@@ -165,3 +199,42 @@ function submitOrder(formData) {
         },
     });
 }
+
+// Xử lý khi người dùng chọn phương thức thanh toán (COD, chuyển khoản, momo)
+const selectMethodPayment = () => {
+    $(".method-payment").on("click", (e) => {
+        const element = $(e.currentTarget);
+
+        if (
+            element.hasClass("cod") ||
+            element.hasClass("bank_transfer") ||
+            element.hasClass("momo")
+        ) {
+            const method_icon = element.find(".method-icon img").attr("src");
+            const method_name = element.find(".method-name").text().trim();
+
+            const selected = $(".method-payment.selected");
+            selected.empty();
+
+            if (selected.length) {
+                const html = `
+                    <div class="method-icon">
+                        <img src="${method_icon}" alt="">
+                    </div>
+                    <div class="method-name">
+                        ${method_name}
+                    </div>
+                    <div class="other-option">
+                        <span>thay đổi</span><i class="uil uil-angle-right fs-2"></i>
+                    </div>
+                `;
+                selected.html(html);
+                $(".modal-method").addClass("d-none");
+            }
+            toggleModalMethod();
+        }
+    });
+};
+
+// Hàm tạm thời chưa sử dụng – có thể dành cho logic cập nhật sau này
+const updateSelectedMethod = () => {};

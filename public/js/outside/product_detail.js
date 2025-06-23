@@ -28,7 +28,7 @@ $(document).ready(function () {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function () {
-                toast("Thêm vào giỏ hàng thành công", "success");
+                toast("Đã thêm vào giỏ hàng", "success");
             },
             error: function (xhr) {
                 console.error("Failed to add to cart", xhr.responseJSON);

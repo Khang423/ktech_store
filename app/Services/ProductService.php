@@ -67,12 +67,6 @@ class ProductService extends Controller
     {
         DB::beginTransaction();
         try {
-            $category = strtoupper($request->category_product_id);
-            $gender = strtoupper($request->brand_id);
-            $date = now()->format('Ymd');
-
-            $sku = "{$category}-{$gender}-{$date}";
-
             // insert product
             $dataProduct = [];
             $dataProduct['category_product_id'] = $request->category_product_id;
@@ -84,7 +78,6 @@ class ProductService extends Controller
             // insert product version
             $dataProductVersion = [];
             $dataProductVersion['product_id'] = $product_id;
-            $dataProductVersion['sku'] = $sku;
             $dataProductVersion['name'] = $request->name;
             $dataProductVersion['slug'] = Str::slug($request->name);
             $dataProductVersion['price'] = $request->price;

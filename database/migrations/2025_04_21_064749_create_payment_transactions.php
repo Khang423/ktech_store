@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->smallInteger('payment_method');
             $table->smallInteger('transaction_status');
-            $table->string('gateway_transaction_id');
-            $table->string('gateway_response_text');
+            $table->string('transaction_id');
+            $table->string('response_text');
             $table->timestamps();
         });
     }

@@ -1103,7 +1103,180 @@ body {
     width: 50%;
     color: #fff;
 }
+/* css select method payment */
+.section-order .method-payment {
+    height: 80px;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+}
+.section-order .method-payment .method-icon {
+    height: 100%;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.section-order .method-payment .method-icon img {
+    height: 50px;
+    width: 100%;
+    background-color: transparent;
+}
+.section-order .method-payment .method-name {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #000;
+    font-weight: 600;
+    font-size: 14px;
+}
+.section-order .method-payment .other-option {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #25449a;
+    text-decoration: underline;
+}
+/* modal method payment */
+.section-order .modal-method {
+    height: auto;
+    width: 602px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 20px;
+    position: fixed; /* cố định vị trí theo màn hình */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* canh giữa theo cả chiều ngang và dọc */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.section-order .modal-method .method-body .method-payment:hover {
+    border: 1px solid #25449a;
+}
+.section-order .modal-method .method-header {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 0px 20px;
+    background-color: #e4e4e494;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.section-order .modal-method .method-header .title {
+    width: 80%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-transform: none;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 0px;
+}
+.section-order .modal-method .method-header .btn-method-close {
+    width: 20%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+.section-order .modal-method .method-header .btn-method-close:hover {
+    color: #25449a;
+}
+.section-order .modal-method .method-body {
+    height: auto;
+    width: 100%;
+    margin-top: 80px;
+}
+.section-order .modal-method .method-footer {
+    height: 80px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 0px 20px;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.24);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.section-order .modal-method .method-footer .btn-confirm {
+    height: 50%;
+    width: 100%;
+    background-color: #2a52be;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* order content method payment  */
+.section-order .payment-content {
+    height: 80px;
+    width: 100%;
+    border: 1px solid lightgray;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    padding-left: 5px;
+    border-radius: 3px;
+}
+.section-order .payment-content .thumbnail{
+    height:100%;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-order .payment-content .thumbnail img{
+    height: 60px;
+    width: 60px;
+    border-radius: 5px;
+}
+
+.section-order .payment-content .title{
+    width: 80%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-weight: 600;
+    font-size: 15px;
+    color: #000;
+}
+
+.section-order .payment-content .fee-ship{
+    width: 20%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-weight: 600;
+    font-size: 15px;
+    color: #000;
+}
 /* profile css */
 .section-profile {
     height: auto;

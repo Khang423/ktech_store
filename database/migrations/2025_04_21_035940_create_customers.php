@@ -19,15 +19,26 @@ return new class extends Migration
             $table->string('password', 60);
             $table->string('address')->nullable();
             $table->string('birthday')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->integer('district_id')->nullable();
+            $table->integer('ward_id')->nullable();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
             $table->timestamps();
         });
     }
- 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropForeign(['city_id']);
+            $table->dropForeign(['district_id']);
+            $table->dropForeign(['ward_id']);
+        });
         Schema::dropIfExists('customers');
     }
 };

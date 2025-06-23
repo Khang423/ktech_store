@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('product_versions', function (Blueprint $table) {
-            $table->string('sku')->after('id');
+        Schema::table('category_products', function (Blueprint $table) {
+            $table->dropColumn(['product_type', 'thumbnail']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('version_products', function (Blueprint $table) {
-            $table->dropColumn('sku');
+        Schema::table('category_products', function (Blueprint $table) {
+            $table->smallInteger('product_type')->default(0);
+            $table->text('thumbnail')->nullable();
         });
     }
 };

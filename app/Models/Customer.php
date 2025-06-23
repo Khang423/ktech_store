@@ -6,12 +6,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Customer extends Authenticatable
 {
-      protected $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'tel',
         'password',
-        'birthday'
+        'birthday',
+        'city_id',
+        'district_id',
+        'address',
+        'ward_id',
     ];
 
     public static function getInfo()
@@ -23,6 +27,10 @@ class Customer extends Authenticatable
             'tel',
             'password',
             'birthday',
+            'city_id',
+            'district_id',
+            'ward_id',
+            'address',
             'created_at',
             'updated_at',
         ];

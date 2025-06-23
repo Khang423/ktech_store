@@ -2,7 +2,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Danh mục
+            Danh mục: {{ $categoryProduct->name }}
         </span>
         <i class="mdi mdi-chevron-right"></i>
         Danh sách
@@ -15,7 +15,8 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.categoryProducts.create') }}">
+                            <a class="btn btn-primary mb-2"
+                                href="{{ route('admin.categoryProducts.details.create', $categoryProduct->slug) }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Thêm
                             </a>
@@ -80,9 +81,6 @@
                     className: 'text-center',
                     render: (data) => `
                     <span class='table-action d-flex justify-content-center gap-2'>
-                        <a href="${data.preview}" class="action-view" data-id="${data.id}">
-                                <i class="edit text-info uil-eye action-icon"></i>
-                            </a>
                         <a href="${data.edit}">
                             <i class="uil-edit text-primary action-icon"></i>
                         </a>
@@ -98,10 +96,11 @@
             ];
 
             let table = $('#datatable').DataTable(
-                customerDatatable("{{ route('admin.categoryProducts.getList') }}", columns)
+                customerDatatable("{{ route('admin.categoryProducts.getListDetail', $categoryProduct->slug) }}",
+                    columns)
             );
 
-            $routeDelete = '{{ route('admin.categoryProducts.delete') }}';
+            $routeDelete = '{{ route('admin.categoryProducts.details.delete', $categoryProduct->slug) }}';
             destroy($routeDelete, table);
         });
     </script>

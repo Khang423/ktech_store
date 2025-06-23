@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Member extends Authenticatable
 {
     protected $fillable = [
-        'id',
         'name',
         'slug',
         'email',
@@ -18,8 +17,9 @@ class Member extends Authenticatable
         'phone',
         'avatar',
         'password',
-        'created_at',
-        'updated_at',
+        'city_id',
+        'district_id',
+        'ward_id',
     ];
 
     public function getInfo()
@@ -34,6 +34,9 @@ class Member extends Authenticatable
             'phone',
             'avatar',
             'password',
+            'city_id',
+            'district_id',
+            'ward_id',
             'created_at',
             'updated_at',
         ];
@@ -47,5 +50,4 @@ class Member extends Authenticatable
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
-
 }
