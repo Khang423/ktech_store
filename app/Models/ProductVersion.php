@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVersion extends Model
 {
     protected $fillable = [
-        'sku',
         'product_id',
         'name',
         'slug',
@@ -23,7 +22,6 @@ class ProductVersion extends Model
     {
         return [
             'id',
-            'sku',
             'product_id',
             'name',
             'slug',

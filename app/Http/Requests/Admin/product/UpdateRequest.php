@@ -23,6 +23,7 @@ class UpdateRequest extends FormRequest
             'final_price' => 'required',
             'import_price' => 'string|required',
             'category_product_id' => 'string|required',
+            'category_product_detail_id' => 'string|required',
             'brand_id' => 'string|required',
             'audio_technology_laptop' => 'string|nullable',
             'audio_technology_phone' => 'string|nullable',

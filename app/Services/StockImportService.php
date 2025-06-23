@@ -48,6 +48,7 @@ class StockImportService extends Controller
 
     public function store($request)
     {
+
         $listProducts = json_decode($request->input('products'), true);
         $member_id = Auth::guard('members')->id();
         DB::beginTransaction();
@@ -84,7 +85,6 @@ class StockImportService extends Controller
                 $inventory->stock_quantity = ($inventory->stock_quantity ?? 0) + $quantity;
                 $inventory->save();
             }
-
             $stock_import->update([
                 'total_amount' => $total_amount,
             ]);

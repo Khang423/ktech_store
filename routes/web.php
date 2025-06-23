@@ -117,6 +117,7 @@ Route::group([
         Route::put('/edit/{productVersion:slug}', [ProductController::class, 'update'])->name('update');
         Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
         Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
+        Route::post('/getDataCategoryProductDetail', [ProductController::class, 'getDataCategoryProductDetail'])->name('getDataCategoryProductDetail');
     });
     // Role route
     Route::group([

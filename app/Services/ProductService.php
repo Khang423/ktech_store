@@ -69,7 +69,7 @@ class ProductService extends Controller
         try {
             // insert product
             $dataProduct = [];
-            $dataProduct['category_product_id'] = $request->category_product_id;
+            $dataProduct['category_product_details_id'] = $request->category_product_detail_id;
             $dataProduct['brand_id'] = $request->brand_id;
             $dataProduct['status'] = StatusEnum::ON;
             $product = Product::create($dataProduct);
@@ -204,7 +204,7 @@ class ProductService extends Controller
         try {
             // insert product
             $dataProduct = [];
-            $dataProduct['category_product_id'] = $request->category_product_id;
+            $dataProduct['category_product_details_id'] = $request->category_product_detail_id;
             $dataProduct['brand_id'] = $request->brand_id;
             $dataProduct['status'] = StatusEnum::ON;
             Product::query()

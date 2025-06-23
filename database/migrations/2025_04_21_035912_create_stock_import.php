@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('supplier_id')->constrained('suppliers')->cascadeOnDelete();
             $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
             $table->string('note')->nullable();
-            $table->double('total_amount');
+            $table->double('total_amount')->nullable();
             $table->smallInteger('status')->default(0);
             $table->timestamps();
         });

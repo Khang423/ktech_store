@@ -69,6 +69,24 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-2">
+                                            <label for="category_product_detail_id" class="form-label">Series Sản
+                                                phẩm</label>
+                                            <select class="form-select" id="category_product_detail_id"
+                                                name="category_product_detail_id" style="height: 48px">
+                                                @foreach ($category_product_detail as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        @if ($product->products->category_product_detail == $item->id) selected @endif>
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <div class="text-danger mt-1 error-category_product_id"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-2">
                                             <label for="import_price" class="form-label">Giá nhập</label>
                                             <input type="text" class="form-control" id="import_price"
                                                 placeholder="Giá nhập" name="import_price"
@@ -82,7 +100,8 @@
                                         <div class="mb-2">
                                             <label for="profit_rate" class="form-label">Lợi nhuận (%)</label>
                                             <input type="text" class="form-control" id="profit_rate"
-                                                placeholder="Lợi nhuận (%)" name="profit_rate" value="{{ $productVersion->profit_rate }}">
+                                                placeholder="Lợi nhuận (%)" name="profit_rate"
+                                                value="{{ $productVersion->profit_rate }}">
                                             <div class="text-danger mt-1 error-profit_rate"></div>
                                         </div>
                                     </div>
@@ -945,6 +964,35 @@
             $routeIndex = '{{ route('admin.products.index') }}';
             $routedestroy = '{{ route('admin.products.destroy-image') }}';
 
+            // load data category product detail
+            $('#category_product_id').change((e) => {
+                let categoryid = $(e.target).val();
+
+                $.ajax({
+                    url: `{{ route('admin.products.getDataCategoryProductDetail') }}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        category_product_id: categoryid,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        const data = response.data;
+                        const category_product_detail = $('#category_product_detail_id');
+                        category_product_detail.empty();
+                        data.forEach((item) => {
+                            category_product_detail.append(
+                                `<option value="${item.id}">${item.name}</option>`
+                            );
+                        });
+                        category_product_detail.trigger('change');
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    },
+                });
+
+            });
             update($routeUpdate, $routeIndex);
             deleteAlertValidation($inputs);
         });

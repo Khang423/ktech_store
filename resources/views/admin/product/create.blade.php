@@ -32,7 +32,6 @@
                                                 placeholder="Tên sản phẩm" name="name">
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
-
                                         <div class="mb-2">
                                             <label for="brand_id" class="form-label">Thương hiệu </label>
                                             <select class="form-select" id="brand_id" name="brand_id" style="height: 48px">
@@ -45,12 +44,20 @@
                                             </select>
                                             <div class="text-danger mt-1 error-brand_id"></div>
                                         </div>
+                                        <div class="mb-2">
+                                            <label for="category_product_detail_id" class="form-label">Series Sản
+                                                phẩm</label>
+                                            <select class="form-select" id="category_product_detail_id"
+                                                name="category_product_detail_id" style="height: 48px">
+                                            </select>
+                                            <div class="text-danger mt-1 error-category_product_id"></div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-2">
                                             <label for="price" class="form-label">Đơn Giá</label>
-                                            <input type="text" class="form-control" id="price"
-                                                placeholder="Đơn giá" name="price">
+                                            <input type="text" class="form-control" id="price" placeholder="Đơn giá"
+                                                name="price">
                                             <div class="text-danger mt-1 error-price"></div>
                                         </div>
                                         <div class="mb-2">
@@ -66,9 +73,6 @@
                                             </select>
                                             <div class="text-danger mt-1 error-category_product_id"></div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
-
                                     </div>
                                 </div>
                             </div>
@@ -885,6 +889,35 @@
                     $('.laptop').addClass('d-none');
                     $('.phone').addClass('d-none');
                 }
+            });
+            // load data category product detail
+            $('#category_product_id').change((e) => {
+                let categoryid = $(e.target).val();
+
+                $.ajax({
+                    url: `{{ route('admin.products.getDataCategoryProductDetail') }}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        category_product_id: categoryid,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        const data = response.data;
+                        const category_product_detail = $('#category_product_detail_id');
+                        category_product_detail.empty();
+                        data.forEach((item) => {
+                            category_product_detail.append(
+                                `<option value="${item.id}">${item.name}</option>`
+                            );
+                        });
+                        category_product_detail.trigger('change');
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    },
+                });
+
             });
             // function handle post data
             store($routeStore, $routeIndex);

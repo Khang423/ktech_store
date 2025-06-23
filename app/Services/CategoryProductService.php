@@ -70,16 +70,17 @@ class CategoryProductService extends Controller
     {
         DB::beginTransaction();
         try {
-            $dataStore = [];
-            $dataStore['name'] = $request->name;
-            $dataStore['description'] = $request->description;
-            $dataStore['slug'] = Str::slug($request->name);
-
+            $this->model::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'slug' => Str::slug($request->name),
+            ]);
             DB::commit();
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            return false;
         }
     }
 
