@@ -9,13 +9,12 @@
             <a href="{{ route('admin.products.index') }}">Danh sách</a>
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Cập nhật
+        Thêm
     </div>
 @endsection
 @section('content')
     <form method="post" enctype="multipart/form-data" autocomplete="off" id="form-update">
         @csrf
-        @method('PUT')
         <div class="row">
             <div class="col-8">
                 {{-- Information --}}
@@ -90,7 +89,7 @@
                                             <label for="import_price" class="form-label">Giá nhập</label>
                                             <input type="text" class="form-control" id="import_price"
                                                 placeholder="Giá nhập" name="import_price"
-                                                value="{{ formatPriceToVND($stock_import_details->price ?? '0') }}">
+                                                value="{{ formatPriceToVND($stock_import_details->price) }}">
                                             <div class="text-danger mt-1 error-import_price"></div>
                                         </div>
                                     </div>
@@ -848,42 +847,20 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        @if ($productVersion->thumbnail !== null)
-                            <label class="text-dark header-title font-16 fw-bold">
-                                Ảnh trưng bày
-                            </label>
-                            <div class="d-flex justify-content-center mb-2 mt-2">
-                                <div id="preview-thumbnail">
-                                    <img src="{{ asset('asset/admin/products') . '/' . $productVersion->id . '/' . $productVersion->thumbnail }}"
-                                        width="250" height="auto" class="img-fluid img-thumbnail mt-2 mb-2">
-                                </div>
-                            </div>
-                            <input name="thumbnail_old" type="hidden"style="display: none"
-                                value="{{ $productVersion->thumbnail }}" />
-                            <input name="thumbnail_new" type="file" id="img_thumbnail" style="display: none" />
-                            <div class="thumbnail text-center dropzone">
-                                <i class="h1 text-muted uil-upload-alt"></i>
-                                <h3>Chọn ảnh </h3>
-                            </div>
-                            <div class="error-thumbnail text-center text-danger"></div>
-                        @else
-                            <label class="text-dark header-title font-16 fw-bold">
-                                Ảnh trưng bày
-                            </label>
-                            <div class="d-flex justify-content-center mb-2 mt-2">
-                                <div id="preview-thumbnail">
-                                </div>
-                            </div>
-                            <input name="thumbnail" type="file" id="img_thumbnail" style="display: none" />
-                            <div class="thumbnail text-center dropzone">
-                                <i class="h1 text-muted uil-upload-alt"></i>
-                                <h3>Chọn ảnh </h3>
-                            </div>
-                            <div class="error-thumbnail text-center text-danger"></div>
-                        @endif
+                        <label class="text-dark header-title font-16 fw-bold">
+                            Ảnh trưng bày
+                        </label>
+                        <div class="d-flex justify-content-center mb-2 mt-2">
+                            <div id="preview-thumbnail"></div>
+                        </div>
+                        <input name="thumbnail" type="file" id="img_thumbnail" style="display: none" />
+                        <div class="thumbnail text-center dropzone">
+                            <i class="h1 text-muted uil-upload-alt"></i>
+                            <h3>Chọn ảnh </h3>
+                        </div>
+                        <div class="error-thumbnail text-center text-danger"></div>
                     </div>
                 </div>
-                {{-- //  image detail --}}
                 <div class="card">
                     <div class="card-body">
                         <lable class="text-dark header-title font-16 fw-bold">
@@ -893,43 +870,13 @@
                             <div id="preview-image"></div>
                         </div>
                         <div class="mt-2">
-                            <input name="image_add[]" type="file" id="imgInput" style="display: none" multiple>
+                            <input name="image[]" type="file" id="imgInput" style="display: none" multiple>
                             <div class="dz-message-image text-center dropzone">
                                 <i class="h1 text-muted uil-upload-alt"></i>
                                 <h3>Chọn nhiều ảnh</h3>
                             </div>
                         </div>
                         <div class="error-new-image text-center text-danger"></div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <lable class="text-dark header-title font-16 fw-bold">
-                                Ảnh chi tiết cũ
-                            </lable>
-                            <div class=" mb-2 mt-2">
-                                @foreach ($product_image as $index => $image)
-                                    <div class="mt-2 text-center image-container">
-                                        <i class="destroy-image btn btn-link uil-times-square font-24 text-danger"
-                                            data-id="{{ $image->id }}"></i>
-
-                                        <img src="{{ asset('asset/admin/products') . '/' . $image->product_id . '/image/' . $image->image }}"
-                                            class="old-img img-fluid img-thumbnail me-3" width="170" height="auto">
-
-                                        <input type="file" name="image_update[{{ $index }}]" class="mt-2">
-
-                                        <input type="hidden" name="product_id[{{ $index }}]"
-                                            value="{{ $image->product_id }}" readonly>
-                                        <input type="hidden" name="product_image_old_id[{{ $index }}]"
-                                            value="{{ $image->id }}" readonly>
-                                        <input type="hidden" name="image_old[{{ $index }}]"
-                                            value="{{ $image->image }}" readonly>
-                                    </div>
-                                    <div class="error-img text-center text-danger mt-2"
-                                        id="error-img-{{ $image->id }}"></div>
-                                @endforeach
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -939,9 +886,9 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="tab-pane show active">
-                                    <button class="btn btn-primary" id="btn-update" onclick="tinymce.triggerSave()">
+                                    <button class="btn btn-primary" id="btn-store" onclick="tinymce.triggerSave()">
                                         <i class="mdi mdi-plus-circle me-2"></i>
-                                        <span>Cập nhật</span>
+                                        <span>Thêm </span>
                                     </button>
                                 </div>
                             </div>
@@ -956,16 +903,19 @@
 @push('js')
     <script src="{{ asset('js/admin/product.js') }}"></script>
     <script>
-        // init
-        const $form = $('#form-update');
-        const $inputs = $form.find('input');
-        $routeUpdate = '{{ route('admin.products.update', $productVersion->slug) }}';
-        $routeIndex = '{{ route('admin.products.index') }}';
-        const routedestroy = "{{ route('admin.products.destroy-image') }}";
-        const routeGetDataCategoryDetail = "{{ route('admin.products.getDataCategoryProductDetail') }}";
-        // load data category product detail
+        $(document).ready(function() {
+            // khai báo biến
+            const $form = $('#form-update');
+            const $inputs = $form.find('input');
+            $routeStore = '{{ route('admin.products.productsVersion.store', $productVersion->slug) }}';
+            $routeIndex = '{{ route('admin.products.index') }}';
+            // xoá ảnh trong list ảnh chi tiết
+            const routedestroy = "{{ route('admin.products.destroy-image') }}";
+            const routeGetDataCategoryDetail = "{{ route('admin.products.getDataCategoryProductDetail') }}";
 
-        update($routeUpdate, $routeIndex);
-        deleteAlertValidation($inputs);
+
+            store($routeStore, $routeIndex);
+            deleteAlertValidation($inputs);
+        });
     </script>
 @endpush

@@ -1,3 +1,101 @@
+// ==== Xoá ảnh cũ ====
+$(".destroy-image").on("click", function () {
+    const button = $(this).parent();
+    const errorImage = $(this).data("id");
+
+    const image = $(this).siblings('input[name^="image_old["]').val();
+    const productId = $(this).siblings('input[name^="product_id["]').val();
+    const imageId = $(this).siblings('input[name^="product_image_id["]').val();
+
+    $.ajax({
+        url: routedestroy,
+        type: "POST",
+        dataType: "json",
+        data: {
+            id: imageId,
+            product_id: productId,
+            image: image,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function () {
+            button.remove();
+        },
+        error: function (data) {
+            $.each(data.responseJSON.errors, (key, value) => {
+                $(`#error-img${errorImage}`).text(value);
+            });
+        },
+    });
+});
+// ==== Trigger input khi click ảnh ====
+$(".thumbnail").on("click", () => $("#img_thumbnail").click());
+$(".dz-message-image").on("click", () => $("#imgInput").click());
+
+// ==== Khi chọn ảnh thumbnail ====
+$("#img_thumbnail").on("change", () =>
+    handleImagePreview("#img_thumbnail", "#preview-thumbnail")
+);
+
+// ==== Khi chọn ảnh thường ====
+$("#imgInput").on("change", () =>
+    handleImagePreview("#imgInput", "#preview-image", "me-3")
+);
+
+$("#category_product_id").change((e) => {
+    let categoryid = $(e.target).val();
+
+    $.ajax({
+        url: routeGetDataCategoryDetail,
+        type: "POST",
+        dataType: "json",
+        data: {
+            category_product_id: categoryid,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            const data = response.data;
+            const category_product_detail = $("#category_product_detail_id");
+            category_product_detail.empty();
+            data.forEach((item) => {
+                category_product_detail.append(
+                    `<option value="${item.id}">${item.name}</option>`
+                );
+            });
+            category_product_detail.trigger("change");
+        },
+        error: function (data) {
+            console.log(data);
+        },
+    });
+});
+
+
+const getNumber = (selector) =>
+    parseFloat($(selector).val().replace(/\D/g, "") || 0);
+const formatVND = (number) => number.toLocaleString("vi-VN") + " đ";
+
+
+$("#profit_rate").on("input", (e) => {
+    let profitRate = parseFloat($(e.target).val().replace(/\D/g, "") || 0);
+    if (profitRate < 0) profitRate = 0;
+
+    const importPrice = getNumber("#import_price");
+    if (!importPrice) return;
+
+    const finalPrice = importPrice * (1 + profitRate / 100);
+    $("#final_price").val(formatVND(finalPrice));
+});
+
+// ==== Tính lợi nhuận từ giá bán ====
+$("#final_price").on("input", () => {
+    const finalPrice = getNumber("#final_price");
+    const importPrice = getNumber("#import_price");
+    if (!importPrice) return;
+
+    const profitRate = ((finalPrice - importPrice) / importPrice) * 100;
+    $("#profit_rate").val(Math.round(profitRate));
+});
+
 const handleImagePreview = (inputSelector, previewSelector, imgClass = "") => {
     const preview = $(previewSelector);
     preview.empty();
@@ -19,74 +117,3 @@ const handleImagePreview = (inputSelector, previewSelector, imgClass = "") => {
         preview.append(wrapper);
     });
 };
-
-// ==== Trigger input khi click ảnh ====
-$(".thumbnail").on("click", () => $("#img_thumbnail").click());
-$(".dz-message-image").on("click", () => $("#imgInput").click());
-
-// ==== Khi chọn ảnh thumbnail ====
-$("#img_thumbnail").on("change", () =>
-    handleImagePreview("#img_thumbnail", "#preview-thumbnail")
-);
-
-// ==== Khi chọn ảnh thường ====
-$("#imgInput").on("change", () =>
-    handleImagePreview("#imgInput", "#preview-image", "me-3")
-);
-
-// ==== Xoá ảnh cũ ====
-$(".destroy-image").on("click", function () {
-    const button = $(this).parent();
-    const errorImage = $(this).data("id");
-
-    const image = $(this).siblings('input[name^="image_old["]').val();
-    const productId = $(this).siblings('input[name^="product_id["]').val();
-    const imageId = $(this).siblings('input[name^="product_image_id["]').val();
-
-    $.ajax({
-        url: routedestroy,
-        type: "POST",
-        dataType: "json",
-        data: {
-            id: imageId,
-            product_id: productId,
-            image: image,
-            _token: "{{ csrf_token() }}",
-        },
-        success: function () {
-            button.remove();
-        },
-        error: function (data) {
-            $.each(data.responseJSON.errors, (key, value) => {
-                $(`#error-img${errorImage}`).text(value);
-            });
-        },
-    });
-});
-
-// ==== Tiện ích xử lý số ====
-const getNumber = (selector) =>
-    parseFloat($(selector).val().replace(/\D/g, "") || 0);
-const formatVND = (number) => number.toLocaleString("vi-VN") + " đ";
-
-// ==== Tính giá bán từ lợi nhuận ====
-$("#profit_rate").on("input", (e) => {
-    let profitRate = parseFloat($(e.target).val().replace(/\D/g, "") || 0);
-    if (profitRate < 0) profitRate = 0;
-
-    const importPrice = getNumber("#import_price");
-    if (!importPrice) return;
-
-    const finalPrice = importPrice * (1 + profitRate / 100);
-    $("#final_price").val(formatVND(finalPrice));
-});
-
-// ==== Tính lợi nhuận từ giá bán ====
-$("#final_price").on("input", () => {
-    const finalPrice = getNumber("#final_price");
-    const importPrice = getNumber("#import_price");
-    if (!importPrice) return;
-
-    const profitRate = ((finalPrice - importPrice) / importPrice) * 100;
-    $("#profit_rate").val(Math.round(profitRate));
-});

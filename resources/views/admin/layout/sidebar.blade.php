@@ -36,29 +36,23 @@
                     </span>
                 </a>
             </li>
+
             <li class="side-nav-item">
-                <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarDevice" aria-expanded="false"
-                    aria-controls="sidebarDevice">
+                <a href="{{ route('admin.products.index') }}" class="side-nav-link">
                     <i class="uil-desktop"></i>
                     <span>
                         Sản phẩm
                     </span>
-                    <span class="menu-arrow"></span>
                 </a>
-                <div class="collapse" id="sidebarDevice" style="">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="{{ route('admin.products.index') }}">
-                                Danh sách
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.categoryProducts.index') }}">
-                                Danh mục
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="{{ route('admin.categoryProducts.index') }}" class="side-nav-link">
+                    <i class="uil uil-hdd"></i>
+                    <span>
+                        Danh mục sản phẩm
+                    </span>
+                </a>
             </li>
 
             <li class="side-nav-item">

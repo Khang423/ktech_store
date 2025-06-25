@@ -15,7 +15,7 @@ class Product extends Model
         'updated_at',
     ];
 
-    public function getInfo()
+    public static function getInfo()
     {
         return [
             'id',
@@ -37,5 +37,9 @@ class Product extends Model
 
     public function productVersions(){
         return $this->hasMany(ProductVersion::class,'id','product_id');
+    }
+
+    public function firstProductVersion() {
+        return $this->hasOne(ProductVersion::class, 'product_id')->orderBy('created_at');
     }
 }

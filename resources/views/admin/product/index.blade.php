@@ -33,9 +33,9 @@
                                     <th class="text-center">#</th>
                                     <th class="text-center">Sản phẩm</th>
                                     <th class="text-center">Ảnh </th>
-                                    <th class="text-center">Đơn giá</th>
+                                    {{-- <th class="text-center">Đơn giá</th> --}}
                                     <th class="text-center">Trạng thái</th>
-                                    <th class="text-center">Ngày tạo</th>
+                                    {{-- <th class="text-center">Ngày tạo</th> --}}
                                     <th class="text-center" style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
@@ -62,8 +62,8 @@
                     className: 'text-center',
                     render: function(data) {
                         return `
-                <span class='text-dark badge bg-light font-15'>${data}</span>
-            `;
+                        <span class='text-dark badge bg-light font-15'>${data}</span>
+                    `;
                     }
                 },
                 {
@@ -74,40 +74,43 @@
                     className: 'text-center',
                     render: function(data) {
                         return `
-                <img src="/asset/admin/products/${data.id}/${data.thumbnail}" height="100" width="100" class="me-3">
-            `;
+                        <img src="/asset/admin/products/${data.id}/${data.thumbnail}" height="100" width="100" class="me-3">
+                    `;
                     }
                 },
-                {
-                    data: 'price',
-                    name: 'price',
-                    orderable: false,
-                    searchable: false,
-                    className: 'text-center',
-                    render: function(data) {
-                        return `<span class='text-dark'>${data}</span>`;
-                    }
-                },
+                // {
+                //     data: 'price',
+                //     name: 'price',
+                //     orderable: false,
+                //     searchable: false,
+                //     className: 'text-center',
+                //     render: function(data) {
+                //         return `<span class='text-dark'>${data}</span>`;
+                //     }
+                // },
                 {
                     data: 'status',
                     name: 'status',
-                    orderable: false,
-                    searchable: false,
                     className: 'text-center',
-                    render: function(data) {
-                        return `<span class='text-dark'>${data}</span>`;
+                    render: (data, type, row) => {
+                        const isChecked = data == 0 ? 'checked' : 'check';
+                        const switchId = `switch-${row.id}`;
+                        return `
+                        <input type="checkbox" id="${switchId}" class="checkBoxStatus" data-id="${row.id}" ${isChecked} data-switch="success"/>
+                        <label for="${switchId}" data-on-label="Bật" data-off-label="Tắt"></label>
+                    `;
                     }
                 },
-                {
-                    data: 'created_at',
-                    name: 'created_at',
-                    orderable: false,
-                    searchable: false,
-                    className: 'text-center',
-                    render: function(data) {
-                        return `<span class='text-dark'>${data}</span>`;
-                    }
-                },
+                // {
+                //     data: 'created_at',
+                //     name: 'created_at',
+                //     orderable: false,
+                //     searchable: false,
+                //     className: 'text-center',
+                //     render: function(data) {
+                //         return `<span class='text-dark'>${data}</span>`;
+                //     }
+                // },
                 {
                     data: 'actions',
                     name: 'actions',
@@ -117,9 +120,13 @@
                     render: function(data, type, row) {
                         return `
                             <span class='table-action'>
+                                <a href="${data}
+                                    <i class="edit text-success uil-edit action-icon"></i>
+                                </a>
                                 <a href="${data.edit}">
                                     <i class="edit text-primary uil-edit action-icon"></i>
                                 </a>
+
                                 <form action="${data.destroy}" method="POST" class="action-icon">
                                     @csrf
                                     @method('DELETE')
@@ -136,8 +143,42 @@
                 customerDatatable("{{ route('admin.products.getList') }}", columns)
             );
 
+            // $RouteUpdateStatus = ;
+
+            $(document).on('change', '.checkBoxStatus', (e) => {
+                const checkbox = e.target;
+                const id = $(checkbox).data('id');
+
+                if (checkbox.checked) {
+                    const routePost = "{{ route('admin.products.updateStatus') }}";
+                    postDataStatus(id, 'checked', routePost);
+                } else {
+                    const routePost = "{{ route('admin.products.updateStatus') }}";
+                    postDataStatus(id, 'check', routePost);
+                }
+            });
             $routeDelete = '{{ route('admin.products.delete') }}';
             destroy($routeDelete, table);
+
+
         });
+        const postDataStatus = (id, status, route) => {
+            $.ajax({
+                url: route,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    product_id: id,
+                    status: status,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function() {
+                    toast('Cập nhật thành công', 'success');
+                },
+                error: function(data) {
+                    toast('Cập nhật thất bại', 'error')
+                },
+            });
+        }
     </script>
 @endpush

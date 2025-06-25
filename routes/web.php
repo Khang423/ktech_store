@@ -118,6 +118,15 @@ Route::group([
         Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
         Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
         Route::post('/getDataCategoryProductDetail', [ProductController::class, 'getDataCategoryProductDetail'])->name('getDataCategoryProductDetail');
+        Route::post('/updateStatus', [ProductController::class, 'updateStatus'])->name('updateStatus');
+
+        Route::group([
+            'prefix' => '/{productVersion:slug}',
+            'as' => 'productsVersion.'
+        ], function () {
+            Route::get('/create', [ProductController::class, 'createProductVersion'])->name('create');
+            Route::post('/store', [ProductController::class, 'storeProductVersion'])->name('store');
+        });
     });
     // Role route
     Route::group([
