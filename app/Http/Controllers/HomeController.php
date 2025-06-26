@@ -34,7 +34,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        $product = ProductVersion::with('products')->get();
+        $product = ProductVersion::whereHas('products', function ($query) {
+            $query->where('status', StatusEnum::ON);
+        })->with([
+                    'products' => function ($query) {
+                        $query->where('status', StatusEnum::ON);
+                    }
+                ])->get();
+
         $category_product = CategoryProduct::get();
         return view('outside.index', [
             'banners' => Banner::query()->where('status', StatusEnum::ON)->get(),

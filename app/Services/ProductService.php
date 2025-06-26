@@ -46,7 +46,7 @@ class ProductService extends Controller
                 ];
             })
             ->editColumn('name', function ($object) {
-                return  $object->firstProductVersion->name;
+                return $object->firstProductVersion->name;
             })
             ->editColumn('status', function ($object) {
                 if ($object->status == StatusEnum::ON) {
@@ -58,15 +58,12 @@ class ProductService extends Controller
                 return number_format($object->firstProductVersion->final_price, 0, ',', '.') . '₫';
             })
             ->addColumn('actions', function ($object) {
+
                 return [
-                    // 'id' => $object->id,
-                    // 'destroy' => route('admin.products.delete'),
-                    // 'edit' => route('admin.products.edit', $object),
-                    // 'create' => route('admin.products.productsVersion.create', $object),
                     'id' => $object->id,
-                    'destroy' => '',
-                    'edit' => '',
-                    'create' => '',
+                    'destroy' => route('admin.products.delete'),
+                    'edit' => route('admin.products.edit', $object->firstProductVersion),
+                    'list' => route('admin.products.productsVersion.index', $object->firstProductVersion),
                 ];
             })
             ->make(true);
@@ -92,9 +89,9 @@ class ProductService extends Controller
             $dataProductVersion['price'] = $request->price;
             $dataProductVersion['description'] = $request->description;
 
-            $productVersion =  ProductVersion::create($dataProductVersion);
+            $productVersion = ProductVersion::create($dataProductVersion);
             //productversion_id
-            $productVersion_id =  $productVersion->id;
+            $productVersion_id = $productVersion->id;
 
             switch ($request->product_type) {
                 case ProductTypeEnum::LAPTOP:
@@ -223,7 +220,7 @@ class ProductService extends Controller
             $product_id = $product_version->product_id;
             // insert product version
             $import_price = (int) preg_replace('/[^\d]/', '', $request->import_price);
-            $final_price  = (int) preg_replace('/[^\d]/', '', $request->final_price);
+            $final_price = (int) preg_replace('/[^\d]/', '', $request->final_price);
             $dataProductVersion = [];
             $dataProductVersion['product_id'] = $product_id;
             $dataProductVersion['name'] = $request->name;
@@ -443,9 +440,9 @@ class ProductService extends Controller
             $dataProductVersion['price'] = $request->price;
             $dataProductVersion['description'] = $request->description;
 
-            $productVersion =  ProductVersion::create($dataProductVersion);
+            $productVersion = ProductVersion::create($dataProductVersion);
             //productversion_id
-            $productVersion_id =  $productVersion->id;
+            $productVersion_id = $productVersion->id;
 
             switch ($request->product_type) {
                 case ProductTypeEnum::LAPTOP:
@@ -563,9 +560,9 @@ class ProductService extends Controller
     {
         DB::beginTransaction();
         try {
-            if($request->status === 'checked'){
+            if ($request->status === 'checked') {
                 Product::where('id', $request->product_id)->update(['status' => StatusEnum::ON]);
-            }else{
+            } else {
                 Product::where('id', $request->product_id)->update(['status' => StatusEnum::OFF]);
             }
             DB::commit();
@@ -575,5 +572,46 @@ class ProductService extends Controller
             throw $e;
             return false;
         }
+    }
+
+    public function getListProductVersion($request)
+    {
+        return DataTables::of(
+            ProductVersion::where('product_id', $request->product_id)
+                ->select(ProductVersion::getInfo())
+                ->get()
+        )
+            ->editColumn('index', function ($object) {
+                static $i = 0;
+                return ++$i;
+            })
+            ->editColumn('thumbnail', function ($object) {
+                return [
+                    'thumbnail' => $object->thumbnail,
+                    'id' => $object->id,
+                ];
+            })
+            ->editColumn('name', function ($object) {
+                return $object->name;
+            })
+            ->editColumn('price', function ($object) {
+                return number_format($object->final_price, 0, ',', '.') . '₫';
+            })
+            ->addColumn('actions', function ($object) {
+
+                return [
+                    // 'id' => $object->id,
+                    // 'destroy' => route('admin.products.delete'),
+                    // 'edit' => route('admin.products.edit', $object->firstProductVersion),
+                    // 'list' => route('admin.products.productsVersion.index', [
+                    //     'productVersion' => $object->id,
+                    // ]),
+                    'id' => $object->id,
+                    'destroy' => ' ',
+                    'edit' => ' ',
+                    'list' => '',
+                ];
+            })
+            ->make(true);
     }
 }

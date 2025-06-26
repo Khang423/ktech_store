@@ -7,19 +7,14 @@ use App\Http\Requests\Admin\product\UpdateRequest;
 use App\Models\Brand;
 use App\Models\CategoryProduct;
 use App\Models\CategoryProductDetail;
-use App\Models\LaptopSpec;
-use App\Models\PhoneSpec;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVersion;
 use App\Models\StockImportDetail;
 use App\Models\Supplier;
-use App\Repositories\product\ProductInterface;
 use App\Services\ProductService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use Intervention\Image\Colors\Rgb\Channels\Red;
-use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class ProductController extends Controller
 {
@@ -48,8 +43,8 @@ class ProductController extends Controller
     {
         return view('admin.product.create', [
             'category_product' => CategoryProduct::select('id', 'name')->get(),
-            'brand'            => Brand::select('id', 'name')->get(),
-            'supplier'         => Supplier::select('id', 'name')->get(),
+            'brand' => Brand::select('id', 'name')->get(),
+            'supplier' => Supplier::select('id', 'name')->get(),
         ]);
     }
 
@@ -60,13 +55,13 @@ class ProductController extends Controller
             ->first();
         $category_product_detail = CategoryProductDetail::with('categoryProduct')->where('id', $product->category_product_details_id)->first();
         return view('admin.productVersion.create', [
-            'productVersion'       => $productVersion,
-            'product'              => ProductVersion::with(['laptopSpecs', 'products', 'phoneSpecs', 'stockImportDetails'])
+            'productVersion' => $productVersion,
+            'product' => ProductVersion::with(['laptopSpecs', 'products', 'phoneSpecs', 'stockImportDetails'])
                 ->find($productVersion->id),
-            'category_product'     => CategoryProduct::select(['id', 'name'])->get(),
-            'category_product_detail'     => CategoryProductDetail::where('catogory_product_id', $category_product_detail->categoryProduct->id)->select(['id', 'name'])->get(),
-            'brand'                => Brand::select(['id', 'name'])->get(),
-            'product_image'        =>  ProductImage::where('product_id', $productVersion->id)->get(),
+            'category_product' => CategoryProduct::select(['id', 'name'])->get(),
+            'category_product_detail' => CategoryProductDetail::where('catogory_product_id', $category_product_detail->categoryProduct->id)->select(['id', 'name'])->get(),
+            'brand' => Brand::select(['id', 'name'])->get(),
+            'product_image' => ProductImage::where('product_id', $productVersion->id)->get(),
             'stock_import_details' => StockImportDetail::where('product_version_id', $productVersion->id)->first(),
         ]);
     }
@@ -97,13 +92,13 @@ class ProductController extends Controller
             ->first();
         $category_product_detail = CategoryProductDetail::with('categoryProduct')->where('id', $product->category_product_details_id)->first();
         return view('admin.product.edit', [
-            'productVersion'       => $productVersion,
-            'product'              => ProductVersion::with(['laptopSpecs', 'products', 'phoneSpecs', 'stockImportDetails'])
+            'productVersion' => $productVersion,
+            'product' => ProductVersion::with(['laptopSpecs', 'products', 'phoneSpecs', 'stockImportDetails'])
                 ->find($productVersion->id),
-            'category_product'     => CategoryProduct::select(['id', 'name'])->get(),
-            'category_product_detail'     => CategoryProductDetail::where('catogory_product_id', $category_product_detail->categoryProduct->id)->select(['id', 'name'])->get(),
-            'brand'                => Brand::select(['id', 'name'])->get(),
-            'product_image'        =>  ProductImage::where('product_id', $productVersion->id)->get(),
+            'category_product' => CategoryProduct::select(['id', 'name'])->get(),
+            'category_product_detail' => CategoryProductDetail::where('catogory_product_id', $category_product_detail->categoryProduct->id)->select(['id', 'name'])->get(),
+            'brand' => Brand::select(['id', 'name'])->get(),
+            'product_image' => ProductImage::where('product_id', $productVersion->id)->get(),
             'stock_import_details' => StockImportDetail::where('product_version_id', $productVersion->id)->first(),
         ]);
     }
@@ -154,5 +149,17 @@ class ProductController extends Controller
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function indexProductVersion(ProductVersion $productVersion)
+    {
+        return view('admin.productVersion.index', [
+            'productVersion' => $productVersion
+        ]);
+    }
+
+    public function getListProductVersion(ProductVersion $productVersion)
+    {
+        return $this->productService->getListProductVersion($productVersion);
     }
 }
