@@ -5,7 +5,7 @@
             Sản phẩm
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        D anh sách
+        Danh sách
     </div>
 @endsection
 @section('content')
@@ -32,9 +32,8 @@
                                     <th class="text-center">#</th>
                                     <th class="text-center">Sản phẩm</th>
                                     <th class="text-center">Ảnh </th>
-                                    {{-- <th class="text-center">Đơn giá</th> --}}
-                                    <th class="text-center">Trạng thái</th>
-                                    {{-- <th class="text-center">Ngày tạo</th> --}}
+                                    <th class="text-center">Đơn giá</th>
+                                    <th class="text-center">Ngày tạo</th>
                                     <th class="text-center" style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
@@ -77,39 +76,26 @@
                     `;
                     }
                 },
-                // {
-                //     data: 'price',
-                //     name: 'price',
-                //     orderable: false,
-                //     searchable: false,
-                //     className: 'text-center',
-                //     render: function(data) {
-                //         return `<span class='text-dark'>${data}</span>`;
-                //     }
-                // },
                 {
-                    data: 'status',
-                    name: 'status',
+                    data: 'price',
+                    name: 'price',
+                    orderable: false,
+                    searchable: false,
                     className: 'text-center',
-                    render: (data, type, row) => {
-                        const isChecked = data == 0 ? 'checked' : 'check';
-                        const switchId = `switch-${row.id}`;
-                        return `
-                        <input type="checkbox" id="${switchId}" class="checkBoxStatus" data-id="${row.id}" ${isChecked} data-switch="success"/>
-                        <label for="${switchId}" data-on-label="Bật" data-off-label="Tắt"></label>
-                    `;
+                    render: function(data) {
+                        return `<span class='text-dark'>${data}</span>`;
                     }
                 },
-                // {
-                //     data: 'created_at',
-                //     name: 'created_at',
-                //     orderable: false,
-                //     searchable: false,
-                //     className: 'text-center',
-                //     render: function(data) {
-                //         return `<span class='text-dark'>${data}</span>`;
-                //     }
-                // },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    render: function(data) {
+                        return `<span class='text-dark'>${data}</span>`;
+                    }
+                },
                 {
                     data: 'actions',
                     name: 'actions',
@@ -138,7 +124,8 @@
             ];
 
             let table = $('#datatable').DataTable(
-                customerDatatable("{{ route('admin.products.getList') }}", columns)
+                customerDatatable(
+                    "{{ route('admin.products.productsVersion.getList', $productVersion->slug) }}", columns)
             );
 
             // $RouteUpdateStatus = ;

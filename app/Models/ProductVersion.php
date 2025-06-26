@@ -18,7 +18,7 @@ class ProductVersion extends Model
         'updated_at',
     ];
 
-    public function getInfo()
+    public static function getInfo()
     {
         return [
             'id',
@@ -62,7 +62,7 @@ class ProductVersion extends Model
 
     public function cartItems()
     {
-        return  $this->hasMany(CartItem::class, 'product_id', 'id');
+        return $this->hasMany(CartItem::class, 'product_id', 'id');
     }
 
     public function inventories()

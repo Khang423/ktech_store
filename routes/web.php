@@ -8,11 +8,9 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryProductController;
-use App\Http\Controllers\CategoryProductDetailController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
@@ -124,6 +122,8 @@ Route::group([
             'prefix' => '/{productVersion:slug}',
             'as' => 'productsVersion.'
         ], function () {
+            Route::get('/', [ProductController::class, 'indexProductVersion'])->name('index');
+            Route::post('/getList', [ProductController::class, 'getListProductVersion'])->name('getList');
             Route::get('/create', [ProductController::class, 'createProductVersion'])->name('create');
             Route::post('/store', [ProductController::class, 'storeProductVersion'])->name('store');
         });
