@@ -47,7 +47,9 @@ const totalPriceList = () => {
             const $row = $(row);
             const quantity = parseInt($row.find("td").eq(3).text().trim());
             const price_include_vat_Text = $row.find("td").eq(6).text().trim();
-            const price_include_vat = parseFloat(price_include_vat_Text.replace(/[^\d]/g, ""));
+            const price_include_vat = parseFloat(
+                price_include_vat_Text.replace(/[^\d]/g, "")
+            );
 
             return quantity * price_include_vat;
         })
@@ -72,7 +74,9 @@ const countProducts = () => {
             const price = parseFloat(cleaned);
 
             const total_price_Text = $row.find("td").eq(7).text().trim();
-            const total_price_Text_cleaned = total_price_Text.replace(/\./g, "").replace(/[^\d]/g, "");
+            const total_price_Text_cleaned = total_price_Text
+                .replace(/\./g, "")
+                .replace(/[^\d]/g, "");
             const total_price = parseFloat(total_price_Text_cleaned);
             return {
                 id: productId,
@@ -106,8 +110,8 @@ const storeInventory = ($routeStore, $routeIndex) => {
             processData: false,
             data: form_data,
             success: () => {
-                window.location.href = $routeIndex;
                 toast("Thêm thành công", "success");
+                window.location.href = $routeIndex;
             },
             error: (data) => {
                 $(".text-danger").text("");

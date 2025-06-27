@@ -8,14 +8,13 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
-
 {
     protected $bannerService;
     use ApiResponse;
     public function __construct(
         BannerService $bannerService,
     ) {
-        $this->bannerService  = $bannerService;
+        $this->bannerService = $bannerService;
     }
     public function index()
     {

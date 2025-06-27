@@ -16,7 +16,7 @@ class BannerService extends Controller
 {
     private Model $model;
     private $imageTrait;
-    public function __construct(Banner $banner,ImageTrait $imageTrait)
+    public function __construct(Banner $banner, ImageTrait $imageTrait)
     {
         $this->model = $banner;
         $this->imageTrait = $imageTrait;
@@ -33,7 +33,7 @@ class BannerService extends Controller
                 return ++$i;
             })
             ->editColumn('status', function ($object) {
-                if($object->status == 0){
+                if ($object->status == 0) {
                     return 'checked';
                 }
                 return '';
@@ -59,8 +59,8 @@ class BannerService extends Controller
             $dataStore['status'] = StatusEnum::ON;
             $dataStore['member_id'] = Auth::user()->id;
 
-            if($request->hasFile('banner_image')){
-                $banner_name = $this->imageTrait->convertToWebpAndStore($request->file('banner_image'),'banners');
+            if ($request->hasFile('banner_image')) {
+                $banner_name = $this->imageTrait->convertToWebpAndStore($request->file('banner_image'), 'banners');
                 $dataStore['banner'] = $banner_name;
             }
             $this->model->query()->create($dataStore);
@@ -97,13 +97,13 @@ class BannerService extends Controller
     {
         DB::beginTransaction();
         try {
-            $banner = $this->model->query()->where('id',$request->id)->first();
-            $result = $this->imageTrait->deleteImage($banner->banner,'banners',null);
-            if($result){
+            $banner = $this->model->query()->where('id', $request->id)->first();
+            $result = $this->imageTrait->deleteImage($banner->banner, 'banners', null);
+            if ($result) {
                 $this->model
-                ->query()
-                ->where('id', $request->id)
-                ->delete();
+                    ->query()
+                    ->where('id', $request->id)
+                    ->delete();
             }
             DB::commit();
             return true;

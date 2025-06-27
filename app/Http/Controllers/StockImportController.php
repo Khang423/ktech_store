@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Admin\stockImport\StoreRequest;
 use App\Models\ProductVersion;
 use App\Models\StockImport;
-use App\Models\StockImportDetail;
 use App\Models\Supplier;
 use App\Services\StockImportService;
 use App\Traits\ApiResponse;
@@ -40,7 +39,7 @@ class StockImportController extends Controller
         ]);
     }
 
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
         $result = $this->service->store($request);
         if ($result) {

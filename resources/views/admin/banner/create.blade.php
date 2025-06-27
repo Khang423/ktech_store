@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary" id="btn-store">
+                                <button class="btn btn-primary" id="btn-store" type="button">
                                     <i class="mdi mdi-plus-circle me-2"></i>
                                     <span>Thêm</span>
                                 </button>
@@ -62,8 +62,7 @@
                         <div class="d-flex justify-content-center mb-2 mt-2">
                             <div id="preview-thumbnail"></div>
                         </div>
-                        <input name="banner_image" type="file" id="img_thumbnail"
-                            style="display: none" />
+                        <input name="banner_image" type="file" id="img_thumbnail" style="display: none" />
                         <div class="thumbnail text-center dropzone">
                             <i class="h1 text-muted uil-upload-alt"></i>
                             <h3>Chose Image</h3>
@@ -107,10 +106,11 @@
             // init
             const $form = $('#form-store');
             const $inputs = $form.find('input');
-            $routeStore = '{{ route('admin.banners.store') }}';
-            $routeIndex = '{{ route('admin.banners.index') }}';
+            const routeStore = '{{ route('admin.banners.store') }}';
+            const routeIndex = '{{ route('admin.banners.index') }}';
             // function handle
-            store($routeStore, $routeIndex);
+
+            store(routeStore, routeIndex);
             deleteAlertValidation($inputs);
         });
     </script>
