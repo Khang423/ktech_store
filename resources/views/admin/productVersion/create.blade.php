@@ -87,9 +87,13 @@
                                     <div class="col-lg-12">
                                         <div class="mb-2">
                                             <label for="import_price" class="form-label">Giá nhập</label>
+                                            @if ($stock_import_details->price ?? '')
+                                                <input type="text" class="form-control" id="import_price"
+                                                    placeholder="Giá nhập" name="import_price"
+                                                    value="{{ formatPriceToVND($stock_import_details->price) }}">
+                                            @endif
                                             <input type="text" class="form-control" id="import_price"
-                                                placeholder="Giá nhập" name="import_price"
-                                                value="{{ formatPriceToVND($stock_import_details->price) }}">
+                                                placeholder="Giá nhập" name="import_price" value="0">
                                             <div class="text-danger mt-1 error-import_price"></div>
                                         </div>
                                     </div>

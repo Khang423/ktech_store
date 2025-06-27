@@ -61,7 +61,7 @@
                     name: 'banner',
                     className: 'text-center',
                     render: (data) => `
-                    <img src="{{ asset('asset/admin/banners') }}/${data}" height="150" width="250" loading="lazy">
+                    <img src="{{ asset('asset/admin/banners') }}/${data}" height="auto" width="100%" loading="lazy">
                 `
                 },
                 {

@@ -15,7 +15,8 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.products.create') }}">
+                            <a class="btn btn-primary mb-2"
+                                href="{{ route('admin.products.productsVersion.create', $productVersion->slug) }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Thêm
                             </a>
@@ -128,8 +129,6 @@
                     "{{ route('admin.products.productsVersion.getList', $productVersion->slug) }}", columns)
             );
 
-            // $RouteUpdateStatus = ;
-
             $(document).on('change', '.checkBoxStatus', (e) => {
                 const checkbox = e.target;
                 const id = $(checkbox).data('id');
@@ -148,6 +147,7 @@
                 $('[data-bs-toggle="tooltip"]').tooltip();
             });
         });
+
         const postDataStatus = (id, status, route) => {
             $.ajax({
                 url: route,

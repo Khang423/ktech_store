@@ -122,9 +122,6 @@
                                 <a href="${data.list}" data-bs-toggle="tooltip" data-bs-placement="top" title="Danh sách sản phẩm cùng phiên bản">
                                     <i class="list text-primary uil uil-list-ul action-icon"></i>
                                 </a>
-                                <a href="${data.edit}" title="Chỉnh sửa sản phẩm">
-                                    <i class="edit text-primary uil-edit action-icon"></i>
-                                </a>
                                 <form action="${data.destroy}" method="POST" class="action-icon">
                                     @csrf
                                     @method('DELETE')

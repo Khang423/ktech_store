@@ -79,8 +79,7 @@ function destroy($routeDelete, $table) {
                 toast("Xóa thành công.");
                 $table.draw();
             },
-            error: function (data) {
-            },
+            error: function (data) {},
         });
     });
 }

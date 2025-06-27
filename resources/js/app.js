@@ -1,8 +1,8 @@
 // import './bootstrap';
-import Swiper from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import Swiper from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 document.addEventListener("DOMContentLoaded", () => {
     const swiper = new Swiper(".swiper", {
