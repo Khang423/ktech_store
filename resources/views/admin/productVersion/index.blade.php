@@ -129,6 +129,14 @@
                     "{{ route('admin.products.productsVersion.getList', $productVersion->slug) }}", columns)
             );
 
+            <<
+            << << < HEAD
+                ===
+                === =
+                // $RouteUpdateStatus = ;
+
+                >>>
+                >>> > d3171c919746d336bc591c0aa02385c635d7a9f8
             $(document).on('change', '.checkBoxStatus', (e) => {
                 const checkbox = e.target;
                 const id = $(checkbox).data('id');
@@ -146,8 +154,12 @@
             $(function() {
                 $('[data-bs-toggle="tooltip"]').tooltip();
             });
-        });
+        }); <<
+        << << < HEAD
 
+            ===
+            === = >>>
+            >>> > d3171c919746d336bc591c0aa02385c635d7a9f8
         const postDataStatus = (id, status, route) => {
             $.ajax({
                 url: route,
