@@ -1,7 +1,7 @@
 /* header bar */
 .header {
     width: 100vw;
-    height: 5rem;
+    height: auto;
     top: 0px;
     background-color: #2a52be;
     position: fixed;

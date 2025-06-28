@@ -2,10 +2,8 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Sản phẩm
+            Danh sách sản phẩm
         </span>
-        <i class="mdi mdi-chevron-right"></i>
-        D anh sách
     </div>
 @endsection
 @section('content')
