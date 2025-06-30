@@ -44,22 +44,9 @@
                                             </select>
                                             <div class="text-danger mt-1 error-brand_id"></div>
                                         </div>
-                                        <div class="mb-2">
-                                            <label for="category_product_detail_id" class="form-label">Series Sản
-                                                phẩm</label>
-                                            <select class="form-select" id="category_product_detail_id"
-                                                name="category_product_detail_id" style="height: 48px">
-                                            </select>
-                                            <div class="text-danger mt-1 error-category_product_id"></div>
-                                        </div>
+
                                     </div>
                                     <div class="col-lg-6">
-                                        <div class="mb-2">
-                                            <label for="price" class="form-label">Đơn Giá</label>
-                                            <input type="text" class="form-control" id="price" placeholder="Đơn giá"
-                                                name="price">
-                                            <div class="text-danger mt-1 error-price"></div>
-                                        </div>
                                         <div class="mb-2">
                                             <label for="category_product_id" class="form-label">Danh mục sản phẩm</label>
                                             <select class="form-select" id="category_product_id" name="category_product_id"
@@ -70,6 +57,14 @@
                                                         {{ $item->name }}
                                                     </option>
                                                 @endforeach
+                                            </select>
+                                            <div class="text-danger mt-1 error-category_product_id"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="category_product_detail_id" class="form-label">Series Sản
+                                                phẩm</label>
+                                            <select class="form-select" id="category_product_detail_id"
+                                                name="category_product_detail_id" style="height: 48px">
                                             </select>
                                             <div class="text-danger mt-1 error-category_product_id"></div>
                                         </div>

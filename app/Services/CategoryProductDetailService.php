@@ -20,12 +20,11 @@ class CategoryProductDetailService extends Controller
 
     public function getList($categoryProduct)
     {
-        dd($categoryProduct);
         dd( $this->model::query()
                 ->where('catogory_product_id', $categoryProduct->id)
                 ->get($this->model->getInfo()));
         return DataTables::of(
-            $this->model::query()
+            $this->model::query()->orderBy('created_at', 'desc')
                 ->where('catogory_product_id', $categoryProduct->id)
                 ->get($this->model->getInfo())
         )

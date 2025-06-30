@@ -17,7 +17,7 @@
         id="form-store">
         @csrf
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="tab-content">
@@ -28,32 +28,19 @@
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Tiêu đề của Ảnh</label>
                                             <input type="text" class="form-control" id="name"
-                                                placeholder="Tên nhà cung cấp" name="name">
+                                                placeholder="Tiêu đề của banner" name="name">
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label for="banner_url" class="form-label">Link ảnh</label>
-                                            <input type="text" class="form-control" id="banner_url"
-                                                placeholder="Url của ảnh" name="banner_url">
-                                            <div class="text-danger mt-1 error-banner_url"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" id="btn-store" type="button">
-                                    <i class="mdi mdi-plus-circle me-2"></i>
-                                    <span>Thêm</span>
-                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <label class="text-dark header-title font-16 fw-bold">
@@ -67,7 +54,24 @@
                             <i class="h1 text-muted uil-upload-alt"></i>
                             <h3>Chose Image</h3>
                         </div>
-                        <div class="error-thumbnail text-center text-danger"></div>
+                        <div class="error-banner_image text-center text-danger"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <button class="btn btn-primary" id="btn-store" type="button">
+                                    <i class="mdi mdi-plus-circle me-2"></i>
+                                    <span>Thêm</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,7 +94,7 @@
                 let preview_thumbnail = $("#preview-thumbnail");
                 preview_thumbnail.empty();
                 let fileList = Array.from(this.files).map(file => {
-                    let img = $("<img class='img-fluid img-thumbnail' width='250' height='auto'>")
+                    let img = $("<img class='img-fluid img-thumbnail' width='100%' height='auto'>")
                         .attr("src", URL.createObjectURL(file));
                     img.on("load", function() {
                         URL.revokeObjectURL(img.attr("src"));

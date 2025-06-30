@@ -43,4 +43,21 @@ $(document).ready(function () {
     $("#guest-btn-buy").click(function () {
         $(".modal-action").removeClass("d-none");
     });
+
+    $(".version-card").on("click", (e) => {
+        const product_id = $(e.currentTarget).data("id");
+        const product_slug = $(e.currentTarget).data("slug");
+        window.location.href = "/product/" + product_slug;
+    });
+
+    $(".see-more").on("click", (e) => {
+        const checkActive = $(".product-description").hasClass("active");
+        if (checkActive) {
+            $(".product-description").removeClass("active");
+            $("#btn-see-more").text("Xem thêm nội dung");
+        } else {
+            $(".product-description").addClass("active");
+            $("#btn-see-more").text("Thu gọn nội dung");
+        }
+    });
 });

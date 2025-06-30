@@ -14,39 +14,26 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2">
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             <a class="btn btn-primary mb-2" href="{{ route('admin.stockImports.create') }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Nhập kho
                             </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.stockImports.create') }}">
-                                <i class="mdi mdi-plus-circle me-2"></i>
-                                Xuất kho
-                            </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="text-sm-end">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4">
                             <a class="btn btn-primary mb-2" href="{{ route('admin.stockImports.index') }}">
                                 <i class="uil uil-history"></i>
                                 Lịch sử nhập kho
                             </a>
-                        </div>
-                        <div class="col-sm-4">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.stockImports.create') }}">
+                                <i class="mdi mdi-plus-circle me-2"></i>
+                                Xuất kho
+                            </a>
                             <a class="btn btn-primary mb-2" href="{{ route('admin.stockImports.index') }}">
                                 <i class="uil uil-history"></i>
                                 Lịch sử xuất kho
                             </a>
                         </div>
                         <div class="col-sm-4">
-                            <div class="text-sm-end">
-                            </div>
+
                         </div>
                     </div>
 

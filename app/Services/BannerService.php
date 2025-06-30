@@ -25,7 +25,7 @@ class BannerService extends Controller
     public function getList()
     {
         return DataTables::of(
-            $this->model::query()
+            $this->model::query()->orderBy('created_at', 'desc')
                 ->get($this->model->getInfo())
         )
             ->editColumn('index', function ($object) {
@@ -33,16 +33,16 @@ class BannerService extends Controller
                 return ++$i;
             })
             ->editColumn('status', function ($object) {
-                if ($object->status == 0) {
-                    return 'checked';
+                if ($object->status == StatusEnum::ON) {
+                    return StatusEnum::ON;
                 }
-                return '';
+                return StatusEnum::OFF;
             })
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
                     'destroy' => route('admin.banners.delete'),
-                    'edit' => route('admin.banners.edit', $object),
+                    'edit' => route('admin.banners.edit', $object->slug),
                 ];
             })
             ->make(true);
@@ -104,6 +104,24 @@ class BannerService extends Controller
                     ->query()
                     ->where('id', $request->id)
                     ->delete();
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function updateStatus($request)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->status === 'checked') {
+                $this->model::where('id', $request->banner_id)->update(['status' => StatusEnum::ON]);
+            } else {
+                $this->model::where('id', $request->banner_id)->update(['status' => StatusEnum::OFF]);
             }
             DB::commit();
             return true;

@@ -20,10 +20,6 @@
                                 Thêm
                             </a>
                         </div>
-                        <div class="col-sm-7">
-                            <div class="text-sm-end">
-                            </div>
-                        </div>
                     </div>
 
                     <div class="table-responsive">
@@ -35,7 +31,6 @@
                                     <th>Logo</th>
                                     <th>Quốc gia</th>
                                     <th>Website</th>
-                                    <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
                                     <th style="width: 80px;">Hành động</th>
                                 </tr>
@@ -75,8 +70,7 @@
                     lengthMenu: 'Show <select class=\'form-select form-select-sm ms-1 me-1\'><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="-1">All</option></select>'
                 },
                 pageLength: 20,
-                columns: [
-                    {
+                columns: [{
                         data: 'index',
                         name: 'index',
                         orderable: false,
@@ -100,7 +94,7 @@
                         searchable: false,
                         render: function(data) {
                             return `
-                                <img src="{{ asset('asset/admin/brands') }}/${data.logo}"  height="100" width="120" loading="lazy">
+                                <img src="{{ asset('asset/admin/brands') }}/${data.logo}"  height="auto" width="100%" loading="lazy">
                             `;
                         }
                     },
@@ -127,19 +121,6 @@
                                 <a href="${data}" class='text-dark' target="_blank" rel="noopener noreferrer">
                                     ${data}
                                 </a>
-                            `;
-                        }
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data) {
-                            return `
-                                <span class='text-dark'>
-                                    ${data}
-                                </span>
                             `;
                         }
                     },

@@ -26,6 +26,7 @@ class StockImportService extends Controller
     {
         return DataTables::of(
             StockImport::query()->with('member')
+                ->orderBy('created_at', 'desc')
                 ->get()
         )
             ->editColumn('index', function ($object) {

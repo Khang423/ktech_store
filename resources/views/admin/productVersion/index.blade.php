@@ -2,10 +2,10 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Sản phẩm
+        {{ $productVersion->name }}
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Danh sách
+        Danh sách phiên bản
     </div>
 @endsection
 @section('content')
@@ -15,6 +15,11 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
+                             <a class="btn btn-success mb-2"
+                                href="{{ url()->previous() ?? route('admin.products.index') }}">
+                                <i class="uil uil-step-backward-alt"></i>
+                                Trở về
+                            </a>
                             <a class="btn btn-primary mb-2"
                                 href="{{ route('admin.products.productsVersion.create', $productVersion->slug) }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
@@ -106,8 +111,8 @@
                     render: function(data, type, row) {
                         return `
                             <span class='table-action'>
-                                <a href="${data.list}" data-bs-toggle="tooltip" data-bs-placement="top" title="Danh sách sản phẩm cùng phiên bản">
-                                    <i class="list text-primary uil uil-list-ul action-icon"></i>
+                                <a href="${data.list}" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết sản phẩm">
+                                    <i class="list text-primary uil uil-eye action-icon"></i>
                                 </a>
                                 <a href="${data.edit}" title="Chỉnh sửa sản phẩm">
                                     <i class="edit text-primary uil-edit action-icon"></i>
@@ -129,14 +134,6 @@
                     "{{ route('admin.products.productsVersion.getList', $productVersion->slug) }}", columns)
             );
 
-            <<
-            << << < HEAD
-                ===
-                === =
-                // $RouteUpdateStatus = ;
-
-                >>>
-                >>> > d3171c919746d336bc591c0aa02385c635d7a9f8
             $(document).on('change', '.checkBoxStatus', (e) => {
                 const checkbox = e.target;
                 const id = $(checkbox).data('id');
@@ -154,12 +151,8 @@
             $(function() {
                 $('[data-bs-toggle="tooltip"]').tooltip();
             });
-        }); <<
-        << << < HEAD
+        });
 
-            ===
-            === = >>>
-            >>> > d3171c919746d336bc591c0aa02385c635d7a9f8
         const postDataStatus = (id, status, route) => {
             $.ajax({
                 url: route,

@@ -22,6 +22,7 @@ class RoleService extends Controller
     {
         return DataTables::of(
             $this->model::query()
+                ->orderBy('created_at', 'desc')
                 ->get($this->model->getInfo())
         )
             ->editColumn('index', function ($object) {
@@ -49,10 +50,7 @@ class RoleService extends Controller
         return true;
     }
 
-    public function update($request, $member)
-    {
-
-    }
+    public function update($request, $member) {}
 
     public function delete($request)
     {

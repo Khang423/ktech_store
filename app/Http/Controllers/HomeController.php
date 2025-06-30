@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         $category_product = CategoryProduct::get();
         return view('outside.index', [
-            'banners' => Banner::query()->where('status', StatusEnum::ON)->get(),
+            'banners' => Banner::query()->where('status', StatusEnum::ON)->orderBy('id', 'desc')->get(),
             'product' => $product,
             'category_product' => $category_product,
             'title' => 'K-tech'
@@ -57,8 +57,10 @@ class HomeController extends Controller
             ->where('id', $productVersion->id)
             ->first();
         $title = $product->name;
+        $productVersion = ProductVersion::where('product_id', $productVersion->product_id)->get();
         return view('outside.product_detail', [
             'product' => $product,
+            'productVersion' => $productVersion,
             'title' => $title
         ]);
     }
