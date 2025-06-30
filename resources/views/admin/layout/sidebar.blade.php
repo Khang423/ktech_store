@@ -1,5 +1,5 @@
 <div class="leftside-menu">
-    <a href="{{ env('APP_URL') }}" class="logo logo-light ">
+    <a href="{{ route('admin.dashboard') }}" class="logo logo-light ">
         <span class="logo-lg mt-3">
             <img src="{{ asset('asset/admin/systemImage/KtechLogo.png') }}" alt="Hytertech"
                 style="width: 100px;height: 100px">

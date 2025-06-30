@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\banner\StoreRequest;
 use App\Models\Banner;
 use App\Services\BannerService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class BannerController extends Controller
 {
@@ -31,7 +33,7 @@ class BannerController extends Controller
         return view('admin.banner.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $result = $this->bannerService->store($request);
         if ($result) {
@@ -55,6 +57,15 @@ class BannerController extends Controller
     public function delete(Request $request)
     {
         $result = $this->bannerService->delete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $result = $this->bannerService->updateStatus($request);
         if ($result) {
             return $this->successResponse();
         }

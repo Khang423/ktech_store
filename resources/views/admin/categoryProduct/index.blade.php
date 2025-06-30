@@ -80,8 +80,8 @@
                     className: 'text-center',
                     render: (data) => `
                     <span class='table-action d-flex justify-content-center gap-2'>
-                        <a href="${data.preview}" class="action-view" data-id="${data.id}">
-                                <i class="edit text-info uil-eye action-icon"></i>
+                        <a href="${data.preview}" class="action-view" data-id="${data.id}" title="Chi tiết">
+                                <i class="edit text-info uil uil-list-ul action-icon"></i>
                             </a>
                         <a href="${data.edit}">
                             <i class="uil-edit text-primary action-icon"></i>

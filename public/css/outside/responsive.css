@@ -180,7 +180,6 @@
         align-items: center;
     }
     .section-product-info .product-detail-info .product-versions .version-card {
-        height: 80px;
         padding: 8px 12px;
     }
     .section-product-info .product-detail-info .product-versions {
@@ -251,8 +250,13 @@
         height: 500px;
         width: 100%;
         background-color: #ffffff;
-        padding: 20px 30px;
+        padding: 10px 8px;
         overflow-x: hidden;
+        font-size: 14px;
+    }
+
+    .section-description .content .product-description .see-more {
+        font-size: 14px;
     }
     .section-description .content .product-description .title {
         font-size: 16px;
@@ -673,10 +677,10 @@
         display: none;
     }
 
-    .section-order .method-payment .other-option span{
+    .section-order .method-payment .other-option span {
         display: none;
     }
-    .section-order .method-payment .other-option{
+    .section-order .method-payment .other-option {
         justify-content: end;
     }
 }

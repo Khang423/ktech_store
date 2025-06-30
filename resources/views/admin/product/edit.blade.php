@@ -958,14 +958,14 @@
     <script>
         // init
         const $form = $('#form-update');
-        const $inputs = $form.find('input');
-        $routeUpdate = '{{ route('admin.products.update', $productVersion->slug) }}';
-        $routeIndex = '{{ route('admin.products.index') }}';
+        const inputs = $form.find('input');
+        const routeUpdate = '{{ route('admin.products.productsVersion.update', $productVersion->slug) }}';
+        const routeIndex = '{{ route('admin.products.productsVersion.index', $productVersion->slug) }}';
         const routedestroy = "{{ route('admin.products.destroy-image') }}";
         const routeGetDataCategoryDetail = "{{ route('admin.products.getDataCategoryProductDetail') }}";
         // load data category product detail
 
-        update($routeUpdate, $routeIndex);
-        deleteAlertValidation($inputs);
+        update(routeUpdate, routeIndex);
+        deleteAlertValidation(inputs);
     </script>
 @endpush

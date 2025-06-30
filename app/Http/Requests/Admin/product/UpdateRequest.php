@@ -19,9 +19,9 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'string|required',
-            'profit_rate' => 'required',
-            'final_price' => 'required',
-            'import_price' => 'string|required',
+            'profit_rate' => 'nullable',
+            'final_price' => 'nullable',
+            'import_price' => 'string|nullable',
             'category_product_id' => 'string|required',
             'category_product_detail_id' => 'string|required',
             'brand_id' => 'string|required',

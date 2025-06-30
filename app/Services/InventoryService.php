@@ -26,6 +26,7 @@ class InventoryService extends Controller
     {
         return DataTables::of(
             Inventories::join('product_versions', 'inventories.product_version_id', '=', 'product_versions.id')
+                ->orderBy('inventories.created_at', 'desc')
                 ->get([
                     'product_versions.id as product_id',
                     'product_versions.name as product_name',

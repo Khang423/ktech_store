@@ -136,7 +136,6 @@
                 customerDatatable("{{ route('admin.products.getList') }}", columns)
             );
 
-            // $RouteUpdateStatus = ;
 
             $(document).on('change', '.checkBoxStatus', (e) => {
                 const checkbox = e.target;
@@ -156,6 +155,7 @@
                 $('[data-bs-toggle="tooltip"]').tooltip();
             });
         });
+
         const postDataStatus = (id, status, route) => {
             $.ajax({
                 url: route,

@@ -13,9 +13,7 @@ function store($routeStore, $routeIndex) {
             data: form_data,
             success: function () {
                 toast("Thêm thành công", "success");
-                setTimeout(() => {
-                    window.location.href = $routeIndex;
-                }, 2000);
+                window.location.href = $routeIndex;
             },
             error: function (data) {
                 $(".text-danger").text("");

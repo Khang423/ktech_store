@@ -24,7 +24,7 @@ class CategoryProductService extends Controller
     public function getList()
     {
         return DataTables::of(
-            $this->model::query()
+            $this->model::query()->orderBy('created_at', 'desc')
                 ->get($this->model->getInfo())
         )
             ->editColumn('index', function ($object) {

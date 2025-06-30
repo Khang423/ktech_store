@@ -33,6 +33,7 @@ class ProductService extends Controller
         return DataTables::of(
             Product::select(Product::getInfo())
                 ->with('firstProductVersion')
+                ->orderBy('created_at', 'desc')
                 ->get()
         )
             ->editColumn('index', function ($object) {
@@ -62,7 +63,6 @@ class ProductService extends Controller
                 return [
                     'id' => $object->id,
                     'destroy' => route('admin.products.delete'),
-                    'edit' => route('admin.products.edit', $object->firstProductVersion),
                     'list' => route('admin.products.productsVersion.index', $object->firstProductVersion),
                 ];
             })
@@ -608,7 +608,7 @@ class ProductService extends Controller
                     // ]),
                     'id' => $object->id,
                     'destroy' => ' ',
-                    'edit' => ' ',
+                    'edit' => route('admin.products.productsVersion.edit', $object),
                     'list' => '',
                 ];
             })

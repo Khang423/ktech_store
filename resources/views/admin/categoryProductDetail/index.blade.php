@@ -15,7 +15,12 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-5">
-                            <a class="btn btn-primary mb-2"
+                            <a class="btn btn-success mb-2"
+                                href="{{ url()->previous() ?? route('admin.categoryProducts.index') }}">
+                                <i class="uil uil-step-backward-alt"></i>
+                                Trở về
+                            </a>
+                             <a class="btn btn-primary mb-2"
                                 href="{{ route('admin.categoryProducts.details.create', $categoryProduct->slug) }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Thêm

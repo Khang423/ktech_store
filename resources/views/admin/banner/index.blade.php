@@ -77,12 +77,12 @@
                     name: 'status',
                     className: 'text-center',
                     render: (data, type, row) => {
-                        const checked = data === true || data === '1' || data === 1 ? 'checked' : '';
-                        const switchId = `switch-status-${row.id}`;
+                        const isChecked = data == 0 ? 'checked' : 'check';
+                        const switchId = `switch-${row.id}`;
                         return `
-                <input type="checkbox" id="${switchId}" ${checked} data-switch="success"/>
-                <label for="${switchId}" data-on-label="Bật" data-off-label="Tắt"></label>
-            `;
+                        <input type="checkbox" id="${switchId}" class="checkBoxStatus" data-id="${row.id}" ${isChecked} data-switch="success"/>
+                        <label for="${switchId}" data-on-label="Bật" data-off-label="Tắt"></label>
+                    `;
                     }
                 },
                 {
@@ -121,9 +121,39 @@
                 customerDatatable("{{ route('admin.banners.getList') }}", columns)
             );
 
-            $routeDelete = '{{ route('admin.banners.delete') }}';
-            destroy($routeDelete, table);
+            $(document).on('change', '.checkBoxStatus', (e) => {
+                const checkbox = e.target;
+                const id = $(checkbox).data('id');
+                if (checkbox.checked) {
+                    const routePost = "{{ route('admin.banners.updateStatus') }}";
+                    postDataStatus(id, 'checked', routePost);
+                } else {
+                    const routePost = "{{ route('admin.banners.updateStatus') }}";
+                    postDataStatus(id, 'check', routePost);
+                }
+            });
 
+            const routeDelete = "{{ route('admin.banners.delete') }}";
+            destroy(routeDelete, table);
         });
+
+        const postDataStatus = (id, status, route) => {
+            $.ajax({
+                url: route,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    banner_id: id,
+                    status: status,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function() {
+                    toast('Cập nhật thành công', 'success');
+                },
+                error: function(data) {
+                    toast('Cập nhật thất bại', 'error')
+                },
+            });
+        }
     </script>
 @endpush

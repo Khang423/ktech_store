@@ -111,8 +111,6 @@ Route::group([
         Route::post('/getList', [ProductController::class, 'getList'])->name('getList');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::post('/store', [ProductController::class, 'store'])->name('store');
-        Route::get('/edit/{productVersion:slug}', [ProductController::class, 'edit'])->name('edit');
-        Route::put('/edit/{productVersion:slug}', [ProductController::class, 'update'])->name('update');
         Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
         Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
         Route::post('/getDataCategoryProductDetail', [ProductController::class, 'getDataCategoryProductDetail'])->name('getDataCategoryProductDetail');
@@ -126,6 +124,8 @@ Route::group([
             Route::post('/getList', [ProductController::class, 'getListProductVersion'])->name('getList');
             Route::get('/create', [ProductController::class, 'createProductVersion'])->name('create');
             Route::post('/store', [ProductController::class, 'storeProductVersion'])->name('store');
+            Route::get('/edit', [ProductController::class, 'editProductVersion'])->name('edit');
+            Route::put('/edit', [ProductController::class, 'updateProductVersion'])->name('update');
         });
     });
     // Role route
@@ -141,7 +141,9 @@ Route::group([
         Route::put('/edit/{product:slug}', [RoleController::class, 'update'])->name('update');
         Route::delete('/delete', [RoleController::class, 'delete'])->name('delete');
     });
+
     // Brand route
+
     Route::group([
         'prefix' => 'brands',
         'as' => 'brands.'
@@ -195,7 +197,7 @@ Route::group([
         });
     });
 
-    // banner
+    //  Banner route
     Route::group([
         'prefix' => 'banner',
         'as' => 'banners.'
@@ -207,6 +209,7 @@ Route::group([
         Route::get('/edit/{banner:slug}', [BannerController::class, 'edit'])->name('edit');
         Route::put('/edit/{banner:slug}', [BannerController::class, 'update'])->name('update');
         Route::delete('/delete', [BannerController::class, 'delete'])->name('delete');
+        Route::post('/updateStatus', [BannerController::class, 'updateStatus'])->name('updateStatus');
     });
 
     // Inventory route

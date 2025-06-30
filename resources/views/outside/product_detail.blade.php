@@ -43,19 +43,37 @@
         </div>
         <div class="product-detail-info">
             <div class="product-versions">
-                @for ($i = 1; $i < 3; $i++)
-                    <div class="version-card">
-                        <span class="card-active"><i class="uil-check"></i></span>
-                        <div class="content-card">
-                            <div class="product-version-name">
-                                TECNO CAMON 40 Pro 8GB 256GB
-                            </div>
-                            <div class="product-version-price">
-                                {{ formatPriceToVND(122200003) }}
+                @foreach ($productVersion as $i)
+                    @if ($product->slug === $i->slug)
+                        <div class="version-card active" data-id="{{ $i->id }}" data-slug="{{ $i->slug }}">
+                            <span class="card-active">
+                                <i class="uil-check"></i>
+                            </span>
+                            <div class="content-card">
+                                <div class="product-version-name">
+                                    {{ $i->name }}
+                                </div>
+                                <div class="product-version-price">
+                                    {{ formatPriceToVND($i->price) }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endfor
+                    @else
+                        <div class="version-card" data-id="{{ $i->id }}" data-slug="{{ $i->slug }}">
+                            <span class="card-active d-none">
+                                <i class="uil-check"></i>
+                            </span>
+                            <div class="content-card">
+                                <div class="product-version-name">
+                                    {{ $i->name }}
+                                </div>
+                                <div class="product-version-price">
+                                    {{ formatPriceToVND($i->price) }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
             <hr>
             <div class="product-price">
@@ -97,15 +115,18 @@
         <div class="content d-flex">
             <div class="product-description">
                 <div class="title">
-                    MÔ TẢ SẢN PHẨM
+                    Mô tả sản phẩm
                 </div>
                 <div class="content">
                     {!! $product->description !!}
                 </div>
+                <div class="see-more">
+                   <span id="btn-see-more"> Xem thêm nội dung </span><i class="uil uil-angle-down fs-2"></i>
+                </div>
             </div>
             <div class="product-info">
                 <div class="title">
-                    THÔNG SỐ KỸ THUẬT
+                    Thông số kỹ thuật
                 </div>
                 @php
                     $laptopSpecs = getLaptopSpecs($product);
@@ -1016,5 +1037,6 @@
     <script>
         const routeAddItemToCart = "{{ route('home.addItemToCart') }}";
         const RouteCart = "{{ route('home.cart') }}";
+        const RouteProductVersionDetail = "";
     </script>
 @endpush
