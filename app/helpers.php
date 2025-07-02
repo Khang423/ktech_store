@@ -2,7 +2,9 @@
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\Auth;
+
 
 if (!function_exists('formatPriceToVND')) {
     function formatPriceToVND($price)
