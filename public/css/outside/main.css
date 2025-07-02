@@ -300,7 +300,10 @@ body {
     position: relative;
     background-color: #fff;
 }
-.section-product-info .product-detail-info .product-versions .version-card.active {
+.section-product-info
+    .product-detail-info
+    .product-versions
+    .version-card.active {
     height: 100px;
     width: 48%;
     border: 1px solid lightgray;
