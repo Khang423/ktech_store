@@ -1,6 +1,8 @@
 body {
-    background-color: #fff;
-    font-family: Arial, sans-serif;
+    background-color: #f8f8fc;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.25rem;
+    color: #333333;
 }
 
 .empty {
@@ -72,8 +74,8 @@ body {
     padding: 15px;
     background-color: #fff;
     cursor: pointer;
-    border: 1px solid lightgray;
-    border-radius: 3px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 #section-laptop .product-content {
@@ -298,7 +300,10 @@ body {
     position: relative;
     background-color: #fff;
 }
-.section-product-info .product-detail-info .product-versions .version-card.active {
+.section-product-info
+    .product-detail-info
+    .product-versions
+    .version-card.active {
     height: 100px;
     width: 48%;
     border: 1px solid lightgray;
@@ -1286,20 +1291,20 @@ body {
     padding-left: 5px;
     border-radius: 3px;
 }
-.section-order .payment-content .thumbnail{
-    height:100%;
+.section-order .payment-content .thumbnail {
+    height: 100%;
     width: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.section-order .payment-content .thumbnail img{
+.section-order .payment-content .thumbnail img {
     height: 60px;
     width: 60px;
     border-radius: 5px;
 }
 
-.section-order .payment-content .title{
+.section-order .payment-content .title {
     width: 80%;
     display: flex;
     justify-content: start;
@@ -1309,7 +1314,7 @@ body {
     color: #000;
 }
 
-.section-order .payment-content .fee-ship{
+.section-order .payment-content .fee-ship {
     width: 20%;
     display: flex;
     justify-content: end;
@@ -2301,4 +2306,165 @@ body {
     .content
     #btn-add-address:hover {
     background-color: #25449adc;
+}
+.section-search {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.section-search .option {
+    height: 500px;
+    width: 20%;
+    background-color: #fff;
+    padding: 10px;
+}
+.section-search .view-product {
+    height: 500px;
+    width: 80%;
+}
+
+.section-search .option .range-price {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 2px solid lightgray;
+}
+.section-search .option .range-price .title {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.section-search .option .range-price .content {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section-search .option .range-price .content .input-price {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+.section-search .option .range-price .content .input-price .start-price {
+    height: 30px;
+    width: 50%;
+}
+.section-search .option .range-price .content .input-price .start-price input {
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid lightgray;
+}
+.section-search .option .range-price .content .input-price .end-price {
+    height: 30px;
+    width: 50%;
+}
+.section-search .option .range-price .content .input-price .end-price input {
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid lightgray;
+}
+.section-search .option .range-price .content .animation-ragne-price {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-search .option .item {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+}
+
+.section-search .option .item .title {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.section-search .option .item .title .name {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
+
+.section-search .option .item .title .icon-arrow {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+.section-search .option .item .title .icon-arrow i{
+    transition: transform 0.3s ease;
+}
+.section-search .option .item .title .icon-arrow.rotated i{
+    transform: rotate(180deg);
+}
+.section-search .option .item .content {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    display: none;
+    margin-bottom: 10px;
+}
+.section-search .option .item .content.active {
+    display: block;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    max-height: auto;
+}
+.section-search .option > .item > .content > .item {
+    height: 30px;
+    flex: 1 1 48%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: none;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    gap: 10px;
+}
+.section-search .option > .item > .content > .item .checkbox {
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-search .option > .item > .content > .item .title {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 12px;
 }
