@@ -6,6 +6,7 @@ use App\Enums\StatusEnum;
 use App\Http\Requests\auth\LoginRequest;
 use App\Http\Requests\auth\RegisterRequest;
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\CategoryProduct;
@@ -114,9 +115,11 @@ class HomeController extends Controller
     {
         $keyword = $request->query('q');
         $result = ProductVersion::where('name', 'like', '%' . $keyword . '%')->get();
+        $brand = Brand::get(['id','name']);
         return view('outside.search-result', [
             'product' => $result,
             'keyword' => $keyword,
+            'brand' => $brand,
             'title' => 'Kết quả tìm kiếm'
         ]);
     }

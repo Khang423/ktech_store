@@ -22,18 +22,6 @@ $(document).ready(function () {
         },
     });
 
-    // Initialize Swiper for category products with responsive breakpoints
-    new Swiper(".swiper-category-product", {
-        loop: true,
-        slidesPerView: 5,
-        spaceBetween: 15,
-        breakpoints: {
-            400: { slidesPerView: 2 },
-            640: { slidesPerView: 3 },
-            768: { slidesPerView: 4 },
-            1024: { slidesPerView: 5 },
-        },
-    });
 
     // Handle product card click - redirect to product detail page
     $(".card-product").on("click", function () {

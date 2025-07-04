@@ -1,5 +1,6 @@
-$(".option .item").click((e) => {
-    const $item = $(e.currentTarget);
+$(".option .item .title").click((e) => {
+    const $title = $(e.currentTarget);
+    const $item = $title.closest(".item");
     const $content = $item.find(".content");
     const $iconArrow = $item.find(".icon-arrow");
 
