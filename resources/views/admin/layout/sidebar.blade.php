@@ -96,6 +96,14 @@
                     </span>
                 </a>
             </li>
+             <li class="side-nav-item">
+                <a href="{{ route('admin.tags.index') }}" class="side-nav-link">
+                    <i class="uil uil-pricetag-alt"></i>
+                    <span>
+                        Từ khoá tìm kiếm
+                    </span>
+                </a>
+            </li>
             <li class="side-nav-title">
                 Hệ thống
             </li>

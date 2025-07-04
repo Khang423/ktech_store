@@ -48,35 +48,30 @@
             <div class="item" data-id="1">
                 <div class="title">
                     <div class="name">
-                        Series Model
+                        Thương hiệu
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-down"></i>
                     </div>
                 </div>
                 <div class="content">
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
+                    @foreach ($brand as $i)
+                        <div class="item" data-id="{{ $i->id }}">
+                            <div class="checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <div class="title">
+                                {{ $i->name }}
+                            </div>
                         </div>
-                        <div class="title">
-                            Macbook Pro
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            Macbook Air
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
+            {{-- core cpu --}}
             <div class="item" data-id="3">
                 <div class="title">
                     <div class="name">
-                        Cấu hình
+                        CPU
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-down"></i>
@@ -133,6 +128,36 @@
                     </div>
                 </div>
             </div>
+            {{-- ssd --}}
+            <div class="item" data-id="2">
+                <div class="title">
+                    <div class="name">
+                        Ổ cứng SSD
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="item">
+                        <div class="checkbox">
+                            <input type="checkbox">
+                        </div>
+                        <div class="title">
+                            512GB
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="checkbox">
+                            <input type="checkbox">
+                        </div>
+                        <div class="title">
+                            1TB
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- ram --}}
             <div class="item" data-id="2">
                 <div class="title">
                     <div class="name">
@@ -148,15 +173,52 @@
                             <input type="checkbox">
                         </div>
                         <div class="title">
-                            512GB
+                            8GB
                         </div>
                     </div>
-                     <div class="item">
+                    <div class="item">
                         <div class="checkbox">
                             <input type="checkbox">
                         </div>
                         <div class="title">
-                            1TB
+                            16GB
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="checkbox">
+                            <input type="checkbox">
+                        </div>
+                        <div class="title">
+                            32GB
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- display --}}
+            <div class="item" data-id="2">
+                <div class="title">
+                    <div class="name">
+                        Màn hình
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="item">
+                        <div class="checkbox">
+                            <input type="checkbox">
+                        </div>
+                        <div class="title">
+                            2K
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="checkbox">
+                            <input type="checkbox">
+                        </div>
+                        <div class="title">
+                            4K
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,8 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StockExportController;
 use App\Http\Controllers\StockImportController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\TagDetailController;
 use Illuminate\Support\Facades\Route;
 
 // route home
@@ -241,5 +243,32 @@ Route::group([
         Route::get('/', [StockExportController::class, 'index'])->name('index');
         Route::post('/getList', [StockExportController::class, 'getList'])->name('getList');
         Route::get('/export-details', [StockExportController::class, 'exportDetail'])->name('exportDetail');
+    });
+
+    // Tag Route
+    Route::group([
+        'prefix' => 'tags',
+        'as' => 'tags.'
+    ], function () {
+        Route::get('/', [TagController::class, 'index'])->name('index');
+        Route::post('/getList', [TagController::class, 'getList'])->name('getList');
+        Route::get('/create', [TagController::class, 'create'])->name('create');
+        Route::post('/store', [TagController::class, 'store'])->name('store');
+        Route::get('/{tag:slug}/edit', [TagController::class, 'edit'])->name('edit');
+        Route::put('/{tag:slug}/edit', [TagController::class, 'update'])->name('update');
+        Route::delete('/delete', [TagController::class, 'delete'])->name('delete');
+        Route::get('detail/{tag:slug}', [TagDetailController::class, 'index'])->name('detail');
+
+        Route::group([
+            'prefix' => '/{tag:slug}',
+            'as' => 'tagDetail.'
+        ], function () {
+            Route::post('/getList', [TagDetailController::class, 'getList'])->name('getList');
+            Route::get('/create', [TagDetailController::class, 'create'])->name('create');
+            Route::post('/store', [TagDetailController::class, 'store'])->name('store');
+            Route::get('/{tagDetail:slug}/edit', [TagDetailController::class, 'edit'])->name('edit');
+            Route::put('/{tagDetail:slug}/edit', [TagDetailController::class, 'update'])->name('update');
+            Route::delete('/delete', [TagDetailController::class, 'delete'])->name('delete');
+        });
     });
 });
