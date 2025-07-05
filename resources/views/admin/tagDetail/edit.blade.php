@@ -2,7 +2,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Danh mục : {{ $categoryProductDetail->categoryProduct->name }}
+            Danh mục : {{ $tag->name }}
         </span>
         <i class="mdi mdi-chevron-right"></i>
         <span class="text-primary">
@@ -26,14 +26,13 @@
                                 <div class="row" hidden>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label for="catogory_product_id" class="form-label">Danh mục sản phẩm</label>
-                                            <select class="form-select" id="catogory_product_id" name="catogory_product_id"
+                                            <select class="form-select" id="tag_id" name="tag_id"
                                                 style="height: 48px">
-                                                    <option value="{{ $categoryProductDetail->id }}">
-                                                        {{ $categoryProductDetail->name }}
+                                                    <option value="{{ $tagDetail->id }}">
+                                                        {{ $tagDetail->name }}
                                                     </option>
                                             </select>
-                                            <div class="text-danger mt-1 error-catogory_product_id"></div>
+                                            <div class="text-danger mt-1 error-tag_id"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -41,9 +40,9 @@
                                     <div class="col-lg-12">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label for="name" class="form-label">Tên danh mục chi tiết</label>
+                                                <label for="name" class="form-label">Tên từ khóa</label>
                                                 <input type="text" class="form-control" id="name"
-                                                    placeholder="Tên danh mục chi tiết" name="name" value="{{ $categoryProductDetail->name }}">
+                                                    placeholder="Tên từ khóa" name="name" value="{{ $tagDetail->name }}">
                                                 <div class="text-danger mt-1 error-name"></div>
                                             </div>
                                         </div>
@@ -69,8 +68,8 @@
             // init
             const $form = $('#form-update');
             const $inputs = $form.find('input');
-            $routeUpdate = "{{ route('admin.categoryProducts.details.update', ['categoryProduct' => $categoryProduct, 'categoryProductDetail' => $categoryProductDetail]) }}";
-            $routeIndex = "{{ route('admin.categoryProducts.detail', ['categoryProduct' => $categoryProduct]) }}";
+            $routeUpdate = "{{ route('admin.tags.tagDetail.update', ['tag' => $tag, 'tagDetail' => $tagDetail]) }}";
+            $routeIndex = "{{ route('admin.tags.detail', ['tag' => $tag]) }}";
             // function handle
             update($routeUpdate, $routeIndex);
             deleteAlertValidation($inputs);

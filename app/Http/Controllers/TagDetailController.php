@@ -20,8 +20,8 @@ class TagDetailController extends Controller
 
     public function index(Tag $tag)
     {
-        return view('admin.tagDetail.index',[
-            'tag' => $tag
+        return view('admin.tagDetail.index', [
+            'tag' => $tag,
         ]);
     }
 
@@ -32,8 +32,8 @@ class TagDetailController extends Controller
 
     public function create(Tag $tag)
     {
-        return view('admin.tagDetail.create',[
-            'tag' => $tag
+        return view('admin.tagDetail.create', [
+            'tag' => $tag,
         ]);
     }
 
@@ -46,16 +46,29 @@ class TagDetailController extends Controller
         return $this->errorResponse();
     }
 
-    public function edit(TagDetail $tag_detail)
+    public function edit(Tag $tag, TagDetail $tagDetail)
     {
-        return view('admin.tagDetail.edit',[
-            'tagDetail' => $tag_detail
+        return view('admin.tagDetail.edit', [
+            'tag' => $tag,
+            'tagDetail' => $tagDetail,
         ]);
     }
 
-    public function update(Request $request, TagDetail $tag_detail) {
-
+    public function update(Request $request, Tag $tag, TagDetail $tagDetail)
+    {
+        $result = $this->tagDetailService->update($request, $tagDetail);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 
-    public function delete(Request $request) {}
+    public function delete(Request $request)
+    {
+        $result = $this->tagDetailService->delete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
+    }
 }

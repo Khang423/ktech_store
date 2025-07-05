@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Http\Controllers\Controller;
-use App\Models\CategoryProduct;
-use App\Models\CategoryProductDetail;
 use App\Models\Tag;
 use App\Models\TagDetail;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +22,8 @@ class TagDetailService extends Controller
     {
         return DataTables::of(
             TagDetail::where('tag_id', $tags->id)
-                ->select((new TagDetail)->getInfo())->get()
+                ->select((new TagDetail())->getInfo())
+                ->get(),
         )
             ->editColumn('index', function ($object) {
                 static $i = 0;
@@ -34,11 +33,11 @@ class TagDetailService extends Controller
                 $tags = Tag::where('id', $object->tag_id)->first();
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.tags.tagDetail.delete',[
-                        'tag' => $tags
+                    'destroy' => route('admin.tags.tagDetail.delete', [
+                        'tag' => $tags,
                     ]),
                     'edit' => route('admin.tags.tagDetail.edit', [
-                        'tag' => $tags->slug,
+                        'tag' => $tags,
                         'tagDetail' => $object,
                     ]),
                 ];
@@ -64,16 +63,14 @@ class TagDetailService extends Controller
         }
     }
 
-    public function update($request, $tagsDetail)
+    public function update($request, $tagDetail)
     {
         DB::beginTransaction();
         try {
-            TagDetail::where('id', $tagsDetail->id)
-                ->update([
-                    'name' => $request->name,
-                    'slug' => Str::slug($request->name),
-                ]);
-
+            TagDetail::where('id', $tagDetail->id)->update([
+                'name' => $request->name,
+                'slug' => Str::slug(title: $request->name),
+            ]);
             DB::commit();
             return true;
         } catch (\Throwable $e) {
@@ -86,8 +83,7 @@ class TagDetailService extends Controller
     {
         DB::beginTransaction();
         try {
-            TagDetail::where('id', $request->id)
-                ->delete();
+            TagDetail::where('id', $request->id)->delete();
             DB::commit();
             return true;
         } catch (\Exception $e) {
