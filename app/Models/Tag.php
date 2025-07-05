@@ -33,4 +33,8 @@ class Tag extends Model
     {
         return \Carbon\Carbon::parse($value)->format('H:i:s d-m-Y');
     }
+
+    public function tagDetails() {
+        return $this->hasMany(TagDetail::class);
+    }
 }

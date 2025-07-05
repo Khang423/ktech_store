@@ -35,4 +35,8 @@ class TagDetail extends Model
     {
         return \Carbon\Carbon::parse($value)->format('H:i:s d-m-Y');
     }
+
+    public function tag(){
+        return $this->belongsTo(Tag::class);
+    }
 }
