@@ -1,3 +1,6 @@
+@php
+    use App\Enums\TagEnums;
+@endphp
 @extends('outside.layout.master')
 @section('content')
     <div class="empty"></div>
@@ -78,54 +81,20 @@
                     </div>
                 </div>
                 <div class="content">
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            Core I5
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            Core I7
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            Core I9
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            Ryzen R5
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            Ryzen R7
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            Ryzen R9
-                        </div>
-                    </div>
+                    @foreach ($tag as $i)
+                        @if ($i->slug === TagEnums::CORE_CPU)
+                            @foreach ($i->tagDetails as $tagDetails)
+                                <div class="item">
+                                    <div class="checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="title">
+                                        {{ $tagDetails->name}}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
             {{-- ssd --}}
