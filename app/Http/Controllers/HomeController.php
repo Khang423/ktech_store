@@ -12,6 +12,7 @@ use App\Models\CartItem;
 use App\Models\CategoryProduct;
 use App\Models\Customer;
 use App\Models\ProductVersion;
+use App\Models\Tag;
 use App\Services\AuthService;
 use App\Services\CityService;
 use App\Traits\ApiResponse;
@@ -116,11 +117,13 @@ class HomeController extends Controller
         $keyword = $request->query('q');
         $result = ProductVersion::where('name', 'like', '%' . $keyword . '%')->get();
         $brand = Brand::get(['id','name']);
+        $tag = Tag::with('tagDetails')->get();
         return view('outside.search-result', [
             'product' => $result,
             'keyword' => $keyword,
             'brand' => $brand,
-            'title' => 'Kết quả tìm kiếm'
+            'title' => 'Kết quả tìm kiếm',
+            'tag' => $tag
         ]);
     }
 
