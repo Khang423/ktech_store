@@ -16,7 +16,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-5">
                             <a class="btn btn-success mb-2"
-                                href="{{ url()->previous() ?? route('admin.tags.index') }}">
+                                href="{{ route('admin.tags.index') }}">
                                 <i class="uil uil-step-backward-alt"></i>
                                 Trở về
                             </a>

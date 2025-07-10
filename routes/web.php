@@ -46,7 +46,7 @@ Route::group(
         // check auth status
         Route::post('/auth-status', [AuthController::class, 'authCheck'])->name('authStatus');
 
-        Route::post('/productFillter', [SearchFillter::class, 'productFillter'])->name('productFillter');
+        Route::post('/productFillter', [HomeController::class, 'productFillter'])->name('productFillter');
     },
 );
 

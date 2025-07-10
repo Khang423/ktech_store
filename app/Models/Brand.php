@@ -54,4 +54,8 @@ class Brand extends Model
                     return ' ';
             }
     }
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }
