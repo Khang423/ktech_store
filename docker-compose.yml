@@ -11,6 +11,7 @@ services:
       - db
     networks:
       - laravel
+    user: "${USER_ID}:${GROUP_ID}"
 
   nginx:
     image: nginx:stable
@@ -39,7 +40,7 @@ services:
     networks:
       - laravel
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
 volumes:
   dbdata:

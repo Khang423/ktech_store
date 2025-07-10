@@ -39,10 +39,10 @@ class HomeController extends Controller
         $product = ProductVersion::whereHas('products', function ($query) {
             $query->where('status', StatusEnum::ON);
         })->with([
-                    'products' => function ($query) {
-                        $query->where('status', StatusEnum::ON);
-                    }
-                ])->get();
+            'products' => function ($query) {
+                $query->where('status', StatusEnum::ON);
+            }
+        ])->get();
 
         $category_product = CategoryProduct::get();
         return view('outside.index', [
@@ -116,7 +116,7 @@ class HomeController extends Controller
     {
         $keyword = $request->query('q');
         $result = ProductVersion::where('name', 'like', '%' . $keyword . '%')->get();
-        $brand = Brand::get(['id','name']);
+        $brand = Brand::get(['id', 'name']);
         $tag = Tag::with('tagDetails')->get();
         return view('outside.search-result', [
             'product' => $result,
@@ -149,6 +149,29 @@ class HomeController extends Controller
             'title' => 'Ktech Order',
             'city' => $city,
             'customer' => $customer
+        ]);
+    }
+
+    public function productFillter(Request $request)
+    {
+        $fillter = $request->input('data');
+        $selectedBrand = $fillter['brand'] ?? [];
+        $selectedCPU = $fillter['cpu'] ?? [];
+
+        $result = ProductVersion::with(['products.brands','laptopSpes'])
+            ->when($selectedBrand, function ($query) use ($selectedBrand) {
+                $query->whereHas('products.brands', function ($q) use ($selectedBrand) {
+                    $q->whereIn('name', $selectedBrand);
+                });
+            })
+            ->when($selectedCPU, function ($query) use ($selectedCPU) {
+                $query->whereIn('laptopSpes.cpu', $selectedCPU);
+            })
+            ->get();
+
+        dd($result);
+        return response()->json([
+            'data' => $result
         ]);
     }
 }

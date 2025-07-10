@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item" data-id="1">
+            <div class="item" data-name="brand">
                 <div class="title">
                     <div class="name">
                         Thương hiệu
@@ -59,7 +59,7 @@
                 </div>
                 <div class="content">
                     @foreach ($brand as $i)
-                        <div class="item" data-id="{{ $i->id }}">
+                        <div class="item" data-name="{{$i->name}}">
                             <div class="checkbox">
                                 <input type="checkbox">
                             </div>
@@ -71,7 +71,7 @@
                 </div>
             </div>
             {{-- core cpu --}}
-            <div class="item" data-id="3">
+            <div class="item" data-name="cpu">
                 <div class="title">
                     <div class="name">
                         CPU
@@ -84,7 +84,7 @@
                     @foreach ($tag as $i)
                         @if ($i->slug === TagEnums::CORE_CPU)
                             @foreach ($i->tagDetails as $tagDetails)
-                                <div class="item">
+                                <div class="item" data-name="{{ $tagDetails->slug}}">
                                     <div class="checkbox">
                                         <input type="checkbox">
                                     </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             {{-- ssd --}}
-            <div class="item" data-id="2">
+            <div class="item" data-name="ssd">
                 <div class="title">
                     <div class="name">
                         Ổ cứng SSD
@@ -127,7 +127,7 @@
                 </div>
             </div>
             {{-- ram --}}
-            <div class="item" data-id="2">
+            <div class="item" data-name="ram" >
                 <div class="title">
                     <div class="name">
                         Ram
@@ -164,7 +164,7 @@
                 </div>
             </div>
             {{-- display --}}
-            <div class="item" data-id="2">
+            <div class="item" data-name="display">
                 <div class="title">
                     <div class="name">
                         Màn hình
@@ -201,12 +201,6 @@
                             <div class="swiper-slide">
                                 <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
                                     <div class="product-content" data-id="product-id">
-                                        <div class="product-discount d-flex">
-                                            <img src="{{ asset('asset/outside/icon/sale.png') }}" alt="Icon sale">
-                                            <div class="percent-discount">
-                                                Giảm 30%
-                                            </div>
-                                        </div>
                                         <div class="product-thumbnail">
                                             <img src="{{ asset('asset/admin/products') . '/' . $item->id . '/' . $item->thumbnail }}"
                                                 alt="">

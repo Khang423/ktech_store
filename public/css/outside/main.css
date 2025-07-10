@@ -2331,10 +2331,11 @@ body {
 }
 
 .section-search .option {
-    height: 500px;
+    height: auto;
     width: 20%;
     background-color: #fff;
     padding: 10px;
+    border-radius: 10px;
 }
 .section-search .view-product {
     height: 500px;

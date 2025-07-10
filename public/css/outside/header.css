@@ -84,9 +84,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.header .container .content .search-bar .content .circle-icon:hover {
-    background-color: #2a52be66;
+    border-radius: 5px;
     cursor: pointer;
 }
 .header .container .content .search-bar .content #icon-search {

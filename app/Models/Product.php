@@ -42,4 +42,8 @@ class Product extends Model
     public function firstProductVersion() {
         return $this->hasOne(ProductVersion::class, 'product_id')->orderBy('created_at');
     }
+
+    public function brands() {
+        return $this->belongsTo(Brand::class,'brand_id');
+    }
 }
