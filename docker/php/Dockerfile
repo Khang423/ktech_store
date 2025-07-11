@@ -9,6 +9,12 @@
 # COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 FROM php:8.3-fpm
 
+# Add system user matching the host UID:GID
+ARG USER_ID
+ARG GROUP_ID
+RUN groupadd -g ${GROUP_ID} azens \
+    && useradd -u ${USER_ID} -g ${GROUP_ID} -m azens
+
 # Cài các thư viện cần thiết cho Laravel + WebP support
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
