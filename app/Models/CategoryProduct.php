@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryProduct extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'id',
         'name',
         'slug',
-        'description',
         'created_at',
         'updated_at',
     ];
@@ -21,7 +22,6 @@ class CategoryProduct extends Model
             'id',
             'name',
             'slug',
-            'description',
             'created_at',
             'updated_at',
         ];
@@ -35,8 +35,8 @@ class CategoryProduct extends Model
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
 
-    public function categoryProductDetails()
+    public function usageTypes()
     {
-        return $this->hasMany(CategoryProductDetail::class, 'catogory_product_id', 'id');
+        return $this->hasMany(UsageType::class, 'category_product_id', 'id');
     }
 }

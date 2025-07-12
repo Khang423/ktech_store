@@ -3,29 +3,37 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PermissionRole extends Model
+class UsageType extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
-        'role_id',
-        'permission_id',
-        'created_at',
-        'updated_at',
+        'name',
+        'slug',
+        'category_product_id'
     ];
 
-    public function getInfo() {
+    public static function getInfo()
+    {
         return [
-            'role_id',
-            'permission_id',
+            'id',
+            'name',
+            'slug',
+            'category_product_id',
             'created_at',
             'updated_at',
+            'deleted_at'
         ];
+    }
+
+    public function categoryProducts() {
+        return $this->belongsTo(CategoryProduct::class, 'category_product_id');
     }
     public function getCreatedAtAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
-
     public function getUpdatedAtAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');

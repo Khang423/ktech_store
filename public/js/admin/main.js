@@ -45,9 +45,7 @@ function update($routeUpdate, $routeIndex) {
             data: form_data,
             success: function () {
                 toast("Cập nhật thành công", "success");
-                setTimeout(() => {
-                    window.location.href = $routeIndex;
-                }, 2000);
+                window.location.href = $routeIndex;
             },
             error: function (data) {
                 $(".text-danger").text("");
@@ -63,6 +61,26 @@ function update($routeUpdate, $routeIndex) {
         });
     });
 }
+
+function restore($routeRestore , $table) {
+    $(document).on("click", "#btn-restore", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $routeRestore,
+            type: "POST",
+            data: { _token: $('meta[name="csrf-token"]').attr("content") },
+            success: function () {
+                toast("Khôi phục thành công");
+                $table.draw();
+            },
+            error: function () {
+                toast("Khôi phục thất bại", "error");
+            },
+        });
+    });
+}
+
 function destroy($routeDelete, $table) {
     $(document).on("click", ".destroy", function (e) {
         e.preventDefault();

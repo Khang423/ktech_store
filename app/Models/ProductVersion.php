@@ -3,19 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductVersion extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'product_id',
         'name',
+        'config_name',
         'slug',
         'price',
         'profit_rate',
         'final_price',
         'thumbnail',
-        'created_at',
-        'updated_at',
     ];
 
     public static function getInfo()
@@ -24,6 +26,7 @@ class ProductVersion extends Model
             'id',
             'product_id',
             'name',
+            'config_name',
             'slug',
             'price',
             'profit_rate',
@@ -31,6 +34,7 @@ class ProductVersion extends Model
             'thumbnail',
             'created_at',
             'updated_at',
+            'deleted_at'
         ];
     }
 

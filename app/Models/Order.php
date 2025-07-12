@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
-        'id',
+        'customer_id',
+        'city_id',
+        'district_id',
+        'ward_id',
         'status',
         'total_price',
         'receiver_name',
@@ -15,11 +20,5 @@ class Order extends Model
         'receiver_email',
         'note',
         'ship',
-        'city_id',
-        'district_id',
-        'ward_id',
-        'created_at',
-        'updated_at',
-        'customer_id',
     ];
 }

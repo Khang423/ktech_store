@@ -28,6 +28,7 @@ return new class extends Migration
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
             $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

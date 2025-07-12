@@ -20,6 +20,12 @@
                                 Thêm
                             </a>
                         </div>
+                        <div class="col-sm-5">
+                            <a class="btn btn-primary" id="btn-restore">
+                                <i class="uil uil-history me-2"></i>
+                                Khôi phục
+                            </a>
+                        </div>
                     </div>
 
                     <div class="table-responsive">
@@ -174,8 +180,10 @@
                     $('td:eq(0)', row).html(index + 1 + this.api().page.info().start);
                 }
             });
-            $routeDelete = '{{ route('admin.brands.delete') }}';
-            destroy($routeDelete, table);
+            const routeDelete = '{{ route('admin.brands.destroy') }}';
+            const routeRestore = '{{ route('admin.brands.restoreAll') }}';
+            restore(routeRestore, table);
+            destroy(routeDelete, table);
         });
     </script>
 @endpush

@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
+    use SoftDeletes;
     protected $fillable  = [
         'id',
         'name',
         'slug',
-        'created_at',
-        'updated_at'
     ];
 
     public static function getInfo()
@@ -21,7 +21,8 @@ class Tag extends Model
             'name',
             'slug',
             'created_at',
-            'updated_at'
+            'updated_at',
+            'deleted_at'
         ];
     }
 

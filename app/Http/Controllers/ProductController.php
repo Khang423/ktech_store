@@ -166,4 +166,22 @@ class ProductController extends Controller
         }
         return $this->errorResponse();
     }
+
+    public function destroy(Request $request)
+    {
+        $result = $this->productService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->productService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
 }

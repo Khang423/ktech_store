@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('stock_exports', function (Blueprint $table) {
             $table->id();
             $table->string('ref_code')->unique();
-            $table->foreignId('inventory_id')->constrained('inventories')->cascadeOnDelete();
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
             $table->double('total_amount')->default(0);
             $table->smallInteger('status')->default(0); // pending, completed, cancelled
             $table->string('note');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,7 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('stock_exports', function (Blueprint $table) {
-            $table->dropForeign(['inventory_id']);
             $table->dropForeign(['order_id']);
             $table->dropForeign(['member_id']);
         });

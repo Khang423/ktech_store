@@ -12,6 +12,11 @@ use BenSampo\Enum\Enum;
 final class TagEnums extends Enum
 {
     const CORE_CPU = 'core-cpu';
-    const OptionTwo = 1;
-    const OptionThree = 2;
+    const SSD_SIZE = 'dung-luong-ssd';
+    const RAM_SIZE = 'dung-luong-ram';
+    const USAGE_NEEDS = 'nhu-cau';
+    const CPU_GEN = 'the-he-cpu';
+    const DISPLAY_RESOLUTION = 'do-phan-giai-man-hinh';
+    const GRAPHICS_CARD = 'card-do-hoa-roi';
+    const DISPLAY_SIZE = 'kich-thuoc-man-hinh';
 }

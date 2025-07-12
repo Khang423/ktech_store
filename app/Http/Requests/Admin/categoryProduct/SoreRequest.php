@@ -15,8 +15,6 @@ class SoreRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'description' => 'nullable|max:255',
-            'catogory_product_id' => 'nullable|max:255',
         ];
     }
     public function attributes(): array

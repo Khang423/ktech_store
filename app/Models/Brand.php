@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Brand extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'id',
         'name',
@@ -15,11 +18,9 @@ class Brand extends Model
         'country',
         'website_link',
         'status',
-        'created_at',
-        'updated_at'
     ];
 
-    public function getInfo()
+    public static function getInfo()
     {
         return [
             'id',

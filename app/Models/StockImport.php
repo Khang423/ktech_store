@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StockImport extends Model
 {
+    use SoftDeletes;
     protected $table = 'stock_imports';
 
     protected $fillable = [
