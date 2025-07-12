@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
             $table->text('banner')->nullable();
-            $table->text('banner_url')->nullable();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->smallInteger('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -6,12 +6,9 @@ use App\Http\Requests\Admin\categoryProduct\SoreRequest;
 use App\Http\Requests\Admin\categoryProduct\UpdateRequest;
 use App\Models\CategoryProduct;
 use App\Models\CategoryProductDetail;
-use App\Repositories\categoryProduct\CategoryProductInterface;
-use App\Repositories\categoryProduct\CategoryProductRepository;
 use App\Services\CategoryProductService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class CategoryProductController extends Controller
 {
@@ -72,59 +69,21 @@ class CategoryProductController extends Controller
         return $this->errorResponse();
     }
 
-
-    public function detail(CategoryProduct $categoryProduct)
+    public function destroy(Request $request)
     {
-        return view('admin.categoryProductDetail.index', [
-            'categoryProduct' => $categoryProduct
-        ]);
-    }
-
-    public function getListDetail(CategoryProduct $categoryProduct)
-    {
-        return $this->categoryProductService->getListDetail($categoryProduct);
-    }
-
-    public function createDetail(CategoryProduct $categoryProduct)
-    {
-        return view('admin.categoryProductDetail.create', [
-            'categoryProduct' => $categoryProduct,
-            'slug' => $categoryProduct->slug
-        ]);
-    }
-
-    public function storeDetail(SoreRequest $request)
-    {
-        $result = $this->categoryProductService->storeDetail($request);
+        $result = $this->categoryProductService->destroy($request);
         if ($result) {
             return $this->successResponse();
         }
-        return $this->errorResponse();
+        return false;
     }
 
-    public function editDetail($categoryProduct, CategoryProductDetail $categoryProductDetail)
+    public function restoreAll()
     {
-        return view('admin.categoryProductDetail.edit', [
-            'categoryProduct' => $categoryProduct,
-            'categoryProductDetail' => $categoryProductDetail
-        ]);
-    }
-
-    public function updateDetail(Request $request, CategoryProduct $categoryProduct, CategoryProductDetail $categoryProductDetail)
-    {
-        $result = $this->categoryProductService->updateDetail($request, $categoryProductDetail);
+        $result = $this->categoryProductService->restoreAll();
         if ($result) {
             return $this->successResponse();
         }
-        return $this->errorResponse();
-    }
-
-    public function deleteDetail(Request $request)
-    {
-        $result = $this->categoryProductService->deleteDetail($request);
-        if ($result) {
-            return $this->successResponse();
-        }
-        return $this->errorResponse();
+        return false;
     }
 }

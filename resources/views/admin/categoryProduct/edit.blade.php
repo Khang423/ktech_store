@@ -2,14 +2,14 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Danh mục sản phẩm
+            Loại sản phẩm
         </span>
         <i class="mdi mdi-chevron-right"></i>
         <span class="text-primary">
             <a href="{{route('admin.suppliers.index') }}">Danh sách</a>
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Cập nhật
+        Chỉnh sửa
     </div>
 @endsection
 @section('content')
@@ -29,24 +29,12 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label for="name" class="form-label">Tên Danh mục</label>
+                                            <label for="name" class="form-label">Tên loại</label>
                                             <input type="text" class="form-control" id="name"
-                                                   placeholder="Tên Danh mục"
+                                                   placeholder="Tên loại"
                                                    name="name"
                                                    value="{{ $categoryProduct->name }}">
                                             <div class="text-danger mt-1 error-name"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label for="description" class="form-label">Mô tả</label>
-                                            <input type="text" class="form-control" id="description"
-                                                   placeholder="Mô tả"
-                                                   name="description"
-                                                   value="{{ $categoryProduct->name }}">
-                                            <div class="text-danger mt-1 error-description"></div>
                                         </div>
                                     </div>
                                 </div>

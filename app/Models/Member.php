@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Enums\GenderEnum;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class Member extends Authenticatable
 {
+    use SoftDeletes;
     protected $fillable = [
         'name',
         'slug',

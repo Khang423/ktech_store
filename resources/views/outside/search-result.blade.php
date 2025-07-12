@@ -2,6 +2,9 @@
     use App\Enums\TagEnums;
 @endphp
 @extends('outside.layout.master')
+@push('js')
+    <link href="{{ asset('css/outside/section-laptop.css') }}" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
     <div class="empty"></div>
     <div class="breadcrumb1">
@@ -59,7 +62,7 @@
                 </div>
                 <div class="content">
                     @foreach ($brand as $i)
-                        <div class="item" data-name="{{$i->name}}">
+                        <div class="item" data-name="{{ $i->name }}">
                             <div class="checkbox">
                                 <input type="checkbox">
                             </div>
@@ -84,12 +87,12 @@
                     @foreach ($tag as $i)
                         @if ($i->slug === TagEnums::CORE_CPU)
                             @foreach ($i->tagDetails as $tagDetails)
-                                <div class="item" data-name="{{ $tagDetails->slug}}">
+                                <div class="item" data-name="{{ $tagDetails->name }}">
                                     <div class="checkbox">
                                         <input type="checkbox">
                                     </div>
                                     <div class="title">
-                                        {{ $tagDetails->name}}
+                                        {{ $tagDetails->name }}
                                     </div>
                                 </div>
                             @endforeach
@@ -97,131 +100,198 @@
                     @endforeach
                 </div>
             </div>
-            {{-- ssd --}}
-            <div class="item" data-name="ssd">
+
+            {{-- graphics card --}}
+            <div class="item" data-name="graphic_card">
                 <div class="title">
                     <div class="name">
-                        Ổ cứng SSD
+                        Card đồ hoạ rời
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-down"></i>
                     </div>
                 </div>
                 <div class="content">
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            512GB
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            1TB
-                        </div>
-                    </div>
+                    @foreach ($tag as $i)
+                        @if ($i->slug === TagEnums::GRAPHICS_CARD)
+                            @foreach ($i->tagDetails as $tagDetails)
+                                <div class="item" data-name="{{ $tagDetails->name }}">
+                                    <div class="checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="title">
+                                        {{ $tagDetails->name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
-            {{-- ram --}}
-            <div class="item" data-name="ram" >
+
+            {{-- display size --}}
+            <div class="item" data-name="display_size">
                 <div class="title">
                     <div class="name">
-                        Ram
+                        Kích thước màn hình
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-down"></i>
                     </div>
                 </div>
                 <div class="content">
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            8GB
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            16GB
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            32GB
-                        </div>
-                    </div>
+                    @foreach ($tag as $i)
+                        @if ($i->slug === TagEnums::DISPLAY_SIZE)
+                            @foreach ($i->tagDetails as $tagDetails)
+                                <div class="item" data-name="{{ $tagDetails->name }}">
+                                    <div class="checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="title">
+                                        {{ $tagDetails->name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
-            {{-- display --}}
-            <div class="item" data-name="display">
+
+            {{-- ram size --}}
+            <div class="item" data-name="ram_size">
                 <div class="title">
                     <div class="name">
-                        Màn hình
+                        Dung lượng RAM
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-down"></i>
                     </div>
                 </div>
                 <div class="content">
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            2K
-                        </div>
+                    @foreach ($tag as $i)
+                        @if ($i->slug === TagEnums::RAM_SIZE)
+                            @foreach ($i->tagDetails as $tagDetails)
+                                <div class="item" data-name="{{ $tagDetails->name }}">
+                                    <div class="checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="title">
+                                        {{ $tagDetails->name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- ssd size --}}
+            <div class="item" data-name="ssd_size">
+                <div class="title">
+                    <div class="name">
+                        Dung lượng SSD
                     </div>
-                    <div class="item">
-                        <div class="checkbox">
-                            <input type="checkbox">
-                        </div>
-                        <div class="title">
-                            4K
-                        </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-down"></i>
                     </div>
+                </div>
+                <div class="content">
+                    @foreach ($tag as $i)
+                        @if ($i->slug === TagEnums::SSD_SIZE)
+                            @foreach ($i->tagDetails as $tagDetails)
+                                <div class="item" data-name="{{ $tagDetails->name }}">
+                                    <div class="checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="title">
+                                        {{ $tagDetails->name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- display resolution --}}
+            <div class="item" data-name="display_resolution">
+                <div class="title">
+                    <div class="name">
+                        Độ phân giải màn hình
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                </div>
+                <div class="content">
+                    @foreach ($tag as $i)
+                        @if ($i->slug === TagEnums::DISPLAY_RESOLUTION)
+                            @foreach ($i->tagDetails as $tagDetails)
+                                <div class="item" data-name="{{ $tagDetails->name }}">
+                                    <div class="checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="title">
+                                        {{ $tagDetails->name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- usage needs --}}
+            <div class="item" data-name="usage_need">
+                <div class="title">
+                    <div class="name">
+                        Nhu cầu sử dụng
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-down"></i>
+                    </div>
+                </div>
+                <div class="content">
+                    @foreach ($tag as $i)
+                        @if ($i->slug === TagEnums::USAGE_NEEDS)
+                            @foreach ($i->tagDetails as $tagDetails)
+                                <div class="item" data-name="{{ $tagDetails->name }}">
+                                    <div class="checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="title">
+                                        {{ $tagDetails->name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
         <div class="view-product">
             <section id="section-laptop">
-                <div class="swiper-product-item">
-                    <div class="swiper-wrapper">
-                        @foreach ($product as $item)
-                            <div class="swiper-slide">
-                                <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
-                                    <div class="product-content" data-id="product-id">
-                                        <div class="product-thumbnail">
-                                            <img src="{{ asset('asset/admin/products') . '/' . $item->id . '/' . $item->thumbnail }}"
-                                                alt="">
-                                        </div>
-                                        <div class="product-title ">
-                                            {{ $item->name }}
-                                        </div>
-                                        <div class="product-price">
-                                            {{ formatPriceToVND($item->final_price) }}
-                                        </div>
-                                        <div class="product-rate d-flex">
-                                            <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                            <div class="icon-heart">
-                                            </div>
-                                        </div>
-                                    </div>
+                @foreach ($product as $item)
+                    <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
+                        <div class="product-content" data-id="product-id">
+                            <div class="product-thumbnail">
+                                <img src="{{ asset('asset/admin/products') . '/' . $item->id . '/' . $item->thumbnail }}"
+                                    alt="">
+                            </div>
+                            <div class="product-title ">
+                                {{ $item->name }}
+                            </div>
+                            <div class="product-price">
+                                {{ formatPriceToVND($item->final_price) }}
+                            </div>
+                            <div class="product-rate d-flex">
+                                <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
+                                <div class="icon-heart">
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </section>
         </div>
     </div>

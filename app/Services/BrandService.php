@@ -40,7 +40,7 @@ class BrandService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.brands.delete'),
+                    'destroy' => route('admin.brands.destroy'),
                     'edit' => route('admin.brands.edit', $object),
                 ];
             })
@@ -96,8 +96,8 @@ class BrandService extends Controller
                 $thumbnailNew = $thumbnailName;
 
                 if ($thumbnailNew) {
-                    $result = $this->imageTrait->deleteImage($request->thumbnail_old,$folderName,null);
-                    if($result){
+                    $result = $this->imageTrait->deleteImage($request->thumbnail_old, $folderName, null);
+                    if ($result) {
                         $updateData['logo'] = $thumbnailNew;
                     }
                 }
@@ -119,12 +119,38 @@ class BrandService extends Controller
     {
         DB::beginTransaction();
         try {
-            $brand = Brand::find($request->id);
-            $this->imageTrait->deleteImage($brand->logo,'brands',null);
-            $this->model
-                ->query()
-                ->where('id', $request->id)
-                ->delete();
+            $brand = Brand::withTrashed()->findOrFail($request->id);
+            $this->imageTrait->deleteImage($brand->logo, 'brands', null);
+            $brand->forceDelete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function destroy($request)
+    {
+        DB::beginTransaction();
+        try {
+            $brand = Brand::findOrFail($request->id);
+            $brand->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function restoreAll()
+    {
+        DB::beginTransaction();
+        try {
+            Brand::onlyTrashed()->restore();
             DB::commit();
             return true;
         } catch (\Exception $e) {

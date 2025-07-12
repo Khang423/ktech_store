@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->smallInteger('status')->default(0);
             $table->integer('city_id')->nullable();
             $table->integer('district_id')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
             $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -36,6 +38,7 @@ return new class extends Migration
             $table->dropForeign(['city_id']);
             $table->dropForeign(['district_id']);
             $table->dropForeign(['ward_id']);
+            $table->dropForeign(['customer_id']);
         });
 
         Schema::dropIfExists('orders');

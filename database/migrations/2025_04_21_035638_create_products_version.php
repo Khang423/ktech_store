@@ -16,10 +16,14 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
+            $table->string('config_name');
+            $table->smallInteger('profit_rate')->default(0)->comment('Tỷ lệ lợi nhuận');
+            $table->double('final_price')->default(0)->comment('Giá bán');
             $table->double('price')->nullable();
             $table->text('thumbnail')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

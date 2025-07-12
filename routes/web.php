@@ -15,11 +15,13 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductVersionController;
 use App\Http\Controllers\SearchFillter;
 use App\Http\Controllers\StockExportController;
 use App\Http\Controllers\StockImportController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TagDetailController;
+use App\Http\Controllers\UsageTypeController;
 use Illuminate\Support\Facades\Route;
 
 // route home
@@ -132,21 +134,23 @@ Route::group(
                 Route::post('/store', [ProductController::class, 'store'])->name('store');
                 Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
                 Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
-                Route::post('/getDataCategoryProductDetail', [ProductController::class, 'getDataCategoryProductDetail'])->name('getDataCategoryProductDetail');
                 Route::post('/updateStatus', [ProductController::class, 'updateStatus'])->name('updateStatus');
-
+                Route::delete('/destroy', [ProductController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [ProductController::class, 'restoreAll'])->name('restoreAll');
                 Route::group(
                     [
                         'prefix' => '/{productVersion:slug}',
                         'as' => 'productsVersion.',
                     ],
                     function () {
-                        Route::get('/', [ProductController::class, 'indexProductVersion'])->name('index');
-                        Route::post('/getList', [ProductController::class, 'getListProductVersion'])->name('getList');
-                        Route::get('/create', [ProductController::class, 'createProductVersion'])->name('create');
-                        Route::post('/store', [ProductController::class, 'storeProductVersion'])->name('store');
-                        Route::get('/edit', [ProductController::class, 'editProductVersion'])->name('edit');
-                        Route::put('/edit', [ProductController::class, 'updateProductVersion'])->name('update');
+                        Route::get('/', [ProductVersionController::class, 'index'])->name('index');
+                        Route::post('/getList', [ProductVersionController::class, 'getList'])->name('getList');
+                        Route::get('/create', [ProductVersionController::class, 'create'])->name('create');
+                        Route::post('/store', [ProductVersionController::class, 'store'])->name('store');
+                        Route::get('/edit', [ProductVersionController::class, 'edit'])->name('edit');
+                        Route::put('/edit', [ProductVersionController::class, 'update'])->name('update');
+                        Route::delete('/destroy', [ProductVersionController::class, 'destroy'])->name('destroy');
+                        Route::post('/restoreAll', [ProductVersionController::class, 'restoreAll'])->name('restoreAll');
                     },
                 );
             },
@@ -183,6 +187,8 @@ Route::group(
                 Route::get('/edit/{brand:slug}', [BrandController::class, 'edit'])->name('edit');
                 Route::put('/edit/{brand:slug}', [BrandController::class, 'update'])->name('update');
                 Route::delete('/delete', [BrandController::class, 'delete'])->name('delete');
+                Route::delete('/destroy', [BrandController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [BrandController::class, 'restoreAll'])->name('restoreAll');
             },
         );
         // Supplier route
@@ -202,7 +208,7 @@ Route::group(
             },
         );
 
-        // categoryProduct product route
+        // categoryProduct
         Route::group(
             [
                 'prefix' => 'categoryProducts',
@@ -216,20 +222,24 @@ Route::group(
                 Route::get('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'edit'])->name('edit');
                 Route::put('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'update'])->name('update');
                 Route::delete('/delete', [CategoryProductController::class, 'delete'])->name('delete');
-                Route::get('/detail/{categoryProduct:slug}', [CategoryProductController::class, 'detail'])->name('detail');
-                Route::post('/getListDetail/{categoryProduct:slug}', [CategoryProductController::class, 'getListDetail'])->name('getListDetail');
-                // CategoryProduct detail
+                Route::delete('/destroy', [BrandController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [BrandController::class, 'restoreAll'])->name('restoreAll');
+
                 Route::group(
                     [
-                        'prefix' => '{categoryProduct:slug}',
-                        'as' => 'details.',
+                        'prefix' => '/{categoryProduct:slug}',
+                        'as' => 'usageTypes.',
                     ],
                     function () {
-                        Route::get('/create', [CategoryProductController::class, 'createDetail'])->name('create');
-                        Route::post('/store', [CategoryProductController::class, 'storeDetail'])->name('store');
-                        Route::get('/edit/{categoryProductDetail:slug}', [CategoryProductController::class, 'editDetail'])->name('edit');
-                        Route::put('/edit/{categoryProductDetail:slug}', [CategoryProductController::class, 'updateDetail'])->name('update');
-                        Route::delete('/delete', [CategoryProductController::class, 'deleteDetail'])->name('delete');
+                        Route::get('/', [UsageTypeController::class, 'index'])->name('index');
+                        Route::post('/getList', [UsageTypeController::class, 'getList'])->name('getList');
+                        Route::get('/create', [UsageTypeController::class, 'create'])->name('create');
+                        Route::post('/store', [UsageTypeController::class, 'store'])->name('store');
+                        Route::get('/edit/{usageType:slug}', [UsageTypeController::class, 'edit'])->name('edit');
+                        Route::put('/edit/{usageType:slug}', [UsageTypeController::class, 'update'])->name('update');
+                        Route::delete('/delete', [UsageTypeController::class, 'delete'])->name('delete');
+                        Route::delete('/destroy', [UsageTypeController::class, 'destroy'])->name('destroy');
+                        Route::post('/restoreAll', [UsageTypeController::class, 'restoreAll'])->name('restoreAll');
                     },
                 );
             },
@@ -327,4 +337,3 @@ Route::group(
         );
     },
 );
-

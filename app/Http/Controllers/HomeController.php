@@ -152,26 +152,59 @@ class HomeController extends Controller
         ]);
     }
 
-    public function productFillter(Request $request)
-    {
-        $fillter = $request->input('data');
-        $selectedBrand = $fillter['brand'] ?? [];
-        $selectedCPU = $fillter['cpu'] ?? [];
+public function productFillter(Request $request)
+{
+    $filters = $request->input('data', []);
 
-        $result = ProductVersion::with(['products.brands','laptopSpes'])
-            ->when($selectedBrand, function ($query) use ($selectedBrand) {
-                $query->whereHas('products.brands', function ($q) use ($selectedBrand) {
-                    $q->whereIn('name', $selectedBrand);
-                });
-            })
-            ->when($selectedCPU, function ($query) use ($selectedCPU) {
-                $query->whereIn('laptopSpes.cpu', $selectedCPU);
-            })
-            ->get();
+    // Lấy các filter riêng
+    $brand = $filters['brand'] ?? [];
 
-        dd($result);
-        return response()->json([
-            'data' => $result
-        ]);
-    }
+    // Gộp CPU và thế hệ CPU thành một chuỗi tìm kiếm
+    $searchQuery = collect($filters['cpu'] ?? [])
+        ->filter()
+        ->map(fn($item) => '+' . $item) // dùng toán tử '+' cho boolean mode
+        ->implode(' '); // kết quả: "+core +i5 +11"
+
+    // Các filter còn lại (liên quan đến laptopSpecs)
+    $specFilters = [
+        'gpu' => $filters['graphic_card'] ?? [],
+        'display_size' => $filters['display_size'] ?? [],
+        'ram_size' => $filters['ram_size'] ?? [],
+        'storage_size' => $filters['ssd_size'] ?? [],
+        'display_resolution' => $filters['display_resolution'] ?? [],
+        // 'usage_need' => $filters['usage_need'] ?? [], // Bỏ comment nếu dùng
+    ];
+
+    // Bắt đầu truy vấn ProductVersion
+    $result = ProductVersion::with(['products.brands', 'laptopSpecs'])
+        // Lọc theo thương hiệu (brand)
+        ->when($brand, function ($query) use ($brand) {
+            $query->whereHas('products.brands', function ($q) use ($brand) {
+                $q->whereIn('name', $brand);
+            });
+        })
+        // Lọc theo laptopSpecs (CPU, GPU, RAM,...)
+        ->whereHas('laptopSpecs', function ($q) use ($searchQuery, $specFilters) {
+            // Tìm CPU theo fulltext nếu có chuỗi tìm kiếm
+            if (!empty($searchQuery)) {
+                $q->whereRaw("MATCH(cpu) AGAINST (? IN BOOLEAN MODE)", [$searchQuery]);
+            }
+            // Lọc các trường còn lại bằng LIKE
+            foreach ($specFilters as $field => $values) {
+                if (!empty($values)) {
+                    $q->where(function ($query) use ($field, $values) {
+                        foreach ($values as $value) {
+                            $query->orWhere($field, 'LIKE', '%' . $value . '%');
+                        }
+                    });
+                }
+            }
+        });
+
+    dd($result);
+    return response()->json([
+        'data' => $result->get()
+    ]);
+}
+
 }

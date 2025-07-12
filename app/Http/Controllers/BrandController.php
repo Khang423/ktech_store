@@ -19,18 +19,22 @@ class BrandController extends Controller
     ) {
         $this->brandService = $brandService;
     }
+
     public function index()
     {
         return view('admin.brand.index');
     }
+
     public function getList()
     {
         return $this->brandService->getList();
     }
+
     public function create()
     {
         return view('admin.brand.create');
     }
+
     public function store(Request $request)
     {
         $result =  $this->brandService->store($request);
@@ -39,12 +43,14 @@ class BrandController extends Controller
         }
         return $this->errorResponse();
     }
+
     public function edit(Brand $brand)
     {
         return view('admin.brand.edit', [
             'brand' => $brand,
         ]);
     }
+
     public function update(Request $request, Brand $brand)
     {
         $result = $this->brandService->update($request, $brand);
@@ -53,9 +59,28 @@ class BrandController extends Controller
         }
         return $this->errorResponse();
     }
+
     public function delete(Request $request)
     {
         $result = $this->brandService->delete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function destroy(Request $request)
+    {
+        $result = $this->brandService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->brandService->restoreAll();
         if ($result) {
             return $this->successResponse();
         }

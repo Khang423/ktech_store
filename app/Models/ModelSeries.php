@@ -3,27 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Permission extends Model
+class ModelSeries extends Model
 {
-    protected  $fillable = [
+    use SoftDeletes;
+    protected $fillable = [
         'id',
         'name',
         'slug',
-        'created_at',
-        'updated_at',
+        'brand_id',
     ];
 
-    public function getInfo() {
+    public static function getInfo()
+    {
         return [
             'id',
             'name',
             'slug',
+            'brand_id',
             'created_at',
             'updated_at',
+            'deleted_at'
         ];
     }
-
     public function getCreatedAtAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');

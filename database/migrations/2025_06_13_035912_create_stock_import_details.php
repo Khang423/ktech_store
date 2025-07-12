@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity')->default(0);
             $table->double('price')->default(0);
             $table->double('total_price')->default(0);
+            $table->smallInteger('vat_rate')->default(0)->comment('Thuế VAT');
             $table->timestamps();
         });
     }

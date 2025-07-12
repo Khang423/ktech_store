@@ -2,54 +2,58 @@
 
 namespace App\Services;
 
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\CategoryProduct;
-use App\Models\CategoryProductDetail;
+use App\Models\UsageType;
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
-class CategoryProductService extends Controller
+class UsageTypeService extends Controller
 {
-    private Model $model;
     private $imageTrait;
-    public function __construct(CategoryProduct $categoryProduct, ImageTrait $imageTrait)
+
+    public function __construct(ImageTrait $imageHelper)
     {
-        $this->model = $categoryProduct;
-        $this->imageTrait = $imageTrait;
+        $this->imageTrait = $imageHelper;
     }
 
-    public function getList()
+    public function getList($request)
     {
         return DataTables::of(
-            $this->model::query()->orderBy('created_at', 'desc')
-                ->get($this->model->getInfo())
+            UsageType::where('category_product_id', $request->id)->orderBy('created_at', 'desc')
+                ->get(UsageType::getInfo())
         )
             ->editColumn('index', function ($object) {
                 static $i = 0;
                 return ++$i;
             })
             ->addColumn('actions', function ($object) {
+                $categoryProduct = CategoryProduct::where('id', $object->category_product_id)->first();
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.categoryProducts.destroy'),
-                    'edit' => route('admin.categoryProducts.edit', $object),
-                    'preview' => route('admin.categoryProducts.usageTypes.index', $object),
+                    'delete' => route('admin.categoryProducts.usageTypes.delete', $categoryProduct),
+                    'edit' => route('admin.categoryProducts.usageTypes.edit', [
+                        'usageType' => $object,
+                        'categoryProduct' => $categoryProduct,
+                    ]),
                 ];
             })
             ->make(true);
     }
 
-    public function store($request)
+    public function store($request, $categoryProduct)
     {
         DB::beginTransaction();
         try {
-            $this->model::create([
+            UsageType::create([
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
+                'category_product_id' => $categoryProduct->id,
             ]);
             DB::commit();
             return true;
@@ -60,12 +64,12 @@ class CategoryProductService extends Controller
         }
     }
 
-    public function update($request, $categoryProduct)
+    public function update($request, $usageType)
     {
         DB::beginTransaction();
         try {
-            $categoryProduct = CategoryProduct::findOrFail($categoryProduct->id);
-            $categoryProduct->update([
+            $usageType = UsageType::findOrFail($usageType->id);
+            $usageType->update([
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
             ]);
@@ -83,7 +87,8 @@ class CategoryProductService extends Controller
     {
         DB::beginTransaction();
         try {
-
+            $usageType = UsageType::findOrFail($request->id);
+            $usageType->forceDelete();
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -92,6 +97,7 @@ class CategoryProductService extends Controller
             return false;
         }
     }
+
 
     public function destroy($request)
     {

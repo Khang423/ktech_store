@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('website_link');
             $table->smallInteger('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

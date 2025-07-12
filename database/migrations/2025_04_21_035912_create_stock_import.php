@@ -14,20 +14,19 @@ return new class extends Migration
         Schema::create('stock_imports', function (Blueprint $table) {
             $table->id();
             $table->string('ref_code')->unique();
-            $table->foreignId('inventory_id')->constrained('inventories')->cascadeOnDelete();
             $table->foreignId('supplier_id')->constrained('suppliers')->cascadeOnDelete();
             $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
             $table->string('note')->nullable();
             $table->double('total_amount')->nullable();
             $table->smallInteger('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     public function down(): void
     {
         Schema::table('stock_imports', function (Blueprint $table) {
-            $table->dropForeign(['inventory_id']);
             $table->dropForeign(['supplier_id']);
             $table->dropForeign(['member_id']);
         });
