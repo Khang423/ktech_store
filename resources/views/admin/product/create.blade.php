@@ -90,7 +90,36 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                 </div> --}}
+=======
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Chọn loại sản phẩm</h4>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="mb-2">
+                                            <select class="form-select" id="product_type" name="product_type"
+                                                style="height: 48px">
+                                                <option value="null" hidden>Chọn loại sản phẩm</option>
+                                                <option value="laptop">Laptop</option>
+                                                <option value="phone">Điện thoại</option>
+                                                <option value="keyboard">Bàn phím</option>
+                                                <option value="mouse">Chuột </option>
+                                                <option value="headphone">Tai nghe </option>
+                                            </select>
+                                            <div class="text-danger mt-1 error-product_type"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+>>>>>>> bf80720 (update db and feat usagetype status:done)
             </div>
             <div class="col-4">
                 <div class="card">

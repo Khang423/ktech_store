@@ -145,7 +145,7 @@ Route::group(
 
                 Route::post('/getDataUsageType', [ProductController::class, 'getDataUsageTypeById'])->name('getDataUsageType');
                 Route::post('/getDataModelSeries', [ProductController::class, 'getDataModelSeriesById'])->name('getDataModelSeries');
-              
+
                 Route::group(
                     [
                         'prefix' => '/{products:slug}',
@@ -373,4 +373,3 @@ Route::group(
         );
     },
 );
-
