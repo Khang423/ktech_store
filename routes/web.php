@@ -145,6 +145,7 @@ Route::group(
 
                 Route::post('/getDataUsageType', [ProductController::class, 'getDataUsageTypeById'])->name('getDataUsageType');
                 Route::post('/getDataModelSeries', [ProductController::class, 'getDataModelSeriesById'])->name('getDataModelSeries');
+              
                 Route::group(
                     [
                         'prefix' => '/{products:slug}',
@@ -162,6 +163,7 @@ Route::group(
 
                         Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
                         Route::delete('/delete', [ProductVersionController::class, 'delete'])->name('delete');
+
                         Route::delete('/destroy', [ProductVersionController::class, 'destroy'])->name('destroy');
                         Route::post('/restoreAll', [ProductVersionController::class, 'restoreAll'])->name('restoreAll');
                     },
@@ -220,6 +222,7 @@ Route::group(
                         Route::post('/restoreAll', [ModelSeriesController::class, 'restoreAll'])->name('restoreAll');
                     },
                 );
+
             },
         );
 
@@ -370,3 +373,4 @@ Route::group(
         );
     },
 );
+

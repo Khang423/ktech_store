@@ -26,7 +26,7 @@ use App\Enums\ProductTypeEnum;
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane show active" id="custom-styles-preview">
-                                <h4 class="header-title mb-3">Thông tin</h4>
+                                <h4 class="header-title mb-3">Bộ xử lý và Đồ hoạ</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-2">
@@ -37,6 +37,16 @@ use App\Enums\ProductTypeEnum;
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- Memory and Storage --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Bộ nhớ ram và ổ cứng</h4>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-2">
@@ -57,6 +67,16 @@ use App\Enums\ProductTypeEnum;
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- Display --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Màn hình</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-2">
@@ -73,35 +93,54 @@ use App\Enums\ProductTypeEnum;
                                 {{-- <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-2">
-                                            <label for="import_price" class="form-label">Giá nhập</label>
-                                            @if ($stock_import_details->price ?? '')
-                                                <input type="text" class="form-control" id="import_price"
-                                                    placeholder="Giá nhập" name="import_price"
-                                                    value="{{ formatPriceToVND($stock_import_details->price) }}">
-                                            @endif
-                                            <input type="text" class="form-control" id="import_price"
-                                                placeholder="Giá nhập" name="import_price" value="0">
-                                            <div class="text-danger mt-1 error-import_price"></div>
+                                            <label for="display_technology" class="form-label">Công nghệ màn
+                                                hình</label>
+                                            <input type="text" class="form-control" id="display_technology"
+                                                placeholder="Công nghệ màn hình" name="display_technology"
+                                                value="{{ $laptopSpecs['display_technology'] }}">
+                                            <div class="text-danger mt-1 error-display_technology"></div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="display_resolution_laptop" class="form-label">Độ phân giải
+                                                màn
+                                                hình</label>
+                                            <input type="text" class="form-control"
+                                                id="display_resolution_laptop" placeholder="Độ phân giải màn hình"
+                                                name="display_resolution_laptop"
+                                                value="{{ $laptopSpecs['display_resolution'] }}">
+                                            <div class="text-danger mt-1 error-display_resolution_laptop"></div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- Sound and Batery --}}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="custom-styles-preview">
+                                <h4 class="header-title mb-3">Âm thanh và Pin</h4>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-2">
-                                            <label for="profit_rate" class="form-label">Lợi nhuận (%)</label>
-                                            <input type="text" class="form-control" id="profit_rate"
-                                                placeholder="Lợi nhuận (%)" name="profit_rate"
-                                                value="{{ $productVersion->profit_rate }}">
-                                            <div class="text-danger mt-1 error-profit_rate"></div>
+                                            <label for="audio_technology_laptop" class="form-label">Công nghệ âm
+                                                thanh</label>
+                                            <input type="text" class="form-control"
+                                                id="audio_technology_laptop" placeholder="Công nghệ âm thanh"
+                                                name="audio_technology_laptop"
+                                                value="{{ $laptopSpecs['audio_technology'] }}">
+                                            <div class="text-danger mt-1 error-audio_technology_laptop"></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-2">
-                                            <label for="final_price" class="form-label">Giá bán</label>
-                                            <input type="text" class="form-control" id="final_price"
-                                                placeholder="Giá bán" name="final_price"
-                                                value="{{ formatPriceToVND($productVersion->final_price) }}">
-                                            <div class="text-danger mt-1 error-final_price"></div>
+                                            <label for="battery" class="form-label">Dung lượng pin</label>
+                                            <input type="text" class="form-control" id="battery"
+                                                placeholder="Dung lượng pin" name="battery"
+                                                value="{{ $laptopSpecs['battery'] }}">
+                                            <div class="text-danger mt-1 error-battery"></div>
                                         </div>
                                     </div>
                                 </div> --}}
@@ -109,7 +148,6 @@ use App\Enums\ProductTypeEnum;
                         </div>
                     </div>
                 </div>
-
                 {{-- // Description --}}
                 <div class="card">
                     <div class="card-body">
@@ -122,7 +160,6 @@ use App\Enums\ProductTypeEnum;
                         </div>
                     </div>
                 </div>
-
                 @if ($category_product->slug === ProductTypeEnum::LAPTOP)
                     <div class="laptop">
                         {{-- cpu and gpu --}}
@@ -247,7 +284,7 @@ use App\Enums\ProductTypeEnum;
                                                     <div class="text-danger mt-1 error-display_resolution"></div>
                                                 </div>
                                             </div>
-                                        </div>
+                                       </div>
                                     </div>
                                 </div>
                             </div>
@@ -615,7 +652,6 @@ use App\Enums\ProductTypeEnum;
                                 </div>
                             </div>
                         </div>
-
                         {{-- battery and technoly capacity --}}
                         <div class="card">
                             <div class="card-body">
@@ -653,7 +689,6 @@ use App\Enums\ProductTypeEnum;
                                 </div>
                             </div>
                         </div>
-
                         {{--   weight and dimension --}}
                         <div class="card">
                             <div class="card-body">
@@ -778,7 +813,6 @@ use App\Enums\ProductTypeEnum;
                         </div>
                     </div>
                 @endif
-
             </div>
             <div class="col-4">
                 <div class="card">
@@ -796,6 +830,7 @@ use App\Enums\ProductTypeEnum;
                         </div>
                         <div class="error-thumbnail text-center text-danger"></div>
                     </div>
+                    <div class="error-thumbnail text-center text-danger"></div>
                 </div>
             </div>
         </div>

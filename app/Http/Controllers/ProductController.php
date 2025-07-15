@@ -171,7 +171,7 @@ class ProductController extends Controller
         }
         return false;
     }
-
+  
     public function getDataUsageTypeById(Request $request)
     {
         $data = UsageType::where('category_product_id', $request->category_product_id)
@@ -193,4 +193,5 @@ class ProductController extends Controller
             'data' => $data,
         ]);
     }
+
 }

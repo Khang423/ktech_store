@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\Admin\product_version\UpdateRequest;
 use App\Http\Requests\Admin\product_version\StoreRequest;
 use App\Models\Brand;
@@ -30,6 +31,7 @@ class ProductVersionController extends Controller
     ) {
         $this->productVersionService = $productVersionService;
     }
+
 
     public function index(Product $products)
     {
@@ -75,7 +77,6 @@ class ProductVersionController extends Controller
         }
         return $this->errorResponse();
     }
-
 
 
     public function getList(Product $products)

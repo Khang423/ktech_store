@@ -155,6 +155,7 @@ class ProductVersionService extends Controller
                         'release_date'           => $request->release_date,
                     ]);
 
+
                     break;
                 case ProductTypeEnum::MOUSE:
                     break;

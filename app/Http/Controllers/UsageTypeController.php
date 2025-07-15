@@ -72,5 +72,4 @@ class UsageTypeController extends Controller
         }
         return $this->errorResponse();
     }
-
 }
