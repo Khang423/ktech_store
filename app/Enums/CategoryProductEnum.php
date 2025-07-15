@@ -9,11 +9,9 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class ProductTypeEnum extends Enum
+final class CategoryProductEnum extends Enum
 {
-    const LAPTOP = 'laptop';
-    const PHONE = 'dien-thoai';
-    const KEYBOARD = 'ban-phim';
-    const MOUSE = 'chuot';
-    const HEADPHONE = 'tai-nghe';
+    const L = 0;
+    const OptionTwo = 1;
+    const OptionThree = 2;
 }

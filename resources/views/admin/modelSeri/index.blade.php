@@ -2,7 +2,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Thương hiệu
+            Seri sản phẩm
         </span>
         <i class="mdi mdi-chevron-right"></i>
         Danh sách
@@ -15,12 +15,12 @@
                 <div class="card-body">
                     <div class="row mb-2 col-12">
                         <div class="col-6">
-                            <a class="btn btn-success mb-2" href="{{ route('admin.dashboard') }}">
+                            <a class="btn btn-success mb-2" href="{{ route('admin.brands.index') }}">
                                 <i class="uil uil-step-backward-alt"></i>
                                 Quay lại
                             </a>
                             <a class="btn btn-primary mb-2"
-                                href="{{ route('admin.brands.create') }}">
+                                href="{{ route('admin.brands.modelSeries.create', $brand->slug) }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Thêm
                             </a>
@@ -36,16 +36,13 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="table-responsive">
                         <table class="table table-centered w-100 dt-responsive nowrap" id="datatable">
                             <thead class="table-light">
                                 <tr>
                                     <th>#</th>
-                                    <th>Thương hiệu</th>
-                                    <th>Logo</th>
-                                    <th>Quốc gia</th>
-                                    <th>Website</th>
+                                    <th>Tên seri</th>
+                                    <th>Slug</th>
                                     <th>Ngày tạo</th>
                                     <th style="width: 80px;">Hành động</th>
                                 </tr>
@@ -74,26 +71,10 @@
                     render: data => `<span class="badge bg-light font-15 text-dark">${data}</span>`
                 },
                 {
-                    data: 'logo',
-                    name: 'logo',
-                    className: 'text-center',
-                    render: data =>
-                        `<img src="{{ asset('asset/admin/brands') }}/${data.logo}"  height="auto" width="100%" loading="lazy">`
-                },
-
-                {
-                    data: 'country',
-                    name: 'country',
+                    data: 'slug',
+                    name: 'slug',
                     className: 'text-center',
                     render: data => `<span class="badge bg-light font-15 text-dark">${data}</span>`
-                },
-                {
-                    data: 'website_link',
-                    name: 'website_link',
-                    className: 'text-center',
-                    render: data => `<a href="${data}" class='text-dark' target="_blank" rel="noopener noreferrer">
-                                    ${data}
-                                </a>`
                 },
                 {
                     data: 'created_at',
@@ -109,13 +90,13 @@
                     className: 'text-center',
                     render: (data) => `
                     <span class='table-action d-flex justify-content-center gap-2'>
-                        <a href="${data.preview}" class="action-view" data-id="${data.id}" title="Chi tiết">
+                        <a href="${data.detail}" class="action-view" data-id="${data.id}" title="Chi tiết">
                                 <i class="edit text-info uil uil-list-ul action-icon"></i>
                             </a>
                         <a href="${data.edit}">
                             <i class="uil-edit text-primary action-icon"></i>
                         </a>
-                        <form action="${data.destroy}" method="POST" class="d-inline-block">
+                        <form action="${data.delete}" method="POST" class="d-inline-block">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="${data.id}">
@@ -127,10 +108,12 @@
             ];
 
             let table = $('#datatable').DataTable(
-                customerDatatable("{{ route('admin.brands.getList') }}", columns)
+                customerDatatable(
+                    "{{ route('admin.brands.modelSeries.getList', $brand->slug) }}", columns
+                )
             );
 
-            const routeDelete = '{{ route('admin.brands.destroy') }}';
+            const routeDelete = "{{ route('admin.brands.modelSeries.delete', $brand) }}";
             const routeRestore = '{{ route('admin.brands.restoreAll') }}';
             restore(routeRestore, table);
             destroy(routeDelete, table);

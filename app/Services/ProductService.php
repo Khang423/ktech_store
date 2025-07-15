@@ -32,7 +32,6 @@ class ProductService extends Controller
     {
         return DataTables::of(
             Product::select(Product::getInfo())
-                ->with('firstProductVersion')
                 ->orderBy('created_at', 'desc')
                 ->get()
         )
@@ -42,12 +41,12 @@ class ProductService extends Controller
             })
             ->editColumn('thumbnail', function ($object) {
                 return [
-                    'thumbnail' => $object->firstProductVersion->thumbnail,
-                    'id' => $object->firstProductVersion->id,
+                    'thumbnail' => $object->thumbnail,
+                    'id' => $object->id,
                 ];
             })
             ->editColumn('name', function ($object) {
-                return $object->firstProductVersion->name;
+                return $object->name;
             })
             ->editColumn('status', function ($object) {
                 if ($object->status == StatusEnum::ON) {
@@ -55,15 +54,14 @@ class ProductService extends Controller
                 }
                 return StatusEnum::OFF;
             })
-            ->editColumn('price', function ($object) {
-                return number_format($object->firstProductVersion->final_price, 0, ',', '.') . '₫';
-            })
             ->addColumn('actions', function ($object) {
 
                 return [
                     'id' => $object->id,
                     'destroy' => route('admin.products.delete'),
-                    'list' => route('admin.products.productsVersion.index', $object->firstProductVersion),
+                    'list' => route('admin.products.productsVersion.index', [
+                        'products' => $object
+                    ]),
                 ];
             })
             ->make(true);
@@ -73,128 +71,25 @@ class ProductService extends Controller
     {
         DB::beginTransaction();
         try {
-            // insert product
-            $dataProduct = [];
-            $dataProduct['category_product_details_id'] = $request->category_product_detail_id;
-            $dataProduct['brand_id'] = $request->brand_id;
-            $dataProduct['status'] = StatusEnum::ON;
-            $product = Product::create($dataProduct);
-            // product_id
-            $product_id = $product->id;
-            // insert product version
-            $dataProductVersion = [];
-            $dataProductVersion['product_id'] = $product_id;
-            $dataProductVersion['name'] = $request->name;
-            $dataProductVersion['slug'] = Str::slug($request->name);
-            $dataProductVersion['price'] = $request->price;
-            $dataProductVersion['description'] = $request->description;
-
-            $productVersion = ProductVersion::create($dataProductVersion);
-            //productversion_id
-            $productVersion_id = $productVersion->id;
-
-            switch ($request->product_type) {
-                case ProductTypeEnum::LAPTOP:
-                    // insert product detail
-                    $dataLaptop = [];
-                    $dataLaptop['product_id'] = $productVersion_id;
-                    $dataLaptop['gpu'] = $request->gpu_laptop;
-                    $dataLaptop['cpu'] = $request->cpu;
-                    $dataLaptop['ram_size'] = $request->ram_size_laptop;
-                    $dataLaptop['ram_type'] = $request->ram_type;
-                    $dataLaptop['ram_slot'] = $request->ram_slot;
-                    $dataLaptop['storage_type'] = $request->storage_type;
-                    $dataLaptop['storage_size'] = $request->storage_size_laptop;
-                    $dataLaptop['display_size'] = $request->display_size_laptop;
-                    $dataLaptop['display_resolution'] = $request->display_resolution_laptop;
-                    $dataLaptop['display_technology'] = $request->display_technology;
-                    $dataLaptop['display_panel'] = $request->display_panel;
-                    $dataLaptop['refresh_rate'] = $request->refresh_rate;
-                    $dataLaptop['audio_technology'] = $request->audio_technology_laptop;
-                    $dataLaptop['memory_card_slot'] = $request->memory_card_slot;
-                    $dataLaptop['wifi'] = $request->wifi_laptop;
-                    $dataLaptop['bluetooth_version'] = $request->bluetooth_version;
-                    $dataLaptop['usb_ports'] = $request->usb_ports;
-                    $dataLaptop['dimension'] = $request->dimension;
-                    $dataLaptop['weight'] = $request->weight_laptop;
-                    $dataLaptop['material'] = $request->material;
-                    $dataLaptop['operating_system'] = $request->operating_system;
-                    $dataLaptop['webcam'] = $request->webcam;
-                    $dataLaptop['battery'] = $request->battery;
-                    $dataLaptop['keyboard_type'] = $request->keyboard_type;
-                    $dataLaptop['other_feature'] = $request->other_feature;
-                    $dataLaptop['security'] = $request->security;
-                    $dataPhone['release_date'] = $request->release_date_laptop;
-                    LaptopSpec::query()->create($dataLaptop);
-                    break;
-                case ProductTypeEnum::PHONE:
-                    $dataPhone = [];
-                    $dataPhone['product_id'] = $productVersion_id;
-                    $dataPhone['display_size'] = $request->display_size_phone;
-                    $dataPhone['display_type'] = $request->display_type;
-                    $dataPhone['display_resolution'] = $request->display_resolution_phone;
-                    $dataPhone['display_refresh_rate'] = $request->display_refresh_rate;
-                    $dataPhone['display_features'] = $request->display_features;
-                    $dataPhone['rear_camera'] = $request->rear_camera;
-                    $dataPhone['front_camera'] = $request->front_camera;
-                    $dataPhone['camera_features'] = $request->camera_features;
-                    $dataPhone['chipset'] = $request->chipset;
-                    $dataPhone['gpu'] = $request->gpu_phone;
-                    $dataPhone['nfc_support'] = $request->nfc_support;
-                    $dataPhone['sim_type'] = $request->sim_type;
-                    $dataPhone['network_support'] = $request->network_support;
-                    $dataPhone['gps_support'] = $request->gps_support;
-                    $dataPhone['ram_size'] = $request->ram_size_phone;
-                    $dataPhone['storage_size'] = $request->storage_size_phone;
-                    $dataPhone['battery_capacity'] = $request->battery_capacity;
-                    $dataPhone['charging_port'] = $request->charging_port;
-                    $dataPhone['charging_technology'] = $request->charging_technology;
-                    $dataPhone['weight'] = $request->weight_phone;
-                    $dataPhone['frame_material'] = $request->frame_material;
-                    $dataPhone['dimension'] = $request->dimension;
-                    $dataPhone['operating_system'] = $request->operating_system_phone;
-                    $dataPhone['water_dust_resistance'] = $request->water_dust_resistance;
-                    $dataPhone['audio_technology'] = $request->audio_technology_phone;
-                    $dataPhone['fingerprint_sensor'] = $request->fingerprint_sensor;
-                    $dataPhone['other_sensors'] = $request->other_sensors;
-                    $dataPhone['wifi_technology'] = $request->wifi_technology;
-                    $dataPhone['bluetooth_technology'] = $request->bluetooth_technology;
-                    $dataPhone['release_date'] = $request->release_date_phone;
-                    PhoneSpec::query()
-                        ->where('product_id', $productVersion_id)
-                        ->create($dataPhone);
-                    break;
-                case ProductTypeEnum::MOUSE:
-                    break;
-                case ProductTypeEnum::KEYBOARD:
-                    break;
-                case ProductTypeEnum::HEADPHONE:
-                    break;
-            }
+            $product = Product::create([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'usage_type_id' => $request->usage_type_id,
+                'model_series_id' => $request->model_series_id,
+                'category_product_id' => $request->category_product_id,
+                'brand_id' => $request->brand_id,
+                'status' => StatusEnum::ON,
+            ]);
 
             // thumbnail
             if ($request->hasFile('thumbnail')) {
-                $thumbnailName = $this->imageTrait->storeImage($request->thumbnail, 'products', $productVersion_id, 'thumbnail');
+                $thumbnailName = $this->imageTrait->storeImage($request->thumbnail, 'products', $product->id, 'thumbnail');
             }
-            ProductVersion::query()
-                ->where('id', $productVersion_id)
-                ->update([
-                    'thumbnail' => $thumbnailName
-                ]);
 
-            // image[]
+            $product->update([
+                'thumbnail' => $thumbnailName,
+            ]);
 
-            if ($request->hasFile('image')) {
-                foreach ($request->image as $image) {
-                    $imageName = $this->imageTrait->storeImage($image, 'products', $productVersion_id, 'image');
-                    ProductImage::query()->create(
-                        [
-                            'product_id' => $productVersion_id,
-                            'image' => $imageName
-                        ]
-                    );
-                }
-            }
             DB::commit();
             return true;
         } catch (\Exception $e) {

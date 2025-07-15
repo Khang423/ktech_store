@@ -42,6 +42,7 @@ class BrandService extends Controller
                     'id' => $object->id,
                     'destroy' => route('admin.brands.destroy'),
                     'edit' => route('admin.brands.edit', $object),
+                    'preview' => route('admin.brands.modelSeries.index', $object),
                 ];
             })
             ->make(true);

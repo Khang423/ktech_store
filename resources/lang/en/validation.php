@@ -159,6 +159,10 @@ return [
         'final_price' => 'Giá bán',
         'profit_rate' => 'Tỷ lệ lợi nhuận',
         'import_price' => 'Giá nhập',
+        'category_product_id' => 'Loại sản phẩm',
+        'model_series_id' => 'Seri sản phẩm',
+        'usage_type_id' => 'Nhu cầu sử dụng',
+        'brand_id' => 'Thương hiệu',
     ],
 
 ];

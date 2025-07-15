@@ -14,9 +14,9 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ModelSeriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductVersionController;
-use App\Http\Controllers\SearchFillter;
 use App\Http\Controllers\StockExportController;
 use App\Http\Controllers\StockImportController;
 use App\Http\Controllers\TagController;
@@ -130,25 +130,40 @@ Route::group(
             function () {
                 Route::get('/', [ProductController::class, 'index'])->name('index');
                 Route::post('/getList', [ProductController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [ProductController::class, 'create'])->name('create');
                 Route::post('/store', [ProductController::class, 'store'])->name('store');
-                Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
-                Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
+
+                Route::get('/{products:slug}/edit', [ProductVersionController::class, 'edit'])->name('edit');
+                Route::put('/{products:slug}/edit', [ProductVersionController::class, 'update'])->name('update');
+
                 Route::post('/updateStatus', [ProductController::class, 'updateStatus'])->name('updateStatus');
+
+                Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
                 Route::delete('/destroy', [ProductController::class, 'destroy'])->name('destroy');
                 Route::post('/restoreAll', [ProductController::class, 'restoreAll'])->name('restoreAll');
+
+                Route::post('/getDataUsageType', [ProductController::class, 'getDataUsageTypeById'])->name('getDataUsageType');
+                Route::post('/getDataModelSeries', [ProductController::class, 'getDataModelSeriesById'])->name('getDataModelSeries');
+              
                 Route::group(
                     [
-                        'prefix' => '/{productVersion:slug}',
+                        'prefix' => '/{products:slug}',
                         'as' => 'productsVersion.',
                     ],
                     function () {
                         Route::get('/', [ProductVersionController::class, 'index'])->name('index');
                         Route::post('/getList', [ProductVersionController::class, 'getList'])->name('getList');
+
                         Route::get('/create', [ProductVersionController::class, 'create'])->name('create');
                         Route::post('/store', [ProductVersionController::class, 'store'])->name('store');
-                        Route::get('/edit', [ProductVersionController::class, 'edit'])->name('edit');
-                        Route::put('/edit', [ProductVersionController::class, 'update'])->name('update');
+
+                        Route::get('/{productVersions:slug}/edit', [ProductVersionController::class, 'edit'])->name('edit');
+                        Route::put('/{productVersions:slug}/edit', [ProductVersionController::class, 'update'])->name('update');
+
+                        Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
+                        Route::delete('/delete', [ProductVersionController::class, 'delete'])->name('delete');
+
                         Route::delete('/destroy', [ProductVersionController::class, 'destroy'])->name('destroy');
                         Route::post('/restoreAll', [ProductVersionController::class, 'restoreAll'])->name('restoreAll');
                     },
@@ -189,8 +204,28 @@ Route::group(
                 Route::delete('/delete', [BrandController::class, 'delete'])->name('delete');
                 Route::delete('/destroy', [BrandController::class, 'destroy'])->name('destroy');
                 Route::post('/restoreAll', [BrandController::class, 'restoreAll'])->name('restoreAll');
+
+                Route::group(
+                    [
+                        'prefix' => '/{brand:slug}',
+                        'as' => 'modelSeries.',
+                    ],
+                    function () {
+                        Route::get('/', [ModelSeriesController::class, 'index'])->name('index');
+                        Route::post('/getList', [ModelSeriesController::class, 'getList'])->name('getList');
+                        Route::get('/create', [ModelSeriesController::class, 'create'])->name('create');
+                        Route::post('/store', [ModelSeriesController::class, 'store'])->name('store');
+                        Route::get('/edit/{modelSeries:slug}', [ModelSeriesController::class, 'edit'])->name('edit');
+                        Route::put('/edit/{modelSeries:slug}', [ModelSeriesController::class, 'update'])->name('update');
+                        Route::delete('/delete', [ModelSeriesController::class, 'delete'])->name('delete');
+                        Route::delete('/destroy', [ModelSeriesController::class, 'destroy'])->name('destroy');
+                        Route::post('/restoreAll', [ModelSeriesController::class, 'restoreAll'])->name('restoreAll');
+                    },
+                );
+
             },
         );
+
         // Supplier route
         Route::group(
             [
@@ -290,6 +325,7 @@ Route::group(
                 Route::get('/invoice/{id}', [StockImportController::class, 'exportPDF'])->name('exportPDF');
             },
         );
+
         // Inventory histories export
         Route::group(
             [

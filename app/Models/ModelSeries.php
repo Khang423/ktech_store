@@ -35,4 +35,9 @@ class ModelSeries extends Model
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
+
+    public function brands()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
 }

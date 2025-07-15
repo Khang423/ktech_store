@@ -30,15 +30,6 @@ class ImageTrait
         return false;
     }
 
-    // function deleteImage($image, $folderName)
-    // {
-    //     if ($image && $folderName) {
-    //         $path = 'asset/admin/' . $folderName . '/' . $image;
-    //         Storage::disk('public_path')->delete($path);
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     public function storeImage($image, $folderName, $product_id, $image_type)
     {
@@ -70,7 +61,17 @@ class ImageTrait
                 Storage::disk('public_path')->put($path, $encode->toString());
                 return $thumbnailName;
             }
-        }else{
+        } else if ($image_type == 'thumbnail_version') {
+            if ($image && $folderName && $product_id != null) {
+                $manager = new ImageManager(Driver::class);
+                $image = $manager->read($image);
+                $encode = $image->toWebp(80);
+                $thumbnailName =  uniqid('image_') . '.webp';
+                $path = 'asset/admin/' . $folderName . '/' . $product_id . '/' . 'thumbnail' . '/' . $thumbnailName;
+                Storage::disk('public_path')->put($path, $encode->toString());
+                return $thumbnailName;
+            }
+        } else {
             return false;
         }
     }
