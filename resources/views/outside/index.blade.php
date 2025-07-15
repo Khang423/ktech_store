@@ -33,11 +33,14 @@
                                     </div>
                                 </div>
                                 <div class="product-thumbnail">
-                                    <img src="{{ asset('asset/admin/products') . '/' . $item->id . '/' . $item->thumbnail }}"
+                                    <img src="{{ asset('asset/admin/products') . '/' . $item->product_id .'/'.'thumbnail'.'/' . $item->thumbnail }}"
                                         alt="">
                                 </div>
                                 <div class="product-title ">
-                                    {{ $item->name }}
+                                    @php
+                                        $name = "$item->name - $item->config_name";
+                                    @endphp
+                                    {{ $name }}
                                 </div>
                                 <div class="product-price">
                                     {{ formatPriceToVND($item->final_price) }}

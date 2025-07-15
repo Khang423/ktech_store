@@ -44,14 +44,20 @@
                                             </select>
                                             <div class="text-danger mt-1 error-brand_id"></div>
                                         </div>
-
+                                        <div class="mb-2">
+                                            <label for="model_series_id" class="form-label">Seri sản phẩm </label>
+                                            <select class="form-select" id="model_series_id" name="model_series_id"
+                                                style="height: 48px">
+                                            </select>
+                                            <div class="text-danger mt-1 error-model_series_id"></div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-2">
-                                            <label for="category_product_id" class="form-label">Danh mục sản phẩm</label>
+                                            <label for="category_product_id" class="form-label">Loại sản phẩm</label>
                                             <select class="form-select" id="category_product_id" name="category_product_id"
                                                 style="height: 48px">
-                                                <option value="" hidden>Chọn danh mục sản phẩm</option>
+                                                <option value="" hidden>Chọn loại sản phẩm</option>
                                                 @foreach ($category_product as $item)
                                                     <option value="{{ $item->id }}">
                                                         {{ $item->name }}
@@ -61,12 +67,11 @@
                                             <div class="text-danger mt-1 error-category_product_id"></div>
                                         </div>
                                         <div class="mb-2">
-                                            <label for="category_product_detail_id" class="form-label">Series Sản
-                                                phẩm</label>
-                                            <select class="form-select" id="category_product_detail_id"
-                                                name="category_product_detail_id" style="height: 48px">
+                                            <label for="usage_type_id" class="form-label">Nhu cầu sử dụng </label>
+                                            <select class="form-select" id="usage_type_id" name="usage_type_id"
+                                                style="height: 48px">
                                             </select>
-                                            <div class="text-danger mt-1 error-category_product_id"></div>
+                                            <div class="text-danger mt-1 error-usage_type_id"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +81,7 @@
                 </div>
 
                 {{-- Description --}}
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane show active" id="custom-styles-preview">
@@ -85,32 +90,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="tab-content">
-                            <div class="tab-pane show active" id="custom-styles-preview">
-                                <h4 class="header-title mb-3">Chọn loại sản phẩm</h4>
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="mb-2">
-                                            <select class="form-select" id="product_type" name="product_type"
-                                                style="height: 48px">
-                                                <option value="null" hidden>Chọn loại sản phẩm</option>
-                                                <option value="laptop">Laptop</option>
-                                                <option value="phone">Điện thoại</option>
-                                                <option value="keyboard">Bàn phím</option>
-                                                <option value="mouse">Chuột </option>
-                                                <option value="headphone">Tai nghe </option>
-                                            </select>
-                                            <div class="text-danger mt-1 error-product_type"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> --}}
             </div>
             <div class="col-4">
                 <div class="card">
@@ -182,54 +162,11 @@
                 preview_thumbnail.append(fileList);
             });
 
-            $(".dz-message-image").on("click", function() {
-                $("#imgInput").click();
-            });
-
-            $("#imgInput").change(function() {
-                let preview_image = $("#preview-image");
-                preview_image.empty();
-
-                let fileList = Array.from(this.files).map(file => {
-                    let img = $(
-                            "<img class='img-fluid img-thumbnail me-3' width='170' height='auto'>")
-                        .attr("src", URL.createObjectURL(file));
-                    img.on("load", function() {
-                        URL.revokeObjectURL(img.attr("src"));
-                    });
-
-                    let sizeText = $("<div class='text-center text-dark'>" + formatBytes(file
-                        .size) + "</div>");
-                    return $("<div class='d-inline-block text-center'></div>").append(img,
-                        sizeText);
-                });
-
-                preview_image.append(fileList);
-            });
-
-            $('#product_type').change(function() {
-                let optionValue = $(this).val();
-
-                // Ẩn hết tất cả các phần liên quan
-
-                // Hiện phần phù hợp
-                if (optionValue === 'laptop') {
-                    $('.laptop').removeClass('d-none');
-                    $('.phone').addClass('d-none');
-                } else if (optionValue === 'phone') {
-                    $('.phone').removeClass('d-none');
-                    $('.laptop').addClass('d-none');
-                } else {
-                    $('.laptop').addClass('d-none');
-                    $('.phone').addClass('d-none');
-                }
-            });
-            // load data category product detail
             $('#category_product_id').change((e) => {
                 let categoryid = $(e.target).val();
 
                 $.ajax({
-                    url: `{{ route('admin.products.getDataCategoryProductDetail') }}`,
+                    url: `{{ route('admin.products.getDataUsageType') }}`,
                     type: "POST",
                     dataType: "json",
                     data: {
@@ -238,14 +175,14 @@
                     },
                     success: function(response) {
                         const data = response.data;
-                        const category_product_detail = $('#category_product_detail_id');
-                        category_product_detail.empty();
+                        const usage_type = $('#usage_type_id');
+                        usage_type.empty();
                         data.forEach((item) => {
-                            category_product_detail.append(
+                            usage_type.append(
                                 `<option value="${item.id}">${item.name}</option>`
                             );
                         });
-                        category_product_detail.trigger('change');
+                        usage_type.trigger('change');
                     },
                     error: function(data) {
                         console.log(data);
@@ -253,7 +190,36 @@
                 });
 
             });
-            // function handle post data
+
+            $('#brand_id').change((e) => {
+                let brand_id = $(e.target).val();
+
+                $.ajax({
+                    url: `{{ route('admin.products.getDataModelSeries') }}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        brand_id : brand_id,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        const data = response.data;
+                        const usage_type = $('#model_series_id');
+                        usage_type.empty();
+                        data.forEach((item) => {
+                            usage_type.append(
+                                `<option value="${item.id}">${item.name}</option>`
+                            );
+                        });
+                        usage_type.trigger('change');
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    },
+                });
+
+            });
+
             store($routeStore, $routeIndex);
             deleteAlertValidation($inputs);
         });
