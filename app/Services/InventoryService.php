@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Inventories;
+use App\Models\Product;
+use App\Models\ProductVersion;
 use App\Models\StockImport;
 use App\Models\StockImportDetail;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +30,7 @@ class InventoryService extends Controller
             Inventories::join('product_versions', 'inventories.product_version_id', '=', 'product_versions.id')
                 ->orderBy('inventories.created_at', 'desc')
                 ->get([
-                    'product_versions.id as product_id',
+                    'product_versions.product_id as product_id',
                     'product_versions.name as product_name',
                     'product_versions.thumbnail as thumbnail',
                     'inventories.stock_quantity',
@@ -40,9 +42,10 @@ class InventoryService extends Controller
                 return ++$i;
             })
             ->editColumn('avatar', function ($object) {
+                $product = Product::where('id',$object->product_id)->first();
                 return [
-                    'thumbnail' => $object->thumbnail,
-                    'product_id' => $object->product_id,
+                    'thumbnail' => $product->thumbnail,
+                    'product_id' => $product->id,
                 ];
             })
             ->editColumn('name', function ($object) {

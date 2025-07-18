@@ -1,32 +1,32 @@
 // ==== Xoá ảnh cũ ====
-$(".destroy-image").on("click", function () {
-    const button = $(this).parent();
-    const errorImage = $(this).data("id");
+// $(".destroy-image").on("click", function () {
+//     const button = $(this).parent();
+//     const errorImage = $(this).data("id");
 
-    const image = $(this).siblings('input[name^="image_old["]').val();
-    const productId = $(this).siblings('input[name^="product_id["]').val();
-    const imageId = $(this).siblings('input[name^="product_image_id["]').val();
+//     const image = $(this).siblings('input[name^="image_old["]').val();
+//     const productId = $(this).siblings('input[name^="product_id["]').val();
+//     const imageId = $(this).siblings('input[name^="product_image_id["]').val();
 
-    $.ajax({
-        url: routedestroy,
-        type: "POST",
-        dataType: "json",
-        data: {
-            id: imageId,
-            product_id: productId,
-            image: image,
-            _token: $('meta[name="csrf-token"]').attr("content"),
-        },
-        success: function () {
-            button.remove();
-        },
-        error: function (data) {
-            $.each(data.responseJSON.errors, (key, value) => {
-                $(`#error-img${errorImage}`).text(value);
-            });
-        },
-    });
-});
+//     $.ajax({
+//         url: routedestroy,
+//         type: "POST",
+//         dataType: "json",
+//         data: {
+//             id: imageId,
+//             product_id: productId,
+//             image: image,
+//             _token: $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         success: function () {
+//             button.remove();
+//         },
+//         error: function (data) {
+//             $.each(data.responseJSON.errors, (key, value) => {
+//                 $(`#error-img${errorImage}`).text(value);
+//             });
+//         },
+//     });
+// });
 // ==== Trigger input khi click ảnh ====
 $(".thumbnail").on("click", () => $("#img_thumbnail").click());
 $(".dz-message-image").on("click", () => $("#imgInput").click());

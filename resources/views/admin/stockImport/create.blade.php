@@ -25,20 +25,40 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label for="product_version_id" class="form-label">Sản phẩm</label>
-                                            <select class="form-select" id="product_version_id" name="product_version_id"
+                                            <label for="category_product_id" class="form-label">Loại sản phẩm</label>
+                                            <select class="form-select" id="category_product_id" name="category_product_id"
                                                 style="height: 48px">
-                                                <option value="" hidden>Chọn sản phẩm</option>
-                                                @foreach ($products as $item)
+                                                <option value="" hidden>Chọn loại sản phẩm</option>
+                                                @foreach ($category_product as $item)
                                                     <option value="{{ $item->id }}">
                                                         {{ $item->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <div class="text-danger mt-1 error-product_version_id"></div>
+                                            <div class="text-danger mt-1 error-category_product_id"></div>
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label for="products" class="form-label">Sản phẩm</label>
+                                            <select class="form-select" id="products" name="products" style="height: 48px">
+                                            </select>
+                                            <div class="text-danger mt-1 error-products"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label for="product_version" class="form-label">Phiên bản sản phẩm</label>
+                                            <select class="form-select" id="product_version" name="product_version"
+                                                style="height: 48px">
+                                            </select>
+                                            <div class="text-danger mt-1 error-product_version"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -57,8 +77,9 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label" for="quantity">Số lượng sản phẩm</label>
                                             <input type="text" class="form-control" id="quantity"
@@ -66,9 +87,11 @@
                                             <div class="text-danger mt-1 error-quantity"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label" for="price">Giá nhập</label>
+                                            <label class="form-label" for="price">Giá nhập (VNĐ)</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="price"
                                                     placeholder="Giá nhập" name="price">
@@ -76,7 +99,9 @@
                                             <div class="text-danger mt-1 error-price"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label for="vat" class="form-label">Thuế VAT (%)</label>
                                             <input type="text" class="form-control" id="vat"
@@ -132,13 +157,72 @@
 @push('js')
     <script src="{{ asset('js/admin/inventories.js') }}"></script>
     <script>
-        // init
-        const $form = $('#form-store');
-        const $inputs = $form.find('input');
-        $routeStore = '{{ route('admin.stockImports.store') }}';
-        $routeIndex = '{{ route('admin.inventories.index') }}';
-        // function handle
-        storeInventory($routeStore, $routeIndex);
-        deleteAlertValidation($inputs);
+        $(document).ready(() => {
+            // init
+            const $form = $('#form-store');
+            const $inputs = $form.find('input');
+            $routeStore = '{{ route('admin.stockImports.store') }}';
+            $routeIndex = '{{ route('admin.inventories.index') }}';
+
+            $('#category_product_id').change((e) => {
+                let categoryid = $(e.target).val();
+
+                $.ajax({
+                    url: `{{ route('admin.stockImports.getDataProduct') }}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        category_product_id: categoryid,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        const data = response.data;
+                        const products = $('#products');
+                        products.empty();
+                        data.forEach((item) => {
+                            products.append(
+                                `<option value="${item.id}">${item.name}</option>`
+                            );
+                        });
+                        products.trigger('change');
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    },
+                });
+            });
+
+
+            $('#products').change((e) => {
+                let product_id = $(e.target).val();
+
+                $.ajax({
+                    url: `{{ route('admin.stockImports.getDataProductVersion') }}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        product_id: product_id,
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        const data = response.data;
+                        const product_version = $('#product_version');
+                        product_version.empty();
+                        data.forEach((item) => {
+                            product_version.append(
+                                `<option value="${item.id}">${item.config_name}</option>`
+                            );
+                        });
+                        product_version.trigger('change');
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    },
+                });
+            });
+            // function handle
+            storeInventory($routeStore, $routeIndex);
+            deleteAlertValidation($inputs);
+        });
     </script>
 @endpush

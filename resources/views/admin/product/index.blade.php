@@ -86,16 +86,6 @@
                     `;
                         }
                     },
-                    // {
-                    //     data: 'price',
-                    //     name: 'price',
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     className: 'text-center',
-                    //     render: function(data) {
-                    //         return `<span class='text-dark'>${data}</span>`;
-                    //     }
-                    // },
                     {
                         data: 'status',
                         name: 'status',
@@ -109,16 +99,6 @@
                     `;
                         }
                     },
-                    // {
-                    //     data: 'created_at',
-                    //     name: 'created_at',
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     className: 'text-center',
-                    //     render: function(data) {
-                    //         return `<span class='text-dark'>${data}</span>`;
-                    //     }
-                    // },
                     {
                         data: 'actions',
                         name: 'actions',
@@ -128,15 +108,21 @@
                         render: function(data, type, row) {
                             return `
                             <span class='table-action'>
+                                <a href="${data.view}" data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <i class="list text-primary uil uil-eye action-icon"></i>
+                                </a>
                                 <a href="${data.list}" data-bs-toggle="tooltip" data-bs-placement="top" title="Danh sách sản phẩm cùng phiên bản">
                                     <i class="list text-primary uil uil-list-ul action-icon"></i>
                                 </a>
-                                <form action="${data.destroy}" method="POST" class="action-icon">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="id" value="${data.id}" title="Xóa sản phẩm khỏi hệ thống">
-                                    <i class="destroy text-danger uil-trash-alt" type="button"></i>
-                                </form>
+                                <a href="${data.edit}" data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <i class="edit text-primary uil uil-edit action-icon"></i>
+                                </a>
+                                <form action="${data.destroy}" method="POST" class="d-inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="${data.id}">
+                                <i class="uil-trash-alt text-danger destroy action-icon" type="button"></i>
+                            </form>
                             </span>
                         `;
                         }
@@ -159,13 +145,20 @@
                         postDataStatus(id, 'check', routePost);
                     }
                 });
-                $routeDelete = '{{ route('admin.products.delete') }}';
-                destroy($routeDelete, table);
 
                 $(function() {
                     $('[data-bs-toggle="tooltip"]').tooltip();
                 });
+
+                const routeDestroy = '{{ route('admin.products.destroy') }}';
+                const routeRestore = '{{ route('admin.products.restoreAll') }}';
+                const routeForceDelete = '{{ route('admin.products.forceDelete') }}';
+
+                forceDelete(routeForceDelete, table);
+                restore(routeRestore, table);
+                destroy(routeDestroy, table);
             });
+
 
             const postDataStatus = (id, status, route) => {
                 $.ajax({

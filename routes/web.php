@@ -134,12 +134,13 @@ Route::group(
                 Route::get('/create', [ProductController::class, 'create'])->name('create');
                 Route::post('/store', [ProductController::class, 'store'])->name('store');
 
-                Route::get('/{products:slug}/edit', [ProductVersionController::class, 'edit'])->name('edit');
-                Route::put('/{products:slug}/edit', [ProductVersionController::class, 'update'])->name('update');
+                Route::get('/{products:slug}/edit', [ProductController::class, 'edit'])->name('edit');
+                Route::put('/{products:slug}/edit', [ProductController::class, 'update'])->name('update');
 
                 Route::post('/updateStatus', [ProductController::class, 'updateStatus'])->name('updateStatus');
 
-                Route::delete('/delete', [ProductController::class, 'delete'])->name('delete');
+                Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
+                Route::delete('/forceDelete', [ProductController::class, 'forceDelete'])->name('forceDelete');
                 Route::delete('/destroy', [ProductController::class, 'destroy'])->name('destroy');
                 Route::post('/restoreAll', [ProductController::class, 'restoreAll'])->name('restoreAll');
 
@@ -158,12 +159,12 @@ Route::group(
                         Route::get('/create', [ProductVersionController::class, 'create'])->name('create');
                         Route::post('/store', [ProductVersionController::class, 'store'])->name('store');
 
-                        Route::get('/{productVersions:slug}/edit', [ProductVersionController::class, 'edit'])->name('edit');
-                        Route::put('/{productVersions:slug}/edit', [ProductVersionController::class, 'update'])->name('update');
+                        Route::get('/{product_version:slug}/edit', [ProductVersionController::class, 'edit'])->name('edit');
+                        Route::put('/{product_version:slug}/edit', [ProductVersionController::class, 'update'])->name('update');
 
-                        Route::post('/destroy-image', [ProductController::class, 'destroy_image'])->name('destroy-image');
                         Route::delete('/delete', [ProductVersionController::class, 'delete'])->name('delete');
 
+                        Route::delete('/forceDelete', [ProductVersionController::class, 'forceDelete'])->name('forceDelete');
                         Route::delete('/destroy', [ProductVersionController::class, 'destroy'])->name('destroy');
                         Route::post('/restoreAll', [ProductVersionController::class, 'restoreAll'])->name('restoreAll');
                     },
@@ -222,7 +223,6 @@ Route::group(
                         Route::post('/restoreAll', [ModelSeriesController::class, 'restoreAll'])->name('restoreAll');
                     },
                 );
-
             },
         );
 
@@ -310,7 +310,7 @@ Route::group(
             },
         );
 
-        // Inventory histories import
+        // stock imports route
         Route::group(
             [
                 'prefix' => 'stockImports',
@@ -321,8 +321,10 @@ Route::group(
                 Route::post('/getList', [StockImportController::class, 'getList'])->name('getList');
                 Route::get('/create', [StockImportController::class, 'create'])->name('create');
                 Route::post('/store', [StockImportController::class, 'store'])->name('store');
-                Route::get('/details', [StockImportController::class, 'detail'])->name('detail');
+                Route::get('/{stockImport:ref_code}/details', [StockImportController::class, 'detail'])->name('detail');
                 Route::get('/invoice/{id}', [StockImportController::class, 'exportPDF'])->name('exportPDF');
+                Route::post('/getDataProduct', [StockImportController::class, 'getDataProduct'])->name('getDataProduct');
+                Route::post('/getDataProductVersion', [StockImportController::class, 'getDataProductVersion'])->name('getDataProductVersion');
             },
         );
 

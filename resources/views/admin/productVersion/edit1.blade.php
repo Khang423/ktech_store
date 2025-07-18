@@ -1,3 +1,8 @@
+@php
+    use App\Enums\ProductTypeEnum;
+    $laptopSpecs = getLaptopSpecs($product);
+    $phoneSpecs = getPhoneSpecs($product);
+@endphp
 @extends('admin.layout.master')
 @section('title')
     <div class="text-dark">
@@ -9,12 +14,13 @@
             Danh sách phiên bản
         </span>
         <i class="mdi mdi-chevron-right"></i>
-        Thêm
+        Cập nhật
     </div>
 @endsection
 @section('content')
     <form method="post" enctype="multipart/form-data" autocomplete="off" id="form-update">
         @csrf
+        @method('PUT')
         <div class="row">
             <div class="col-8">
                 {{-- Information --}}
@@ -66,65 +72,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="mb-2">
-                                            <label for="import_price" class="form-label">Giá nhập</label>
-                                            @if ($stock_import_details->price ?? '')
-                                                <input type="text" class="form-control" id="import_price"
-                                                    placeholder="Giá nhập" name="import_price"
-                                                    value="{{ formatPriceToVND($stock_import_details->price) }}">
-                                            @endif
-                                            <input type="text" class="form-control" id="import_price"
-                                                placeholder="Giá nhập" name="import_price" value="0">
-                                            <div class="text-danger mt-1 error-import_price"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-2">
-                                            <label for="profit_rate" class="form-label">Lợi nhuận (%)</label>
-                                            <input type="text" class="form-control" id="profit_rate"
-                                                placeholder="Lợi nhuận (%)" name="profit_rate"
-                                                value="{{ $productVersion->profit_rate }}">
-                                            <div class="text-danger mt-1 error-profit_rate"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-2">
-                                            <label for="final_price" class="form-label">Giá bán</label>
-                                            <input type="text" class="form-control" id="final_price"
-                                                placeholder="Giá bán" name="final_price"
-                                                value="{{ formatPriceToVND($productVersion->final_price) }}">
-                                            <div class="text-danger mt-1 error-final_price"></div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- // Description --}}
-                <div class="card">
-                    <div class="card-body">
-                        <div class="tab-content">
-                            <div class="tab-pane show active" id="custom-styles-preview">
-                                <h4 class="header-title mb-3">Mô tả sản phẩm</h4>
-                                <textarea class="form-control tinymce-editor" name="description" rows="10">
-                            </textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @php
-                    $laptopSpecs = getLaptopSpecs($product);
-                    $phoneSpecs = getPhoneSpecs($product);
-                @endphp
                 @if ($product->laptopSpecs)
                     <div class="laptop">
-                        {{-- cpu and gpu --}}
+                        {{--                    cpu and gpu --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content">
@@ -155,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- Memory and Storage --}}
+                        {{--                Memory and Storage --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content">
@@ -208,7 +163,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- Display --}}
+                        {{--                Display --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content">
@@ -297,7 +252,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- dimension and weigth --}}
+                        {{--    dimension and weigth --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content">
@@ -335,7 +290,7 @@
                             </div>
                         </div>
 
-                        {{-- utilities and other feature --}}
+                        {{--    utilities and other feature --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content">
@@ -397,7 +352,7 @@
                             </div>
                         </div>
 
-                        {{-- port connect --}}
+                        {{--    port connect --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="tab-content">
@@ -517,8 +472,8 @@
                                                 <div class="mb-2">
                                                     <label for="rear_camera" class="form-label">Camera Sau</label>
                                                     <textarea class="form-control" id="rear_camera" name="rear_camera" rows="3">
-                                            {{ $phoneSpecs['rear_camera'] }}
-                                            </textarea>
+                                        {{ $phoneSpecs['rear_camera'] }}
+                                    </textarea>
                                                     <div class="text-danger mt-1 error-rear_camera"></div>
                                                 </div>
                                                 <div class="mb-2">
@@ -534,8 +489,8 @@
                                                     <label for="camera_features" class="form-label">Tính năng
                                                         camera</label>
                                                     <textarea class="form-control" id="camera_features" name="camera_features" rows="3">
-                                            {{ $phoneSpecs['camera_features'] }}
-                                            </textarea>
+                                        {{ $phoneSpecs['camera_features'] }}
+                                    </textarea>
                                                     <div class="text-danger mt-1 error-camera_features"></div>
                                                 </div>
                                             </div>
@@ -829,59 +784,7 @@
                     </div>
                 @endif
             </div>
-
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <label class="text-dark header-title font-16 fw-bold">
-                            Ảnh trưng bày
-                        </label>
-                        <div class="d-flex justify-content-center mb-2 mt-2">
-                            <div id="preview-thumbnail"></div>
-                        </div>
-                        <input name="thumbnail" type="file" id="img_thumbnail" style="display: none" />
-                        <div class="thumbnail text-center dropzone">
-                            <i class="h1 text-muted uil-upload-alt"></i>
-                            <h3>Chọn ảnh </h3>
-                        </div>
-                        <div class="error-thumbnail text-center text-danger"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <lable class="text-dark header-title font-16 fw-bold">
-                            Ảnh chi tiết
-                        </lable>
-                        <div class="d-flex justify-content-center mb-2 mt-2">
-                            <div id="preview-image"></div>
-                        </div>
-                        <div class="mt-2">
-                            <input name="image[]" type="file" id="imgInput" style="display: none" multiple>
-                            <div class="dz-message-image text-center dropzone">
-                                <i class="h1 text-muted uil-upload-alt"></i>
-                                <h3>Chọn nhiều ảnh</h3>
-                            </div>
-                        </div>
-                        <div class="error-new-image text-center text-danger"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane show active">
-                                    <button class="btn btn-primary" id="btn-store" onclick="tinymce.triggerSave()">
-                                        <i class="mdi mdi-plus-circle me-2"></i>
-                                        <span>Thêm </span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
     </form>
 @endsection
 @push('css')
@@ -889,18 +792,16 @@
 @push('js')
     <script src="{{ asset('js/admin/product.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            // khai báo biến
-            const $form = $('#form-update');
-            const $inputs = $form.find('input');
-            const routeStore = "{{ route('admin.products.productsVersion.store', $productVersion->slug) }}";
-            const routeIndex = "{{ route('admin.products.productsVersion.index', $productVersion->slug) }}";
-            // xoá ảnh trong list ảnh chi tiết
-            const routedestroy = "{{ route('admin.products.destroy-image') }}";
-            const routeGetDataCategoryDetail = "{{ route('admin.products.getDataCategoryProductDetail') }}";
+        // init
+        const $form = $('#form-update');
+        const inputs = $form.find('input');
+        const routeUpdate = '{{ route('admin.products.productsVersion.update', $productVersion->slug) }}';
+        const routeIndex = '{{ route('admin.products.productsVersion.index', $productVersion->slug) }}';
+        const routedestroy = "{{ route('admin.products.destroy-image') }}";
+        const routeGetDataCategoryDetail = "{{ route('admin.products.getDataCategoryProductDetail') }}";
+        // load data category product detail
 
-            store(routeStore, routeIndex);
-            deleteAlertValidation($inputs);
-        });
+        update(routeUpdate, routeIndex);
+        deleteAlertValidation(inputs);
     </script>
 @endpush

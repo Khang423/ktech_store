@@ -11,6 +11,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\CategoryProduct;
 use App\Models\Customer;
+use App\Models\Product;
 use App\Models\ProductVersion;
 use App\Models\Tag;
 use App\Services\AuthService;
@@ -55,9 +56,10 @@ class HomeController extends Controller
 
     public function product_detail(ProductVersion $productVersion)
     {
-        $product = ProductVersion::with(['products', 'phoneSpecs', 'productImages', 'laptopSpecs'])
+        $product = Product::with(['productImages', 'productVersions.phoneSpecs', 'productVersions.laptopSpecs'])
             ->where('id', $productVersion->id)
             ->first();
+        dd($product->products->productImages);
         $title = $product->name;
         $productVersion = ProductVersion::where('product_id', $productVersion->product_id)->get();
         return view('outside.product_detail', [

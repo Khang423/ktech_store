@@ -25,7 +25,6 @@
                                 Thêm
                             </a>
                         </div>
-<<<<<<< HEAD
                         <div class="col-6 text-end">
                             <a class="btn btn-info mb-2" id="btn-restore">
                                 <i class="uil uil-history me-2"></i>
@@ -35,13 +34,6 @@
                                 <i class="uil uil-trash-alt"></i>
                                 Xoá vĩnh viễn
                             </a>
-=======
-                        <div class="col-sm-5">
-                            <a class="btn btn-primary" id="btn-restore">
-                                <i class="uil uil-history me-2"></i>
-                                Khôi phục
-                            </a>
->>>>>>> bf80720 (update db and feat usagetype status:done)
                         </div>
                     </div>
 
@@ -132,16 +124,12 @@
                     </span>
                 `
                 }
-<<<<<<< HEAD
             ];
 
             let table = $('#datatable').DataTable(
                 customerDatatable("{{ route('admin.brands.getList') }}", columns)
             );
 
-=======
-            });
->>>>>>> bf80720 (update db and feat usagetype status:done)
             const routeDelete = '{{ route('admin.brands.destroy') }}';
             const routeRestore = '{{ route('admin.brands.restoreAll') }}';
             restore(routeRestore, table);

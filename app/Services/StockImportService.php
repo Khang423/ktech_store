@@ -36,11 +36,15 @@ class StockImportService extends Controller
             ->editColumn('member_id', function ($object) {
                 return $object->member->name ?? '';
             })
+            ->editColumn('total_amount', function ($object) {
+                return number_format($object->total_amount, 0, ',', '.') . ' ₫';
+            })
+
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
                     'destroy' => '',
-                    'preview' => route('admin.stockImports.exportPDF', $object->id),
+                    'preview' => route('admin.stockImports.detail', $object),
                     'edit' => '',
                 ];
             })
