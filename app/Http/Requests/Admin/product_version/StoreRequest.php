@@ -73,8 +73,6 @@ class StoreRequest extends FormRequest
             'weight_phone' => 'string|nullable',
             'wifi_laptop' => 'string|nullable',
             'wifi_technology' => 'string|nullable',
-            'thumbnail' => 'image|required',
-            'image' => 'array|nullable'
         ];
     }
 }

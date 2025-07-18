@@ -50,12 +50,12 @@ class Product extends Model
 
     public function productVersions()
     {
-        return $this->hasMany(ProductVersion::class, 'id', 'product_id');
+        return $this->hasMany(ProductVersion::class, 'product_id', 'id');
     }
 
-    public function firstProductVersion()
+    public function productImages()
     {
-        return $this->hasOne(ProductVersion::class, 'product_id')->orderBy('created_at');
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
 
     public function brands()

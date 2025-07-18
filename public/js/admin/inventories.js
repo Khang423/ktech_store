@@ -1,7 +1,7 @@
 $(document).ready(() => {});
 const addProductToTable = () => {
-    const productId = $("#product_version_id").val();
-    const productName = $("#product_version_id option:selected").text();
+    const productId = $("#product_version").val();
+    const productName = $("#product_version option:selected").text();
     const quantity = parseInt($("#quantity").val());
     const price = parseFloat($("#price").val());
     const vat = parseFloat($("#vat").val());

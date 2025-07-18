@@ -1,12 +1,17 @@
+@php
+    use App\Enums\ProductTypeEnum;
+    $laptopSpecs = get_laptop_specs($laptopSpec);
+    $phoneSpecs = get_phone_specs($phoneSpec);
+@endphp
 @extends('admin.layout.master')
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Sản phẩm
+            {{ $products->name }}
         </span>
         <i class="mdi mdi-chevron-right"></i>
         <span class="text-primary">
-            <a href="{{ route('admin.products.index') }}">Danh sách</a>
+            Danh sách phiên bản
         </span>
         <i class="mdi mdi-chevron-right"></i>
         Cập nhật
@@ -17,7 +22,7 @@
         @csrf
         @method('PUT')
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 {{-- Information --}}
                 <div class="card">
                     <div class="card-body">
@@ -30,7 +35,7 @@
                                             <label for="name" class="form-label">Tên sản phẩm</label>
                                             <input type="text" class="form-control" id="name"
                                                 placeholder="Tên sản phẩm" name="name"
-                                                value="{{ $productVersion->name }}">
+                                                value="{{ $productVersions->name }}" readonly>
                                             <div class="text-danger mt-1 error-name"></div>
                                         </div>
                                     </div>
@@ -38,30 +43,19 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-2">
-                                            <label for="category_product_id" class="form-label">Danh mục sản phẩm</label>
-                                            <select class="form-select" id="category_product_id" name="category_product_id"
-                                                style="height: 48px">
-                                                @foreach ($category_product as $item)
-                                                    <option value="{{ $item->id }}"
-                                                        @if ($product->products->category_product_id == $item->id) selected @endif>
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <label for="category_product_id" class="form-label">Loại sản phẩm</label>
+                                            <input class="form-control" id="category_product_id" name="category_product_id"
+                                                value="{{ $products->category_product_id == $category_product->id ? $category_product->name : '' }}"
+                                                style="height: 48px" readonly>
                                             <div class="text-danger mt-1 error-category_product_id"></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-2">
                                             <label for="brand_id" class="form-label">Thương hiệu </label>
-                                            <select class="form-select" id="brand_id" name="brand_id" style="height: 48px">
-                                                @foreach ($brand as $item)
-                                                    <option value="{{ $item->id }}"
-                                                        @if ($product->products->brand_id == $item->id) selected @endif>
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <input class="form-control" id="brand_id" name="brand_id"
+                                                value="{{ $products->brand_id == $brand->id ? $brand->name : '' }}"
+                                                style="height: 48px" readonly>
                                             <div class="text-danger mt-1 error-brand_id"></div>
                                         </div>
                                     </div>
@@ -69,18 +63,13 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-2">
-                                            <label for="category_product_detail_id" class="form-label">Series Sản
-                                                phẩm</label>
-                                            <select class="form-select" id="category_product_detail_id"
-                                                name="category_product_detail_id" style="height: 48px">
-                                                @foreach ($category_product_detail as $item)
-                                                    <option value="{{ $item->id }}"
-                                                        @if ($product->products->category_product_detail == $item->id) selected @endif>
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <div class="text-danger mt-1 error-category_product_id"></div>
+                                            <label for="model_seri" class="form-label">
+                                                Series Sản phẩm
+                                            </label>
+                                            <input class="form-control" id="model_seri" name="model_seri"
+                                                value="{{ $products->model_series_id == $model_seri->id ? $model_seri->name : '' }}"
+                                                style="height: 48px" readonly>
+                                            <div class="text-danger mt-1 error-model_seri"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +79,7 @@
                                             <label for="import_price" class="form-label">Giá nhập</label>
                                             <input type="text" class="form-control" id="import_price"
                                                 placeholder="Giá nhập" name="import_price"
-                                                value="{{ formatPriceToVND($stock_import_details->price ?? '0') }}">
+                                                value="{{ formatPriceToVND($stock_import_details->price ?? '0') }} " readonly>
                                             <div class="text-danger mt-1 error-import_price"></div>
                                         </div>
                                     </div>
@@ -101,7 +90,7 @@
                                             <label for="profit_rate" class="form-label">Lợi nhuận (%)</label>
                                             <input type="text" class="form-control" id="profit_rate"
                                                 placeholder="Lợi nhuận (%)" name="profit_rate"
-                                                value="{{ $productVersion->profit_rate }}">
+                                                value="{{ $productVersions->profit_rate }}">
                                             <div class="text-danger mt-1 error-profit_rate"></div>
                                         </div>
                                     </div>
@@ -110,7 +99,7 @@
                                             <label for="final_price" class="form-label">Giá bán</label>
                                             <input type="text" class="form-control" id="final_price"
                                                 placeholder="Giá bán" name="final_price"
-                                                value="{{ formatPriceToVND($productVersion->final_price) }}">
+                                                value="{{ formatPriceToVND($productVersions->final_price) }}">
                                             <div class="text-danger mt-1 error-final_price"></div>
                                         </div>
                                     </div>
@@ -119,25 +108,7 @@
                         </div>
                     </div>
                 </div>
-
-                {{--                // Description --}}
-                <div class="card">
-                    <div class="card-body">
-                        <div class="tab-content">
-                            <div class="tab-pane show active" id="custom-styles-preview">
-                                <h4 class="header-title mb-3">Mô tả sản phẩm</h4>
-                                <textarea class="form-control tinymce-editor" name="description" rows="10">
-                                    {{ $productVersion->description }}
-                                </textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @php
-                    $laptopSpecs = getLaptopSpecs($product);
-                    $phoneSpecs = getPhoneSpecs($product);
-                @endphp
-                @if ($product->laptopSpecs)
+                @if ($category_product->slug == ProductTypeEnum::LAPTOP)
                     <div class="laptop">
                         {{--                    cpu and gpu --}}
                         <div class="card">
@@ -148,12 +119,12 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
-                                                    <label for="gpu_laptop" class="form-label">Card Đồ hoạ</label>
+                                                    <label for="gpu" class="form-label">Card Đồ hoạ</label>
                                                     <input type="text" hidden name="product_type" value="laptop">
-                                                    <input type="text" class="form-control" id="gpu_laptop"
-                                                        placeholder="Card Đồ hoạ" name="gpu_laptop"
+                                                    <input type="text" class="form-control" id="gpu"
+                                                        placeholder="Card Đồ hoạ" name="gpu"
                                                         value="{{ $laptopSpecs['gpu'] }}">
-                                                    <div class="text-danger mt-1 error-gpu_laptop"></div>
+                                                    <div class="text-danger mt-1 error-gpu"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -179,11 +150,11 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="ram_size_laptop" class="form-label">Dung lượng RAM</label>
-                                                    <input type="text" class="form-control" id="ram_size_laptop"
-                                                        placeholder="Dung lượng ram" name="ram_size_laptop"
+                                                    <label for="ram_size" class="form-label">Dung lượng RAM</label>
+                                                    <input type="text" class="form-control" id="ram_size"
+                                                        placeholder="Dung lượng ram" name="ram_size"
                                                         value="{{ $laptopSpecs['ram_size'] }}">
-                                                    <div class="text-danger mt-1 error-ram_size_laptop"></div>
+                                                    <div class="text-danger mt-1 error-ram_size"></div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="ram_type" class="form-label">Loại RAM</label>
@@ -203,12 +174,12 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="storage_size_laptop" class="form-label">Dung lượng bộ
+                                                    <label for="storage_size" class="form-label">Dung lượng bộ
                                                         nhớ</label>
-                                                    <input type="text" class="form-control" id="storage_size_laptop"
-                                                        placeholder="Dung lượng bộ nhớ" name="storage_size_laptop"
+                                                    <input type="text" class="form-control" id="storage_size"
+                                                        placeholder="Dung lượng bộ nhớ" name="storage_size"
                                                         value="{{ $laptopSpecs['storage_size'] }}">
-                                                    <div class="text-danger mt-1 error-storage_size_laptop"></div>
+                                                    <div class="text-danger mt-1 error-storage_size"></div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="storage_type" class="form-label">Loại bộ nhớ</label>
@@ -247,12 +218,12 @@
                                                     <div class="text-danger mt-1 error-display_panel"></div>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <label for="display_size_laptop" class="form-label">Kích thước màn
+                                                    <label for="display_size" class="form-label">Kích thước màn
                                                         hình</label>
-                                                    <input type="text" class="form-control" id="display_size_laptop"
-                                                        placeholder="Kích thước màn hình" name="display_size_laptop"
+                                                    <input type="text" class="form-control" id="display_size"
+                                                        placeholder="Kích thước màn hình" name="display_size"
                                                         value="{{ $laptopSpecs['display_size'] }}">
-                                                    <div class="text-danger mt-1 error-display_size_laptop"></div>
+                                                    <div class="text-danger mt-1 error-display_size"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -265,14 +236,13 @@
                                                     <div class="text-danger mt-1 error-display_technology"></div>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <label for="display_resolution_laptop" class="form-label">Độ phân giải
+                                                    <label for="display_resolution" class="form-label">Độ phân giải
                                                         màn
                                                         hình</label>
-                                                    <input type="text" class="form-control"
-                                                        id="display_resolution_laptop" placeholder="Độ phân giải màn hình"
-                                                        name="display_resolution_laptop"
+                                                    <input type="text" class="form-control" id="display_resolution"
+                                                        placeholder="Độ phân giải màn hình" name="display_resolution"
                                                         value="{{ $laptopSpecs['display_resolution'] }}">
-                                                    <div class="text-danger mt-1 error-display_resolution_laptop"></div>
+                                                    <div class="text-danger mt-1 error-display_resolution"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -289,13 +259,12 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="audio_technology_laptop" class="form-label">Công nghệ âm
+                                                    <label for="audio_technology" class="form-label">Công nghệ âm
                                                         thanh</label>
-                                                    <input type="text" class="form-control"
-                                                        id="audio_technology_laptop" placeholder="Công nghệ âm thanh"
-                                                        name="audio_technology_laptop"
+                                                    <input type="text" class="form-control" id="audio_technology"
+                                                        placeholder="Công nghệ âm thanh" name="audio_technology"
                                                         value="{{ $laptopSpecs['audio_technology'] }}">
-                                                    <div class="text-danger mt-1 error-audio_technology_laptop"></div>
+                                                    <div class="text-danger mt-1 error-audio_technology"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -328,11 +297,11 @@
                                                     <div class="text-danger mt-1 error-material"></div>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <label for="weight_laptop" class="form-label">Trọng lượng</label>
-                                                    <input type="text" class="form-control" id="weight_laptop"
-                                                        placeholder="Trọng lượng" name="weight_laptop"
+                                                    <label for="weight" class="form-label">Trọng lượng</label>
+                                                    <input type="text" class="form-control" id="weight"
+                                                        placeholder="Trọng lượng" name="weight"
                                                         value="{{ $laptopSpecs['weight'] }}">
-                                                    <div class="text-danger mt-1 error-weight_laptop"></div>
+                                                    <div class="text-danger mt-1 error-weight"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -366,13 +335,12 @@
                                                     <div class="text-danger mt-1 error-security"></div>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <label for="operating_system_laptop" class="form-label">Hệ điều
+                                                    <label for="operating_system" class="form-label">Hệ điều
                                                         hành</label>
-                                                    <input type="text" class="form-control"
-                                                        id="operating_system_laptop" placeholder="Hệ điều hành"
-                                                        name="operating_system_laptop"
+                                                    <input type="text" class="form-control" id="operating_system"
+                                                        placeholder="Hệ điều hành" name="operating_system"
                                                         value="{{ $laptopSpecs['operating_system'] }}">
-                                                    <div class="text-danger mt-1 error-operating_system_laptop"></div>
+                                                    <div class="text-danger mt-1 error-operating_system"></div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="keyboard_type" class="form-label">Loại bàn phím </label>
@@ -384,11 +352,11 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="wifi_laptop" class="form-label">Wifi</label>
-                                                    <input type="text" class="form-control" id="wifi_laptop"
-                                                        placeholder="Wifi" name="wifi_laptop"
+                                                    <label for="wifi" class="form-label">Wifi</label>
+                                                    <input type="text" class="form-control" id="wifi"
+                                                        placeholder="Wifi" name="wifi"
                                                         value="{{ $laptopSpecs['wifi'] }}">
-                                                    <div class="text-danger mt-1 error-wifi_laptop"></div>
+                                                    <div class="text-danger mt-1 error-wifi"></div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="memory_card_slot" class="form-label">Khe cắm thẻ
@@ -428,12 +396,12 @@
                                                     <div class="text-danger mt-1 error-usb_ports"></div>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <label for="release_date_laptop" class="form-label">Ngày phát
+                                                    <label for="release_date" class="form-label">Ngày phát
                                                         hành</label>
-                                                    <input type="text" class="form-control" id="release_date_laptop"
-                                                        placeholder="Ngày phát hành" name="release_date_laptop"
+                                                    <input type="text" class="form-control" id="release_date"
+                                                        placeholder="Ngày phát hành" name="release_date"
                                                         value="{{ $laptopSpecs['release_date'] }}">
-                                                    <div class="text-danger mt-1 error-release_date_laptop"></div>
+                                                    <div class="text-danger mt-1 error-release_date"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -452,7 +420,8 @@
                         </div>
                     </div>
                 @endif
-                @if ($product->phoneSpecs)
+                @if ($category_product->slug == ProductTypeEnum::PHONE)
+                    _phone
                     <div class="phone">
                         {{-- display --}}
                         <div class="card">
@@ -463,13 +432,13 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
-                                                    <label for="display_size_phone" class="form-label">Kích thước màn
+                                                    <label for="display_size" class="form-label">Kích thước màn
                                                         hình</label>
                                                     <input type="text" hidden name="product_type" value="phone">
-                                                    <input type="text" class="form-control" id="display_size_phone"
-                                                        placeholder="Kích thước màn hình" name="display_size_phone"
+                                                    <input type="text" class="form-control" id="display_size"
+                                                        placeholder="Kích thước màn hình" name="display_size"
                                                         value="{{ $phoneSpecs['display_size'] }}">
-                                                    <div class="text-danger mt-1 error-display_size_phone"></div>
+                                                    <div class="text-danger mt-1 error-display_size"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -485,13 +454,12 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
-                                                    <label for="display_resolution_phone" class="form-label">Độ phân giải
+                                                    <label for="display_resolution" class="form-label">Độ phân giải
                                                         màn hình</label>
-                                                    <input type="text" class="form-control"
-                                                        id="display_resolution_phone" placeholder="Độ phân giải màn hình"
-                                                        name="display_resolution_phone"
+                                                    <input type="text" class="form-control" id="display_resolution"
+                                                        placeholder="Độ phân giải màn hình" name="display_resolution"
                                                         value="{{ $phoneSpecs['display_resolution'] }}">
-                                                    <div class="text-danger mt-1 error-display_resolution_phone"></div>
+                                                    <div class="text-danger mt-1 error-display_resolution"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -577,11 +545,11 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="gpu_phone" class="form-label">Chip Đồ hoạ</label>
-                                                    <input type="text" class="form-control" id="gpu_phone"
-                                                        placeholder="Đồ hoạ" name="gpu_phone"
+                                                    <label for="gpu" class="form-label">Chip Đồ hoạ</label>
+                                                    <input type="text" class="form-control" id="gpu"
+                                                        placeholder="Đồ hoạ" name="gpu"
                                                         value="{{ $phoneSpecs['gpu'] }}">
-                                                    <div class="text-danger mt-1 error-gpu_phone"></div>
+                                                    <div class="text-danger mt-1 error-gpu"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -648,21 +616,21 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="ram_size_phone" class="form-label">Dung lượng Ram</label>
-                                                    <input type="text" class="form-control" id="ram_size_phone"
-                                                        placeholder="Dung lượng Ram" name="ram_size_phone"
+                                                    <label for="ram_size" class="form-label">Dung lượng Ram</label>
+                                                    <input type="text" class="form-control" id="ram_size"
+                                                        placeholder="Dung lượng Ram" name="ram_size"
                                                         value="{{ $phoneSpecs['ram_size'] }}">
-                                                    <div class="text-danger mt-1 error-ram_size_phone"></div>
+                                                    <div class="text-danger mt-1 error-ram_size"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="storage_size_phone" class="form-label">Bộ nhớ
+                                                    <label for="storage_size" class="form-label">Bộ nhớ
                                                         trong</label>
-                                                    <input type="text" class="form-control" id="storage_size_phone"
-                                                        placeholder="Bộ nhớ trong" name="storage_size_phone"
+                                                    <input type="text" class="form-control" id="storage_size"
+                                                        placeholder="Bộ nhớ trong" name="storage_size"
                                                         value="{{ $phoneSpecs['storage_size'] }}">
-                                                    <div class="text-danger mt-1 error-storage_size_phone"></div>
+                                                    <div class="text-danger mt-1 error-storage_size"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -718,11 +686,11 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="weight_phone" class="form-label">Trọng lượng</label>
-                                                    <input type="text" class="form-control" id="weight_phone"
-                                                        placeholder="Trọng lượng" name="weight_phone"
+                                                    <label for="weight" class="form-label">Trọng lượng</label>
+                                                    <input type="text" class="form-control" id="weight"
+                                                        placeholder="Trọng lượng" name="weight"
                                                         value="{{ $phoneSpecs['weight'] }}">
-                                                    <div class="text-danger mt-1 error-weight_phone"></div>
+                                                    <div class="text-danger mt-1 error-weight"></div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="frame_material" class="form-label">Chất liệu khung
@@ -756,13 +724,12 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="operating_system_phone" class="form-label">Hệ điều
+                                                    <label for="operating_system" class="form-label">Hệ điều
                                                         hành</label>
-                                                    <input type="text" class="form-control"
-                                                        id="operating_system_phone" placeholder="Hệ điều hành"
-                                                        name="operating_system_phone"
+                                                    <input type="text" class="form-control" id="operating_system"
+                                                        placeholder="Hệ điều hành" name="operating_system"
                                                         value="{{ $phoneSpecs['operating_system'] }}">
-                                                    <div class="text-danger mt-1 error-operating_system_phone"></div>
+                                                    <div class="text-danger mt-1 error-operating_system"></div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="water_dust_resistance" class="form-label">Chỉ số kháng
@@ -775,13 +742,12 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-2">
-                                                    <label for="audio_technology_phone" class="form-label">Công nghệ âm
+                                                    <label for="audio_technology" class="form-label">Công nghệ âm
                                                         thanh</label>
-                                                    <input type="text" class="form-control"
-                                                        id="audio_technology_phone" placeholder="Công nghệ âm thanh"
-                                                        name="audio_technology_phone"
+                                                    <input type="text" class="form-control" id="audio_technology"
+                                                        placeholder="Công nghệ âm thanh" name="audio_technology"
                                                         value="{{ $phoneSpecs['audio_technology'] }}">
-                                                    <div class="text-danger mt-1 error-audio_technology_phone"></div>
+                                                    <div class="text-danger mt-1 error-audio_technology"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -815,7 +781,7 @@
                                                 <div class="mb-2">
                                                     <label for="release_date" class="form-label">Ngày phát hành</label>
                                                     <input type="text" class="form-control" id="release_date"
-                                                        placeholder="Ngày phát hành" name="release_date_phone"
+                                                        placeholder="Ngày phát hành" name="release_date"
                                                         value="{{ $phoneSpecs['release_date'] }}">
                                                     <div class="text-danger mt-1 error-release_date"></div>
                                                 </div>
@@ -844,95 +810,6 @@
                     </div>
                 @endif
             </div>
-
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        @if ($productVersion->thumbnail !== null)
-                            <label class="text-dark header-title font-16 fw-bold">
-                                Ảnh trưng bày
-                            </label>
-                            <div class="d-flex justify-content-center mb-2 mt-2">
-                                <div id="preview-thumbnail">
-                                    <img src="{{ asset('asset/admin/products') . '/' . $productVersion->id . '/' . $productVersion->thumbnail }}"
-                                        width="250" height="auto" class="img-fluid img-thumbnail mt-2 mb-2">
-                                </div>
-                            </div>
-                            <input name="thumbnail_old" type="hidden"style="display: none"
-                                value="{{ $productVersion->thumbnail }}" />
-                            <input name="thumbnail_new" type="file" id="img_thumbnail" style="display: none" />
-                            <div class="thumbnail text-center dropzone">
-                                <i class="h1 text-muted uil-upload-alt"></i>
-                                <h3>Chọn ảnh </h3>
-                            </div>
-                            <div class="error-thumbnail text-center text-danger"></div>
-                        @else
-                            <label class="text-dark header-title font-16 fw-bold">
-                                Ảnh trưng bày
-                            </label>
-                            <div class="d-flex justify-content-center mb-2 mt-2">
-                                <div id="preview-thumbnail">
-                                </div>
-                            </div>
-                            <input name="thumbnail" type="file" id="img_thumbnail" style="display: none" />
-                            <div class="thumbnail text-center dropzone">
-                                <i class="h1 text-muted uil-upload-alt"></i>
-                                <h3>Chọn ảnh </h3>
-                            </div>
-                            <div class="error-thumbnail text-center text-danger"></div>
-                        @endif
-                    </div>
-                </div>
-                {{-- //  image detail --}}
-                <div class="card">
-                    <div class="card-body">
-                        <lable class="text-dark header-title font-16 fw-bold">
-                            Ảnh chi tiết
-                        </lable>
-                        <div class="d-flex justify-content-center mb-2 mt-2">
-                            <div id="preview-image"></div>
-                        </div>
-                        <div class="mt-2">
-                            <input name="image_add[]" type="file" id="imgInput" style="display: none" multiple>
-                            <div class="dz-message-image text-center dropzone">
-                                <i class="h1 text-muted uil-upload-alt"></i>
-                                <h3>Chọn nhiều ảnh</h3>
-                            </div>
-                        </div>
-                        <div class="error-new-image text-center text-danger"></div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <lable class="text-dark header-title font-16 fw-bold">
-                                Ảnh chi tiết cũ
-                            </lable>
-                            <div class=" mb-2 mt-2">
-                                @foreach ($product_image as $index => $image)
-                                    <div class="mt-2 text-center image-container">
-                                        <i class="destroy-image btn btn-link uil-times-square font-24 text-danger"
-                                            data-id="{{ $image->id }}"></i>
-
-                                        <img src="{{ asset('asset/admin/products') . '/' . $image->product_id . '/image/' . $image->image }}"
-                                            class="old-img img-fluid img-thumbnail me-3" width="170" height="auto">
-
-                                        <input type="file" name="image_update[{{ $index }}]" class="mt-2">
-
-                                        <input type="hidden" name="product_id[{{ $index }}]"
-                                            value="{{ $image->product_id }}" readonly>
-                                        <input type="hidden" name="product_image_old_id[{{ $index }}]"
-                                            value="{{ $image->id }}" readonly>
-                                        <input type="hidden" name="image_old[{{ $index }}]"
-                                            value="{{ $image->image }}" readonly>
-                                    </div>
-                                    <div class="error-img text-center text-danger mt-2"
-                                        id="error-img-{{ $image->id }}"></div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -949,6 +826,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 @endsection
 @push('css')
@@ -956,16 +834,105 @@
 @push('js')
     <script src="{{ asset('js/admin/product.js') }}"></script>
     <script>
-        // init
-        const $form = $('#form-update');
-        const inputs = $form.find('input');
-        const routeUpdate = '{{ route('admin.products.productsVersion.update', $productVersion->slug) }}';
-        const routeIndex = '{{ route('admin.products.productsVersion.index', $productVersion->slug) }}';
-        const routedestroy = "{{ route('admin.products.destroy-image') }}";
-        const routeGetDataCategoryDetail = "{{ route('admin.products.getDataCategoryProductDetail') }}";
-        // load data category product detail
+        $(document).ready(() => {
+            // init
+            const $form = $('#form-update');
+            const inputs = $form.find('input');
+            const routeUpdate =
+                "{{ route('admin.products.productsVersion.update', ['products' => $products, 'product_version' => $productVersions]) }}";
+            const routeIndex = "{{ route('admin.products.productsVersion.index', $products->slug) }}";
+            // load data category product detail
 
-        update(routeUpdate, routeIndex);
-        deleteAlertValidation(inputs);
+            $('#brand_id').on('change', (e) => {
+                const brand_id = $(e.target).val();
+                loadModelSeries(brand_id);
+            });
+
+            // Tự động gọi khi brand đã có sẵn (ví dụ trong trang edit)
+            const initialBrandId = $('#brand_id').val();
+            if (initialBrandId) {
+                loadModelSeries(initialBrandId);
+            }
+
+            $('#category_product_id').on('change', (e) => {
+                const categoryid = $(e.target).val();
+                loadUsageType(categoryid);
+            });
+
+            // Gọi tự động khi trang load nếu có sẵn category
+            const initialCategoryId = $('#category_product_id').val();
+            if (initialCategoryId) {
+                loadUsageType(initialCategoryId);
+            }
+
+            update(routeUpdate, routeIndex);
+            deleteAlertValidation(inputs);
+        });
+
+        const loadUsageType = (categoryid) => {
+            if (!categoryid) return;
+
+            $.ajax({
+                url: `{{ route('admin.products.getDataUsageType') }}`,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    category_product_id: categoryid,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: (response) => {
+                    const data = response.data;
+                    const usageTypeSelect = $('#usage_type_id');
+                    usageTypeSelect.empty();
+
+                    data.forEach((item) => {
+                        const selected = "{{ $products->usage_type_id }}" == item.id ? 'selected' :
+                            '';
+                        usageTypeSelect.append(
+                            `<option value="${item.id}" ${selected}>${item.name}</option>`
+                        );
+                    });
+
+                    usageTypeSelect.trigger('change');
+                },
+                error: (err) => {
+                    console.log(err);
+                },
+            });
+        };
+
+        const loadModelSeries = (brand_id) => {
+            if (!brand_id) return;
+
+            $.ajax({
+                url: `{{ route('admin.products.getDataModelSeries') }}`,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    brand_id: brand_id,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: (response) => {
+                    const data = response.data;
+                    const modelSeriesSelect = $("#model_series_id");
+                    modelSeriesSelect.empty();
+
+                    data.forEach((item) => {
+                        const selected =
+                            "{{ $products->model_series_id }}" == item.id ?
+                            "selected" :
+                            "";
+                        modelSeriesSelect.append(
+                            `<option value="${item.id}" ${selected}>${item.name}</option>`
+                        );
+                    });
+
+                    modelSeriesSelect.trigger("change");
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            });
+        };
     </script>
 @endpush

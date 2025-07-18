@@ -62,7 +62,7 @@ function update($routeUpdate, $routeIndex) {
     });
 }
 
-function restore($routeRestore , $table) {
+function restore($routeRestore, $table) {
     $(document).on("click", "#btn-restore", function (e) {
         e.preventDefault();
 
@@ -76,6 +76,25 @@ function restore($routeRestore , $table) {
             },
             error: function () {
                 toast("Khôi phục thất bại", "error");
+            },
+        });
+    });
+}
+
+function forceDelete($routeForceDelete, $table) {
+    $(document).on("click", "#btn-forceDelete", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $routeForceDelete,
+            type: "DELETE",
+            data: { _token: $('meta[name="csrf-token"]').attr("content") },
+            success: function () {
+                toast("Xóa vĩnh viễn thành công");
+                $table.draw();
+            },
+            error: function () {
+                toast("Xóa vĩnh viễn thất bại", "error");
             },
         });
     });

@@ -84,3 +84,75 @@ if (!function_exists('getPhoneSpecs')) {
         ];
     }
 }
+
+if (!function_exists('get_laptop_specs')) {
+    function get_laptop_specs($product)
+    {
+        return  [
+            'gpu' => $product->gpu ?? null,
+            'cpu' => $product->cpu ?? null,
+            'ram_size' => $product->ram_size ?? null,
+            'ram_type' => $product->ram_type ?? null,
+            'ram_slot' => $product->ram_slot ?? null,
+            'storage_type' => $product->storage_type ?? null,
+            'storage_size' => $product->storage_size ?? null,
+            'display_size' => $product->display_size ?? null,
+            'display_resolution' => $product->display_resolution ?? null,
+            'display_technology' => $product->display_technology ?? null,
+            'display_panel' => $product->display_panel ?? null,
+            'refresh_rate' => $product->refresh_rate ?? null,
+            'audio_technology' => $product->audio_technology ?? null,
+            'memory_card_slot' => $product->memory_card_slot ?? null,
+            'wifi' => $product->wifi ?? null,
+            'bluetooth_version' => $product->bluetooth_version ?? null,
+            'usb_ports' => $product->usb_ports ?? null,
+            'dimension' => $product->dimension ?? null,
+            'weight' => $product->weight ?? null,
+            'material' => $product->material ?? null,
+            'operating_system' => $product->operating_system ?? null,
+            'webcam' => $product->webcam ?? null,
+            'battery' => $product->battery ?? null,
+            'keyboard_type' => $product->keyboard_type ?? null,
+            'other_feature' => $product->other_feature ?? null,
+            'security' => $product->security ?? null,
+            'release_date' => $product->release_date ?? null,
+        ];
+    }
+}
+if (!function_exists('get_phone_specs')) {
+    function get_phone_specs($product)
+    {
+        return [
+            'display_size' => $product->display_size ?? null,
+            'display_type' => $product->display_type ?? null,
+            'display_resolution' => $product->display_resolution ?? null,
+            'display_refresh_rate' => $product->display_refresh_rate ?? null,
+            'display_features' => $product->display_features ?? null,
+            'rear_camera' => $product->rear_camera ?? null,
+            'front_camera' => $product->front_camera ?? null,
+            'camera_features' => $product->camera_features ?? null,
+            'chipset' => $product->chipset ?? null,
+            'gpu' => $product->gpu ?? null,
+            'nfc_support' => $product->nfc_support ?? null,
+            'sim_type' => $product->sim_type ?? null,
+            'network_support' => $product->network_support ?? null,
+            'gps_support' => $product->gps_support ?? null,
+            'ram_size' => $product->ram_size ?? null,
+            'storage_size' => $product->storage_size ?? null,
+            'battery_capacity' => $product->battery_capacity ?? null,
+            'charging_technology' => $product->charging_technology ?? null,
+            'charging_port' => $product->charging_port ?? null,
+            'operating_system' => $product->operating_system ?? null,
+            'weight' => $product->weight ?? null,
+            'dimension' => $product->dimension ?? null,
+            'frame_material' => $product->frame_material ?? null,
+            'water_dust_resistance' => $product->water_dust_resistance ?? null,
+            'audio_technology' => $product->audio_technology ?? null,
+            'fingerprint_sensor' => $product->fingerprint_sensor ?? null,
+            'other_sensors' => $product->other_sensors ?? null,
+            'wifi_technology' => $product->wifi_technology ?? null,
+            'release_date' => $product->release_date ?? null,
+            'bluetooth_technology' => $product->bluetooth_technology ?? null,
+        ];
+    }
+}

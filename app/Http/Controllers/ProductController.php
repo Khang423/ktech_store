@@ -59,9 +59,19 @@ class ProductController extends Controller
         return $this->errorResponse();
     }
 
-    public function storeProductVersion(UpdateRequest $request, ProductVersion $productVersion)
+    public function edit(Product $products)
     {
-        $result = $this->productService->storeProductVersion($request, $productVersion);
+        return view('admin.product.edit', [
+            'category_product' => CategoryProduct::where('id', $products->category_product_id)->get(['id', 'name']),
+            'brand' => Brand::select('id', 'name')->get(),
+            'products' => $products,
+            'product_image' => ProductImage::where('product_id', $products->id)->get(),
+        ]);
+    }
+
+    public function update(UpdateRequest $request, Product $products)
+    {
+        $result = $this->productService->update($request, $products);
         if ($result) {
             return $this->successResponse();
         }
@@ -69,14 +79,6 @@ class ProductController extends Controller
     }
 
 
-    public function delete(Request $request)
-    {
-        $result = $this->productService->delete($request);
-        if ($result) {
-            return $this->successResponse();
-        }
-        return $this->errorResponse();
-    }
 
     public function destroy_image(Request $request)
     {
@@ -96,64 +98,6 @@ class ProductController extends Controller
         return $this->errorResponse();
     }
 
-
-    public function indexProductVersion(ProductVersion $productVersion)
-    {
-        return view('admin.productVersion.index', [
-            'productVersion' => $productVersion
-        ]);
-    }
-
-    public function getListProductVersion(ProductVersion $productVersion)
-    {
-        return $this->productService->getListProductVersion($productVersion);
-    }
-
-    public function createProductVersion(ProductVersion $productVersion)
-    {
-        $product = Product::where('id', $productVersion->product_id)
-            ->select('category_product_details_id')
-            ->first();
-        $category_product_detail = CategoryProductDetail::with('categoryProduct')->where('id', $product->category_product_details_id)->first();
-        return view('admin.productVersion.create', [
-            'productVersion' => $productVersion,
-            'product' => ProductVersion::with(['laptopSpecs', 'products', 'phoneSpecs', 'stockImportDetails'])
-                ->find($productVersion->id),
-            'category_product' => CategoryProduct::select(['id', 'name'])->get(),
-            'category_product_detail' => CategoryProductDetail::where('catogory_product_id', $category_product_detail->categoryProduct->id)->select(['id', 'name'])->get(),
-            'brand' => Brand::select(['id', 'name'])->get(),
-            'product_image' => ProductImage::where('product_id', $productVersion->id)->get(),
-            'stock_import_details' => StockImportDetail::where('product_version_id', $productVersion->id)->first(),
-        ]);
-    }
-
-    public function editProductVersion(ProductVersion $productVersion)
-    {
-        $product = Product::where('id', $productVersion->product_id)
-            ->select('category_product_details_id')
-            ->first();
-        $category_product_detail = CategoryProductDetail::with('categoryProduct')->where('id', $product->category_product_details_id)->first();
-        return view('admin.product.edit', [
-            'productVersion' => $productVersion,
-            'product' => ProductVersion::with(['laptopSpecs', 'products', 'phoneSpecs', 'stockImportDetails'])
-                ->find($productVersion->id),
-            'category_product' => CategoryProduct::select(['id', 'name'])->get(),
-            'category_product_detail' => CategoryProductDetail::where('catogory_product_id', $category_product_detail->categoryProduct->id)->select(['id', 'name'])->get(),
-            'brand' => Brand::select(['id', 'name'])->get(),
-            'product_image' => ProductImage::where('product_id', $productVersion->id)->get(),
-            'stock_import_details' => StockImportDetail::where('product_version_id', $productVersion->id)->first(),
-        ]);
-    }
-
-    public function updateProductVersion(UpdateRequest $request, ProductVersion $productVersion)
-    {
-        $result = $this->productService->update($request, $productVersion);
-        if ($result) {
-            return $this->successResponse();
-        }
-        return $this->errorResponse();
-    }
-
     public function destroy(Request $request)
     {
         $result = $this->productService->destroy($request);
@@ -161,6 +105,15 @@ class ProductController extends Controller
             return $this->successResponse();
         }
         return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->productService->forceDelete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 
     public function restoreAll()
@@ -171,7 +124,7 @@ class ProductController extends Controller
         }
         return false;
     }
-  
+
     public function getDataUsageTypeById(Request $request)
     {
         $data = UsageType::where('category_product_id', $request->category_product_id)
@@ -193,5 +146,4 @@ class ProductController extends Controller
             'data' => $data,
         ]);
     }
-
 }

@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\stockImport\StoreRequest;
+use App\Models\CategoryProduct;
+use App\Models\Product;
 use App\Models\ProductVersion;
 use App\Models\StockImport;
+use App\Models\StockImportDetail;
 use App\Models\Supplier;
 use App\Services\StockImportService;
 use App\Traits\ApiResponse;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class StockImportController extends Controller
 {
@@ -31,11 +35,14 @@ class StockImportController extends Controller
 
     public function create()
     {
-        $products = ProductVersion::get(['id', 'name']);
+        $product_version = ProductVersion::get();
         $suppliers = Supplier::get(['id', 'name']);
+        $category_product = CategoryProduct::get(['id', 'name']);
+
         return view('admin.stockImport.create', [
-            'products' => $products,
-            'suppliers' => $suppliers
+            'product_version' => $product_version,
+            'suppliers' => $suppliers,
+            'category_product' => $category_product
         ]);
     }
 
@@ -48,9 +55,9 @@ class StockImportController extends Controller
         return $this->errorResponse();
     }
 
-    public function detail(Request $request)
+    public function detail(StockImport $stockImport)
     {
-        return view('admin.stockImport.index');
+
     }
 
     public function exportPDF(Request $request)
@@ -62,5 +69,23 @@ class StockImportController extends Controller
             'data' => $stockImport,
         ]);
         return $pdf->stream("phieu-nhap-hang-{$stockImport->id}.pdf");
+    }
+
+    public function getDataProductVersion(Request $request)
+    {
+        $product_version = ProductVersion::where('product_id', $request->product_id)
+            ->get();
+        return response()->json([
+            'data' => $product_version,
+        ]);
+    }
+
+    public function getDataProduct(Request $request)
+    {
+        $product = Product::where('category_product_id', $request->category_product_id)
+            ->get();
+        return response()->json([
+            'data' => $product,
+        ]);
     }
 }

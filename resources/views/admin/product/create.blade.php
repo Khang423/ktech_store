@@ -81,7 +81,7 @@
                 </div>
 
                 {{-- Description --}}
-                {{-- <div class="card">
+                <div class="card">
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane show active" id="custom-styles-preview">
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
             <div class="col-4">
                 <div class="card">
@@ -107,6 +107,24 @@
                             <h3>Chọn ảnh </h3>
                         </div>
                         <div class="error-thumbnail text-center text-danger"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <lable class="text-dark header-title font-16 fw-bold">
+                            Ảnh chi tiết
+                        </lable>
+                        <div class="d-flex justify-content-center mb-2 mt-2">
+                            <div id="preview-image"></div>
+                        </div>
+                        <div class="mt-2">
+                            <input name="image[]" type="file" id="imgInput" style="display: none" multiple>
+                            <div class="dz-message-image text-center dropzone">
+                                <i class="h1 text-muted uil-upload-alt"></i>
+                                <h3>Chọn nhiều ảnh</h3>
+                            </div>
+                        </div>
+                        <div class="error-new-image text-center text-danger"></div>
                     </div>
                 </div>
             </div>
@@ -162,6 +180,31 @@
                 preview_thumbnail.append(fileList);
             });
 
+             $(".dz-message-image").on("click", function() {
+                $("#imgInput").click();
+            });
+
+            $("#imgInput").change(function() {
+                let preview_image = $("#preview-image");
+                preview_image.empty();
+
+                let fileList = Array.from(this.files).map(file => {
+                    let img = $(
+                            "<img class='img-fluid img-thumbnail me-3' width='170' height='auto'>")
+                        .attr("src", URL.createObjectURL(file));
+                    img.on("load", function() {
+                        URL.revokeObjectURL(img.attr("src"));
+                    });
+
+                    let sizeText = $("<div class='text-center text-dark'>" + formatBytes(file
+                        .size) + "</div>");
+                    return $("<div class='d-inline-block text-center'></div>").append(img,
+                        sizeText);
+                });
+
+                preview_image.append(fileList);
+            });
+
             $('#category_product_id').change((e) => {
                 let categoryid = $(e.target).val();
 
@@ -199,7 +242,7 @@
                     type: "POST",
                     dataType: "json",
                     data: {
-                        brand_id : brand_id,
+                        brand_id: brand_id,
                         _token: $('meta[name="csrf-token"]').attr("content"),
                     },
                     success: function(response) {

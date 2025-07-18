@@ -26,7 +26,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        return view('admin.Role.index');
+        return view('admin.role.index');
     }
 
     public function getList()
@@ -36,7 +36,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('admin.Role.create');
+        return view('admin.role.create');
     }
 
     public function store(StoreRequest $request)
@@ -50,7 +50,7 @@ class RoleController extends Controller
 
     public function edit(Role $Role)
     {
-        return view('admin.Role.edit', [
+        return view('admin.role.edit', [
             'Role' => $Role
         ]);
     }

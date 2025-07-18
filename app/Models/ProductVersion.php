@@ -83,4 +83,6 @@ class ProductVersion extends Model
     {
         return $this->hasMany(StockExportDetail::class, 'product_version_id', 'id');
     }
+
+
 }

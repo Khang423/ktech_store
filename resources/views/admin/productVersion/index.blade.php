@@ -2,7 +2,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            {{ $product->name }}
+            {{ $products->name }}
         </span>
         <i class="mdi mdi-chevron-right"></i>
         Danh sách phiên bản
@@ -20,7 +20,8 @@
                                     <i class="uil uil-step-backward-alt"></i>
                                     Quay lại
                                 </a>
-                                <a class="btn btn-primary mb-2" href="{{ route('admin.products.productsVersion.create',$product->slug) }}">
+                                <a class="btn btn-primary mb-2"
+                                    href="{{ route('admin.products.productsVersion.create', $products->slug) }}">
                                     <i class="mdi mdi-plus-circle me-2"></i>
                                     Thêm
                                 </a>
@@ -42,7 +43,6 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Cấu hình</th>
-                                        <th class="text-center">Ảnh </th>
                                         <th class="text-center">Đơn giá</th>
                                         <th class="text-center">Ngày tạo</th>
                                         <th class="text-center" style="width: 80px;">Hành động</th>
@@ -76,18 +76,6 @@
                         }
                     },
                     {
-                        data: 'thumbnail',
-                        name: 'thumbnail',
-                        orderable: false,
-                        searchable: false,
-                        className: 'text-center',
-                        render: function(data) {
-                            return `
-                        <img src="/asset/admin/products/${data.id}/thumbnail/${data.thumbnail}" height="100" width="100" class="me-3">
-                    `;
-                        }
-                    },
-                    {
                         data: 'price',
                         name: 'price',
                         orderable: false,
@@ -116,9 +104,6 @@
                         render: function(data, type, row) {
                             return `
                             <span class='table-action'>
-                                <a href="${data.list}" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết sản phẩm">
-                                    <i class="list text-primary uil uil-eye action-icon"></i>
-                                </a>
                                 <a href="${data.edit}" title="Chỉnh sửa sản phẩm">
                                     <i class="edit text-primary uil-edit action-icon"></i>
                                 </a>
@@ -136,7 +121,7 @@
 
                 let table = $('#datatable').DataTable(
                     customerDatatable(
-                        "{{ route('admin.products.productsVersion.getList', $product) }}", columns)
+                        "{{ route('admin.products.productsVersion.getList', $products) }}", columns)
                 );
 
                 $(document).on('change', '.checkBoxStatus', (e) => {
@@ -151,12 +136,13 @@
                     }
                 });
 
-                $routeDelete = '{{ route('admin.products.delete') }}';
-                destroy($routeDelete, table);
+                const routeDestroy = '{{ route('admin.products.productsVersion.destroy', $products) }}';
+                const routeRestore = '{{ route('admin.products.productsVersion.restoreAll', $products) }}';
+                const routeForceDelete = '{{ route('admin.products.productsVersion.forceDelete', $products) }}';
 
-                $(function() {
-                    $('[data-bs-toggle="tooltip"]').tooltip();
-                });
+                forceDelete(routeForceDelete, table);
+                restore(routeRestore, table);
+                destroy(routeDestroy, table);
             });
 
             const postDataStatus = (id, status, route) => {
