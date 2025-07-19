@@ -54,9 +54,30 @@ class MemberController extends Controller
         $this->memberService->update($request, $member);
         return 1;
     }
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
-        $this->memberService->delete($request);
-        return $this->successResponse();
+        $result = $this->memberService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->memberService->forceDelete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->memberService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }

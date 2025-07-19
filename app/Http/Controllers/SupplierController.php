@@ -17,8 +17,7 @@ class SupplierController extends Controller
 
     public function __construct(
         SupplierService  $supplierService,
-    )
-    {
+    ) {
         $this->supplierService = $supplierService;
     }
 
@@ -40,7 +39,7 @@ class SupplierController extends Controller
     public function store(StoreRequest $request)
     {
         $result = $this->supplierService->store($request);
-        if($result){
+        if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
@@ -55,19 +54,37 @@ class SupplierController extends Controller
 
     public function update(UpdateRequest $request, Supplier $supplier)
     {
-        $result = $this->supplierService->update($request,$supplier);
-        if($result){
+        $result = $this->supplierService->update($request, $supplier);
+        if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
-        $result = $this->supplierService->delete($request);
-        if($result){
+        $result = $this->supplierService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->supplierService->forceDelete($request);
+        if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->supplierService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }

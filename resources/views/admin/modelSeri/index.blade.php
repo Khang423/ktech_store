@@ -113,10 +113,14 @@
                 )
             );
 
-            const routeDelete = "{{ route('admin.brands.modelSeries.delete', $brand) }}";
-            const routeRestore = '{{ route('admin.brands.restoreAll') }}';
+            const routeDestroy = '{{ route('admin.brands.modelSeries.destroy', $brand) }}';
+            const routeRestore = '{{ route('admin.brands.modelSeries.restoreAll', $brand) }}';
+            const routeForceDelete =
+                '{{ route('admin.brands.modelSeries.forceDelete', $brand) }}';
+
+            forceDelete(routeForceDelete, table);
             restore(routeRestore, table);
-            destroy(routeDelete, table);
+            destroy(routeDestroy, table);
         });
     </script>
 @endpush

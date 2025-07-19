@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('member_role', function (Blueprint $table) {
+        Schema::create('member_roles', function (Blueprint $table) {
             $table->bigInteger('role_id')->unsigned();
             $table->bigInteger('member_id')->unsigned();
             $table->timestamps();
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('member_role', function (Blueprint $table) {
+        Schema::table('member_roles', function (Blueprint $table) {
             $table->dropForeign(['role_id']);
             $table->dropForeign(['member_id']);
         });

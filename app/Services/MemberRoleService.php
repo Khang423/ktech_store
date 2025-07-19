@@ -3,75 +3,60 @@
 namespace App\Services;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use App\Models\ModelSeries;
-use App\Traits\ImageTrait;
+use App\Models\Member;
+use App\Models\MemberRole;
+use App\Models\Role;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
-class ModelSeriesService extends Controller
+class MemberRoleService extends Controller
 {
-    private $imageTrait;
-    protected $model;
-    public function __construct(ModelSeries $model_series,ImageTrait $imageHelper)
+    private Model $model;
+
+    public function __construct(MemberRole $memberRole)
     {
-        $this->model = $model_series;
-        $this->imageTrait = $imageHelper;
+        $this->model = $memberRole;
     }
 
-    public function getList($request)
+    public function getList($role)
     {
         return DataTables::of(
-            ModelSeries::where('brand_id', $request->id)->orderBy('created_at', 'desc')
-                ->get(ModelSeries::getInfo())
+            $this->model::where('role_id', $role->id)
+                ->orderBy('created_at', 'desc')
+                ->get($this->model->getInfo())
         )
             ->editColumn('index', function ($object) {
                 static $i = 0;
                 return ++$i;
             })
+            ->editColumn('role_id', function ($object) {
+                $role = Role::where('id', $object->role_id)->first();
+                return $role->name;
+            })
+            ->editColumn('member_id', function ($object) {
+                $member = Member::where('id', $object->member_id)->first();
+                return $member->name;
+            })
             ->addColumn('actions', function ($object) {
-                $brand = Brand::where('id', $object->brand_id)->first();
+                $role = Role::where('id', $object->role_id)->first();
                 return [
                     'id' => $object->id,
-                    'delete' =>'',
-                    'edit' => route('admin.brands.modelSeries.edit', [
-                        'modelSeries' => $object,
-                        'brand' => $brand,
-                    ]),
+                    'destroy' => '' ,
                 ];
             })
             ->make(true);
     }
 
-    public function store($request, $brand)
+    public function store($request)
     {
         DB::beginTransaction();
         try {
-            ModelSeries::create([
-                'name' => $request->name,
-                'slug' => Str::slug($request->name),
-                'brand_id' => $brand->id,
+            $this->model::create([
+                'role_id' => $request->role_id,
+                'member_id' => $request->member_id,
             ]);
-            DB::commit();
-            return true;
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
-            return false;
-        }
-    }
-
-    public function update($request, $modelSeries)
-    {
-        DB::beginTransaction();
-        try {
-            $model_series = ModelSeries::findOrFail($modelSeries->id);
-            $model_series->update([
-                'name' => $request->name,
-                'slug' => Str::slug($request->name),
-            ]);
-
             DB::commit();
             return true;
         } catch (\Exception $e) {

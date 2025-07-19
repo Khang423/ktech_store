@@ -56,12 +56,30 @@ class TagController extends Controller
         return $this->errorResponse();
     }
 
-    public function delete(Request $request)
+     public function destroy(Request $request)
     {
-        $result = $this->tagService->delete($request);
+        $result = $this->tagService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->tagService->forceDelete($request);
         if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->tagService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }

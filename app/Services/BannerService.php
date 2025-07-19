@@ -41,7 +41,7 @@ class BannerService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.banners.delete'),
+                    'destroy' => '',
                     'edit' => route('admin.banners.edit', $object->slug),
                 ];
             })
@@ -123,6 +123,49 @@ class BannerService extends Controller
             } else {
                 $this->model::where('id', $request->banner_id)->update(['status' => StatusEnum::OFF]);
             }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function destroy($request)
+    {
+        DB::beginTransaction();
+        try {
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function forceDelete($request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->forceDelete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function restoreAll()
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->restore();
             DB::commit();
             return true;
         } catch (\Exception $e) {

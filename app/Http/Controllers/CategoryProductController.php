@@ -60,15 +60,6 @@ class CategoryProductController extends Controller
         return $this->errorResponse();
     }
 
-    public function delete(Request $request)
-    {
-        $result = $this->categoryProductService->delete($request);
-        if ($result) {
-            return $this->successResponse();
-        }
-        return $this->errorResponse();
-    }
-
     public function destroy(Request $request)
     {
         $result = $this->categoryProductService->destroy($request);
@@ -76,6 +67,15 @@ class CategoryProductController extends Controller
             return $this->successResponse();
         }
         return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->categoryProductService->forceDelete($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 
     public function restoreAll()

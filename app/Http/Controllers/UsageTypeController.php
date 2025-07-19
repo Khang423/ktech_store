@@ -64,12 +64,30 @@ class UsageTypeController extends Controller
         return $this->errorResponse();
     }
 
-    public function delete(Request $request, CategoryProduct $categoryProduct)
+    public function destroy(Request $request)
     {
-        $result =  $this->usageTypeService->delete($request);
+        $result = $this->usageTypeService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->usageTypeService->forceDelete($request);
         if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->usageTypeService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }

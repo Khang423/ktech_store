@@ -63,12 +63,30 @@ class TagDetailController extends Controller
         return $this->errorResponse();
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
-        $result = $this->tagDetailService->delete($request);
+        $result = $this->tagDetailService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->tagDetailService->forceDelete($request);
         if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->tagDetailService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }

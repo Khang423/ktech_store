@@ -32,7 +32,7 @@ class TagService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.tags.delete'),
+                    'destroy' => '',
                     'preview' => route('admin.tags.detail', [
                         'tag' => $object
                     ]),
@@ -84,11 +84,40 @@ class TagService extends Controller
         }
     }
 
-    public function delete($request)
+    public function destroy($request)
     {
         DB::beginTransaction();
         try {
-            $this->model->where('id', $request->id)->delete();
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function forceDelete($request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->forceDelete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function restoreAll()
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->restore();
             DB::commit();
             return true;
         } catch (\Exception $e) {

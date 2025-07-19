@@ -13,16 +13,26 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row mb-2">
-                        <div class="col-sm-5">
+                    <div class="row mb-2 col-12">
+                        <div class="col-6">
+                            <a class="btn btn-success mb-2" href="{{ route('admin.dashboard') }}">
+                                <i class="uil uil-step-backward-alt"></i>
+                                Quay lại
+                            </a>
                             <a class="btn btn-primary mb-2" href="{{ route('admin.suppliers.create') }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Thêm
                             </a>
                         </div>
-                        <div class="col-sm-7">
-                            <div class="text-sm-end">
-                            </div>
+                        <div class="col-6 text-end">
+                            <a class="btn btn-info mb-2" id="btn-restore">
+                                <i class="uil uil-history me-2"></i>
+                                Khôi phục
+                            </a>
+                            <a class="btn btn-danger mb-2" id="btn-forceDelete">
+                                <i class="uil uil-trash-alt"></i>
+                                Xoá vĩnh viễn
+                            </a>
                         </div>
                     </div>
 
@@ -137,8 +147,13 @@
                 customerDatatable("{{ route('admin.suppliers.getList') }}", columns)
             );
 
-            $routeDelete = '{{ route('admin.suppliers.delete') }}';
-            destroy($routeDelete, table);
+            const routeDestroy = '{{ route('admin.suppliers.destroy') }}';
+            const routeRestore = '{{ route('admin.suppliers.restoreAll') }}';
+            const routeForceDelete = '{{ route('admin.suppliers.forceDelete') }}';
+
+            forceDelete(routeForceDelete, table);
+            restore(routeRestore, table);
+            destroy(routeDestroy, table);
 
         });
     </script>
