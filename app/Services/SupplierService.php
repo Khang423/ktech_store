@@ -31,7 +31,7 @@ class SupplierService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.suppliers.delete'),
+                    'destroy' => ' ',
                     'edit' => route('admin.suppliers.edit', $object),
                 ];
             })
@@ -84,14 +84,40 @@ class SupplierService extends Controller
         }
     }
 
-    public function delete($request)
+     public function destroy($request)
     {
         DB::beginTransaction();
         try {
-            $this->model
-                ->query()
-                ->where('id', $request->id)
-                ->delete();
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function forceDelete($request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->forceDelete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function restoreAll()
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->restore();
             DB::commit();
             return true;
         } catch (\Exception $e) {

@@ -118,8 +118,7 @@
             let table = $('#datatable').DataTable(
                 customerDatatable("{{ route('admin.stockImports.getList') }}", columns)
             );
-            $routeDelete = '{{ route('admin.members.delete') }}';
-            destroy($routeDelete, table);
+
         });
     </script>
 @endpush

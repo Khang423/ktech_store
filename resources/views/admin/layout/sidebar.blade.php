@@ -116,28 +116,12 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a class="side-nav-link collapsed" data-bs-toggle="collapse" href="#sidebarRoles" aria-expanded="false"
-                    aria-controls="sidebarDevice">
-                    <i class="uil-label"></i>
+                <a href="{{ route('admin.roles.index') }}" class="side-nav-link">
+                    <i class="uil uil-shield"></i>
                     <span>
                         Vai trò
                     </span>
-                    <span class="menu-arrow"></span>
                 </a>
-                <div class="collapse" id="sidebarRoles" style="">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="{{ route('admin.roles.index') }}">
-                                Danh sách
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                Đặt quyền
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li class="side-nav-title">
             </li>

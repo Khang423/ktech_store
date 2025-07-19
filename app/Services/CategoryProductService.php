@@ -35,7 +35,7 @@ class CategoryProductService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.categoryProducts.destroy'),
+                    'destroy' =>' ',
                     'edit' => route('admin.categoryProducts.edit', $object),
                     'preview' => route('admin.categoryProducts.usageTypes.index', $object),
                 ];
@@ -79,11 +79,12 @@ class CategoryProductService extends Controller
         }
     }
 
-    public function delete($request)
+    public function destroy($request)
     {
         DB::beginTransaction();
         try {
-
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -93,12 +94,11 @@ class CategoryProductService extends Controller
         }
     }
 
-    public function destroy($request)
+    public function forceDelete($request)
     {
         DB::beginTransaction();
         try {
-            $brand = Brand::findOrFail($request->id);
-            $brand->delete();
+            $this->model::onlyTrashed()->forceDelete();
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -112,7 +112,7 @@ class CategoryProductService extends Controller
     {
         DB::beginTransaction();
         try {
-            Brand::onlyTrashed()->restore();
+            $this->model::onlyTrashed()->restore();
             DB::commit();
             return true;
         } catch (\Exception $e) {

@@ -16,10 +16,11 @@ use Yajra\DataTables\DataTables;
 class UsageTypeService extends Controller
 {
     private $imageTrait;
-
-    public function __construct(ImageTrait $imageHelper)
+    protected $model;
+    public function __construct(UsageType $usage, ImageTrait $imageHelper)
     {
         $this->imageTrait = $imageHelper;
+        $this->model = $usage;
     }
 
     public function getList($request)
@@ -36,7 +37,7 @@ class UsageTypeService extends Controller
                 $categoryProduct = CategoryProduct::where('id', $object->category_product_id)->first();
                 return [
                     'id' => $object->id,
-                    'delete' => route('admin.categoryProducts.usageTypes.delete', $categoryProduct),
+                    'delete' => '',
                     'edit' => route('admin.categoryProducts.usageTypes.edit', [
                         'usageType' => $object,
                         'categoryProduct' => $categoryProduct,
@@ -83,12 +84,12 @@ class UsageTypeService extends Controller
         }
     }
 
-    public function delete($request)
+    public function destroy($request)
     {
         DB::beginTransaction();
         try {
-            $usageType = UsageType::findOrFail($request->id);
-            $usageType->forceDelete();
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -98,13 +99,11 @@ class UsageTypeService extends Controller
         }
     }
 
-
-    public function destroy($request)
+    public function forceDelete($request)
     {
         DB::beginTransaction();
         try {
-            $brand = Brand::findOrFail($request->id);
-            $brand->delete();
+            $this->model::onlyTrashed()->forceDelete();
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -118,7 +117,7 @@ class UsageTypeService extends Controller
     {
         DB::beginTransaction();
         try {
-            Brand::onlyTrashed()->restore();
+            $this->model::onlyTrashed()->restore();
             DB::commit();
             return true;
         } catch (\Exception $e) {

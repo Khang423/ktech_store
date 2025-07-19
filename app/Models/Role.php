@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'id',
         'name',
@@ -14,7 +16,8 @@ class Role extends Model
         'updated_at',
     ];
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return [
             'id',
             'name',
@@ -31,5 +34,10 @@ class Role extends Model
     public function getUpdatedAtAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
+    }
+
+    public function memberRoles()
+    {
+        return $this->hasMany(MemberRole::class);
     }
 }

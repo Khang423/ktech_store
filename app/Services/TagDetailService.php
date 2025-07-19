@@ -33,9 +33,7 @@ class TagDetailService extends Controller
                 $tags = Tag::where('id', $object->tag_id)->first();
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.tags.tagDetail.delete', [
-                        'tag' => $tags,
-                    ]),
+                    'destroy' => '',
                     'edit' => route('admin.tags.tagDetail.edit', [
                         'tag' => $tags,
                         'tagDetail' => $object,
@@ -79,11 +77,40 @@ class TagDetailService extends Controller
         }
     }
 
-    public function delete($request)
+    public function destroy($request)
     {
         DB::beginTransaction();
         try {
-            TagDetail::where('id', $request->id)->delete();
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function forceDelete($request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->forceDelete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function restoreAll()
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->restore();
             DB::commit();
             return true;
         } catch (\Exception $e) {

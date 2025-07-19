@@ -54,13 +54,31 @@ class BannerController extends Controller
         return $this->bannerService->update($request, $banner);
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
-        $result = $this->bannerService->delete($request);
+        $result = $this->bannerService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->bannerService->forceDelete($request);
         if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->bannerService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 
     public function updateStatus(Request $request)

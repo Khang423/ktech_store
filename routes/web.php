@@ -14,6 +14,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\MemberRoleController;
 use App\Http\Controllers\ModelSeriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductVersionController;
@@ -113,11 +114,16 @@ Route::group(
             function () {
                 Route::get('/', [MemberController::class, 'index'])->name('index');
                 Route::post('/getList', [MemberController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [MemberController::class, 'create'])->name('create');
                 Route::post('/store', [MemberController::class, 'store'])->name('store');
+
                 Route::get('/edit/{member:slug}', [MemberController::class, 'edit'])->name('edit');
                 Route::put('/edit/{member:slug}', [MemberController::class, 'update'])->name('update');
-                Route::delete('/delete', [MemberController::class, 'delete'])->name('delete');
+
+                Route::delete('/forceDelete', [MemberController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [MemberController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [MemberController::class, 'restoreAll'])->name('restoreAll');
             },
         );
 
@@ -171,6 +177,7 @@ Route::group(
                 );
             },
         );
+
         // Role route
         Route::group(
             [
@@ -180,13 +187,41 @@ Route::group(
             function () {
                 Route::get('/', [RoleController::class, 'index'])->name('index');
                 Route::post('/getList', [RoleController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [RoleController::class, 'create'])->name('create');
                 Route::post('/store', [RoleController::class, 'store'])->name('store');
-                Route::get('/edit/{product:slug}', [RoleController::class, 'edit'])->name('edit');
-                Route::put('/edit/{product:slug}', [RoleController::class, 'update'])->name('update');
-                Route::delete('/delete', [RoleController::class, 'delete'])->name('delete');
+
+                Route::get('/edit/{role:slug}', [RoleController::class, 'edit'])->name('edit');
+                Route::put('/edit/{role:slug}', [RoleController::class, 'update'])->name('update');
+
+                Route::delete('/forceDelete', [RoleController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [RoleController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [RoleController::class, 'restoreAll'])->name('restoreAll');
+
+                Route::group(
+                    [
+                        'prefix' => '/{role:slug}',
+                        'as' => 'memberRoles.',
+                    ],
+                    function () {
+                        Route::get('/', [MemberRoleController::class, 'index'])->name('index');
+                        Route::post('/getList', [MemberRoleController::class, 'getList'])->name('getList');
+
+                        Route::get('/create', [MemberRoleController::class, 'create'])->name('create');
+                        Route::post('/store', [MemberRoleController::class, 'store'])->name('store');
+
+                        Route::get('/edit/{memberRole:role_id}', [MemberRoleController::class, 'edit'])->name('edit');
+                        Route::put('/edit/{memberRole:role_id}', [MemberRoleController::class, 'update'])->name('update');
+
+                        Route::delete('/forceDelete', [MemberRoleController::class, 'forceDelete'])->name('forceDelete');
+                        Route::delete('/destroy', [MemberRoleController::class, 'destroy'])->name('destroy');
+                        Route::post('/restoreAll', [MemberRoleController::class, 'restoreAll'])->name('restoreAll');
+                    },
+                );
             },
         );
+
+
 
         // Brand route
 
@@ -198,11 +233,14 @@ Route::group(
             function () {
                 Route::get('/', [BrandController::class, 'index'])->name('index');
                 Route::post('/getList', [BrandController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [BrandController::class, 'create'])->name('create');
                 Route::post('/store', [BrandController::class, 'store'])->name('store');
+
                 Route::get('/edit/{brand:slug}', [BrandController::class, 'edit'])->name('edit');
                 Route::put('/edit/{brand:slug}', [BrandController::class, 'update'])->name('update');
-                Route::delete('/delete', [BrandController::class, 'delete'])->name('delete');
+
+                Route::delete('/forceDelete', [BrandController::class, 'forceDelete'])->name('forceDelete');
                 Route::delete('/destroy', [BrandController::class, 'destroy'])->name('destroy');
                 Route::post('/restoreAll', [BrandController::class, 'restoreAll'])->name('restoreAll');
 
@@ -214,11 +252,14 @@ Route::group(
                     function () {
                         Route::get('/', [ModelSeriesController::class, 'index'])->name('index');
                         Route::post('/getList', [ModelSeriesController::class, 'getList'])->name('getList');
+
                         Route::get('/create', [ModelSeriesController::class, 'create'])->name('create');
                         Route::post('/store', [ModelSeriesController::class, 'store'])->name('store');
+
                         Route::get('/edit/{modelSeries:slug}', [ModelSeriesController::class, 'edit'])->name('edit');
                         Route::put('/edit/{modelSeries:slug}', [ModelSeriesController::class, 'update'])->name('update');
-                        Route::delete('/delete', [ModelSeriesController::class, 'delete'])->name('delete');
+
+                        Route::delete('/forceDelete', [ModelSeriesController::class, 'forceDelete'])->name('forceDelete');
                         Route::delete('/destroy', [ModelSeriesController::class, 'destroy'])->name('destroy');
                         Route::post('/restoreAll', [ModelSeriesController::class, 'restoreAll'])->name('restoreAll');
                     },
@@ -235,11 +276,16 @@ Route::group(
             function () {
                 Route::get('/', [SupplierController::class, 'index'])->name('index');
                 Route::post('/getList', [SupplierController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [SupplierController::class, 'create'])->name('create');
                 Route::post('/store', [SupplierController::class, 'store'])->name('store');
+
                 Route::get('/edit/{supplier:slug}', [SupplierController::class, 'edit'])->name('edit');
                 Route::put('/edit/{supplier:slug}', [SupplierController::class, 'update'])->name('update');
-                Route::delete('/delete', [SupplierController::class, 'delete'])->name('delete');
+
+                Route::delete('/forceDelete', [SupplierController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [SupplierController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [SupplierController::class, 'restoreAll'])->name('restoreAll');
             },
         );
 
@@ -252,13 +298,16 @@ Route::group(
             function () {
                 Route::get('/', [CategoryProductController::class, 'index'])->name('index');
                 Route::post('/getList', [CategoryProductController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [CategoryProductController::class, 'create'])->name('create');
                 Route::post('/store', [CategoryProductController::class, 'store'])->name('store');
+
                 Route::get('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'edit'])->name('edit');
                 Route::put('/edit/{categoryProduct:slug}', [CategoryProductController::class, 'update'])->name('update');
-                Route::delete('/delete', [CategoryProductController::class, 'delete'])->name('delete');
-                Route::delete('/destroy', [BrandController::class, 'destroy'])->name('destroy');
-                Route::post('/restoreAll', [BrandController::class, 'restoreAll'])->name('restoreAll');
+
+                Route::delete('/forceDelete', [CategoryProductController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [CategoryProductController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [CategoryProductController::class, 'restoreAll'])->name('restoreAll');
 
                 Route::group(
                     [
@@ -268,11 +317,14 @@ Route::group(
                     function () {
                         Route::get('/', [UsageTypeController::class, 'index'])->name('index');
                         Route::post('/getList', [UsageTypeController::class, 'getList'])->name('getList');
+
                         Route::get('/create', [UsageTypeController::class, 'create'])->name('create');
                         Route::post('/store', [UsageTypeController::class, 'store'])->name('store');
+
                         Route::get('/edit/{usageType:slug}', [UsageTypeController::class, 'edit'])->name('edit');
                         Route::put('/edit/{usageType:slug}', [UsageTypeController::class, 'update'])->name('update');
-                        Route::delete('/delete', [UsageTypeController::class, 'delete'])->name('delete');
+
+                        Route::delete('/forceDelete', [UsageTypeController::class, 'forceDelete'])->name('forceDelete');
                         Route::delete('/destroy', [UsageTypeController::class, 'destroy'])->name('destroy');
                         Route::post('/restoreAll', [UsageTypeController::class, 'restoreAll'])->name('restoreAll');
                     },
@@ -289,11 +341,17 @@ Route::group(
             function () {
                 Route::get('/', [BannerController::class, 'index'])->name('index');
                 Route::post('/getList', [BannerController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [BannerController::class, 'create'])->name('create');
                 Route::post('/store', [BannerController::class, 'store'])->name('store');
+
                 Route::get('/edit/{banner:slug}', [BannerController::class, 'edit'])->name('edit');
                 Route::put('/edit/{banner:slug}', [BannerController::class, 'update'])->name('update');
-                Route::delete('/delete', [BannerController::class, 'delete'])->name('delete');
+
+                Route::delete('/forceDelete', [BannerController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [BannerController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [BannerController::class, 'restoreAll'])->name('restoreAll');
+
                 Route::post('/updateStatus', [BannerController::class, 'updateStatus'])->name('updateStatus');
             },
         );
@@ -350,11 +408,17 @@ Route::group(
             function () {
                 Route::get('/', [TagController::class, 'index'])->name('index');
                 Route::post('/getList', [TagController::class, 'getList'])->name('getList');
+
                 Route::get('/create', [TagController::class, 'create'])->name('create');
                 Route::post('/store', [TagController::class, 'store'])->name('store');
+
                 Route::get('/{tag:slug}/edit', [TagController::class, 'edit'])->name('edit');
                 Route::put('/{tag:slug}/edit', [TagController::class, 'update'])->name('update');
-                Route::delete('/delete', [TagController::class, 'delete'])->name('delete');
+
+                Route::delete('/forceDelete', [TagController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [TagController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [TagController::class, 'restoreAll'])->name('restoreAll');
+
                 Route::get('detail/{tag:slug}', [TagDetailController::class, 'index'])->name('detail');
 
                 Route::group(
@@ -364,11 +428,16 @@ Route::group(
                     ],
                     function () {
                         Route::post('/getList', [TagDetailController::class, 'getList'])->name('getList');
+
                         Route::get('/create', [TagDetailController::class, 'create'])->name('create');
                         Route::post('/store', [TagDetailController::class, 'store'])->name('store');
+
                         Route::get('/{tagDetail:slug}/edit', [TagDetailController::class, 'edit'])->name('edit');
                         Route::put('/{tagDetail:slug}/edit', [TagDetailController::class, 'update'])->name('update');
-                        Route::delete('/delete', [TagDetailController::class, 'delete'])->name('delete');
+
+                        Route::delete('/forceDelete', [TagDetailController::class, 'forceDelete'])->name('forceDelete');
+                        Route::delete('/destroy', [TagDetailController::class, 'destroy'])->name('destroy');
+                        Route::post('/restoreAll', [TagDetailController::class, 'restoreAll'])->name('restoreAll');
                     },
                 );
             },

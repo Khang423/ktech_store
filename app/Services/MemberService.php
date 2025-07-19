@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\GenderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use App\Models\MemberRole;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -31,14 +32,9 @@ class MemberService extends Controller
                 static $i = 0;
                 return ++$i;
             })
-            ->editColumn('gender', function ($object) {
-                if ($object->gender === GenderEnum::MALE) {
-                    return 'Name';
-                } elseif ($object->gender === GenderEnum::FEMALE) {
-                    return 'Nữ';
-                } else {
-                    return 'Khác';
-                }
+            ->editColumn('role', function ($object) {
+                $member_role = MemberRole::with('roles')->where('member_id', $object->id)->first();
+                return $member_role->roles->name ?? '';
             })
             ->editColumn('avatar', function ($object) {
                 return [
@@ -48,18 +44,9 @@ class MemberService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.members.delete'),
+                    'destroy' => ' ' ,
                     'edit' => route('admin.members.edit', $object),
                 ];
-            })
-            ->filter(function ($query) {
-                if (request()->has('name')) {
-                    $query->where('name', 'like', "%" . request('name') . "%");
-                }
-
-                if (request()->has('email')) {
-                    $query->where('email', 'like', "%" . request('email') . "%");
-                }
             })
             ->make(true);
     }
@@ -130,18 +117,46 @@ class MemberService extends Controller
         }
     }
 
-    public function delete($request)
+    public function destroy($request)
     {
         DB::beginTransaction();
         try {
-            $this->model
-                ->query()
-                ->where('id', $request->id)
-                ->delete();
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
             DB::commit();
+            return true;
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+            return false;
+        }
+    }
+
+    public function forceDelete($request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->forceDelete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function restoreAll()
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->restore();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
         }
     }
 }

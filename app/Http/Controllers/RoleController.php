@@ -19,8 +19,7 @@ class RoleController extends Controller
 
     public function __construct(
         RoleService  $roleService,
-    )
-    {
+    ) {
         $this->roleService = $roleService;
     }
 
@@ -42,34 +41,52 @@ class RoleController extends Controller
     public function store(StoreRequest $request)
     {
         $result = $this->roleService->store($request);
-        if($result){
+        if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
     }
 
-    public function edit(Role $Role)
+    public function edit(Role $role)
     {
         return view('admin.role.edit', [
-            'Role' => $Role
+            'role' => $role
         ]);
     }
 
-    public function update(UpdateRequest $request, Role $Role)
+    public function update(UpdateRequest $request, Role $role)
     {
-        $result = $this->roleService->update($request,$Role);
-        if($result){
+        $result = $this->roleService->update($request, $role);
+        if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
-        $result = $this->roleService->delete($request);
-        if($result){
+        $result = $this->roleService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->roleService->forceDelete($request);
+        if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->roleService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }

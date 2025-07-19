@@ -35,8 +35,9 @@ class RoleService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.roles.delete'),
+                    'destroy' =>' ',
                     'edit' => route('admin.roles.edit', $object),
+                    'member_role' => route('admin.roles.memberRoles.index', $object),
                 ];
             })
             ->make(true);
@@ -64,6 +65,49 @@ class RoleService extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+        }
+    }
+
+    public function destroy($request)
+    {
+        DB::beginTransaction();
+        try {
+            $product = $this->model::findOrFail($request->id);
+            $product->delete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function forceDelete($request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->forceDelete();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function restoreAll()
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::onlyTrashed()->restore();
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
         }
     }
 }

@@ -62,12 +62,30 @@ class ModelSeriesController extends Controller
         return $this->errorResponse();
     }
 
-    public function delete(Request $request, Brand $brand)
+    public function destroy(Request $request)
     {
-        $result =  $this->modelSeriesService->delete($request);
+        $result = $this->modelSeriesService->destroy($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $result = $this->modelSeriesService->forceDelete($request);
         if ($result) {
             return $this->successResponse();
         }
         return $this->errorResponse();
+    }
+
+    public function restoreAll()
+    {
+        $result = $this->modelSeriesService->restoreAll();
+        if ($result) {
+            return $this->successResponse();
+        }
+        return false;
     }
 }
