@@ -224,8 +224,6 @@ Route::group(
             },
         );
 
-
-
         // Brand route
         Route::group(
             [

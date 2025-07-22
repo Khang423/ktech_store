@@ -37,10 +37,7 @@
                                         alt="">
                                 </div>
                                 <div class="product-title ">
-                                    @php
-                                        $name = "$item->name - $item->config_name";
-                                    @endphp
-                                    {{ $name }}
+                                    {{ $item->config_name }}
                                 </div>
                                 <div class="product-price">
                                     {{ formatPriceToVND($item->final_price) }}

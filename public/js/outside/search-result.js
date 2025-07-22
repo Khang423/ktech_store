@@ -52,12 +52,13 @@ const initFilterChangeListener = () => {
             success: function (response) {
                 console.log("success", response);
                 setDataSearch(response); // render sản phẩm mới
+                $('.option').removeClass('active');
             },
         });
     });
 };
 
-// ✅ Render sản phẩm sau khi lọc
+
 const setDataSearch = (response) => {
     const $preview = $("#section-laptop");
     $preview.empty();
@@ -99,4 +100,11 @@ const setDataSearch = (response) => {
 $("#section-laptop").on("click", ".card-product", function () {
     const product_slug = $(this).data("slug");
     window.location.href = "/product/" + product_slug;
+});
+
+$(".btn-open-tool-filter").on("click", (e) => {
+    $('.option').addClass('active');
+});
+$(".btn-close-option").on("click", (e) => {
+    $('.option').removeClass('active');
 });
