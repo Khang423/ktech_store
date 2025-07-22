@@ -1,18 +1,56 @@
 <?php
 
+use App\Enums\OrderStatusEnum;
+use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\CategoryProduct;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 
 if (!function_exists('formatPriceToVND')) {
     function formatPriceToVND($price)
     {
-        return number_format($price, 0, ',', '.') . '₫';
+        return number_format($price, 0, ',', '.') . ' ₫';
+    }
+}
+if (!function_exists('getDataBrandLaptop')) {
+    function getDataBrandLaptop()
+    {
+        return Brand::with('modelSeries')->orderBy('name', 'asc')->get();
     }
 }
 
+if (!function_exists('getDataBrandLaptop')) {
+    function getDataBrandLaptop()
+    {
+        return Brand::with('modelSeries')->orderBy('name', 'asc')->get();
+    }
+}
+
+if (!function_exists('getDataBrandPhone')) {
+    function getDataBrandPhone()
+    {
+        return Brand::with('modelSeries')->orderBy('name', 'asc')->get();
+    }
+}
+
+if (!function_exists('checkCountCart')) {
+    function checkCountCart($customer_id)
+    {
+        $cartIds = Cart::where('customer_id', $customer_id)->pluck('id');
+
+        return CartItem::whereIn('cart_id', $cartIds)->count();
+    }
+}
+
+if (!function_exists('checkOrder')) {
+    function checkOrder()
+    {
+        return Order::where('status', OrderStatusEnum::PENDING)->count();
+    }
+}
 if (!function_exists('getLaptopSpecs')) {
     function getLaptopSpecs($product)
     {

@@ -70,7 +70,7 @@ function renderSelectedProducts(products) {
     let html = "";
     let totalPrice = 0;
 
-    products.forEach(({ product_id, name, price, quantity, thumbnail }) => {
+    products.forEach(({ product_id,product_version_id, name, price, quantity, thumbnail }) => {
         const thumbnailPath = `/asset/admin/products/${product_id}/${thumbnail}`;
         totalPrice += price * quantity;
 

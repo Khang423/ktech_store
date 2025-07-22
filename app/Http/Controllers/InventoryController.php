@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductVersion;
 use App\Models\Supplier;
 use App\Services\InventoryService;
@@ -23,5 +24,18 @@ class InventoryController extends Controller
     {
         return $this->service->getList();
     }
+
+     public function index_detail(Product $products)
+    {
+        return view('admin.inventory.index_detail',[
+            'products' => $products
+        ]);
+    }
+
+    public function getListDetail(Product $products)
+    {
+        return $this->service->getListDetail($products);
+    }
+
 
 }

@@ -6,8 +6,8 @@ $(document).ready(() => {
         const $content = $item.find(".content");
         const $iconArrow = $item.find(".icon-arrow");
 
-        $content.toggleClass("active");        // Toggle nội dung hiển thị
-        $iconArrow.toggleClass("rotated");     // Xoay icon mũi tên
+        $content.toggleClass("active"); // Toggle nội dung hiển thị
+        $iconArrow.toggleClass("rotated"); // Xoay icon mũi tên
     });
 
     // Gán sự kiện checkbox khi trang load
@@ -18,7 +18,9 @@ $(document).ready(() => {
 const getSelectedItems = () => {
     const selectedItems = {};
 
-    $(".section-search .option .item .content .item input[type=checkbox]:checked").each(function () {
+    $(
+        ".section-search .option .item .content .item input[type=checkbox]:checked"
+    ).each(function () {
         const $checkbox = $(this);
         const itemValue = $checkbox.closest(".content .item").data("name"); // giá trị nhỏ (ví dụ: i5, 8GB)
         const itemName = $checkbox.closest(".option > .item").data("name"); // nhóm lớn (ví dụ: CPU, RAM)
@@ -35,13 +37,15 @@ const getSelectedItems = () => {
 
 // ✅ Gán sự kiện "thay đổi" khi chọn/bỏ chọn checkbox
 const initFilterChangeListener = () => {
-    $(".section-search .option .item .content .item input[type=checkbox]").on("change", () => {
+    $(".btn-filter").on("click", () => {
         const data = getSelectedItems();
+        const price = $("#price-range").val();
 
         $.ajax({
             url: "/productFillter",
             type: "POST",
             data: {
+                price,
                 data,
                 _token: $('meta[name="csrf-token"]').attr("content"), // CSRF token Laravel
             },
@@ -60,8 +64,8 @@ const setDataSearch = (response) => {
 
     response.data.forEach((item) => {
         const specs = item.laptop_specs || item.phone_specs || {};
-        const thumbnail = item.thumbnail || "default.jpg";
-        const thumbnailPath = `/asset/admin/products/${item.id}/${thumbnail}`;
+        const thumbnail = item.products.thumbnail || "default.jpg";
+        const thumbnailPath = `/asset/admin/products/${item.product_id}/${thumbnail}`;
 
         const formattedPrice = new Intl.NumberFormat("vi-VN", {
             style: "currency",
@@ -75,7 +79,7 @@ const setDataSearch = (response) => {
                         <img src="${thumbnailPath}" alt="${item.name}">
                     </div>
                     <div class="product-title">
-                        ${item.name}
+                        ${item.config_name}
                     </div>
                     <div class="product-price">
                         ${formattedPrice}

@@ -29,14 +29,12 @@ class CustomerController extends Controller
     {
         $customer_id = Auth::guard('customers')->user()->id;
         $city = $this->cityService->get_all();
-        $address = Address::where('customer_id', $customer_id)->with(['customer', 'city', 'district', 'ward'])->get();
         $customer = Customer::where('id', $customer_id)->first(['id','tel','email','birthday','name']);
         $order = Order::where('customer_id',$customer_id)->count();
         $total_price = Order::where('customer_id',$customer_id)->sum('total_price');
         return view('outside.profile', [
             'title' => 'Ktech - Profile',
             'city' => $city,
-            'address' => $address,
             'customer' => $customer,
             'order' => $order,
             'total_price' => $total_price,

@@ -41,6 +41,17 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-2">
+                                            <label for="config_name" class="form-label">Tên phiên bản</label>
+                                            <input type="text" class="form-control" id="config_name"
+                                                placeholder="Tên sản phẩm" name="config_name"
+                                                value="{{ $productVersions->config_name }}" readonly>
+                                            <div class="text-danger mt-1 error-config_name"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-2">
                                             <label for="category_product_id" class="form-label">Loại sản phẩm</label>
@@ -79,7 +90,7 @@
                                             <label for="import_price" class="form-label">Giá nhập</label>
                                             <input type="text" class="form-control" id="import_price"
                                                 placeholder="Giá nhập" name="import_price"
-                                                value="{{ formatPriceToVND($stock_import_details->price ?? '0') }} " readonly>
+                                                value="{{ formatPriceToVND($stock_import_detail->price ?? '0') }} " readonly>
                                             <div class="text-danger mt-1 error-import_price"></div>
                                         </div>
                                     </div>
@@ -834,105 +845,115 @@
 @push('js')
     <script src="{{ asset('js/admin/product.js') }}"></script>
     <script>
-        $(document).ready(() => {
-            // init
-            const $form = $('#form-update');
-            const inputs = $form.find('input');
-            const routeUpdate =
-                "{{ route('admin.products.productsVersion.update', ['products' => $products, 'product_version' => $productVersions]) }}";
-            const routeIndex = "{{ route('admin.products.productsVersion.index', $products->slug) }}";
-            // load data category product detail
+    $(document).ready(() => {
+        // Khởi tạo biến form và input
+        const $form = $('#form-update');
+        const $inputs = $form.find('input');
 
-            $('#brand_id').on('change', (e) => {
-                const brand_id = $(e.target).val();
-                loadModelSeries(brand_id);
-            });
+        // Route dùng để update và quay về danh sách
+        const routeUpdate = "{{ route('admin.products.productsVersion.update', ['products' => $products, 'product_version' => $productVersions]) }}";
+        const routeIndex = "{{ route('admin.products.productsVersion.index', $products->slug) }}";
 
-            // Tự động gọi khi brand đã có sẵn (ví dụ trong trang edit)
-            const initialBrandId = $('#brand_id').val();
-            if (initialBrandId) {
-                loadModelSeries(initialBrandId);
-            }
-
-            $('#category_product_id').on('change', (e) => {
-                const categoryid = $(e.target).val();
-                loadUsageType(categoryid);
-            });
-
-            // Gọi tự động khi trang load nếu có sẵn category
-            const initialCategoryId = $('#category_product_id').val();
-            if (initialCategoryId) {
-                loadUsageType(initialCategoryId);
-            }
-
-            update(routeUpdate, routeIndex);
-            deleteAlertValidation(inputs);
+        // Gán sự kiện thay đổi brand => gọi load model series
+        $('#brand_id').on('change', (e) => {
+            const brandId = $(e.target).val();
+            loadModelSeries(brandId);
         });
 
-        const loadUsageType = (categoryid) => {
-            if (!categoryid) return;
+        // Gọi tự động khi trang load nếu có brand sẵn (edit page)
+        initSelectOnLoad('#brand_id', loadModelSeries);
 
-            $.ajax({
-                url: `{{ route('admin.products.getDataUsageType') }}`,
-                type: "POST",
-                dataType: "json",
-                data: {
-                    category_product_id: categoryid,
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: (response) => {
-                    const data = response.data;
-                    const usageTypeSelect = $('#usage_type_id');
-                    usageTypeSelect.empty();
+        // Gán sự kiện thay đổi category => gọi load usage type
+        $('#category_product_id').on('change', (e) => {
+            const categoryId = $(e.target).val();
+            loadUsageType(categoryId);
+        });
 
-                    data.forEach((item) => {
-                        const selected = "{{ $products->usage_type_id }}" == item.id ? 'selected' :
-                            '';
-                        usageTypeSelect.append(
-                            `<option value="${item.id}" ${selected}>${item.name}</option>`
-                        );
-                    });
+        // Gọi tự động khi trang load nếu có category sẵn (edit page)
+        initSelectOnLoad('#category_product_id', loadUsageType);
 
-                    usageTypeSelect.trigger('change');
-                },
-                error: (err) => {
-                    console.log(err);
-                },
-            });
-        };
+        // Gọi hàm cập nhật và xoá thông báo lỗi
+        update(routeUpdate, routeIndex);
+        deleteAlertValidation($inputs);
+    });
 
-        const loadModelSeries = (brand_id) => {
-            if (!brand_id) return;
+    /**
+     * Hàm tự động gọi hàm callback nếu select đã có sẵn giá trị
+     * @param {string} selector - ID của thẻ select
+     * @param {function} callback - Hàm xử lý tương ứng
+     */
+    const initSelectOnLoad = (selector, callback) => {
+        const value = $(selector).val();
+        if (value) {
+            callback(value);
+        }
+    };
 
-            $.ajax({
-                url: `{{ route('admin.products.getDataModelSeries') }}`,
-                type: "POST",
-                dataType: "json",
-                data: {
-                    brand_id: brand_id,
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: (response) => {
-                    const data = response.data;
-                    const modelSeriesSelect = $("#model_series_id");
-                    modelSeriesSelect.empty();
+    /**
+     * Load danh sách usage type dựa theo category_product_id
+     * @param {number|string} categoryId
+     */
+    const loadUsageType = (categoryId) => {
+        if (!categoryId) return;
 
-                    data.forEach((item) => {
-                        const selected =
-                            "{{ $products->model_series_id }}" == item.id ?
-                            "selected" :
-                            "";
-                        modelSeriesSelect.append(
-                            `<option value="${item.id}" ${selected}>${item.name}</option>`
-                        );
-                    });
+        $.ajax({
+            url: `{{ route('admin.products.getDataUsageType') }}`,
+            type: "POST",
+            dataType: "json",
+            data: {
+                category_product_id: categoryId,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: (response) => {
+                const data = response.data || [];
+                const $usageTypeSelect = $('#usage_type_id');
+                $usageTypeSelect.empty();
 
-                    modelSeriesSelect.trigger("change");
-                },
-                error: (error) => {
-                    console.log(error);
-                },
-            });
-        };
-    </script>
+                data.forEach(item => {
+                    const selected = "{{ $products->usage_type_id }}" == item.id ? 'selected' : '';
+                    $usageTypeSelect.append(`<option value="${item.id}" ${selected}>${item.name}</option>`);
+                });
+
+                $usageTypeSelect.trigger('change');
+            },
+            error: (err) => {
+                console.error("Lỗi khi load usage type:", err);
+            },
+        });
+    };
+
+    /**
+     * Load danh sách model series dựa theo brand_id
+     * @param {number|string} brandId
+     */
+    const loadModelSeries = (brandId) => {
+        if (!brandId) return;
+
+        $.ajax({
+            url: `{{ route('admin.products.getDataModelSeries') }}`,
+            type: "POST",
+            dataType: "json",
+            data: {
+                brand_id: brandId,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: (response) => {
+                const data = response.data || [];
+                const $modelSeriesSelect = $("#model_series_id");
+                $modelSeriesSelect.empty();
+
+                data.forEach(item => {
+                    const selected = "{{ $products->model_series_id }}" == item.id ? "selected" : "";
+                    $modelSeriesSelect.append(`<option value="${item.id}" ${selected}>${item.name}</option>`);
+                });
+
+                $modelSeriesSelect.trigger("change");
+            },
+            error: (error) => {
+                console.error("Lỗi khi load model series:", error);
+            },
+        });
+    };
+</script>
+
 @endpush

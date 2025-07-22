@@ -69,22 +69,56 @@ $("#category_product_id").change((e) => {
     });
 });
 
-
 const getNumber = (selector) =>
     parseFloat($(selector).val().replace(/\D/g, "") || 0);
 const formatVND = (number) => number.toLocaleString("vi-VN") + " đ";
 
-
 $("#profit_rate").on("input", (e) => {
-    let profitRate = parseFloat($(e.target).val().replace(/\D/g, "") || 0);
-    if (profitRate < 0) profitRate = 0;
+    const $input = $(e.target);
+    const rawValue = $input.val();
+    let profitRate = parseFloat(rawValue);
 
+    const $error = $(".error-profit_rate");
     const importPrice = getNumber("#import_price");
     if (!importPrice) return;
 
-    const finalPrice = importPrice * (1 + profitRate / 100);
-    $("#final_price").val(formatVND(finalPrice));
+    let message = "";
+
+    // Nếu không phải số thì hiển thị lỗi đơn giản
+    if (isNaN(profitRate)) {
+        message = "Vui lòng nhập lợi nhận";
+    }
+    // Kiểm tra ngoài khoảng cho phép
+    else if (profitRate < -99) {
+        profitRate = -99;
+        message = "Lợi nhuận âm tối thiểu là -99%";
+    } else if (profitRate > 100) {
+        profitRate = 100;
+        message = "Lợi nhuận tối đa là 100%";
+    }
+    // Nếu trong khoảng và âm => hiển thị tiền lỗ
+    else if (profitRate < 0) {
+        const lossAmount = (importPrice * Math.abs(profitRate)) / 100;
+        message = `Bạn đang lỗ ${formatVND(lossAmount)}`;
+    }
+
+    // Hiển thị hoặc ẩn cảnh báo
+    if (message) {
+        $error.text(message).show();
+    } else {
+        $error.text("").hide();
+    }
+
+    // Nếu giá trị hợp lệ, tính final price
+    if (!isNaN(profitRate) && profitRate >= -99 && profitRate <= 100) {
+        const finalPrice = importPrice * (1 + profitRate / 100);
+        $("#final_price").val(formatVND(finalPrice));
+    } else {
+        // Nếu vượt giới hạn, không cập nhật final_price
+        $("#final_price").val("");
+    }
 });
+
 
 // ==== Tính lợi nhuận từ giá bán ====
 $("#final_price").on("input", () => {

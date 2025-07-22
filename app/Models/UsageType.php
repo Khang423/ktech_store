@@ -38,4 +38,8 @@ class UsageType extends Model
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }

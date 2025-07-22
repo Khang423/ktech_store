@@ -136,11 +136,9 @@ class ProductService extends Controller
                 $thumbnailName = $this->imageTrait->storeImage($request->thumbnail_new, 'products', $products->id, 'thumbnail');
                 $result = $this->imageTrait->deleteImage($request->thumbnail_old, 'products', $products->id);
                 if ($result) {
-                    ProductVersion::query()
-                        ->where('id', $products->id)
-                        ->update([
-                            'thumbnail' => $thumbnailName
-                        ]);
+                    Product::where('id',$products->id)->update([
+                        'thumbnail' => $thumbnailName
+                    ]);
                 }
             }
 

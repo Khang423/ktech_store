@@ -175,10 +175,11 @@
     position: absolute;
     color: #fff;
     border-radius: 25px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
-    padding-left: 3.8px;
-    padding-bottom: 3.5px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     top: 5px;
     left: 35px;
 }

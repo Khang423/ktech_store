@@ -37,18 +37,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        $product = ProductVersion::whereHas('products', function ($query) {
+        $product_version = ProductVersion::whereHas('products', function ($query) {
             $query->where('status', StatusEnum::ON);
         })->with([
             'products' => function ($query) {
                 $query->where('status', StatusEnum::ON);
             }
         ])->get();
-
         $category_product = CategoryProduct::get();
         return view('outside.index', [
             'banners' => Banner::query()->where('status', StatusEnum::ON)->orderBy('id', 'desc')->get(),
-            'product' => $product,
+            'product_version' => $product_version,
             'category_product' => $category_product,
             'title' => 'K-tech'
         ]);
@@ -57,11 +56,11 @@ class HomeController extends Controller
     public function product_detail(ProductVersion $productVersion)
     {
         $product = Product::with(['productImages', 'productVersions.phoneSpecs', 'productVersions.laptopSpecs'])
-            ->where('id', $productVersion->id)
+            ->whereHas('productVersions', function ($query) use ($productVersion) {
+                $query->where('id', $productVersion->id);
+            })
             ->first();
-        dd($product->products->productImages);
         $title = $product->name;
-        $productVersion = ProductVersion::where('product_id', $productVersion->product_id)->get();
         return view('outside.product_detail', [
             'product' => $product,
             'productVersion' => $productVersion,
@@ -134,7 +133,7 @@ class HomeController extends Controller
         $customer_id = Auth::guard('customers')->user()->id;
         $cart = Cart::where('customer_id', $customer_id)->first('id');
         $cart_item = CartItem::where('cart_id', $cart->id)
-            ->with('productVersion')
+            ->with('productVersion.products')
             ->get();
         return view('outside.cart', [
             'title' => 'Giỏ hàng của tôi',
@@ -154,59 +153,75 @@ class HomeController extends Controller
         ]);
     }
 
-public function productFillter(Request $request)
-{
-    $filters = $request->input('data', []);
+    public function productFillter(Request $request)
+    {
+        $filters = $request->input('data', []);
+        // Lấy các filter riêng
+        $brand = $filters['brand'] ?? [];
+        $usage_type = $filters['usage_need'] ?? [];
+        $price = $request->price ?? '';
+        // Các filter còn lại (liên quan đến laptopSpecs)
+        $laptopSpecFilters = [
+            'gpu' => $filters['graphic_card'] ?? [],
+            'cpu' => $filters['cpu'] ?? [],
+            'display_size' => $filters['display_size'] ?? [],
+            'ram_size' => $filters['ram_size'] ?? [],
+            'storage_size' => $filters['ssd_size'] ?? [],
+            'display_resolution' => $filters['display_resolution'] ?? [],
+        ];
 
-    // Lấy các filter riêng
-    $brand = $filters['brand'] ?? [];
+        $result = ProductVersion::with(['products.brands', 'laptopSpecs'])
 
-    // Gộp CPU và thế hệ CPU thành một chuỗi tìm kiếm
-    $searchQuery = collect($filters['cpu'] ?? [])
-        ->filter()
-        ->map(fn($item) => '+' . $item) // dùng toán tử '+' cho boolean mode
-        ->implode(' '); // kết quả: "+core +i5 +11"
+            ->when($brand, function ($query) use ($brand) {
+                $query->whereHas('products.brands', function ($q) use ($brand) {
+                    $q->whereIn('name', $brand);
+                });
+            })
+            ->when($price, function ($query) use ($price) {
+                // Nếu $price là dạng mảng [min, max]
+                $query->whereBetween('final_price', [0, $price]);
+            })
+            ->when($usage_type, function ($query) use ($usage_type) {
+                $query->whereHas('products.usageTypes', function ($q) use ($usage_type) {
+                    $q->whereIn('name', $usage_type);
+                });
+            })
 
-    // Các filter còn lại (liên quan đến laptopSpecs)
-    $specFilters = [
-        'gpu' => $filters['graphic_card'] ?? [],
-        'display_size' => $filters['display_size'] ?? [],
-        'ram_size' => $filters['ram_size'] ?? [],
-        'storage_size' => $filters['ssd_size'] ?? [],
-        'display_resolution' => $filters['display_resolution'] ?? [],
-        // 'usage_need' => $filters['usage_need'] ?? [], // Bỏ comment nếu dùng
-    ];
-
-    // Bắt đầu truy vấn ProductVersion
-    $result = ProductVersion::with(['products.brands', 'laptopSpecs'])
-        // Lọc theo thương hiệu (brand)
-        ->when($brand, function ($query) use ($brand) {
-            $query->whereHas('products.brands', function ($q) use ($brand) {
-                $q->whereIn('name', $brand);
-            });
-        })
-        // Lọc theo laptopSpecs (CPU, GPU, RAM,...)
-        ->whereHas('laptopSpecs', function ($q) use ($searchQuery, $specFilters) {
-            // Tìm CPU theo fulltext nếu có chuỗi tìm kiếm
-            if (!empty($searchQuery)) {
-                $q->whereRaw("MATCH(cpu) AGAINST (? IN BOOLEAN MODE)", [$searchQuery]);
-            }
-            // Lọc các trường còn lại bằng LIKE
-            foreach ($specFilters as $field => $values) {
-                if (!empty($values)) {
-                    $q->where(function ($query) use ($field, $values) {
-                        foreach ($values as $value) {
-                            $query->orWhere($field, 'LIKE', '%' . $value . '%');
-                        }
-                    });
+            ->whereHas('laptopSpecs', function ($q) use ($laptopSpecFilters) {
+                foreach ($laptopSpecFilters as $field => $values) {
+                    if (!empty($values)) {
+                        $q->where(function ($query) use ($field, $values) {
+                            foreach ($values as $value) {
+                                $query->orWhere($field, 'LIKE', '%' . $value . '%');
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
 
-    dd($result);
-    return response()->json([
-        'data' => $result->get()
-    ]);
-}
 
+        return response()->json([
+            'data' => $result->get()
+        ]);
+    }
+
+    public function ShowProduct(Request $request)
+    {
+
+        $brand = Brand::get(['id', 'name']);
+        $tag = Tag::with('tagDetails')->get();
+        $category = CategoryProduct::where('slug', $request->data)->first();
+        $product = ProductVersion::with(['products'])
+            ->whereHas('products', function ($query) use ($category) {
+                $query->where('category_product_id', $category->id);
+            })
+            ->get();
+        return view('outside.show_product', [
+            'brand' => $brand,
+            'title' => 'Kết quả tìm kiếm',
+            'tag' => $tag,
+            'product' => $product,
+            'category' => $category
+        ]);
+    }
 }

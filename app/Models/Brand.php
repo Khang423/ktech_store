@@ -44,22 +44,24 @@ class Brand extends Model
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
 
-    public function getStatusAttribute($value){
-        switch($value)
-            {
-                case StatusEnum::ON:
-                    return 'Hoạt động';
-                case StatusEnum::OFF:
-                    return 'Ngưng hoạt động';
-                default:
-                    return ' ';
-            }
+    public function getStatusAttribute($value)
+    {
+        switch ($value) {
+            case StatusEnum::ON:
+                return 'Hoạt động';
+            case StatusEnum::OFF:
+                return 'Ngưng hoạt động';
+            default:
+                return ' ';
+        }
     }
 
-    public function products() {
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
-    public function modelSeries() {
+    public function modelSeries()
+    {
         return $this->hasMany(ModelSeries::class);
     }
 }

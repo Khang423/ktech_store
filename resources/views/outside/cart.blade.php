@@ -24,20 +24,25 @@
         @foreach ($cart_item as $item)
             <div class="item mb-2">
                 <div class="product-checkbox">
-                    <input type="checkbox" data-price="{{ $item->unit_price }}" data-id="{{ $item->productVersion->id }}"
-                        data-quantity="{{ $item->quantity }}" data-thumbnail="{{ $item->productVersion->thumbnail }}"
-                        data-name="{{ $item->productVersion->name }}" class="form-check-input product-check"
+                    <input type="checkbox"
+                        data-price="{{ $item->unit_price }}"
+                        data-product-id="{{ $item->productVersion->products->id }}"
+                        data-product-version-id="{{ $item->productVersion->id }}"
+                        data-quantity="{{ $item->quantity }}"
+                        data-thumbnail="{{ $item->productVersion->products->thumbnail }}"
+                        data-name="{{ $item->productVersion->config_name }}"
+                        class="form-check-input product-check"
                         id="product-check">
                 </div>
                 <div class="product-thumbnail">
                     @if ($item->productVersion)
-                        <img src="{{ asset('asset/admin/products/') . '/' . $item->productVersion->id . '/' . $item->productVersion->thumbnail }}"
+                        <img src="{{ asset('asset/admin/products/') . '/' . $item->productVersion->product_id . '/' . $item->productVersion->products->thumbnail }}"
                             alt="">
                     @endif
                 </div>
                 <div class="product-info">
                     <div class="product-name">
-                        {{ $item->productVersion ? $item->productVersion->name : 'Không có dữ liệu' }}
+                        {{ $item->productVersion ? $item->productVersion->config_name : 'Không có dữ liệu' }}
                     </div>
                     <div class="product-price">
                         {{ formatPriceToVND($item->unit_price) }}

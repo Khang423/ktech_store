@@ -16,12 +16,12 @@
             <div class="col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row align-items-center" >
-                            <i class="uil-cloud-wifi font-36 text-center"></i>
+                        <div class="row align-items-center">
+                            <i class="uil uil-laptop font-36 text-center"></i>
                             <div class="col-12 text-center">
                                 <h3 class="my-2 py-1 font-24"></h3>
                             </div>
-                            <h5 class="text-muted fw-normal mt-0 text-center">Gói Internet</h5>
+                            <h5 class="text-muted fw-normal mt-0 text-center">Số lượng sản phẩm</h5>
                         </div> <!-- end row-->
                     </div> <!-- end card-body -->
                 </div> <!-- end card -->

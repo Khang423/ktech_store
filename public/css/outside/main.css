@@ -2336,6 +2336,10 @@ body {
     background-color: #fff;
     padding: 10px;
     border-radius: 10px;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+}
+.section-search .option .item:last-child {
+    border-bottom: none;
 }
 .section-search .view-product {
     height: auto;
@@ -2374,7 +2378,7 @@ body {
 }
 .section-search .option .range-price .content .input-price .start-price {
     height: 30px;
-    width: 50%;
+    width: 30%;
 }
 .section-search .option .range-price .content .input-price .start-price input {
     height: 100%;
@@ -2382,10 +2386,11 @@ body {
     border-radius: 3px;
     outline: none;
     border: 1px solid lightgray;
+    padding-left: 15px;
 }
 .section-search .option .range-price .content .input-price .end-price {
     height: 30px;
-    width: 50%;
+    width: 70%;
 }
 .section-search .option .range-price .content .input-price .end-price input {
     height: 100%;
@@ -2393,8 +2398,9 @@ body {
     border-radius: 3px;
     outline: none;
     border: 1px solid lightgray;
+    padding-left: 10px;
 }
-.section-search .option .range-price .content .animation-ragne-price {
+.section-search .option .range-price .content .animation-ragne-price input {
     height: 30px;
     width: 100%;
     display: flex;
@@ -2409,7 +2415,47 @@ body {
     border-bottom: 1px solid lightgray;
     cursor: pointer;
 }
-
+.section-search .option .actions {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 10px;
+}
+.section-search .option .actions .btn-delete-filter {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #25449a;
+    border: 2px solid #25449a;
+    padding: 5px;
+    cursor: pointer;
+}
+.section-search .option .actions .btn-filter {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #fff;
+    background-color: #25449a;
+    padding: 5px;
+    cursor: pointer;
+}
+.section-search .option .actions .btn-filter:hover {
+    background-color: #305dd8;
+}
+.section-search .option .actions .btn-delete-filter:hover {
+    color: #305dd8;
+    border: 2px solid #305dd8;
+}
 .section-search .option .item .title {
     height: 50px;
     width: 100%;
@@ -2421,9 +2467,10 @@ body {
     height: 100%;
     width: 80%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     font-size: 13px;
+    padding-left: 10px;
 }
 
 .section-search .option .item .title .icon-arrow {
@@ -2434,10 +2481,10 @@ body {
     align-items: center;
     font-size: 20px;
 }
-.section-search .option .item .title .icon-arrow i{
+.section-search .option .item .title .icon-arrow i {
     transition: transform 0.3s ease;
 }
-.section-search .option .item .title .icon-arrow.rotated i{
+.section-search .option .item .title .icon-arrow.rotated i {
     transform: rotate(180deg);
 }
 .section-search .option .item .content {
