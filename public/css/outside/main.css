@@ -76,6 +76,11 @@ body {
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+#section-laptop .card-product:hover {
+    transform: translateY(-5px);
 }
 
 #section-laptop .product-content {

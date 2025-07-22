@@ -15,9 +15,9 @@
             </a>
             <i class=" uil-angle-right-b"></i>
             <span style="color:#2a52be">
-                @if ($product->laptopSpecs)
+                @if ($productVersion->laptopSpecs)
                     Laptop
-                @elseif ($product->phoneSpecs)
+                @elseif ($productVersion->phoneSpecs)
                     Điện thoại
                 @endif
             </span>
