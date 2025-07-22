@@ -270,6 +270,55 @@
 .header .desktop-menu .overlay .sidebar-tab {
     height: 100%;
     width: 700px;
-    background-color:#fff ;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    background-color: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 10px;
+}
+#sidebar-tab .content {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+#sidebar-tab .content > .item {
+    height: auto;
+    width: 23.5%;
+    padding: 10px;
+}
+#sidebar-tab .content > .item > a > .title {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(141, 141, 141);
+    cursor: pointer;
+}
+#sidebar-tab .content > .item > a > .title:hover {
+    color: #2a52be;
+}
+#sidebar-tab .content > .item > .content-child {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#sidebar-tab .content > .item > .content-child > a > .item {
+    height: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgb(163, 163, 163);
+    cursor: pointer;
+}
+#sidebar-tab .content > .item > .content-child > a > .item:hover {
+    color: #2a52be;
 }

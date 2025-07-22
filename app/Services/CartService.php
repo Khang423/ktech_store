@@ -23,11 +23,11 @@ class CartService extends Controller
     {
         DB::beginTransaction();
         try {
-            $product_id = $request->productId;
-            $product = ProductVersion::select('price')->find($product_id);
+            $product_version_id = $request->productId;
+            $product_version = ProductVersion::find($product_version_id);
             $customer_id = Auth::guard('customers')->user()->id;
             $cart = $this->model::where('customer_id', $customer_id)->firstOrFail();
-            $product_old = CartItem::where('cart_id', $cart->id)->where('product_id', $product_id)->first();
+            $product_old = CartItem::where('cart_id', $cart->id)->where('product_id', $product_version_id)->first();
 
             if ($product_old) {
                 $product_old->quantity += 1;
@@ -36,9 +36,9 @@ class CartService extends Controller
                 CartItem::create([
                     'customer_id' => $customer_id,
                     'cart_id' => $cart->id,
-                    'product_id' => $product_id,
+                    'product_id' => $product_version_id,
                     'quantity' => 1,
-                    'unit_price' => $product->price
+                    'unit_price' => $product_version->final_price
                 ]);
             }
             DB::commit();

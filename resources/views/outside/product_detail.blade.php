@@ -43,18 +43,18 @@
         </div>
         <div class="product-detail-info">
             <div class="product-versions">
-                @foreach ($productVersion as $i)
-                    @if ($product->slug === $i->slug)
+                @foreach ($product->productVersions as $i)
+                    @if ($productVersion->slug === $i->slug)
                         <div class="version-card active" data-id="{{ $i->id }}" data-slug="{{ $i->slug }}">
                             <span class="card-active">
                                 <i class="uil-check"></i>
                             </span>
                             <div class="content-card">
                                 <div class="product-version-name">
-                                    {{ $i->name }}
+                                    {{ $i->config_name }}
                                 </div>
                                 <div class="product-version-price">
-                                    {{ formatPriceToVND($i->price) }}
+                                    {{ formatPriceToVND($i->final_price) }}
                                 </div>
                             </div>
                         </div>
@@ -65,10 +65,10 @@
                             </span>
                             <div class="content-card">
                                 <div class="product-version-name">
-                                    {{ $i->name }}
+                                    {{ $i->config_name }}
                                 </div>
                                 <div class="product-version-price">
-                                    {{ formatPriceToVND($i->price) }}
+                                    {{ formatPriceToVND($i->final_price) }}
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
             <hr>
             <div class="product-price">
                 <div class="btn-price">
-                    {{ formatPriceToVND($product->final_price) }}
+                    {{ formatPriceToVND($productVersion->final_price) }}
                 </div>
                 <div class="product-buy mt-2">
                     @if (Auth::guard('customers')->check())
@@ -87,7 +87,7 @@
                                 MUA NGAY
                             </span>
                         </div>
-                        <div class="btn-add_to_cart" data-product-id={{ $product->id }}>
+                        <div class="btn-add_to_cart" data-product-id={{ $productVersion->id }}>
                             <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
                             <span>
                                 Thêm vào giỏ
@@ -129,10 +129,10 @@
                     Thông số kỹ thuật
                 </div>
                 @php
-                    $laptopSpecs = getLaptopSpecs($product);
-                    $phoneSpecs = getPhoneSpecs($product);
+                    $laptopSpecs = getLaptopSpecs($productVersion);
+                    $phoneSpecs = getPhoneSpecs($productVersion);
                 @endphp
-                @if ($product->laptopSpecs)
+                @if ($productVersion->laptopSpecs)
                     <div class="content">
                         @if ($laptopSpecs['gpu'])
                             <div class="item">
@@ -236,7 +236,7 @@
                         @endif
                     </div>
                 @endif
-                @if ($product->phoneSpecs)
+                @if ($productVersion->phoneSpecs)
                     <div class="content">
                         @if ($phoneSpecs['display_size'])
                             <div class="item">
@@ -393,7 +393,7 @@
                         <img src="{{ asset('asset/admin/products') . '/' . $product->id . '/' . $product->thumbnail }}"
                             alt="">
                     </div>
-                    @if ($product->laptopSpecs)
+                    @if ($productVersion->laptopSpecs)
                         <div class="content">
                             <div class="title-item">
                                 <span>Bộ xử lý và Card đồ hoạ</span>
@@ -678,7 +678,7 @@
                             @endif
                         </div>
                     @endif
-                    @if ($product->phoneSpecs)
+                    @if ($productVersion->phoneSpecs)
                         <div class="content">
                             <div class="title-item">
                                 <span>Màn hình</span>

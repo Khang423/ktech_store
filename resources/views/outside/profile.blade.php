@@ -258,7 +258,7 @@
                                     </div>
                                 </div>
                                 <div class="address-content">
-                                    @foreach ($address as $i)
+                                    {{-- @foreach ($address as $i)
                                         <div class="item" data-id="{{ $i->id }}">
                                             <div class="item-header">
                                                 <div class="left">
@@ -294,7 +294,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                             </div>
                             <div class="other" id="password-and-connect">
@@ -414,6 +414,6 @@
         const RouteDeleteAddress = "{{ route('home.deleteAddress') }}";
         const RouteProfile = "{{ route('home.profile') }}";
         const RouteLogout = "{{ route('home.logout') }}";
-      
+
     </script>
 @endpush

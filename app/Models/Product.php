@@ -62,4 +62,9 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
+
+    public function usageTypes()
+    {
+        return $this->belongsTo(UsageType::class, 'usage_type_id');
+    }
 }

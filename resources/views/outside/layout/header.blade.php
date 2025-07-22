@@ -58,18 +58,34 @@
                                 </div>
                             @endguest
                         </div>
-                        <div class="cart">
-                            <div class="content">
-                                <div class="border-cart btn-cart d-flex">
-                                    <div class="icon-cart">
-                                        <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
-                                    </div>
-                                    <div class="circle-quantity-item-cart">
-                                        1
+                        @auth('customers')
+                            <div class="cart">
+                                <div class="content">
+                                    <div class="border-cart btn-cart d-flex">
+                                        <div class="icon-cart">
+                                            <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
+                                        </div>
+                                        <div class="circle-quantity-item-cart">
+                                            {{ checkCountCart(Auth::guard('customers')->user()->id) }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endauth
+                        @guest('customers')
+                            <div class="cart">
+                                <div class="content">
+                                    <div class="border-cart btn-cart d-flex">
+                                        <div class="icon-cart">
+                                            <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
+                                        </div>
+                                        <div class="circle-quantity-item-cart">
+                                            0
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -77,27 +93,56 @@
         <div class="desktop-menu d-none">
             <div class="sidebar">
                 <div class="item">
-                    <div class="title">
+
+                    <div class="title" data-name="laptop">
                         <i class="uil uil-monitor fs-2"></i>
-                        <span>LAPTOP</span>
+                        <a
+                            href="{{ route('home.showProduct', [
+                                'data' => 'laptop',
+                            ]) }}">
+                            <span class="text-dark">Laptop</span>
+                        </a>
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-right"></i>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="title">
+                    <div class="title" data-name="phone">
                         <i class="uil uil-mobile-android fs-2"></i>
-                        <span>ĐIỆN THOẠI</span>
+                        <a
+                            href="{{ route('home.showProduct', [
+                                'data' => 'dien-thoai',
+                            ]) }}">
+                            <span class="text-dark">Điện thoại</span>
+                        </a>
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-right"></i>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="title">
+                    <div class="title" data-name="keyboard">
+                        <i class="uil uil-keyboard-alt fs-2"></i>
+                        <span>Phím Cơ</span>
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-right"></i>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="title" data-name="mouse">
+                        <i class="uil uil-mouse-alt fs-2"></i>
+                        <span>Chuột</span>
+                    </div>
+                    <div class="icon-arrow">
+                        <i class="uil uil-angle-right"></i>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="title" data-name="headphone">
                         <i class="uil uil-headphones-alt fs-2"></i>
-                        <span>PHỤ KIỆN</span>
+                        <span>Tai nghe</span>
                     </div>
                     <div class="icon-arrow">
                         <i class="uil uil-angle-right"></i>
@@ -105,8 +150,47 @@
                 </div>
             </div>
             <div class="overlay">
-                <div class="sidebar-tab">
-
+                <div class="sidebar-tab d-none" id="sidebar-tab">
+                    <div class="content tab-laptop d-none">
+                        @foreach (getDataBrandLaptop() as $i)
+                            <div class="item">
+                                <a href="">
+                                    <div class="title">
+                                        {{ $i->name }}
+                                    </div>
+                                </a>
+                                <div class="content-child">
+                                    @foreach ($i->modelSeries as $model)
+                                        <a href="">
+                                            <div class="item">
+                                                {{ $model->name }}
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="content tab-phone d-none">
+                        @foreach (getDataBrandLaptop() as $i)
+                            <div class="item">
+                                <a href="">
+                                    <div class="title">
+                                        {{ $i->name }}phone
+                                    </div>
+                                </a>
+                                <div class="content-child">
+                                    @foreach ($i->modelSeries as $model)
+                                        <a href="">
+                                            <div class="item">
+                                                {{ $model->name }}
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,15 +274,11 @@
                     </div>
                 </div>
                 <div class="item-dropdown">
-                    <div class="item">
-                        DELL
-                    </div>
-                    <div class="item">
-                        LENOVO
-                    </div>
-                    <div class="item">
-                        MSI
-                    </div>
+                    @foreach (getDataBrandLaptop() as $i)
+                        <div class="item">
+                            {{ $i->name }}
+                        </div>
+                    @endforeach
                 </div>
                 <div class="item d-flex toggle-dropdown">
                     <div class="title fs-4 fw-bold">

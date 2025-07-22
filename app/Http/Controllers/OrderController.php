@@ -18,9 +18,27 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function store(StoreRequest $request)
+    public function index()
+    {
+        return view('admin.order.index');
+    }
+
+    public function getList()
+    {
+        return $this->orderService->getList();
+    }
+    public function store(Request $request)
     {
         $result = $this->orderService->store($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $result = $this->orderService->updateStatus($request);
         if ($result) {
             return $this->successResponse();
         }

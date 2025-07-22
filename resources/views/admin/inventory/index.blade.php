@@ -45,7 +45,7 @@
                                     <th class="text-center">Sản phẩm</th>
                                     <th class="text-center">Ảnh đại diện</th>
                                     <th class="text-center">Tồn kho</th>
-                                    <th class="text-center">Ngày cập nhật</th>
+                                    <th class="text-center">Hành động</th>
                                 </tr>
                             </thead>
                         </table>
@@ -73,8 +73,8 @@
                 `
                 },
                 {
-                    data: 'avatar',
-                    name: 'avatar',
+                    data: 'thumbnail',
+                    name: 'thumbnail',
                     className: 'text-center',
                     orderable: false,
                     searchable: false,
@@ -90,47 +90,20 @@
                     searchable: false,
                     render: (data) => `<span class='text-dark'>${data}</span>`
                 },
-                // {
-                //     data: 'price',
-                //     name: 'price',
-                //     className: 'text-center',
-                //     orderable: false,
-                //     searchable: false,
-                //     render: (data) => `<span class='text-dark'>${data}</span>`
-                // },
                 {
-                    data: 'updated_at',
-                    name: 'updated_at',
+                    data: 'actions',
+                    name: 'actions',
                     className: 'text-center',
                     orderable: false,
                     searchable: false,
-                    render: (data) => `<span class='text-dark'>${data}</span>`
-                },
-                //         {
-                //             data: 'actions',
-                //             name: 'actions',
-                //             className: 'text-center',
-                //             orderable: false,
-                //             searchable: false,
-                //             render: (data) => `
-            //             <span class='table-action d-flex justify-content-center gap-2'>
-            //                 <a href="javascript:void(0)" class="action-view" data-id="${data.id}">
-            //                     <i class="edit text-info uil-eye action-icon"></i>
-            //                 </a>
-            //                 <a href="${data.edit}">
-            //                     <i class="edit text-primary uil-edit action-icon"></i>
-            //                 </a>
-            //                 <form action="${data.destroy}" method="POST" class="d-inline action-icon" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?')">
-            //                     @csrf
-            //                     @method('DELETE')
-            //                     <input type="hidden" name="id" value="${data.id}">
-            //                     <button type="submit" class="btn p-0 border-0 bg-transparent">
-            //                         <i class="destroy text-danger uil-trash-alt"></i>
-            //                     </button>
-            //                 </form>
-            //             </span>
-            // `
-                //         }
+                    render: (data) => `
+                        <span class='table-action d-flex justify-content-center gap-2'>
+                            <a href="${data.preview}">
+                                <i class="edit text-primary uil-eye action-icon"></i>
+                            </a>
+                        </span>
+            `
+                }
             ];
 
             let table = $('#datatable').DataTable(

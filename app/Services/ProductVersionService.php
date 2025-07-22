@@ -187,6 +187,8 @@ class ProductVersionService extends Controller
 
             $product_version_id = $productVersion->id;
 
+
+
             switch ($category_product->slug) {
                 case ProductTypeEnum::LAPTOP:
                     LaptopSpec::where('product_id', $product_version_id)
@@ -270,6 +272,8 @@ class ProductVersionService extends Controller
                     'config_name' => $nameConfig,
                     'name' => $products->name,
                     'slug' => Str::slug($nameConfig),
+                    'profit_rate' => $request->profit_rate,
+                    'final_price' => (int) preg_replace('/[^\d]/', '', $request->final_price),
                 ]);
 
             DB::commit();

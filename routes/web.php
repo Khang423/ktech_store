@@ -23,6 +23,7 @@ use App\Http\Controllers\StockImportController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TagDetailController;
 use App\Http\Controllers\UsageTypeController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 // route home
@@ -46,6 +47,8 @@ Route::group(
         // search product
         Route::post('/search', [HomeController::class, 'searchProcess'])->name('searchProcess');
         Route::get('/search-result', [HomeController::class, 'searchResult'])->name('searchResult');
+
+        Route::get('/product', [HomeController::class, 'showProduct'])->name('showProduct');
         // check auth status
         Route::post('/auth-status', [AuthController::class, 'authCheck'])->name('authStatus');
 
@@ -221,10 +224,7 @@ Route::group(
             },
         );
 
-
-
         // Brand route
-
         Route::group(
             [
                 'prefix' => 'brands',
@@ -365,6 +365,17 @@ Route::group(
             function () {
                 Route::get('/', [InventoryController::class, 'index'])->name('index');
                 Route::post('/getList', [InventoryController::class, 'getList'])->name('getList');
+
+                Route::group(
+                    [
+                        'prefix' => '{products:slug}',
+                        'as' => 'details.',
+                    ],
+                    function () {
+                        Route::get('/', [InventoryController::class, 'index_detail'])->name('index');
+                        Route::post('/getListDetail', [InventoryController::class, 'getListDetail'])->name('getList');
+                    },
+                );
             },
         );
 
@@ -386,7 +397,7 @@ Route::group(
             },
         );
 
-        // Inventory histories export
+        // stock export route
         Route::group(
             [
                 'prefix' => 'stockExports',
@@ -442,5 +453,23 @@ Route::group(
                 );
             },
         );
+
+        // Order Route
+        Route::group(
+            [
+                'prefix' => 'orders',
+                'as' => 'orders.',
+            ],
+            function () {
+                Route::get('/', [OrderController::class, 'index'])->name('index');
+                Route::post('/getList', [OrderController::class, 'getList'])->name('getList');
+                Route::post('/updateStatus', [OrderController::class, 'updateStatus'])->name('updateStatus');
+                Route::delete('/forceDelete', [BannerController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [BannerController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [BannerController::class, 'restoreAll'])->name('restoreAll');
+                Route::post('/pdf/{order:{slug}', [BannerController::class, 'pdf'])->name('pdf');
+            },
+        );
+        // Discount Route
     },
 );

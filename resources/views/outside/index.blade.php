@@ -22,7 +22,7 @@
     <section id="section-laptop">
         <div class="swiper-product-item">
             <div class="swiper-wrapper">
-                @foreach ($product as $item)
+                @foreach ($product_version as $item)
                     <div class="swiper-slide">
                         <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
                             <div class="product-content" data-id="product-id">
@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="product-thumbnail">
-                                    <img src="{{ asset('asset/admin/products') . '/' . $item->product_id .'/'.'thumbnail'.'/' . $item->thumbnail }}"
+                                    <img src="{{ asset('asset/admin/products') . '/' . $item->products->id .'/'. $item->products->thumbnail }}"
                                         alt="">
                                 </div>
                                 <div class="product-title ">
@@ -66,7 +66,7 @@
     <section id="section-laptop">
         <div class="swiper-product-item">
             <div class="swiper-wrapper">
-                @foreach ($product as $item)
+                @foreach ($product_version as $item)
                     <div class="swiper-slide">
                         <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
                             <div class="product-content" data-id="product-id">
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="product-thumbnail">
-                                    <img src="{{ asset('asset/admin/products') . '/' . $item->id . '/' . $item->thumbnail }}"
+                                    <img src="{{ asset('asset/admin/products') . '/' . $item->products->id .'/'. $item->products->thumbnail }}"
                                         alt="">
                                 </div>
                                 <div class="product-title ">

@@ -24,6 +24,7 @@ class StoreRequest extends FormRequest
             'usage_type_id' => 'required',
             'brand_id' => 'required',
             'thumbnail' => 'image|required',
+            'description' => 'nullable',
         ];
     }
 }

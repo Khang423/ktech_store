@@ -27,38 +27,92 @@ class InventoryService extends Controller
     public function getList()
     {
         return DataTables::of(
-            Inventories::join('product_versions', 'inventories.product_version_id', '=', 'product_versions.id')
-                ->orderBy('inventories.created_at', 'desc')
-                ->get([
-                    'product_versions.product_id as product_id',
-                    'product_versions.name as product_name',
-                    'product_versions.thumbnail as thumbnail',
-                    'inventories.stock_quantity',
-                    'inventories.updated_at as updated_at',
-                ])
+            DB::table('inventories')
+                ->join('product_versions', 'inventories.product_version_id', '=', 'product_versions.id')
+                ->join('products', 'product_versions.product_id', '=', 'products.id')
+                ->select(
+                    'products.id as id',
+                    'products.thumbnail as thumbnail',
+                    'products.name',
+                    'products.slug',
+                    DB::raw('SUM(inventories.stock_quantity) as stock_quantity')
+                )
+                ->groupBy('products.id')
+                ->get()
         )
             ->editColumn('index', function ($object) {
                 static $i = 0;
                 return ++$i;
             })
-            ->editColumn('avatar', function ($object) {
-                $product = Product::where('id',$object->product_id)->first();
+            ->editColumn('thumbnail', function ($object) {
                 return [
-                    'thumbnail' => $product->thumbnail,
-                    'product_id' => $product->id,
+                    'thumbnail' => $object->thumbnail,
+                    'product_id' => $object->id,
                 ];
             })
             ->editColumn('name', function ($object) {
-                return $object->product_name;
+                return $object->name;
             })
-            // ->addColumn('actions', function ($object) {
-            //     return [
-            //         'id' => $object->id,
-            //         'destroy' => route('admin.inventories.delete'),
-            //         'preview' => route('admin.inventories.delete'),
-            //         'edit' => route('admin.inventories.edit', $object->),
-            //     ];
-            // })
+            ->addColumn('actions', function ($object) {
+                return [
+                    'id' => $object->id,
+                    'preview' => route('admin.inventories.details.index', $object->slug),
+                ];
+            })
+            ->make(true);
+    }
+    public function getListDetail($products)
+    {
+        return DataTables::of(
+            ProductVersion::where('product_versions.product_id', $products->id)
+                ->join('inventories', 'product_versions.id', '=', 'inventories.product_version_id')
+                ->join('stock_import_details', 'product_versions.id', '=', 'stock_import_details.product_version_id')
+                ->join('stock_imports', 'stock_imports.id', '=', 'stock_import_details.stock_import_id')
+                ->select([
+                    'stock_import_details.stock_import_id',
+                    'stock_imports.ref_code',
+                    'product_versions.id as id',
+                    'product_versions.config_name as name',
+                    'stock_import_details.price as price',
+                    'inventories.stock_quantity as stock_quantity',
+                    'stock_import_details.created_at as create_date',
+                ])
+                ->groupBy(
+                    'stock_import_details.stock_import_id',
+                    'stock_imports.ref_code',
+                    'product_versions.id',
+                    'product_versions.config_name',
+                    'stock_import_details.price',
+                    'inventories.stock_quantity',
+                    'stock_import_details.created_at',
+                )
+                ->get()
+        )
+            ->editColumn('index', function ($object) {
+                static $i = 0;
+                return ++$i;
+            })
+            ->editColumn('price', function ($object) {
+                return number_format($object->price, 0, ',', '.') . ' ₫';
+            })
+            ->editColumn('name', function ($object) {
+                return $object->name;
+            })
+            ->editColumn('import_code', function ($object) {
+                return $object->ref_code;
+            })
+            ->editColumn('stock_quantity', function ($object) {
+                return $object->stock_quantity;
+            })
+            ->editColumn('created_at', function ($object) {
+                return $object->create_date;
+            })
+            ->addColumn('actions', function ($object) {
+                return [
+                    'id' => $object->id,
+                    'preview' => '',
+                ];
+            })
             ->make(true);
     }
 }

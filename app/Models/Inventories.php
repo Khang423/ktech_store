@@ -20,7 +20,7 @@ class Inventories extends Model
         ];
     }
 
-    public function productVersion()
+    public function productVersions()
     {
         return $this->belongsTo(ProductVersion::class, 'id', 'product_version_id');
     }

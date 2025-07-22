@@ -14,6 +14,7 @@ use App\Models\PhoneSpec;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVersion;
+use App\Models\StockImport;
 use App\Models\StockImportDetail;
 use App\Models\Supplier;
 use App\Services\ProductService;
@@ -70,7 +71,7 @@ class ProductVersionController extends Controller
     {
         $laptopspec = LaptopSpec::where('product_id', $product_version->id)->first();
         $phonespec = PhoneSpec::where('product_id', $product_version->id)->first();
-
+        $stock_import_detail = StockImportDetail::where('product_version_id',$product_version->id)->first();
         return view('admin.productVersion.edit', [
             'products' => $products,
             'category_product' => CategoryProduct::where('id', $products->category_product_id)->first(['id', 'name', 'slug']),
@@ -79,6 +80,7 @@ class ProductVersionController extends Controller
             'productVersions' => $product_version,
             'laptopSpec' => $laptopspec,
             'phoneSpec' => $phonespec,
+            'stock_import_detail' => $stock_import_detail
         ]);
     }
 

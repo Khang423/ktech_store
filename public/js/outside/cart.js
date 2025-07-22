@@ -56,7 +56,8 @@ $(document).ready(function () {
             const quantity = parseInt($(this).data("quantity")) || 0;
             const thumbnail = $(this).data("thumbnail") || ' ';
             const name = $(this).data("name") || '';
-            const product_id = parseInt($(this).data("id"));
+            const product_id = parseInt($(this).data("product-id"));
+            const product_version_id = parseInt($(this).data("product-version-id"));
 
             const product_info = {
                 price: price,
@@ -64,6 +65,7 @@ $(document).ready(function () {
                 thumbnail: thumbnail,
                 name: name,
                 product_id: product_id,
+                product_version_id: product_version_id,
             };
             selectedProducts.push(product_info);
         });

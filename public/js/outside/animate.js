@@ -67,6 +67,16 @@ $(document).ready(function () {
             $(".desktop-menu").addClass("d-none");
         }
     });
+
+    $(".desktop-menu .sidebar .item").on("click", function (e) {
+        const item_name = $(this).find(".title").data("name");
+        const tab = $(".sidebar-tab");
+        tab.removeClass('d-none');
+        if (!item_name) return;
+
+        tab.find(".content").addClass("d-none");
+        tab.find(`.tab-${item_name}`).removeClass("d-none");
+    });
 });
 
 function goToPageProfile() {

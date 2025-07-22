@@ -73,10 +73,13 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="\" class="side-nav-link">
+                <a href="{{ route('admin.orders.index')}}" class="side-nav-link">
                     <i class=" uil-bill"></i>
+                    @if (checkOrder() >= 1)
+                        <span class="badge bg-danger float-end">{{ checkOrder() }}</span>
+                    @endif
                     <span>
-                        Hoá đơn
+                        Đơn hàng
                     </span>
                 </a>
             </li>

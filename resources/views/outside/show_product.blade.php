@@ -23,7 +23,7 @@
     <div class="section-search">
         <div class="option">
             <div class="content-search">
-                <div class="title">
+                <div class="title fs-4 text-center fw-bold mb-2">
                     Bộ lọc tìm kiếm
                 </div>
                 <div class="content">
@@ -39,15 +39,15 @@
                 <div class="content">
                     <div class="input-price">
                         <div class="start-price">
-                            <input type="text">
+                            <input type="text" value="0₫">
                         </div>
                         <span class="d-flex justify-content-center align-items-center fs-3"> - </span>
                         <div class="end-price">
-                            <input type="text">
+                            <input type="text" id="price-display">
                         </div>
                     </div>
                     <div class="animation-ragne-price">
-                        <input type="range">
+                        <input type="range" min="0" id="price-range" max="100000000" step="1000000">
                     </div>
                 </div>
             </div>
@@ -73,34 +73,62 @@
                     @endforeach
                 </div>
             </div>
-            {{-- core cpu --}}
-            <div class="item" data-name="cpu">
-                <div class="title">
-                    <div class="name">
-                        CPU
+            @if ($category->slug === 'laptop')
+                {{-- core cpu --}}
+                <div class="item" data-name="cpu">
+                    <div class="title">
+                        <div class="name">
+                            CPU
+                        </div>
+                        <div class="icon-arrow">
+                            <i class="uil uil-angle-down"></i>
+                        </div>
                     </div>
-                    <div class="icon-arrow">
-                        <i class="uil uil-angle-down"></i>
+                    <div class="content">
+                        @foreach ($tag as $i)
+                            @if ($i->slug === TagEnums::CORE_CPU)
+                                @foreach ($i->tagDetails as $tagDetails)
+                                    <div class="item" data-name="{{ $tagDetails->name }}">
+                                        <div class="checkbox">
+                                            <input type="checkbox">
+                                        </div>
+                                        <div class="title">
+                                            {{ $tagDetails->name }}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        @endforeach
                     </div>
                 </div>
-                <div class="content">
-                    @foreach ($tag as $i)
-                        @if ($i->slug === TagEnums::CORE_CPU)
-                            @foreach ($i->tagDetails as $tagDetails)
-                                <div class="item" data-name="{{ $tagDetails->name }}">
-                                    <div class="checkbox">
-                                        <input type="checkbox">
+            @elseif($category->slug === 'dien-thoai')
+                <div class="item" data-name="cpu">
+                    <div class="title">
+                        <div class="name">
+                            Chíp xử lý
+                        </div>
+                        <div class="icon-arrow">
+                            <i class="uil uil-angle-down"></i>
+                        </div>
+                    </div>
+                    <div class="content">
+                        @foreach ($tag as $i)
+                            @if ($i->slug === TagEnums::CPU_PHONE)
+                                @foreach ($i->tagDetails as $tagDetails)
+                                    <div class="item" data-name="{{ $tagDetails->name }}">
+                                        <div class="checkbox">
+                                            <input type="checkbox">
+                                        </div>
+                                        <div class="title">
+                                            {{ $tagDetails->name }}
+                                        </div>
                                     </div>
-                                    <div class="title">
-                                        {{ $tagDetails->name }}
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
-                    @endforeach
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-
+            @endif
             {{-- graphics card --}}
             <div class="item" data-name="graphic_card">
                 <div class="title">
@@ -128,7 +156,6 @@
                     @endforeach
                 </div>
             </div>
-
             {{-- display size --}}
             <div class="item" data-name="display_size">
                 <div class="title">
@@ -156,7 +183,6 @@
                     @endforeach
                 </div>
             </div>
-
             {{-- ram size --}}
             <div class="item" data-name="ram_size">
                 <div class="title">
@@ -184,7 +210,6 @@
                     @endforeach
                 </div>
             </div>
-
             {{-- ssd size --}}
             <div class="item" data-name="ssd_size">
                 <div class="title">
@@ -212,7 +237,6 @@
                     @endforeach
                 </div>
             </div>
-
             {{-- display resolution --}}
             <div class="item" data-name="display_resolution">
                 <div class="title">
@@ -240,7 +264,6 @@
                     @endforeach
                 </div>
             </div>
-
             {{-- usage needs --}}
             <div class="item" data-name="usage_need">
                 <div class="title">
@@ -266,6 +289,14 @@
                             @endforeach
                         @endif
                     @endforeach
+                </div>
+            </div>
+            <div class="actions">
+                <div class="btn-delete-filter">
+                    <span>Xoá bộ lộc</span>
+                </div>
+                <div class="btn-filter">
+                    <span>Áp dụng</span>
                 </div>
             </div>
         </div>
@@ -298,5 +329,14 @@
 @endsection
 @push('js')
     <script src="{{ asset('js/outside/search-result.js') }}"></script>
-    <script></script>
+    <script>
+        $(document).ready(() => {
+            const priceRange = document.getElementById('price-range');
+            const priceDisplay = document.getElementById('price-display');
+            priceRange.addEventListener('input', () => {
+                const value = parseInt(priceRange.value);
+                priceDisplay.value = value.toLocaleString('vi-VN') + '₫';
+            });
+        })
+    </script>
 @endpush

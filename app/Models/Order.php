@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
@@ -21,4 +22,33 @@ class Order extends Model
         'note',
         'ship',
     ];
+
+    public static function getInfo()
+    {
+        return [
+            'id',
+            'customer_id',
+            'city_id',
+            'district_id',
+            'ward_id',
+            'status',
+            'total_price',
+            'receiver_name',
+            'receiver_tel',
+            'receiver_email',
+            'note',
+            'ship',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y');
+    }
+    public function customers()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 }
