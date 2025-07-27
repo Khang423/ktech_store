@@ -52,4 +52,9 @@ class Member extends Authenticatable
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
+
+    public function memberRoles()
+    {
+        return $this->hasMany(MemberRole::class);
+    }
 }

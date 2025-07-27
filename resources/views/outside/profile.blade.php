@@ -40,7 +40,7 @@
                     </div>
                     <div class="information">
                         <div class="quantity">
-                            {{ $order }}
+                            {{ $order_count }}
                         </div>
                         <div class="title">
                             Tổng số đơn hàng đã mua
@@ -101,24 +101,24 @@
 
                     </div>
                     <div class="content ">
-                        <div class="purchase-history d-none">
+                        <div class="purchase-history">
                             <div class="order-status">
-                                <div class="item active" id="order-all">
+                                <div class="item active all" id="order-all">
                                     Tất cả
                                 </div>
-                                <div class="item" id="status-pending">
+                                <div class="item pending" id="status-pending">
                                     Chờ xác nhận
                                 </div>
-                                <div class="item" id="status-1">
-                                    Đã xác nhận
+                                <div class="item processing" id="status-1">
+                                    Đang xử lý
                                 </div>
-                                <div class="item" id="status-2">
+                                <div class="item shiped" id="status-2">
                                     Đang vận chuyển
                                 </div>
-                                <div class="item" id="status-3">
+                                <div class="item delivered" id="status-3">
                                     Đã giao hàng
                                 </div>
-                                <div class="item" id="status-4">
+                                <div class="item cancel" id="status-4">
                                     Đã huỷ
                                 </div>
                             </div>
@@ -133,42 +133,52 @@
                                 </div>
                             </div>
                             <div class="view mt-2">
-                                @for ($i = 0; $i < 4; $i++)
+                                @foreach ($order as $i)
                                     <div class="item mb-2">
                                         <div class="item-header">
                                             <div class="left">
                                                 <div class="id-order">
-                                                    Đơn hàng : sấdfasd
+                                                    Đơn hàng : {{ $i->order_code ?? '' }}
                                                 </div>
                                                 <div class="order-date">
-                                                    Ngày đặt hàng :
+                                                    Ngày đặt hàng : {{ $i->created_at }}
                                                 </div>
                                             </div>
                                             <div class="right">
                                                 <div class="order-status cancel">
-                                                    Trạng thái
+                                                    @if ($i->status === 1)
+                                                        <span class="text-info badge bg-light font-15">Chờ xác nhận</span>
+                                                    @elseif ($i->status === 2)
+                                                        <span class="text-success badge bg-light font-15">Đãng xử lý</span>
+                                                    @elseif ($i->status === 3)
+                                                        <span class="text-primary badge bg-light font-15">Đang giao</span>
+                                                    @elseif ($i->status === 4)
+                                                        <span class="text-success badge bg-light font-15">Đã giao </span>
+                                                    @elseif ($i->status === 5)
+                                                        <span class="text-danger badge bg-light font-15">Đã huỷ</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="item-content mt-1">
                                             <div class="left">
                                                 <div class="thumbnail">
-                                                    <img src="{{ asset('asset/admin/products/1/thumbnail_683fabf1ae166.webp') }}"
+                                                    <img src="{{ asset('asset/admin/products') . '/' . $i->orderItem->first()->productVersions->product_id . '/' . $i->orderItem->first()->productVersions->products->thumbnail }}"
                                                         alt="">
                                                 </div>
                                                 <div class="product-info">
                                                     <div class="name">
-                                                        Macbook Pro M4
+                                                        {{ $i->orderItem->first()->productVersions->config_name }}
                                                     </div>
                                                     <div class="price">
-                                                        {{ formatPriceToVND(39900000) }}
+                                                        {{ formatPriceToVND($i->orderItem->first()->productVersions->final_price) }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="right">
                                                 <div class="order-total">
                                                     Tổng thanh toán : <span
-                                                        style="font-size: 16px;font-weight: 600;color: #25449a">{{ formatPriceToVND(39900000) }}</span>
+                                                        style="font-size: 16px;font-weight: 600;color: #25449a">{{ formatPriceToVND($i->total_price) }}</span>
                                                 </div>
                                                 <div class="order-detail">
                                                     Xem chi tiết >
@@ -176,7 +186,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endfor
+                                @endforeach
                             </div>
                         </div>
                         <div class="account-info d-none" id="profile-account-info">
@@ -414,6 +424,6 @@
         const RouteDeleteAddress = "{{ route('home.deleteAddress') }}";
         const RouteProfile = "{{ route('home.profile') }}";
         const RouteLogout = "{{ route('home.logout') }}";
-
+        const RouteGetDataOrderByStatus = "{{ route('home.getDataOrder') }}";
     </script>
 @endpush

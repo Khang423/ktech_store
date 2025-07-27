@@ -79,9 +79,9 @@ class HomeController extends Controller
     {
         $success = $this->authService->customerLogin($request);
         if (!$success) {
-            return $this->errorResponse('errors', 'messages.login_error');
+            return $this->errorResponse('messages.login_error');
         }
-        return $this->successResponse('success', 'messages.login_success');
+        return $this->successResponse('messages.login_success');
     }
 
     public function register()
@@ -95,9 +95,9 @@ class HomeController extends Controller
     {
         $success = $this->authService->customerRegister($request);
         if (!$success) {
-            return $this->errorResponse('error', 'messages.register_error');
+            return $this->errorResponse('messages.register_error');
         }
-        return $this->successResponse('success', 'messages.register_success');
+        return $this->successResponse('messages.register_success');
     }
 
     public function logout()
@@ -223,5 +223,12 @@ class HomeController extends Controller
             'product' => $product,
             'category' => $category
         ]);
+    }
+
+    public function thanks()
+    {
+        $order = session()->pull('order_info');
+
+        return view('outside.thanks', compact('order'));
     }
 }

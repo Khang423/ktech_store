@@ -56,6 +56,9 @@
     right: 6px;
     padding: 2px;
     padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .header .container .content-mobile .search-bar .circle-icon:hover {
     background-color: #18abef66;

@@ -63,26 +63,24 @@ class ProductVersion extends Model
     {
         return $this->hasOne(LaptopSpec::class, 'product_id', 'id');
     }
-
     public function cartItems()
     {
         return $this->hasMany(CartItem::class, 'product_id', 'id');
     }
-
     public function inventories()
     {
         return $this->hasMany(Inventories::class, 'product_version_id', 'id');
     }
-
     public function stockImportDetails()
     {
         return $this->hasMany(StockImportDetail::class, 'product_version_id', 'id');
     }
-
     public function stockExportDetails()
     {
         return $this->hasMany(StockExportDetail::class, 'product_version_id', 'id');
     }
-
-
+    public function orderItems()
+    {
+        return $this->hasOne(OrderItem::class, 'product_id', 'id');
+    }
 }

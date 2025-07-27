@@ -9,15 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class StaffSaleMiddleware
 {
     use Toast;
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::guard('members')->user();
-        $role = $user->memberRoles()->first()?->role_id;
 
-        if (in_array($role, [RoleEnum::ROOT_ADMIN, RoleEnum::SALE_STAFF, RoleEnum::WHEREHOUSE_STAFF])) {
+        if ($user && $user->memberRoles()->first()?->role_id === RoleEnum::SALE_STAFF) {
             return $next($request);
         }
 

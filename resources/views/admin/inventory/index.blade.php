@@ -23,11 +23,11 @@
                                 <i class="uil uil-history"></i>
                                 Lịch sử nhập kho
                             </a>
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.stockImports.create') }}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.stockExports.create') }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Xuất kho
                             </a>
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.stockImports.index') }}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.stockExports.index') }}">
                                 <i class="uil uil-history"></i>
                                 Lịch sử xuất kho
                             </a>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\RoleEnum;
 use App\Traits\Toast;
 use Closure;
 use Illuminate\Http\Request;
@@ -14,13 +13,9 @@ class AdminMiddleware
     use Toast;
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::guard('members')->user();
-        $role = $user->memberRoles()->first()?->role_id;
-
-        if (in_array($role, [RoleEnum::ROOT_ADMIN, RoleEnum::SALE_STAFF, RoleEnum::WHEREHOUSE_STAFF])) {
+        if(Auth::guard('members')->check()){
             return $next($request);
         }
-
         $this->errorToast('messages.auth_admin_error');
         return redirect()->route('admin.index');
     }

@@ -6,7 +6,7 @@ use BenSampo\Enum\Enum;
 
 final class RoleEnum extends Enum
 {
-    const ROOT_ADMIN = 0;
-    const SALE_STAFF = 1;
-    const WHEREHOUSE_STAFF = 2;
+    const ROOT_ADMIN = 1;
+    const SALE_STAFF = 2;
+    const WHEREHOUSE_STAFF = 3;
 }

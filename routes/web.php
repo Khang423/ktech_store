@@ -53,6 +53,8 @@ Route::group(
         Route::post('/auth-status', [AuthController::class, 'authCheck'])->name('authStatus');
 
         Route::post('/productFillter', [HomeController::class, 'productFillter'])->name('productFillter');
+
+        Route::get('/thanks', [HomeController::class, 'thanks'])->name('thanks');
     },
 );
 
@@ -75,6 +77,7 @@ Route::group(
         Route::post('customer/add-address', [CustomerController::class, 'addAddress'])->name('addAddress');
         // detele address
         Route::post('customer/delete-address', [CustomerController::class, 'deleteAddress'])->name('deleteAddress');
+        Route::post('customer/getDataOrder', [CustomerController::class, 'getDataOrder'])->name('getDataOrder');
     },
 );
 
@@ -107,6 +110,7 @@ Route::group(
         // route dashboard
         Route::group([], function () {
             Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+            Route::get('/getData', [AdminController::class, 'getData'])->name('getData');
         });
         // Member route
         Route::group(
@@ -406,7 +410,8 @@ Route::group(
             function () {
                 Route::get('/', [StockExportController::class, 'index'])->name('index');
                 Route::post('/getList', [StockExportController::class, 'getList'])->name('getList');
-                Route::get('/export-details', [StockExportController::class, 'exportDetail'])->name('exportDetail');
+                Route::get('/create', [StockExportController::class, 'create'])->name('create');
+                Route::post('/store', [StockExportController::class, 'store'])->name('store');
             },
         );
 

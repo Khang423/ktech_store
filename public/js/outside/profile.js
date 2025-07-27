@@ -33,6 +33,26 @@ $(document).ready(function () {
     $(".order-status .item").click(function () {
         $(".order-status .item").removeClass("active");
         $(this).addClass("active");
+
+        if ($(this).hasClass("pending")) {
+            const status = "pending";
+            getDataOrderByStatus(status);
+        } else if ($(this).hasClass("processing")) {
+            const status = "processing";
+            getDataOrderByStatus(status);
+        } else if ($(this).hasClass("shiped")) {
+            const status = "shiped";
+            getDataOrderByStatus(status);
+        } else if ($(this).hasClass("delivered")) {
+            const status = "delivered";
+            getDataOrderByStatus(status);
+        } else if ($(this).hasClass("cancel")) {
+            const status = "cancel";
+            getDataOrderByStatus(status);
+        } else if ($(this).hasClass("all")) {
+            const status = "all";
+            getDataOrderByStatus(status);
+        }
     });
     // open modal add address
     $(".btn-add-address").click(function () {
@@ -58,7 +78,7 @@ $(document).ready(function () {
         checkUrlProfile();
     });
 
-    $('.btn-logout').on('click', () => {
+    $(".btn-logout").on("click", () => {
         window.location.href = RouteLogout;
     });
 });
@@ -96,6 +116,7 @@ function deleteAddress(id) {
         },
     });
 }
+
 function openModal() {
     $(".modal-add-address").removeClass("d-none");
     $(".modal-add-address .modal-content").animate({ right: "0px" }, 200);
@@ -184,5 +205,112 @@ function submitOrder(formData) {
                 $(`.error-${field}`).text(messages[0]);
             });
         },
+    });
+}
+
+const getDataOrderByStatus = (status) => {
+    $.ajax({
+        url: RouteGetDataOrderByStatus,
+        type: "POST",
+        dataType: "json",
+        data: {
+            status: status,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            console.log(response);
+
+            const preview = $(".purchase-history").find(".view");
+            preview.empty();
+            const statusBadgeMap = {
+                1: '<span class="text-info badge bg-light font-15">Chờ xác nhận</span>',
+                2: '<span class="text-success badge bg-light font-15">Đang xử lý</span>',
+                3: '<span class="text-primary badge bg-light font-15">Đang giao</span>',
+                4: '<span class="text-success badge bg-light font-15">Đã giao</span>',
+                5: '<span class="text-danger badge bg-light font-15">Đã huỷ</span>',
+            };
+            response.data.forEach(function (order) {
+                const order_code = order.order_code;
+                const order_date = order.created_at;
+                const product_id =
+                    order.order_item[0].product_versions.product_id;
+                const thumbnail =
+                    order.order_item[0].product_versions.products.thumbnail;
+                const config_name =
+                    order.order_item[0].product_versions.config_name;
+                const total_price = order.total_price;
+                const product_price = order.order_item[0].unit_price;
+                const order_status = order.status;
+                const image_url = `/asset/admin/products/${product_id}/${thumbnail}`;
+                const statusBadge =
+                    statusBadgeMap[order_status] ||
+                    '<span class="text-secondary badge bg-light font-15">Không xác định</span>';
+
+                const html = `
+                            <div class="item mb-2">
+                                <div class="item-header">
+                                    <div class="left">
+                                        <div class="id-order">
+                                            Đơn hàng : ${order_code}
+                                        </div>
+                                        <div class="order-date">
+                                            Ngày đặt hàng : ${order_date}
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <div class="order-status cancel">
+                                            ${statusBadge}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-content mt-1">
+                                    <div class="left">
+                                        <div class="thumbnail">
+                                            <img src="${image_url}"
+                                                alt="">
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="name">
+                                                ${config_name}
+                                            </div>
+                                            <div class="price">
+                                                ${formatPriceToVND(
+                                                    product_price
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <div class="order-total">
+                                            Tổng thanh toán : <span
+                                                style="font-size: 16px;font-weight: 600;color: #25449a">${formatPriceToVND(
+                                                    total_price
+                                                )}</span>
+                                        </div>
+                                        <div class="order-detail">
+                                            Xem chi tiết >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                `;
+
+                preview.append(html);
+            });
+        },
+        error: function (data) {
+            $(".text-danger").text("");
+            const errors = data.responseJSON?.errors || {};
+            Object.entries(errors).forEach(([field, messages]) => {
+                $(`.error-${field}`).text(messages[0]);
+            });
+        },
+    });
+};
+
+function formatPriceToVND(price) {
+    return price.toLocaleString("vi-VN", {
+        style: "currency",
+        currency: "VND",
     });
 }

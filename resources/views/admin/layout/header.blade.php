@@ -59,6 +59,13 @@
                             Tài khoản của tôi
                         </span>
                     </a>
+                    <a class="dropdown-item">
+                        {{-- href="{{ route('admin.members.edit', Auth::user()) }}" --}}
+                        <i class="uil uil-padlock"></i>
+                        <span>
+                            Đổi mật khẩu
+                        </span>
+                    </a>
 
                     <a href="{{ route('admin.logout') }}">
                         <button type="submit" class="logout dropdown-item">

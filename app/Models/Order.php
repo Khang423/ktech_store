@@ -11,6 +11,7 @@ class Order extends Model
     use SoftDeletes;
     protected $fillable = [
         'customer_id',
+        'order_code',
         'city_id',
         'district_id',
         'ward_id',
@@ -28,6 +29,7 @@ class Order extends Model
         return [
             'id',
             'customer_id',
+            'order_code',
             'city_id',
             'district_id',
             'ward_id',
@@ -47,8 +49,13 @@ class Order extends Model
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y');
     }
+
     public function customers()
     {
         return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function orderItem() {
+        return $this->hasMany(OrderItem::class);
     }
 }
