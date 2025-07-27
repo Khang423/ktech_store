@@ -149,6 +149,9 @@
 }
 /* product-detail */
 @media (max-width: 480px) {
+    #section-laptop .card-product:hover {
+        transform: none;
+    }
     .section-product-info {
         flex-wrap: wrap;
     }
@@ -621,7 +624,7 @@
         width: 100%;
     }
     .section-profile .main .header-profile {
-        border-radius: 3px;
+        border-radius: 5px;
     }
     .section-profile .customer-info .avatar .avatar-circle {
         height: 55px;

@@ -15,4 +15,14 @@ class OrderItem extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function orders()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function productVersions()
+    {
+        return $this->belongsTo(ProductVersion::class, 'product_id', 'id');
+    }
 }

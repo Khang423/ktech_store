@@ -30,9 +30,9 @@ class AuthController extends Controller
         $success = $this->authService->login($request);
 
         if (!$success) {
-            return $this->errorResponse('error', 'messages.login_error');
+            return $this->errorResponse('messages.login_error');
         }
-        return $this->successResponse('success', 'messages.login_success');
+        return $this->successResponse('messages.login_success');
     }
 
     public function logout()

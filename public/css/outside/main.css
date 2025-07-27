@@ -1510,6 +1510,7 @@ body {
     border-radius: 15px;
     padding-top: 10px;
     border: 1px solid lightgray;
+    background-color: #fff;
 }
 .section-profile .sidebar .item {
     height: 50px;
@@ -1545,6 +1546,7 @@ body {
     border: 1px solid lightgray;
     border-radius: 15px;
     padding: 15px;
+    background-color: #fff;
 }
 .section-profile .dashboard .purchase-history {
     height: 45px;
@@ -1618,7 +1620,7 @@ body {
 }
 .section-profile .dashboard .purchase-history .view .item .item-header .left {
     height: 100%;
-    width: 50%;
+    width: 70%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -1626,7 +1628,7 @@ body {
 }
 .section-profile .dashboard .purchase-history .view .item .item-header .right {
     height: 100%;
-    width: 50%;
+    width: 30%;
 }
 
 .section-profile
@@ -1648,7 +1650,7 @@ body {
 }
 .section-profile .dashboard .purchase-history .view .item .item-content .left {
     height: 100%;
-    width: 50%;
+    width: 70%;
     display: flex;
     justify-content: start;
     align-self: center;
@@ -1733,7 +1735,7 @@ body {
 }
 .section-profile .dashboard .purchase-history .view .item .item-content .right {
     height: 100%;
-    width: 50%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: center;

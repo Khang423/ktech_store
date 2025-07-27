@@ -50,6 +50,11 @@ return [
             'provider' => 'members',
         ],
 
+        'staffSale' => [
+            'driver' => 'session',
+            'provider' => 'staffSale',
+        ],
+
         'customers' => [
             'driver' => 'session',
             'provider' => 'customers',
@@ -79,6 +84,10 @@ return [
         //     'model' => env('AUTH_MODEL', App\Models\User::class),
         // ],
         'members' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Member::class),
+        ],
+        'staffSale' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Member::class),
         ],

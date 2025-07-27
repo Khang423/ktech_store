@@ -74,9 +74,14 @@ class OrderService extends Controller
             $customer_id = Auth::guard('customers')->user()->id;
             $cart = Cart::where('customer_id', $customer_id)->first('id');
 
+            $prefix = 'KT';
+            $timestamp = now()->format('YmdHis'); // NămThángNgàyGiờPhútGiây
+            $code = $prefix . $timestamp;
             // Create order and assign address and customer info
+
             $order = Order::create([
                 'receiver_name'   => $request->name,
+                'order_code'      => $code,
                 'receiver_tel'    => $request->tel,
                 'receiver_email'  => $request->email_receiver,
                 'customer_id'     => $customer_id,
@@ -112,6 +117,8 @@ class OrderService extends Controller
             $order->update([
                 'total_price' => $total_price,
             ]);
+
+            session(['order_info' => $order]);
 
             DB::commit();
             return true;

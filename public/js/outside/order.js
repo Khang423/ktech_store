@@ -70,11 +70,19 @@ function renderSelectedProducts(products) {
     let html = "";
     let totalPrice = 0;
 
-    products.forEach(({ product_id,product_version_id, name, price, quantity, thumbnail }) => {
-        const thumbnailPath = `/asset/admin/products/${product_id}/${thumbnail}`;
-        totalPrice += price * quantity;
+    products.forEach(
+        ({
+            product_id,
+            product_version_id,
+            name,
+            price,
+            quantity,
+            thumbnail,
+        }) => {
+            const thumbnailPath = `/asset/admin/products/${product_id}/${thumbnail}`;
+            totalPrice += price * quantity;
 
-        html += `
+            html += `
             <div class="item">
                 <div class="thumbnail">
                     <img src="${thumbnailPath}" alt="${name}">
@@ -86,7 +94,8 @@ function renderSelectedProducts(products) {
                 <div class="product-quantity">Số lượng: ${quantity}</div>
             </div>
         `;
-    });
+        }
+    );
 
     $(".product-list").html(html);
     $(".total-price")
@@ -186,8 +195,14 @@ function submitOrder(formData) {
         processData: false,
         data: formData,
         success: function () {
-            toast("Đặt hàng thành công", "success");
-            window.location.href = "/cart";
+            const formObj = {};
+            formData.forEach((value, key) => {
+                formObj[key] = value;
+            });
+            // Lưu vào localStorage
+            localStorage.setItem("orderData", JSON.stringify(formObj));
+            // Chuyển trang
+            window.location.href = "/thanks";
         },
         error: function (data) {
             $(".text-danger").text("");

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inventories;
+use App\Models\StockExport;
 use App\Models\StockImport;
 use App\Models\StockImportDetail;
 use Illuminate\Database\Eloquent\Model;
@@ -15,17 +16,16 @@ class StockExportService extends Controller
 {
     private Model $model;
 
-    public function __construct(StockImport $inventory)
+    public function __construct(StockExport $stock_export)
     {
-        $this->model = $inventory;
+        $this->model = $stock_export;
     }
 
 
     public function getList()
     {
         return DataTables::of(
-            StockImport::query()->with('member')
-                ->orderBy('created_at', 'desc')
+            $this->model::orderBy('created_at', 'desc')
                 ->get()
         )
             ->editColumn('index', function ($object) {

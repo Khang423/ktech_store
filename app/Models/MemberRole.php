@@ -33,4 +33,8 @@ class MemberRole extends Model
     {
         return \Carbon\Carbon::parse($value)->format('d-m-y H:i:s');
     }
+
+    public function members(){
+        return $this->belongsTo(Role::class, 'member_id');
+    }
 }

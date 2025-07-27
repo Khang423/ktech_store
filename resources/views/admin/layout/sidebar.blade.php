@@ -1,3 +1,6 @@
+@php
+    use App\Enums\RoleEnum;
+@endphp
 <div class="leftside-menu">
     <a href="{{ route('admin.dashboard') }}" class="logo logo-light ">
         <span class="logo-lg mt-3">
@@ -73,7 +76,7 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="{{ route('admin.orders.index')}}" class="side-nav-link">
+                <a href="{{ route('admin.orders.index') }}" class="side-nav-link">
                     <i class=" uil-bill"></i>
                     @if (checkOrder() >= 1)
                         <span class="badge bg-danger float-end">{{ checkOrder() }}</span>
@@ -107,25 +110,27 @@
                     </span>
                 </a>
             </li>
-            <li class="side-nav-title">
-                Hệ thống
-            </li>
-            <li class="side-nav-item">
-                <a href="{{ route('admin.members.index') }}" class="side-nav-link">
-                    <i class="uil uil-users-alt"></i>
-                    <span>
-                        Tài khoản
-                    </span>
-                </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="{{ route('admin.roles.index') }}" class="side-nav-link">
-                    <i class="uil uil-shield"></i>
-                    <span>
-                        Vai trò
-                    </span>
-                </a>
-            </li>
+            @if (Auth::guard('members')->user()->memberRoles()->first()->role_id === RoleEnum::ROOT_ADMIN)
+                <li class="side-nav-title">
+                    Hệ thống
+                </li>
+                <li class="side-nav-item">
+                    <a href="{{ route('admin.members.index') }}" class="side-nav-link">
+                        <i class="uil uil-users-alt"></i>
+                        <span>
+                            Tài khoản
+                        </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="{{ route('admin.roles.index') }}" class="side-nav-link">
+                        <i class="uil uil-shield"></i>
+                        <span>
+                            Vai trò
+                        </span>
+                    </a>
+                </li>
+            @endif
             <li class="side-nav-title">
             </li>
             <li class="side-nav-title">
