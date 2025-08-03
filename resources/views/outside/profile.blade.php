@@ -412,7 +412,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>2
     </section>
 @endsection
 @push('js')

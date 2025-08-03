@@ -82,7 +82,7 @@
                 </div>
                 <div class="product-buy mt-2">
                     @if (Auth::guard('customers')->check())
-                        <div class="btn-buy">
+                        <div class="btn-buy" data-product-id={{ $productVersion->id }}>
                             <span>
                                 MUA NGAY
                             </span>
@@ -378,7 +378,7 @@
             </div>
             <div class="product-info-detail">
                 <div class="info-detail-header">
-                    <div class="title text-dark">
+                    <div class="title ">
                         THÔNG SỐ NỔI BẬT
                     </div>
                     <div class="btn-product-info-detail-close">

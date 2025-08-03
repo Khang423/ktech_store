@@ -1,276 +1,367 @@
 <!DOCTYPE html>
 <html lang="vi">
 
-
 <head>
-    <link rel="shortcut icon" href="https://ktech.id.vn/asset/admin/systemImage/ktech-dark.svg">
     <meta charset="UTF-8">
-    <title>Hóa đơn {{ $data->ref_code }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Hóa Đơn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @page {
-            size: A4;
-            margin: 10mm;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         body {
-            font-family: DejaVu Sans, sans-serif;
-            font-size: 10pt;
-            margin: 0;
-            padding: 0;
-            background: #fff;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
         }
 
         .invoice-container {
-            width: 100%;
-            max-width: 480pt;
-            margin: 0 auto;
-            padding: 0;
-            box-sizing: border-box;
+            background: white;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.5rem;
+            overflow: hidden;
         }
 
-        .company-header {
-            border-bottom: 1pt solid #000;
-            padding: 8pt 0;
+        .invoice-header {
+            background: white;
+            border-bottom: 2px solid #dee2e6;
         }
 
-        .company-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .logo-cell {
-            width: 70pt;
-            height: 50pt;
-            text-align: center;
-            vertical-align: middle;
-            background-color: #000;
-            font-weight: bold;
-            color: #2d5a2d;
-            font-size: 9pt;
-        }
-
-        img {
-            display: block;
-            margin: 0 auto;
-            /* Căn giữa */
-            max-width: 100%;
-            max-height: 100%;
+        .logo-placeholder {
+            width: 100px;
             height: 100px;
-            object-fit: contain;
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 0.875rem;
         }
 
-        .company-info {
-            padding-left: 8pt;
-            font-size: 9pt;
-        }
-
-        .invoice-title {
-            font-size: 12pt;
-            font-weight: bold;
-            margin: 12pt 0 5pt 0;
-        }
-
-        .invoice-details,
-        .status-paid,
-        .customer-info,
-        .bank-info {
-            font-size: 9pt;
-            margin-bottom: 8pt;
-        }
-
-        .status-paid {
-            color: #dc3545;
-            font-weight: bold;
-        }
-
-        .customer-info {
-            background: #f8f9fa;
-            border: 1pt solid #ddd;
-            padding: 8pt;
+        .info-box {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
         }
 
         .invoice-table {
-            width: 100%;
-            font-size: 12px;
             border-collapse: collapse;
-            margin-top: 8pt;
-            table-layout: fixed;
         }
 
         .invoice-table th,
         .invoice-table td {
-            border: 1pt solid #000;
-            padding: 3pt;
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+        }
+
+        .invoice-table thead th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .invoice-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .totals-box {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .payment-info {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .invoice-footer {
+            background-color: #f8f9fa;
             text-align: center;
-            box-sizing: border-box;
+            padding: 1.5rem;
         }
 
-        .text-left {
-            text-align: left !important;
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+            }
+
+            .invoice-container {
+                box-shadow: none !important;
+            }
         }
 
-        .text-right {
-            text-align: right !important;
+        .btn-action {
+            margin: 0 0.25rem;
         }
 
-        .summary-table {
-            width: 100%;
-            font-size: 9pt;
-            border-collapse: collapse;
-            margin-top: 12pt;
-        }
-
-        .summary-table th,
-        .summary-table td {
-            border: 1pt solid #000;
-            padding: 4pt;
-        }
-
-        .total-amount {
-            font-weight: bold;
-            font-size: 10pt;
-        }
-
-        .qr-table {
-            width: 100%;
-            margin-top: 18pt;
-            border-collapse: collapse;
-        }
-
-        .qr-code {
-            width: 90pt;
-            height: 90pt;
-            border: 1pt solid #ccc;
-            background: #f0f0f0;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 8pt;
-        }
-
-        .bank-info {
-            padding-left: 8pt;
-            font-size: 9pt;
-        }
-
-        table,
-        tr,
-        td,
-        th {
-            page-break-inside: avoid;
+        [contenteditable="true"] {
+            border: 1px dashed #007bff !important;
+            border-radius: 0.25rem;
+            padding: 0.5rem !important;
+            background-color: #fff3cd;
         }
     </style>
-
 </head>
 
 <body>
-    <div class="invoice-container">
-        <div class="company-header">
-            <table class="company-table">
-                <tr>
-                    <td class="logo-cell">
-                        <img src="https://ktech.id.vn/asset/admin/systemImage/KtechLogo.png" alt="">
-                    </td>
-                    <td class="company-info">
-                        <strong>K-Tech Store</strong><br>
-                        Mã số thuế: ##########<br>
-                        Địa chỉ: #########################<br>
-                        Điện thoại: 0799599040<br>
-                        STK: 0799599040 tại Mb Bank
-                    </td>
-                </tr>
-            </table>
+    <div class="container my-5">
+        <div class="invoice-container">
+            <!-- Header -->
+            <div class="invoice-header p-4">
+                <div class="row align-items-start">
+                    <div class="col-md-8">
+                        <h1 class="display-4 fw-bold text-dark mb-3">HÓA ĐƠN</h1>
+                        <p class="text-muted mb-1">Số hóa đơn: <strong>#INV-2024-001</strong></p>
+                        <p class="text-muted">Ngày: <span id="currentDate"></span></p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="logo-placeholder ms-auto">
+                            LOGO
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company & Customer Info -->
+            <div class="p-4">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h5 class="fw-semibold text-dark mb-3">Từ:</h5>
+                        <div class="info-box">
+                            <p class="fw-medium text-dark mb-2">Công ty ABC</p>
+                            <p class="text-muted mb-1">123 Đường Nguyễn Văn A</p>
+                            <p class="text-muted mb-1">Quận 1, TP.HCM</p>
+                            <p class="text-muted mb-1">Điện thoại: 0123 456 789</p>
+                            <p class="text-muted mb-0">Email: info@congtyabc.com</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h5 class="fw-semibold text-dark mb-3">Đến:</h5>
+                        <div class="info-box">
+                            <p class="fw-medium text-dark mb-2">Khách hàng XYZ</p>
+                            <p class="text-muted mb-1">456 Đường Lê Văn B</p>
+                            <p class="text-muted mb-1">Quận 3, TP.HCM</p>
+                            <p class="text-muted mb-1">Điện thoại: 0987 654 321</p>
+                            <p class="text-muted mb-0">Email: khachhang@email.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invoice Items -->
+            <div class="px-4">
+                <div class="table-responsive">
+                    <table class="table invoice-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">STT</th>
+                                <th style="width: 40%;">Mô tả</th>
+                                <th style="width: 12%;" class="text-center">Số lượng</th>
+                                <th style="width: 20%;" class="text-end">Đơn giá</th>
+                                <th style="width: 20%;" class="text-end">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoiceItems">
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Dịch vụ tư vấn</td>
+                                <td class="text-center">1</td>
+                                <td class="text-end">5,000,000 ₫</td>
+                                <td class="text-end fw-medium">5,000,000 ₫</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td>Thiết kế website</td>
+                                <td class="text-center">1</td>
+                                <td class="text-end">10,000,000 ₫</td>
+                                <td class="text-end fw-medium">10,000,000 ₫</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">3</td>
+                                <td>Bảo trì hệ thống</td>
+                                <td class="text-center">12</td>
+                                <td class="text-end">500,000 ₫</td>
+                                <td class="text-end fw-medium">6,000,000 ₫</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Totals -->
+            <div class="p-4">
+                <div class="row justify-content-end">
+                    <div class="col-md-6">
+                        <div class="totals-box">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted">Tạm tính:</span>
+                                <span class="fw-medium" id="subtotal">21,000,000 ₫</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted">VAT (10%):</span>
+                                <span class="fw-medium" id="tax">2,100,000 ₫</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 fw-semibold text-dark">Tổng cộng:</span>
+                                <span class="h4 fw-bold text-dark" id="total">23,100,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Info -->
+            <div class="px-4 pb-4">
+                <div class="payment-info">
+                    <h5 class="fw-semibold text-dark mb-3">Thông tin thanh toán</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="text-muted mb-2"><strong>Ngân hàng:</strong> Vietcombank</p>
+                            <p class="text-muted mb-2"><strong>Số tài khoản:</strong> 1234567890</p>
+                            <p class="text-muted mb-0"><strong>Chủ tài khoản:</strong> Công ty ABC</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-muted mb-2"><strong>Hạn thanh toán:</strong> 30 ngày</p>
+                            <p class="text-muted mb-0"><strong>Phương thức:</strong> Chuyển khoản</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="invoice-footer">
+                <p class="text-muted mb-2">Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!</p>
+                <p class="small text-muted">Mọi thắc mắc xin liên hệ: info@congtyabc.com | 0123 456 789</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="no-print p-4 bg-white border-top text-center">
+                <button onclick="window.print()" class="btn btn-primary btn-action">
+                    <i class="fas fa-print me-2"></i>In hóa đơn
+                </button>
+                <button onclick="downloadPDF()" class="btn btn-success btn-action">
+                    <i class="fas fa-file-pdf me-2"></i>Tải PDF
+                </button>
+                <button onclick="editInvoice()" class="btn btn-secondary btn-action" id="editBtn">
+                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                </button>
+            </div>
         </div>
-
-        <div class="invoice-title">HÓA ĐƠN {{ $data->ref_code ?? '' }}</div>
-
-        <div class="invoice-details">
-            Hóa đơn ngày: {{ $data->created_at }}<br>
-            Ngày đến hạn: {{ $data->updated_at }}
-        </div>
-
-        <div class="status-paid">
-            Trạng thái: Chưa thanh toán | Số tiền: {{ formatPriceToVND($data->total_amount) }}
-        </div>
-
-        <div class="customer-info">
-            Họ tên: Võ Vĩ Khang<br>
-            Địa chỉ: Ấp 7 Chợ, Đông Thái, An Biên, Kiên Giang<br>
-            Hình thức: QR/PAY/ATM/Credit
-        </div>
-
-        <table class="invoice-table">
-            <thead>
-                <tr>
-                    <th style="width:40px">STT</th>
-                    <th>Sản phẩm</th>
-                    <th>ĐVT</th>
-                    <th>Số lượng</th>
-                    <th>Đơn giá</th>
-                    <th>Tổng tiền</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $index = 1;
-                    $sum = 0;
-                @endphp
-                @foreach ($data->stockImportDetails as $i)
-                    <tr>
-                        <td>{{ $index++ }}</td>
-                        <td class="text-left">{{ $i->productVersion->name }}</td>
-                        <td>Chiếc</td>
-                        <td>{{ $i->quantity }}</td>
-                        <td class="text-center">{{ formatPriceToVND($i->price) }}</td>
-                        <td class="text-right">{{ formatPriceToVND($i->price * $i->quantity) }}</td>
-                    </tr>
-                    {{ $sum += $i->price * $i->quantity }}
-                @endforeach
-                <tr>
-                    <td colspan="5" class="text-right">Tạm tính</td>
-                    <td colspan="1" class="text-right">{{ formatPriceToVND($sum) }}</td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="text-right">Thuế VAT</td>
-                    <td colspan="1" class="text-right">0 đ</td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="text-right total-amount">Tổng</td>
-                    <td colspan="1" class="text-right total-amount">{{ formatPriceToVND($sum) }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <table class="summary-table">
-            <tr>
-                <th>Tổng hợp</th>
-                <th>Trước thuế</th>
-                <th>VAT</th>
-                <th>Tổng thanh toán</th>
-            </tr>
-            <tr>
-                <td>Không chịu thuế</td>
-                <td class="text-right">{{ formatPriceToVND($sum) }}</td>
-                <td class="text-right">0 đ</td>
-                <td class="text-right">{{ formatPriceToVND($sum) }}</td>
-            </tr>
-        </table>
-
-        <table class="qr-table">
-            <tr>
-                <td class="qr-code">
-                    <img src="" alt="">
-                </td>
-                <td class="bank-info">
-                    <strong>Thông tin chuyển khoản</strong><br>
-                    Ngân hàng: MBBank<br>
-                    STK: 0799599040<br>
-                    Chủ TK: Võ Vĩ Khang<br>
-                    Nội dung: {{ $data->ref_code}}<br>
-                    Số tiền: {{ formatPriceToVND($sum) }}
-                </td>
-            </tr>
-        </table>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('vi-VN');
+
+        // Calculate totals
+        function calculateTotals() {
+            const rows = document.querySelectorAll('#invoiceItems tr');
+            let subtotal = 0;
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length > 0) {
+                    const amount = cells[4].textContent.replace(/[₫,\s]/g, '');
+                    subtotal += parseInt(amount) || 0;
+                }
+            });
+
+            const tax = subtotal * 0.1;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = subtotal.toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('tax').textContent = tax.toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('total').textContent = total.toLocaleString('vi-VN') + ' ₫';
+        }
+
+        // Download PDF function
+        function downloadPDF() {
+            alert('Chức năng tải PDF sẽ được tích hợp với thư viện PDF generator trong phiên bản thực tế.');
+        }
+
+        // Edit invoice function
+        function editInvoice() {
+            const editBtn = document.getElementById('editBtn');
+            const isEditing = document.body.classList.contains('editing');
+
+            if (!isEditing) {
+                // Enable editing mode
+                document.body.classList.add('editing');
+
+                // Make info boxes editable
+                const editableElements = document.querySelectorAll('.info-box p');
+                editableElements.forEach(el => {
+                    if (el.textContent.trim()) {
+                        el.contentEditable = true;
+                    }
+                });
+
+                // Change button
+                editBtn.innerHTML = '<i class="fas fa-save me-2"></i>Lưu';
+                editBtn.className = 'btn btn-warning btn-action';
+            } else {
+                // Save and exit editing mode
+                document.body.classList.remove('editing');
+
+                const editableElements = document.querySelectorAll('[contenteditable="true"]');
+                editableElements.forEach(el => {
+                    el.contentEditable = false;
+                });
+
+                // Change button back
+                editBtn.innerHTML = '<i class="fas fa-edit me-2"></i>Chỉnh sửa';
+                editBtn.className = 'btn btn-secondary btn-action';
+
+                // Recalculate totals
+                calculateTotals();
+            }
+        }
+
+        // Initialize
+        calculateTotals();
+    </script>
+    <script>
+        (function() {
+            function c() {
+                var b = a.contentDocument || a.contentWindow.document;
+                if (b) {
+                    var d = b.createElement('script');
+                    d.innerHTML =
+                        "window.__CF$cv$params={r:'9679d260363709c0',t:'MTc1MzkzMDU3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d)
+                }
+            }
+            if (document.body) {
+                var a = document.createElement('iframe');
+                a.height = 1;
+                a.width = 1;
+                a.style.position = 'absolute';
+                a.style.top = 0;
+                a.style.left = 0;
+                a.style.border = 'none';
+                a.style.visibility = 'hidden';
+                document.body.appendChild(a);
+                if ('loading' !== document.readyState) c();
+                else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+                else {
+                    var e = document.onreadystatechange || function() {};
+                    document.onreadystatechange = function(b) {
+                        e(b);
+                        'loading' !== document.readyState && (document.onreadystatechange = e, c())
+                    }
+                }
+            }
+        })();
+    </script>
 </body>
 
 </html>

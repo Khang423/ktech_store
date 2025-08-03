@@ -33,7 +33,7 @@ class CustomerController extends Controller
         $customer = Customer::where('id', $customer_id)->first(['id', 'tel', 'email', 'birthday', 'name']);
         $order = Order::with('orderItem.productVersions.products')->where('customer_id', $customer_id)->get();
         $orde_count = Order::where('customer_id', $customer_id)->count();
-        $total_price = Order::where('customer_id', $customer_id)->where('status',OrderStatusEnum::DELIVERED)->sum('total_price');
+        $total_price = Order::where('customer_id', $customer_id)->where('status', OrderStatusEnum::DELIVERED)->sum('total_price');
         return view('outside.profile', [
             'title' => 'Ktech - Profile',
             'city' => $city,
@@ -78,6 +78,38 @@ class CustomerController extends Controller
     }
 
     public function getDataOrder(Request $request)
+    {
+        $statusMap = [
+            'all' => 'all',
+            'pending'   => OrderStatusEnum::PENDING,
+            'processing' => OrderStatusEnum::PROCCESSING,
+            'shiped'   => OrderStatusEnum::SHIPED,
+            'delivered' => OrderStatusEnum::DELIVERED,
+            'cancel'    => OrderStatusEnum::CANCEL,
+        ];
+
+        $statusKey = $request->status;
+        $status = $statusMap[$statusKey] ?? 0;
+
+        $customerId = Auth::guard('customers')->id();
+
+        if ($status === 'all') {
+            $result = Order::with('orderItem.productVersions.products')
+                ->where('customer_id', $customerId)
+                ->get();
+        } else {
+            $result = Order::with('orderItem.productVersions.products')
+                ->where('status', $status)
+                ->where('customer_id', $customerId)
+                ->get();
+        }
+
+        return response()->json([
+            'data' => $result
+        ]);
+    }
+
+    public function getDataOrderItem(Request $request)
     {
         $statusMap = [
             'all' => 'all',

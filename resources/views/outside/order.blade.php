@@ -56,7 +56,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Họ tên</label>
+                                <label for="name" class="form-label">Họ tên người nhận</label>
                                 <input type="text" class="name form-control" id="name" name="name"
                                     value="{{ $customer->name }}">
                                 <div class="text-danger mt-1 error-name"></div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="tel" class="form-label">SĐT</label>
+                                <label for="tel" class="form-label">SĐT người nhận </label>
                                 <input type="text" class="tel form-control" id="tel" name="tel"
                                     value="{{ $customer->tel }}">
                                 <div class="text-danger mt-1 error-tel"></div>
@@ -134,7 +134,7 @@
                     Thanh toán khi nhận hàng
                 </div>
                 <div class="other-option">
-                    <span>thay đổi</span><i class="uil uil-angle-right fs-2"></i>
+                    <span>Thay đổi</span><i class="uil uil-angle-right fs-2"></i>
                 </div>
             </div>
             <div class="overlay">

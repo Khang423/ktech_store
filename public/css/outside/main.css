@@ -262,6 +262,7 @@ body {
     display: flex;
     justify-content: center; /* Căn giữa ngang */
     align-items: center;
+    border-radius: 10px;
 }
 .section-product-info .product-image #product-image-carousel img {
     width: 70%;
@@ -276,6 +277,7 @@ body {
     padding: 5px;
     background-color: #fff;
     border: 1px solid lightgray;
+    border-radius: 5px;
 }
 
 /* product info */
@@ -301,7 +303,7 @@ body {
     border: 1px solid lightgray;
     padding: 15px;
     padding-bottom: 5px;
-    border-radius: 3px;
+    border-radius: 5px;
     position: relative;
     background-color: #fff;
 }
@@ -401,6 +403,7 @@ body {
     margin-top: 20px;
     background-color: #fff;
     border: 1px solid lightgray;
+    border-radius: 5px;
 }
 .section-product-info .product-detail-info .product-price .btn-price {
     background-color: #fff;
@@ -500,6 +503,7 @@ body {
     padding: 20px 30px;
     overflow-y: hidden;
     position: relative;
+    border-radius: 5px;
 }
 .section-description .content .product-description.active {
     height: auto;
@@ -533,6 +537,7 @@ body {
     display: flex;
     color: #3d3d3d;
     justify-content: start;
+    margin-bottom: 10px;
 }
 .section-description .content .product-info {
     height: auto;
@@ -541,6 +546,7 @@ body {
     border-radius: 0px;
     border: 1px solid lightgray;
     padding: 15px;
+    border-radius: 5px;
 }
 
 .section-description .content .product-info .title {
@@ -554,8 +560,9 @@ body {
 .section-description .content .product-info .content {
     height: auto;
     width: 100%;
-    border: 2px solid lightgray;
+    border: 1px solid lightgray;
     padding: 0px 10px;
+    border-radius: 5px;
 }
 .section-description .content .product-info .content .item {
     height: auto;
@@ -634,15 +641,17 @@ body {
 .section-description .content .product-info-detail .info-detail-header {
     height: 3.5rem;
     padding: 15px;
-    border-bottom: 2px solid lightgray;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #25449a;
+    color: #fff;
 }
 
 .section-description .content .product-info-detail .title {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
-    position: absolute;
-    top: 10px;
-    left: 15px;
+    color: #fff;
 }
 .section-description .content .product-info-detail .info-detail-main {
     height: 100%;
@@ -986,10 +995,9 @@ body {
     width: 100%;
     display: flex;
     gap: 20px;
-
     color: #919eab;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 20px;
 }
 .section-order .main .page-title .info {
     height: 100%;
@@ -999,6 +1007,8 @@ body {
     color: #2a52be;
     border-bottom: 3px solid #25449a;
     font-weight: 600;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 .section-order .main .page-title .payment {
     height: 100%;
@@ -1014,7 +1024,7 @@ body {
     margin: 15px 0px;
     background-color: #fff;
     border: 1px solid lightgray;
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 0px 15px;
 }
 .section-order .main .product-list .item {
@@ -1065,7 +1075,7 @@ body {
     border: 1px solid lightgray;
     background-color: #fff;
     padding: 15px;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 .section-order .main .customer-info .title-name-and-tel {
     height: 40%;
@@ -1105,25 +1115,23 @@ body {
     height: auto;
     width: 100%;
     border: 1px solid lightgray;
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 15px;
+    background-color: #fff;
 }
 .section-order .main .address-receiver select {
     height: 45px;
 }
 
 .section-order .main .address-receiver input {
-    border: none;
-    border-bottom: 1px solid lightgray;
     outline: none;
-    border-radius: 0px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    color: #000;
 }
 .section-order .main .address-receiver label {
     font-size: 12px;
     font-weight: 600;
-}
-.section-order .main .address-receiver input:focus {
-    border-bottom: 1px solid #25449a;
 }
 .section-order .main .bottom-bar {
     height: 80px;
@@ -1172,10 +1180,11 @@ body {
 .section-order .method-payment {
     height: 80px;
     width: 100%;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 1px solid lightgray;
     cursor: pointer;
     display: flex;
+    background-color: #fff;
     flex-direction: row;
 }
 .section-order .method-payment .method-icon {
@@ -1193,7 +1202,7 @@ body {
 }
 .section-order .method-payment .method-name {
     height: 100%;
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -1203,12 +1212,14 @@ body {
 }
 .section-order .method-payment .other-option {
     height: 100%;
-    width: 30%;
+    width: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 14px;
     color: #25449a;
+}
+.section-order .method-payment .other-option:hover {
     text-decoration: underline;
 }
 /* modal method payment */
@@ -1307,8 +1318,9 @@ body {
     display: flex;
     flex-direction: row;
     padding: 10px;
+    background-color: #fff;
     padding-left: 5px;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 .section-order .payment-content .thumbnail {
     height: 100%;
@@ -1324,7 +1336,7 @@ body {
 }
 
 .section-order .payment-content .title {
-    width: 80%;
+    width: 75%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -1334,7 +1346,7 @@ body {
 }
 
 .section-order .payment-content .fee-ship {
-    width: 20%;
+    width: 25%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -2328,6 +2340,7 @@ body {
     #btn-add-address:hover {
     background-color: #25449adc;
 }
+
 .section-search {
     height: auto;
     width: 100%;
