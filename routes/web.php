@@ -77,10 +77,13 @@ Route::group(
         // profile
         Route::get('customer/profile', [CustomerController::class, 'profile'])->name('profile');
         Route::post('customer/add-address', [CustomerController::class, 'addAddress'])->name('addAddress');
-        // detele address
+
         Route::post('customer/delete-address', [CustomerController::class, 'deleteAddress'])->name('deleteAddress');
-        Route::post('customer/getDataOrder', [CustomerController::class, 'getDataOrder'])->name('getDataOrder');
-        Route::post('customer/getDataOrderItem', [CustomerController::class, 'getDataOrderItem'])->name('getDataOrderItem');
+        Route::post('customer/get-data-order', [CustomerController::class, 'getDataOrder'])->name('getDataOrder');
+        Route::post('customer/get-data-order-item', [CustomerController::class, 'getDataOrderItem'])->name('getDataOrderItem');
+
+        Route::post('customer/profile/info-update', [CustomerController::class, 'infoUpdate'])->name('infoUpdate');
+        Route::post('customer/profile/address-update', [CustomerController::class, 'addressUpdate'])->name('addressUpdate');
     },
 );
 

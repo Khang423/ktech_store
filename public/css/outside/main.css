@@ -1505,7 +1505,7 @@ body {
     color: gray;
 }
 .section-profile .dashboard {
-    height: 790px;
+    height: auto;
     width: 100%;
 }
 .section-profile .dashboard .main {
@@ -1561,7 +1561,7 @@ body {
     background-color: #fff;
 }
 .section-profile .dashboard .purchase-history {
-    height: 45px;
+    height: auto;
     width: 100%;
 }
 .section-profile .dashboard .purchase-history .order-status {
@@ -1770,7 +1770,7 @@ body {
 }
 
 .section-profile .dashboard .content .account-info .personal-info {
-    height: 220px;
+    height: 360px;
     width: 100%;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -1802,10 +1802,8 @@ body {
     cursor: pointer;
 }
 .section-profile #profile-account-info .personal-info .info-content {
-    height: 150px;
+    height: auto;
     width: 100%;
-    display: flex;
-    gap: 50px;
 }
 
 .section-profile #profile-account-info .personal-info .info-content .left {
@@ -1928,7 +1926,7 @@ body {
 }
 /* address info */
 .section-profile .dashboard .content .account-info .address-info {
-    height: 320px;
+    height: 450px;
     width: 100%;
     border: 1px solid lightgray;
     border-radius: 10px;

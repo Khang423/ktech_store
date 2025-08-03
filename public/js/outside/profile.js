@@ -63,10 +63,16 @@ $(document).ready(function () {
         closeModal();
     });
 
-    $("#btn-add-address").click(function () {
-        const form = $("#form-store")[0];
+    $(".btn-info-update").click(function () {
+        const form = $("#form-info")[0];
         const formData = new FormData(form);
-        submitOrder(formData);
+        InfoUpdate(formData);
+    });
+
+    $("#btn-address-update").click(function () {
+        const form = $("#form-address")[0];
+        const formData = new FormData(form);
+        AddressUpdate(formData);
     });
 
     $(".btn-delete").click(function () {
@@ -87,6 +93,25 @@ $(document).ready(function () {
     });
     $(".btn-action-logout").on("click", () => {
         $(".modal-logout").removeClass("d-none");
+    });
+
+    //  address
+    $(".select2").select2();
+
+    // Khi thay đổi tỉnh/thành phố, load danh sách quận/huyện
+    $(".city").change(function () {
+        const cityId = $(this).val();
+        if (cityId !== null && cityId !== "") {
+            loadDistrictsByCity(cityId);
+        }
+    });
+
+    // Khi thay đổi quận/huyện, load danh sách phường/xã
+    $(".district").change(function () {
+        const districtId = $(this).val();
+        if (districtId !== null && districtId !== "") {
+            loadWardsByDistrict(districtId);
+        }
     });
 });
 
@@ -321,3 +346,110 @@ function formatPriceToVND(price) {
         currency: "VND",
     });
 }
+
+// Load danh sách quận/huyện theo tỉnh/thành
+function loadDistrictsByCity(cityId) {
+    const $district = $(".district").empty();
+    const $ward = $(".ward").empty();
+
+    addDefaultOption($ward, "--- Xã/Phường ---");
+    addDefaultOption($district, "--- Quận/Huyện ---");
+
+    $.ajax({
+        url: RouteGetDistrict,
+        type: "POST",
+        dataType: "json",
+        data: {
+            city_id: cityId,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (data) {
+            data.forEach((item) => {
+                $district.append(new Option(item.name, item.id));
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Lỗi khi load quận/huyện:", error);
+        },
+    });
+}
+
+// Load danh sách xã/phường theo quận/huyện
+function loadWardsByDistrict(districtId) {
+    const $ward = $(".ward").empty();
+    addDefaultOption($ward, "--- Xã/Phường ---");
+
+    $.ajax({
+        url: RouteGetWard,
+        type: "POST",
+        dataType: "json",
+        data: {
+            district_id: districtId,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (data) {
+            data.forEach((item) => {
+                $ward.append(new Option(item.name, item.id));
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Lỗi khi load xã/phường:", error);
+        },
+    });
+}
+
+// Thêm tuỳ chọn mặc định cho select-box
+function addDefaultOption($select, text) {
+    $select.append(
+        $("<option>", {
+            text: text,
+            disabled: true,
+            selected: true,
+        })
+    );
+}
+
+const AddressUpdate = (formData) => {
+    $.ajax({
+        url: RouteAddressUpdate,
+        type: "POST",
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function () {
+            toast("Cập nhật thành công", "success");
+            location.reload();
+        },
+        error: function (data) {
+            $(".text-danger").text(""); // Clear all old error texts
+
+            const errors = data.responseJSON?.errors || {};
+            Object.entries(errors).forEach(([field, messages]) => {
+                $(`.error-${field}`).text(messages[0]);
+            });
+        },
+    });
+};
+const InfoUpdate = (formData) => {
+    $.ajax({
+        url: RouteInfoUpdate,
+        type: "POST",
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function () {
+            toast("Cập nhật thành công", "success");
+            location.reload();
+        },
+        error: function (data) {
+            $(".text-danger").text(""); // Clear all old error texts
+
+            const errors = data.responseJSON?.errors || {};
+            Object.entries(errors).forEach(([field, messages]) => {
+                $(`.error-${field}`).text(messages[0]);
+            });
+        },
+    });
+};
