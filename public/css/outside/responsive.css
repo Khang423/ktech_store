@@ -524,6 +524,7 @@
         display: flex;
         gap: 10px;
         background-color: #fff;
+        z-index: 999999;
     }
     .section-profile .sidebar .item .title {
         display: none;
@@ -594,6 +595,13 @@
         border-radius: 5px;
         border: 1px solid lightgray;
         padding: 10px;
+    }
+    .section-profile .dashboard .content .account-info .personal-info {
+        height: 490px;
+        width: 100%;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        padding: 10px 20px;
     }
     .section-profile
         .dashboard
@@ -755,4 +763,3 @@
         justify-content: end;
     }
 }
-

@@ -140,4 +140,27 @@ class CustomerController extends Controller
             'data' => $result
         ]);
     }
+
+    public function infoUpdate(Request $request)
+    {
+        $customer_id = Auth::guard('customers')->user()->id;
+        Customer::where('id', $customer_id)->update([
+            'name' => $request->name,
+            // 'gender' => $request->gender,
+            'birthday' => $request->birthday,
+            'tel' => $request->tel,
+            'email' => $request->email,
+        ]);
+        return $this->successResponse('success');
+    }
+    public function addressUpdate(Request $request)
+    {
+        $customer_id = Auth::guard('customers')->user()->id;
+        Customer::where('id', $customer_id)->update([
+            'city_id' => $request->city,
+            'district_id' => $request->district,
+            'ward_id' => $request->ward
+        ]);
+        return $this->successResponse('success');
+    }
 }

@@ -101,7 +101,7 @@
 
                     </div>
                     <div class="content ">
-                        <div class="purchase-history">
+                        <div class="purchase-history d-none">
                             <div class="order-status">
                                 <div class="item active all" id="order-all">
                                     Tất cả
@@ -189,7 +189,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="account-info d-none" id="profile-account-info">
+                        <div class="account-info " id="profile-account-info">
                             <div class="personal-info">
                                 <div class="info-header">
                                     <div class="left">
@@ -198,114 +198,129 @@
                                         </div>
                                     </div>
                                     <div class="right">
-                                        <div class="btn-update">
+                                        <div class="btn-info-update">
                                             <i class="uil uil-edit"></i> Cập nhật
                                         </div>
                                     </div>
                                 </div>
-                                <div class="info-content">
-                                    <div class="left">
-                                        <div class="item">
-                                            <div class="title">
-                                                Họ và tên :
+                                <form id="form-info" method="POST">
+                                    @csrf
+                                    <div class="info-content">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="item">
+                                                    <div class="mb-1 col-12">
+                                                        <label for="name" class="form-label">Họ tên</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            placeholder="Họ tên" name="name"
+                                                            value="{{ $customer->name }}">
+                                                        <div class="text-danger mt-1 error-name"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="mb-1 col-12">
+                                                        <label for="gender" class="form-label">Giới tính</label>
+                                                        <select class="form-select" id="gender" name="gender"
+                                                            style="height: 48px">
+                                                            <option value="{{ $customer->gender }}" hidden>
+                                                                @if ($customer->gender == '0')
+                                                                    Nam
+                                                                @elseif ($customer->gender == '1')
+                                                                    Nữ
+                                                                @else
+                                                                    Khác
+                                                                @endif
+                                                            </option>
+                                                            <option value="0">Nam</option>
+                                                            <option value="1">Nữ</option>
+                                                            <option value="2">Khác</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="mb-1 col-12">
+                                                        <label for="birthday" class="form-label">Ngày sinh</label>
+                                                        <input type="text" class="form-control" id="birthday"
+                                                            placeholder="Ngày sinh" name="birthday"
+                                                            value="{{ $customer->birthday }}">
+                                                        <div class="text-danger mt-1 error-birthday"></div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="value">
-                                                {{ $customer->name }}
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="title">
-                                                Giới tính :
-                                            </div>
-                                            <div class="value">
-                                                Nam
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="title">
-                                                Ngày sinh :
-                                            </div>
-                                            <div class="value">
-                                                {{ $customer->birthday }}
+                                            <div class="col-md-6 col-12">
+                                                <div class="item">
+                                                    <div class="mb-1 col-12">
+                                                        <label for="tel" class="form-label">Số điện thoại</label>
+                                                        <input type="text" class="form-control" id="tel"
+                                                            placeholder="Số điện thoại" name="tel"
+                                                            value="{{ $customer->tel }}">
+                                                        <div class="text-danger mt-1 error-tel"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="mb-3 col-12">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="text" class="form-control" id="email"
+                                                            placeholder="Email" name="email"
+                                                            value="{{ $customer->email }}">
+                                                        <div class="text-danger mt-1 error-email"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="right">
-                                        <div class="item">
-                                            <div class="title">
-                                                Số điện thoại :
-                                            </div>
-                                            <div class="value">
-                                                {{ $customer->tel }}
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="title">
-                                                Email:
-                                            </div>
-                                            <div class="value">
-                                                {{ $customer->email }}
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="title">
-                                                Địa chỉ mặc định :
-                                            </div>
-                                            <div class="value">
-                                                -
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                             <div class="address-info">
                                 <div class="address-header">
                                     <div class="title">
-                                        Sổ địa chỉ
+                                        Thông tin địa chỉ
                                     </div>
-                                    <div class="btn-add-address">
-                                        <i class="uil uil-map-marker-plus"></i> Thêm địa chỉ
+                                    <div class="btn-add-address" id="btn-address-update">
+                                        <i class="uil uil-edit"></i> Cập nhật
                                     </div>
                                 </div>
-                                <div class="address-content">
-                                    {{-- @foreach ($address as $i)
-                                        <div class="item" data-id="{{ $i->id }}">
-                                            <div class="item-header">
-                                                <div class="left">
-                                                    {{ $i->customer->name }}
-                                                </div>
-                                                <div class="right">
-                                                    Nhà
-                                                </div>
-                                            </div>
-                                            <div class="item-content">
-                                                <div class="basic-info">
-                                                    <div class="name">
-                                                        {{ $i->customer->name }}
-                                                    </div>
-                                                    <div class="tel">
-                                                        {{ $i->customer->tel }}
-                                                    </div>
-                                                </div>
-                                                <div class="address-info1">
-                                                    {{ $i->note . ',' . $i->full_address }}
-                                                </div>
-                                            </div>
-                                            <div class="item-footer">
-                                                <div class="item-action">
-                                                    <div class="right">
-                                                        <div class="btn-delete" data-id="{{ $i->id }}">
-                                                            Xoá
-                                                        </div>
-                                                        <div class="btn-update">
-                                                            Cập nhật
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <form id="form-address" method="POST">
+                                    @csrf
+                                    <div class="address-content">
+                                        <div class="mb-1 col-12">
+                                            <label for="city" class="form-label">Tỉnh/thành phố </label>
+                                            <select class="city form-control select2" data-toggle="select2"
+                                                id="city" name="city" required>
+                                                <option></option>
+                                                @foreach ($city as $i)
+                                                    <option value="{{ $i->id }}"
+                                                        {{ $customer->city_id == $i->id ? 'selected' : '' }}>
+                                                        {{ $i->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <div class="text-danger mt-1 error-city"></div>
                                         </div>
-                                    @endforeach --}}
-                                </div>
+                                        <div class="mb-1 col-12">
+                                            <label for="district" class="form-label">Quận/huyện
+                                            </label>
+                                            <select class="district form-control select2" data-toggle="select2"
+                                                id="district" name="district" required>
+                                            </select>
+                                            <div class="text-danger mt-1 error-district"></div>
+                                        </div>
+                                        <div class="mb-1 col-12">
+                                            <label for="ward" class="form-label">Xã/phường/thị trấn
+                                            </label>
+                                            <select class="ward form-control select2" data-toggle="select2"
+                                                id="ward" name="ward" required>
+                                            </select>
+                                            <div class="text-danger mt-1 error-ward"></div>
+                                        </div>
+                                        <div class="mb-1 col-12">
+                                            <label for="address" class="form-label">Địa chỉ</label>
+                                            <input type="text" class="form-control" id="address" name="address">
+                                        </div>
+
+                                    </div>
+                                </form>
                             </div>
                             <div class="other" id="password-and-connect">
                                 <div class="reset-password">
@@ -352,67 +367,6 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-add-address d-none">
-                <div class="overlay">
-                    <div class="modal-content">
-                        <div class="header-content">
-                            <div class="title">
-                                Thêm địa chỉ
-                            </div>
-                            <div class="btn-close-modal-address" id="btn-close-modal-add-address">
-                                <i class="uil-multiply"></i>
-                            </div>
-                        </div>
-                        <div class="main-content">
-                            <div class="title">
-                                Địa chỉ nhận hàng
-                            </div>
-                            <div class="list-item">
-                                <form id="form-store" method="post">
-                                    @csrf
-                                    <div class="item">
-                                        <label for="city" class="form-label">Tỉnh/thành phố </label>
-                                        <select class="city form-select" id="city" name="city" required>
-                                            <option selected>Chọn Tỉnh/Thành Phố</option>
-                                            @foreach ($city as $i)
-                                                <option value={{ $i->id }}>{{ $i->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="item">
-                                        <label for="district" class="form-label">Quận/huyện
-                                        </label>
-                                        <select class="district form-select" id="district" name="district"
-                                            name="ward" required> required>
-                                        </select>
-                                        <div class="text-danger mt-1 error-district"></div>
-                                    </div>
-                                    <div class="item">
-                                        <label for="ward" class="form-label">Xã/phường
-                                        </label>
-                                        <select class="ward form-select" id="ward" name="ward" required>
-                                        </select>
-                                        <div class="text-danger mt-1 error-ward"></div>
-                                    </div>
-                                    <div class="item">
-                                        <label for="city" class="form-label">Địa chỉ </label>
-                                        <input type="text" class="form-control" name="address"
-                                            placeholder="Nhập địa chỉ nhà">
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-                        <div class="footer-content">
-                            <div class="content">
-                                <div id="btn-add-address">
-                                    Thêm địa chỉ mới
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="modal-logout d-none  ">
                 <div class="modal-logout-overlay">
                     <div class="modal-logout-content">
@@ -446,5 +400,7 @@
         const RouteProfile = "{{ route('home.profile') }}";
         const RouteLogout = "{{ route('home.logout') }}";
         const RouteGetDataOrderByStatus = "{{ route('home.getDataOrder') }}";
+        const RouteInfoUpdate = "{{ route('home.infoUpdate') }}";
+        const RouteAddressUpdate = "{{ route('home.addressUpdate') }}";
     </script>
 @endpush

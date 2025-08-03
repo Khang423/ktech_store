@@ -134,7 +134,7 @@
                     Thanh toán khi nhận hàng
                 </div>
                 <div class="other-option">
-                    <span>Thay đổi</span><i class="uil uil-angle-right fs-2"></i>
+                    <span>T`hay đổi</span><i class="uil uil-angle-right fs-2"></i>
                 </div>
             </div>
             <div class="overlay">
