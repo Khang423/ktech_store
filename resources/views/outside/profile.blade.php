@@ -90,7 +90,7 @@
                                 Thông tin tài khoản
                             </div>
                         </div>
-                        <div class="item btn-logout">
+                        <div class="item btn-action-logout">
                             <div class="icon">
                                 <i class="uil uil-sign-out-alt"></i>
                             </div>
@@ -412,7 +412,28 @@
                         </div>
                     </div>
                 </div>
-            </div>2
+            </div>
+            <div class="modal-logout d-none  ">
+                <div class="modal-logout-overlay">
+                    <div class="modal-logout-content">
+                        <span class="modal-logout-close"><i class="uil-multiply"></i></span>
+                        <div class="logo">
+                            <img src="{{ asset('asset/admin/systemImage/ktech-dark.svg') }}" alt="Logo Ktech">
+                        </div>
+                        <div class="text-review">
+                            Bạn chắc chắn muốn đăng xuất
+                        </div>
+                        <div class="btn-action">
+                            <div class="btn-cancel">
+                                Huỷ
+                            </div>
+                            <div class="btn-logout">
+                                Tiếp tục
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
 @endsection
 @push('js')

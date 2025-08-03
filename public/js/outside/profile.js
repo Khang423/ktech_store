@@ -81,6 +81,13 @@ $(document).ready(function () {
     $(".btn-logout").on("click", () => {
         window.location.href = RouteLogout;
     });
+
+    $(".modal-logout-close").on("click", () => {
+        $(".modal-logout").addClass("d-none");
+    });
+    $(".btn-action-logout").on("click", () => {
+        $(".modal-logout").removeClass("d-none");
+    });
 });
 
 const checkUrlProfile = () => {

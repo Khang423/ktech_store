@@ -2549,3 +2549,98 @@ body {
     align-items: center;
     font-size: 12px;
 }
+/* css modal action */
+.section-profile .modal-logout .modal-logout-overlay {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền tối trong suốt */
+    z-index: 99; /* thấp hơn modal */
+}
+.section-profile .modal-logout .modal-logout-content {
+    height: auto;
+    width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+}
+.section-profile .modal-logout .modal-logout-content .logo {
+    height: 100px;
+    width: 50%;
+    margin-left: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-profile .modal-logout .modal-logout-content .logo img {
+    height: 100%;
+    width: 100%;
+}
+.section-profile .modal-logout .modal-logout-content .text-review {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3d3d3d;
+    text-align: center;
+    height: 50px;
+    color: #3d3d3d;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-profile .modal-logout .modal-logout-content .btn-action {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.section-profile .modal-logout .modal-logout-content .btn-action .btn-cancel {
+    height: 50px;
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    color: #3d3d3d;
+    align-items: center;
+    border: 2px solid #2a52be;
+    cursor: pointer;
+}
+.section-profile .modal-logout .modal-logout-content .btn-action .btn-logout {
+    height: 50px;
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    color: #ffffff;
+    align-items: center;
+    background-color: #2a52be;
+    cursor: pointer;
+}
+.section-profile .modal-logout .modal-logout-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 20px;
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    cursor: pointer;
+}
+.section-profile .modal-logout .modal-logout-close:hover {
+    background-color: rgb(179, 179, 179);
+}
