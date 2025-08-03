@@ -55,6 +55,8 @@ Route::group(
         Route::post('/productFillter', [HomeController::class, 'productFillter'])->name('productFillter');
 
         Route::get('/thanks', [HomeController::class, 'thanks'])->name('thanks');
+
+        Route::get('/order-invoice', [HomeController::class, 'orderInvoice'])->name('orderInvoice');
     },
 );
 
@@ -78,6 +80,7 @@ Route::group(
         // detele address
         Route::post('customer/delete-address', [CustomerController::class, 'deleteAddress'])->name('deleteAddress');
         Route::post('customer/getDataOrder', [CustomerController::class, 'getDataOrder'])->name('getDataOrder');
+        Route::post('customer/getDataOrderItem', [CustomerController::class, 'getDataOrderItem'])->name('getDataOrderItem');
     },
 );
 

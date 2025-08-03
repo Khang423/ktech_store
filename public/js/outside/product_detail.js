@@ -14,7 +14,25 @@ $(document).ready(function () {
             Thumbs,
         }
     );
+    $(".btn-buy").on("click", (e) => {
+        const productId = $(e.currentTarget).data("productId");
 
+        $.ajax({
+            url: routeAddItemToCart,
+            type: "POST",
+            dataType: "json",
+            data: {
+                productId,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function () {
+                window.location.href = "/cart";
+            },
+            error: function (xhr) {
+                console.error("Failed to add to cart", xhr.responseJSON);
+            },
+        });
+    });
     // Handle "Add to Cart" for logged-in users
     $(".btn-add_to_cart").click(function () {
         const productId = $(this).data("productId");
@@ -60,4 +78,9 @@ $(document).ready(function () {
             $("#btn-see-more").text("Thu gọn nội dung");
         }
     });
+    quantityUp();
 });
+
+const quantityUp = (e) => {
+    $('')
+}
