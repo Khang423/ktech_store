@@ -30,9 +30,9 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="text-center">#</th>
+                                    <th class="text-center">Mã hoá đơn</th>
                                     <th class="text-center">Người đặt</th>
-                                    <th class="text-center">Người nhận</th>
-                                    <th class="text-center">SĐT </th>
+                                    {{-- <th class="text-center">SĐT </th> --}}
                                     <th class="text-center">Email</th>
                                     <th class="text-center">Tổng tiền</th>
                                     <th class="text-center">Ngày đặt</th>
@@ -59,23 +59,23 @@
                     className: 'text-center',
                 },
                 {
+                    data: 'order_code',
+                    name: 'order_code',
+                    className: 'text-center',
+                    render: (data) => `<span class='text-dark badge bg-light font-15'>${data}</span>`
+                },
+                {
                     data: 'customer',
                     name: 'customer',
                     className: 'text-center',
                     render: (data) => `<span class='text-dark badge bg-light font-15'>${data}</span>`
                 },
-                {
-                    data: 'receiver_name',
-                    name: 'receiver_name',
-                    className: 'text-center',
-                    render: (data) => `<span class='text-dark badge bg-light font-15'>${data}</span>`
-                },
-                {
-                    data: 'receiver_tel',
-                    name: 'receiver_tel',
-                    className: 'text-center',
-                    render: (data) => `<span class='text-dark badge bg-light font-15'>${data}</span>`
-                },
+                // {
+                //     data: 'receiver_tel',
+                //     name: 'receiver_tel',
+                //     className: 'text-center',
+                //     render: (data) => `<span class='text-dark badge bg-light font-15'>${data}</span>`
+                // },
                 {
                     data: 'receiver_email',
                     name: 'receiver_email',
@@ -117,8 +117,8 @@
                         {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
-                                    <a href="${data.edit}">
-                                        <i class="edit text-primary uil uil-eye action-icon"></i>
+                                    <a href="${data.preview}">
+                                        <i class="edit text-primary uil uil-print action-icon"></i>
                                     </a>
                                 </span>
                             `;
@@ -127,19 +127,18 @@
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
                                     <i data-id="${data.id}" data-status="cancel" class="btn-updateStatus text-danger uil uil-file-times-alt action-icon"></i>
-                                    <a href="${data.edit}">
-                                        <i class="edit text-primary uil uil-eye action-icon"></i>
+                                    <a href="${data.preview}">
+                                        <i class="edit text-primary uil uil-print action-icon"></i>
                                     </a>
                                 </span>
                             `;
-                        }
-                        else if (data.status === 5) // processing
+                        } else if (data.status === 5) // processing
                         {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
                                     <i data-id="${data.id}" data-status="accept" class="btn-updateStatus text-success uil uil-file-check-alt action-icon"></i>
-                                    <a href="${data.edit}">
-                                        <i class="edit text-primary uil uil-eye action-icon"></i>
+                                    <a href="${data.preview}">
+                                        <i class="edit text-primary uil uil-print action-icon"></i>
                                     </a>
                                 </span>
                             `;
@@ -148,8 +147,8 @@
                             <span class='table-action d-flex justify-content-center gap-2'>
                                 <i data-id="${data.id}" data-status="accept" class="btn-updateStatus text-success uil uil-file-check-alt action-icon"></i>
                                 <i data-id="${data.id}" data-status="cancel" class="btn-updateStatus text-danger uil uil-file-times-alt action-icon"></i>
-                                <a href="${data.edit}">
-                                    <i class="edit text-primary uil uil-eye action-icon"></i>
+                                <a href="${data.preview}">
+                                    <i class="edit text-primary uil uil-print action-icon"></i>
                                 </a>
                             </span>
                         `;
@@ -187,7 +186,7 @@
                 type: "POST",
                 dataType: "json",
                 data: {
-                    product_id: id,
+                    order_id: id,
                     status: status,
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },

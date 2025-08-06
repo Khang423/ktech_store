@@ -1,3 +1,10 @@
+$(document).ajaxStart(function () {
+        $("#loading-spinner").fadeIn();
+    })
+    .ajaxStop(function () {
+        $("#loading-spinner").fadeOut();
+    });
+
 function store($routeStore, $routeIndex) {
     $("#btn-store").click(function (e) {
         e.preventDefault();
