@@ -431,6 +431,7 @@ const AddressUpdate = (formData) => {
         },
     });
 };
+
 const InfoUpdate = (formData) => {
     $.ajax({
         url: RouteInfoUpdate,

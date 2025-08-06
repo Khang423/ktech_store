@@ -5,7 +5,7 @@
 <head>
     <link rel="shortcut icon" href="https://ktech.id.vn/asset/admin/systemImage/ktech-dark.svg">
     <meta charset="UTF-8">
-    <title>Hóa đơn {{ $data->ref_code }}</title>
+    <title>Hóa đơn {{ $data->order_code }}</title>
     <style>
         @page {
             size: A4;
@@ -138,13 +138,16 @@
         }
 
         .qr-code {
-            width: 90pt;
-            height: 90pt;
-            border: 1pt solid #ccc;
-            background: #f0f0f0;
+            width: 150pt;
+            height: 170pt;
             text-align: center;
             vertical-align: middle;
             font-size: 8pt;
+        }
+
+        .qr-code img {
+            width: 150pt;
+            height: 170pt;
         }
 
         .bank-info {
@@ -181,19 +184,26 @@
             </table>
         </div>
 
-        <div class="invoice-title">HÓA ĐƠN {{ $data->ref_code ?? '' }}</div>
+        <div class="invoice-title">HÓA ĐƠN {{ $data->order_code ?? '' }}</div>
 
         <div class="invoice-details">
             Hóa đơn ngày: {{ $data->created_at }}<br>
             Ngày đến hạn: {{ $data->updated_at }}
         </div>
-
+        @php
+            $status = '';
+            if ($data->status = 2) {
+                $status = 'Đang chuẩn bị';
+            }else{
+                $status = 'Không xác định';
+            }
+        @endphp
         <div class="status-paid">
-            Trạng thái: Chưa thanh toán | Số tiền: {{ formatPriceToVND($data->total_amount) }}
+            Trạng thái: {{ $status }}
         </div>
 
         <div class="customer-info">
-            Họ tên: Võ Vĩ Khang<br>
+            Họ tên: {{ $data->customers->name }}<br>
             Địa chỉ: Ấp 7 Chợ, Đông Thái, An Biên, Kiên Giang<br>
             Hình thức: QR/PAY/ATM/Credit
         </div>
@@ -214,16 +224,16 @@
                     $index = 1;
                     $sum = 0;
                 @endphp
-                @foreach ($data->stockImportDetails as $i)
+                @foreach ($data->orderItem as $i)
                     <tr>
                         <td>{{ $index++ }}</td>
-                        <td class="text-left">{{ $i->productVersion->name }}</td>
+                        <td class="text-left">{{ $i->productVersions->config_name }}</td>
                         <td>Chiếc</td>
                         <td>{{ $i->quantity }}</td>
-                        <td class="text-center">{{ formatPriceToVND($i->price) }}</td>
-                        <td class="text-right">{{ formatPriceToVND($i->price * $i->quantity) }}</td>
+                        <td class="text-center">{{ formatPriceToVND($i->unit_price) }}</td>
+                        <td class="text-right">{{ formatPriceToVND($i->unit_price * $i->quantity) }}</td>
                     </tr>
-                    {{ $sum += $i->price * $i->quantity }}
+                    {{ $sum += $i->unit_price * $i->quantity }}
                 @endforeach
                 <tr>
                     <td colspan="5" class="text-right">Tạm tính</td>
@@ -248,7 +258,7 @@
                 <th>Tổng thanh toán</th>
             </tr>
             <tr>
-                <td>Không chịu thuế</td>
+                <td d>Không chịu thuế</td>
                 <td class="text-right">{{ formatPriceToVND($sum) }}</td>
                 <td class="text-right">0 đ</td>
                 <td class="text-right">{{ formatPriceToVND($sum) }}</td>
@@ -258,15 +268,15 @@
         <table class="qr-table">
             <tr>
                 <td class="qr-code">
-                    <img src="" alt="">
+                    <img src="<?php echo 'https://img.vietqr.io/image/MB-0799599040-compact2.png?amount=' . $data->total_price . '&addInfo=Thanh+toan+don+hang+' . $data->order_code; ?>">
                 </td>
                 <td class="bank-info">
                     <strong>Thông tin chuyển khoản</strong><br>
                     Ngân hàng: MBBank<br>
                     STK: 0799599040<br>
                     Chủ TK: Võ Vĩ Khang<br>
-                    Nội dung: {{ $data->ref_code}}<br>
-                    Số tiền: {{ formatPriceToVND($sum) }}
+                    Nội dung: Thanh toán đơn hàng {{ $data->order_code }}<br>
+                    Số tiền: {{ formatPriceToVND($data->total_price) }}
                 </td>
             </tr>
         </table>

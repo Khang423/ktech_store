@@ -23,7 +23,9 @@ use App\Http\Controllers\StockImportController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TagDetailController;
 use App\Http\Controllers\UsageTypeController;
+use App\Mail\CheckPassMail;
 use App\Models\Order;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 // route home
@@ -59,6 +61,7 @@ Route::group(
         Route::get('/order-invoice', [HomeController::class, 'orderInvoice'])->name('orderInvoice');
     },
 );
+
 
 Route::group(
     [
@@ -474,11 +477,11 @@ Route::group(
             function () {
                 Route::get('/', [OrderController::class, 'index'])->name('index');
                 Route::post('/getList', [OrderController::class, 'getList'])->name('getList');
-                Route::post('/updateStatus', [OrderController::class, 'updateStatus'])->name('updateStatus');
-                Route::delete('/forceDelete', [BannerController::class, 'forceDelete'])->name('forceDelete');
-                Route::delete('/destroy', [BannerController::class, 'destroy'])->name('destroy');
-                Route::post('/restoreAll', [BannerController::class, 'restoreAll'])->name('restoreAll');
-                Route::post('/pdf/{order:{slug}', [BannerController::class, 'pdf'])->name('pdf');
+                Route::post('/update-status', [OrderController::class, 'updateStatus'])->name('updateStatus');
+                Route::delete('/forceDelete', [OrderController::class, 'forceDelete'])->name('forceDelete');
+                Route::delete('/destroy', [OrderController::class, 'destroy'])->name('destroy');
+                Route::post('/restoreAll', [OrderController::class, 'restoreAll'])->name('restoreAll');
+                Route::get('/export-invoice/{order:order_code}', [OrderController::class, 'exportInvoice'])->name('exportInvoice');
             },
         );
         // Discount Route

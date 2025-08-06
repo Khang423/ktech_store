@@ -1,3 +1,10 @@
+$(document)
+    .ajaxStart(function () {
+        $("#loading-spinner").fadeIn();
+    })
+    .ajaxStop(function () {
+        $("#loading-spinner").fadeOut();
+    });
 $(document).ready(function () {
     // Initialize Swiper for banners
     new Swiper(".swiper-banner", {
@@ -21,7 +28,6 @@ $(document).ready(function () {
             1280: { slidesPerView: 5 },
         },
     });
-
 
     // Handle product card click - redirect to product detail page
     $(".card-product").on("click", function () {
@@ -101,5 +107,3 @@ $(document).ready(function () {
         });
     });
 });
-
-

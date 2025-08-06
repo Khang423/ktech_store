@@ -5,15 +5,18 @@ namespace App\Services;
 use App\Enums\OrderStatusEnum;
 use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
+use App\Mail\CheckOrderMail;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ProductVersion;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\DataTables;
 
 class OrderService extends Controller
@@ -60,12 +63,13 @@ class OrderService extends Controller
                     'status' => $object->status,
                     'id' => $object->id,
                     'destroy' => route('admin.orders.destroy'),
-                    'preview' => ' ',
+                    'preview' => route('admin.orders.exportInvoice', ['order' => $object->order_code]),
                 ];
             })
             ->rawColumns(['status'])
             ->make(true);
     }
+
     public function store($request)
     {
         DB::beginTransaction();
@@ -134,11 +138,18 @@ class OrderService extends Controller
         DB::beginTransaction();
         try {
             if ($request->status === 'accept') {
-                $this->model->where('id', $request->product_id)->update([
+                $this->model->where('id', $request->order_id)->update([
                     'status' => OrderStatusEnum::PROCCESSING
                 ]);
+                $or = Order::with(['orderItem.productVersions', 'customers'])
+                    ->where('id', $request->order_id)
+                    ->first();
+                $pdf = Pdf::loadView('pdf.invoice-import', [
+                    'data' => $or,
+                ]);
+                Mail::to($or->customers->email)->send(new CheckOrderMail($or, $pdf->output()));
             } else if ($request->status === 'cancel') {
-                $this->model->where('id', $request->product_id)->update([
+                $this->model->where('id', $request->order_id)->update([
                     'status' => OrderStatusEnum::CANCEL
                 ]);
             }
