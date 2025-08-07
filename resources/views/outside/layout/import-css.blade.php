@@ -11,3 +11,5 @@
    <link href="{{ asset('css/outside/responsive.css') }}" rel="stylesheet" type="text/css" />
    {{-- select2 --}}
    <link href="{{ asset('css/libraries/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+   {{-- datatimepicker --}}
+   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />

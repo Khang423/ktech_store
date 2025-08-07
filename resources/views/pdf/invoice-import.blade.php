@@ -187,25 +187,36 @@
         <div class="invoice-title">HÓA ĐƠN {{ $data->order_code ?? '' }}</div>
 
         <div class="invoice-details">
-            Hóa đơn ngày: {{ $data->created_at }}<br>
-            Ngày đến hạn: {{ $data->updated_at }}
+            Ngày lập hoá đơn: {{ $data->created_at }}<br>
         </div>
         @php
-            $status = '';
-            if ($data->status = 2) {
-                $status = 'Đang chuẩn bị';
-            }else{
-                $status = 'Không xác định';
-            }
+            $statusList = [
+                1 => 'Chờ xác nhận',
+                2 => 'Đang chuẩn bị',
+                3 => 'Đang vận chuyển',
+                4 => 'Đã giao',
+                5 => 'Đã hủy',
+            ];
+
+            $methodList = [
+                0 => 'Thanh toán khi nhận hàng',
+                1 => 'Thanh toán trực tuyến MOMO',
+                2 => 'Thanh toán chuyển khoảng ngân hàng',
+            ];
+
+            $method = $methodList[$data->method_payment] ?? 'Không xác định';
+            $status = $statusList[$data->status] ?? 'Không xác định';
         @endphp
+
         <div class="status-paid">
             Trạng thái: {{ $status }}
         </div>
 
         <div class="customer-info">
             Họ tên: {{ $data->customers->name }}<br>
-            Địa chỉ: Ấp 7 Chợ, Đông Thái, An Biên, Kiên Giang<br>
-            Hình thức: QR/PAY/ATM/Credit
+            Địa chỉ:
+            {{ $data->note . ' - ' . $data->wards->name . ' - ' . $data->districts->name . ' - ' . $data->cities->name }}<br>
+            Hình thức: {{ $method }}
         </div>
 
         <table class="invoice-table">

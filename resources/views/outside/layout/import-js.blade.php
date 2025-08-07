@@ -15,3 +15,5 @@
    <script src="{{ asset('js/libraries/sweetalert/confirm_toast.js') }}"></script>
    {{-- select 2  --}}
    <script src="{{ asset('js/libraries/select2/select2.min.js') }}"></script>
+
+   <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>

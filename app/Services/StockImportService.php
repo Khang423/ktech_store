@@ -81,6 +81,7 @@ class StockImportService extends Controller
                     'stock_import_id' => $stock_import->id,
                     'product_version_id' => $product_version_id,
                     'quantity' => $quantity,
+                    'stock_quantity' => $quantity,
                     'price' => $price,
                     'vat_rate' => $vat_rate,
                     'total_price' => $total_price,

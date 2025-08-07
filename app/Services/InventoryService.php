@@ -74,7 +74,8 @@ class InventoryService extends Controller
                     'product_versions.id as id',
                     'product_versions.config_name as name',
                     'stock_import_details.price as price',
-                    'inventories.stock_quantity as stock_quantity',
+                    'stock_import_details.final_price as final_price',
+                    'stock_import_details.stock_quantity',
                     'stock_import_details.created_at as create_date',
                 ])
                 ->groupBy(
@@ -83,7 +84,8 @@ class InventoryService extends Controller
                     'product_versions.id',
                     'product_versions.config_name',
                     'stock_import_details.price',
-                    'inventories.stock_quantity',
+                    'stock_import_details.final_price',
+                    'stock_import_details.stock_quantity',
                     'stock_import_details.created_at',
                 )
                 ->get()
@@ -94,6 +96,9 @@ class InventoryService extends Controller
             })
             ->editColumn('price', function ($object) {
                 return number_format($object->price, 0, ',', '.') . ' ₫';
+            })
+            ->editColumn('final_price', function ($object) {
+                return number_format($object->final_price, 0, ',', '.') . ' ₫';
             })
             ->editColumn('name', function ($object) {
                 return $object->name;

@@ -145,7 +145,7 @@ class HomeController extends Controller
     {
         $city = $this->cityService->get_all();
         $customer_id = Auth::guard('customers')->user()->id;
-        $customer = Customer::where('id', $customer_id)->first(Customer::getInfo());
+        $customer = Customer::with('cities', 'districts', 'wards')->where('id', $customer_id)->first();
         return view('outside.order', [
             'title' => 'Ktech Order',
             'city' => $city,

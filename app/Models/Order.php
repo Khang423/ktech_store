@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\address\City;
+use App\Models\address\District;
+use App\Models\address\Ward;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +25,7 @@ class Order extends Model
         'receiver_email',
         'note',
         'ship',
+        'method_payment',
     ];
 
     public static function getInfo()
@@ -40,6 +44,7 @@ class Order extends Model
             'receiver_email',
             'note',
             'ship',
+            'method_payment',
             'created_at',
             'updated_at',
         ];
@@ -55,7 +60,21 @@ class Order extends Model
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
-    public function orderItem() {
+    public function orderItem()
+    {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function cities()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+    public function wards()
+    {
+        return $this->belongsTo(Ward::class, 'ward_id');
+    }
+    public function districts()
+    {
+        return $this->belongsTo(District::class, 'district_id');
     }
 }

@@ -21,6 +21,7 @@
                                     <th class="text-center">Mã HĐ nhập</th>
                                     <th class="text-center">Phiên bản</th>
                                     <th class="text-center">Giá nhập</th>
+                                    <th class="text-center">Giá bán</th>
                                     <th class="text-center">Tồn kho</th>
                                     <th class="text-center">Ngày nhập</th>
                                 </tr>
@@ -60,6 +61,14 @@
                 {
                     data: 'price',
                     name: 'price',
+                    className: 'text-center',
+                    orderable: false,
+                    searchable: false,
+                    render: (data) => `<span class='text-dark'>${data}</span>`
+                },
+                {
+                    data: 'final_price',
+                    name: 'final_price',
                     className: 'text-center',
                     orderable: false,
                     searchable: false,

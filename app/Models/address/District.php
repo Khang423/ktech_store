@@ -3,6 +3,7 @@
 namespace App\Models\address;
 
 use App\Models\Address;
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 
 class District extends Model
@@ -23,8 +24,12 @@ class District extends Model
         ];
     }
 
-    public function address()
+    public function customers()
     {
-        return  $this->hasMany(Address::class, 'customer_id', 'id');
+        return $this->hasOne(Customer::class, 'district_id', 'id');
+    }
+    public function orders()
+    {
+        return $this->hasOne(Customer::class, 'district_id', 'id');
     }
 }

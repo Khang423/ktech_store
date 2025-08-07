@@ -22,6 +22,7 @@ class UpdateRequest extends FormRequest
             'profit_rate' => 'nullable',
             'final_price' => 'nullable',
             'import_price' => 'string|nullable',
+            'stock_import_id' => 'nullable',
             'category_product_id' => 'string|required',
             'model_seri' => 'string|required',
             'brand_id' => 'string|required',

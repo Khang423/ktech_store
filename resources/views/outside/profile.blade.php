@@ -43,7 +43,7 @@
                             {{ $order_count }}
                         </div>
                         <div class="title">
-                            Tổng số đơn hàng đã mua
+                            Giao dịch
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                             {{ formatPriceToVND($total_price) }}
                         </div>
                         <div class="title">
-                            Tổng tiền tích lũy Từ 01/01/2025
+                            Tổng giá trị đã mua
                         </div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@
                                                 <div class="item">
                                                     <div class="mb-1 col-12">
                                                         <label for="birthday" class="form-label">Ngày sinh</label>
-                                                        <input type="text" class="form-control" id="birthday"
+                                                        <input type="text" class="form-control" id="datepicker"
                                                             placeholder="Ngày sinh" name="birthday"
                                                             value="{{ $customer->birthday }}">
                                                         <div class="text-danger mt-1 error-birthday"></div>
@@ -290,10 +290,12 @@
                                                 id="city" name="city" required>
                                                 <option></option>
                                                 @foreach ($city as $i)
-                                                    <option value="{{ $i->id }}"
-                                                        {{ $customer->city_id == $i->id ? 'selected' : '' }}>
-                                                        {{ $i->name }}
-                                                    </option>
+                                                    @if ($customer->city_id == $i->id)
+                                                        <option value="{{ $i->id }}" selected>{{ $i->name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $i->id }}">{{ $i->name }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                             <div class="text-danger mt-1 error-city"></div>
@@ -301,24 +303,47 @@
                                         <div class="mb-1 col-12">
                                             <label for="district" class="form-label">Quận/huyện
                                             </label>
-                                            <select class="district form-control select2" data-toggle="select2"
-                                                id="district" name="district" required>
-                                            </select>
+                                            @if ($customer->district_id)
+                                                <select class="district form-control select2" data-toggle="select2"
+                                                    id="district" name="district" required>
+                                                    <option value="{{ $customer->districts->id }}">
+                                                        {{ $customer->districts->name }}
+                                                    </option>
+                                                </select>
+                                            @else
+                                                <select class="district form-control select2" data-toggle="select2"
+                                                    id="district" name="district" required>
+                                                </select>
+                                            @endif
                                             <div class="text-danger mt-1 error-district"></div>
                                         </div>
                                         <div class="mb-1 col-12">
                                             <label for="ward" class="form-label">Xã/phường/thị trấn
                                             </label>
-                                            <select class="ward form-control select2" data-toggle="select2"
-                                                id="ward" name="ward" required>
-                                            </select>
+                                            @if ($customer->ward_id)
+                                                <select class="ward form-control select2" data-toggle="select2"
+                                                    id="ward" name="ward" required>
+                                                    <option value="{{ $customer->wards->id }}">
+                                                        {{ $customer->wards->name }}
+                                                    </option>
+                                                </select>
+                                            @else
+                                                <select class="ward form-control select2" data-toggle="select2"
+                                                    id="ward" name="ward" required>
+                                                </select>
+                                            @endif
                                             <div class="text-danger mt-1 error-ward"></div>
                                         </div>
                                         <div class="mb-1 col-12">
-                                            <label for="address" class="form-label">Địa chỉ</label>
-                                            <input type="text" class="form-control" id="address" name="address">
+                                            <label for="note" class="form-label">Địa chỉ</label>
+                                            @if ($customer->note)
+                                                <input type="text" class="form-control" id="note" name="note"
+                                                    value="{{ $customer->note }}">
+                                            @else
+                                                <input type="text" class="form-control" id="note"
+                                                    name="note">
+                                            @endif
                                         </div>
-
                                     </div>
                                 </form>
                             </div>
@@ -337,28 +362,7 @@
                                             Cập nhật lần cuối lúc :
                                         </div>
                                         <div class="right">
-                                            04/05/2024 15:16
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="linked-accounts">
-                                    <div class="title">
-                                        Tài khoản liên kết
-                                    </div>
-                                    <div class="item">
-                                        <div class="left">
-                                            Google
-                                        </div>
-                                        <div class="right">
-                                            Trạng thái
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="left">
-                                            Zalo
-                                        </div>
-                                        <div class="right">
-                                            Trạng thái
+                                            {{ $customer->updated_at}}
                                         </div>
                                     </div>
                                 </div>
@@ -393,6 +397,9 @@
 @push('js')
     <script src="{{ asset('js/outside/profile.js') }}"></script>
     <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
         const RouteGetDistrict = "{{ route('address.getDistricts') }}";
         const RouteGetWard = "{{ route('address.getWards') }}";
         const RouteAddAddress = "{{ route('home.addAddress') }}";

@@ -50,7 +50,7 @@ class OrderController extends Controller
 
     public function exportInvoice(Order $order)
     {
-        $or = Order::with(['orderItem.productVersions','customers'])
+        $or = Order::with(['orderItem.productVersions', 'customers', 'cities', 'districts', 'wards'])
             ->where('id', $order->id)
             ->first();
         $pdf = Pdf::loadView('pdf.invoice-import', [

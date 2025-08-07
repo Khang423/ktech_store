@@ -3,6 +3,8 @@
 namespace App\Models\address;
 
 use App\Models\Address;
+use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
@@ -21,8 +23,14 @@ class City extends Model
             'name',
         ];
     }
-    public function address()
+
+    public function customers()
     {
-        return  $this->hasMany(Address::class, 'customer_id', 'id');
+        return $this->hasOne(Customer::class, 'city_id', 'id');
+    }
+
+    public function orders()
+    {
+        return $this->hasOne(Order::class, 'city_id', 'id');
     }
 }

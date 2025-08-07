@@ -71,7 +71,12 @@ class ProductVersionController extends Controller
     {
         $laptopspec = LaptopSpec::where('product_id', $product_version->id)->first();
         $phonespec = PhoneSpec::where('product_id', $product_version->id)->first();
-        $stock_import_detail = StockImportDetail::where('product_version_id',$product_version->id)->first();
+        $stock_import_detail = StockImportDetail::where('product_version_id', $product_version->id)->get();
+        $stock_import = StockImport::with('stockImportDetails')
+            ->wherehas('stockImportDetails', function ($query) use ($product_version) {
+                $query->where('product_version_id', $product_version->id);
+            })->get();
+
         return view('admin.productVersion.edit', [
             'products' => $products,
             'category_product' => CategoryProduct::where('id', $products->category_product_id)->first(['id', 'name', 'slug']),
@@ -80,11 +85,12 @@ class ProductVersionController extends Controller
             'productVersions' => $product_version,
             'laptopSpec' => $laptopspec,
             'phoneSpec' => $phonespec,
-            'stock_import_detail' => $stock_import_detail
+            'stock_import_detail' => $stock_import_detail,
+            'stock_import' => $stock_import
         ]);
     }
 
-    public function update(UpdateRequest $request , Product $products ,ProductVersion $product_version)
+    public function update(UpdateRequest $request, Product $products, ProductVersion $product_version)
     {
         $result = $this->productVersionService->update($request, $product_version);
         if ($result) {
