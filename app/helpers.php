@@ -51,6 +51,13 @@ if (!function_exists('checkOrder')) {
         return Order::where('status', OrderStatusEnum::PENDING)->count();
     }
 }
+
+// if (!function_exists('checkStockQuantiy')) {
+//     function checkStockQuantiy()
+//     {
+//         return Order::where('status', OrderStatusEnum::PENDING)->count();
+//     }
+// }
 if (!function_exists('getLaptopSpecs')) {
     function getLaptopSpecs($product)
     {

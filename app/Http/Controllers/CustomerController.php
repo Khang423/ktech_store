@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Address;
+use App\Models\address\District;
+use App\Models\address\Ward;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\CityService;
 use App\Services\CustomerService;
+use App\Services\DistrictService;
+use App\Services\WardService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +24,10 @@ class CustomerController extends Controller
     protected $cityService;
     use ApiResponse;
 
-    public function __construct(CityService $cityService, CustomerService $customerService)
-    {
+    public function __construct(
+        CityService $cityService,
+        CustomerService $customerService
+    ) {
         $this->cityService = $cityService;
         $this->customerService = $customerService;
     }
@@ -29,11 +35,11 @@ class CustomerController extends Controller
     public function profile()
     {
         $customer_id = Auth::guard('customers')->user()->id;
-        $city = $this->cityService->get_all();
-        $customer = Customer::where('id', $customer_id)->first(['id', 'tel', 'email', 'birthday', 'name']);
+        $customer = Customer::with(['cities', 'districts', 'wards'])->where('id', $customer_id)->first();
         $order = Order::with('orderItem.productVersions.products')->where('customer_id', $customer_id)->get();
-        $orde_count = Order::where('customer_id', $customer_id)->count();
+        $orde_count = Order::where('customer_id', $customer_id)->where('status',4)->count();
         $total_price = Order::where('customer_id', $customer_id)->where('status', OrderStatusEnum::DELIVERED)->sum('total_price');
+        $city = $this->cityService->get_all();
         return view('outside.profile', [
             'title' => 'Ktech - Profile',
             'city' => $city,
@@ -153,13 +159,15 @@ class CustomerController extends Controller
         ]);
         return $this->successResponse('success');
     }
+
     public function addressUpdate(Request $request)
     {
         $customer_id = Auth::guard('customers')->user()->id;
         Customer::where('id', $customer_id)->update([
             'city_id' => $request->city,
             'district_id' => $request->district,
-            'ward_id' => $request->ward
+            'ward_id' => $request->ward,
+            'note' => $request->note
         ]);
         return $this->successResponse('success');
     }

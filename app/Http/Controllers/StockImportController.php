@@ -55,10 +55,7 @@ class StockImportController extends Controller
         return $this->errorResponse();
     }
 
-    public function detail(StockImport $stockImport)
-    {
-
-    }
+    public function detail(StockImport $stockImport) {}
 
     public function exportPDF(Request $request)
     {
@@ -86,6 +83,14 @@ class StockImportController extends Controller
             ->get();
         return response()->json([
             'data' => $product,
+        ]);
+    }
+
+    public function getDataStockImportDetail(Request $request)
+    {
+        $stock_import_detail = StockImportDetail::where('stock_import_id', $request->stock_import_id)->first();
+        return response()->json([
+            'data' => $stock_import_detail,
         ]);
     }
 }

@@ -11,6 +11,8 @@ use App\Models\PhoneSpec;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVersion;
+use App\Models\StockImport;
+use App\Models\StockImportDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -266,14 +268,24 @@ class ProductVersionService extends Controller
             }
 
             $nameConfig = "{$products->name} - {$request->cpu} - {$request->ram_size} - {$request->storage_size}";
-
+            StockImportDetail::where('stock_import_id', $request->stock_import_id)->update(
+                [
+                    'final_price' => (int) preg_replace('/[^\d]/', '', $request->final_price),
+                    'profit_rate'  => $request->profit_rate
+                ]
+            );
+            // lấy id phiếu nhập sớm nhất nếu số lượng ở phiếu nhập đó = 0 tức là bán hết thì sẽ lấy id kế tiếp
+            $stock_import_old_id = StockImportDetail::with('stockImport')
+                ->where('product_version_id', $productVersion->id)
+                ->where('stock_quantity', '>', '0')->min('stock_import_id');
+            // lấy giá nhập tại phiếu nhập đó
+            $stock_import = StockImport::with('stockImportDetails')->where('id', $stock_import_old_id)->first();
             ProductVersion::where('id', $productVersion->id)
                 ->update([
                     'config_name' => $nameConfig,
                     'name' => $products->name,
                     'slug' => Str::slug($nameConfig),
-                    'profit_rate' => $request->profit_rate,
-                    'final_price' => (int) preg_replace('/[^\d]/', '', $request->final_price),
+                    'final_price' => $stock_import->stockImportDetails->first()->final_price,
                 ]);
 
             DB::commit();

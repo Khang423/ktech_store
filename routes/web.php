@@ -407,6 +407,7 @@ Route::group(
                 Route::get('/invoice/{id}', [StockImportController::class, 'exportPDF'])->name('exportPDF');
                 Route::post('/getDataProduct', [StockImportController::class, 'getDataProduct'])->name('getDataProduct');
                 Route::post('/getDataProductVersion', [StockImportController::class, 'getDataProductVersion'])->name('getDataProductVersion');
+                Route::post('/get-data-stock-import-detail', [StockImportController::class, 'getDataStockImportDetail'])->name('getDataStockImportDetail');
             },
         );
 

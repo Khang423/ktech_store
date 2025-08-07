@@ -37,13 +37,18 @@ $(document).ready(function () {
     $("#btn-order-now").click(function () {
         const form = $("#form-store")[0];
         const formData = new FormData(form);
+        const method_payment = $(".method-payment.selected")
+            .find(".method-name")
+            .data("id");
 
+        const ship_id = $("#ship").data("id");
         const storedProducts =
             JSON.parse(sessionStorage.getItem("selectedProducts")) || [];
 
         formData.append("productSelected", JSON.stringify(storedProducts));
         formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
-
+        formData.append("method_id", method_payment);
+        formData.append("ship_id", ship_id);
         submitOrder(formData);
     });
 
@@ -206,7 +211,7 @@ function submitOrder(formData) {
         },
         error: function (data) {
             $(".text-danger").text("");
-
+            
             const errors = data.responseJSON?.errors || {};
             Object.entries(errors).forEach(([field, messages]) => {
                 $(`.error-${field}`).text(messages[0]);
@@ -227,7 +232,7 @@ const selectMethodPayment = () => {
         ) {
             const method_icon = element.find(".method-icon img").attr("src");
             const method_name = element.find(".method-name").text().trim();
-
+            const method_id = element.data("id");
             const selected = $(".method-payment.selected");
             selected.empty();
 
@@ -236,7 +241,7 @@ const selectMethodPayment = () => {
                     <div class="method-icon">
                         <img src="${method_icon}" alt="">
                     </div>
-                    <div class="method-name">
+                    <div class="method-name" data-id=${method_id} >
                         ${method_name}
                     </div>
                     <div class="other-option">

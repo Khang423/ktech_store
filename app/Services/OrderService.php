@@ -9,9 +9,12 @@ use App\Mail\CheckOrderMail;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Inventories;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ProductVersion;
+use App\Models\StockExportDetail;
+use App\Models\StockImportDetail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +96,9 @@ class OrderService extends Controller
                 'district_id'     => $request->district,
                 'ward_id'         => $request->ward,
                 'note'            => $request->note,
-                'status'            => OrderStatusEnum::PENDING,
+                'status'          => OrderStatusEnum::PENDING,
+                'method_payment'  => $request->method_id,
+                'ship'            => $request->ship_id,
             ]);
 
             $total_price = 0;
@@ -102,6 +107,24 @@ class OrderService extends Controller
             foreach ($productSelected as $item) {
                 $subtotal = $item['price'] * $item['quantity'];
                 $total_price += $subtotal;
+
+                $stock_import_detail = StockImportDetail::where('product_version_id', $item['product_version_id'])
+                    ->where('stock_quantity', '>', 0)
+                    ->orderBy('stock_import_id', 'asc')
+                    ->first();
+
+                if ($stock_import_detail) {
+                    $quantity_new = $stock_import_detail->stock_quantity - $item['quantity'];
+                    if ($quantity_new >= 0) {
+                        $stock_import_detail->update([
+                            'stock_quantity' => $quantity_new
+                        ]);
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
 
                 OrderItem::create([
                     'order_id'   => $order->id,
@@ -121,6 +144,8 @@ class OrderService extends Controller
             $order->update([
                 'total_price' => $total_price,
             ]);
+
+            // update inventory
 
             session(['order_info' => $order]);
 
