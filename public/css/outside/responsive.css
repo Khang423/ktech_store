@@ -537,6 +537,23 @@
         padding-left: 0px;
     }
 
+    .section-order .modal-method {
+        height: auto;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        padding: 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
     .section-profile .sidebar .item.active {
         background-color: #25449a41;
         color: #25449a;

@@ -329,11 +329,6 @@
                             <div class="product-price">
                                 {{ formatPriceToVND($item->final_price) }}
                             </div>
-                            <div class="product-rate d-flex">
-                                <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                <div class="icon-heart">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 @endforeach

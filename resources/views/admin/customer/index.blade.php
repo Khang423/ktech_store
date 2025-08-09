@@ -2,7 +2,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Thương hiệu
+            Khách hàng
         </span>
         <i class="mdi mdi-chevron-right"></i>
         Danh sách
@@ -14,12 +14,12 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2 col-12">
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <a class="btn btn-success mb-2" href="{{ route('admin.dashboard') }}">
                                 <i class="uil uil-step-backward-alt"></i>
                                 Quay lại
                             </a>
-                            <a class="btn btn-primary mb-2" href="{{ route('admin.brands.create') }}">
+                            <a class="btn btn-primary mb-2" href="{{ route('admin.members.create') }}">
                                 <i class="mdi mdi-plus-circle me-2"></i>
                                 Thêm
                             </a>
@@ -33,20 +33,20 @@
                                 <i class="uil uil-trash-alt"></i>
                                 Xoá vĩnh viễn
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="table-responsive">
                         <table class="table table-centered w-100 dt-responsive nowrap" id="datatable">
                             <thead class="table-light">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Thương hiệu</th>
-                                    <th>Logo</th>
-                                    <th>Quốc gia</th>
-                                    <th>Website</th>
-                                    <th>Ngày tạo</th>
-                                    <th style="width: 80px;">Hành động</th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Khách hàng</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">SĐT</th>
+                                    <th class="text-center">Địa chỉ</th>
+                                    <th class="text-center">Ngày tạo</th>
+                                    <th class="text-center" style="width: 80px;">Hành động</th>
                                 </tr>
                             </thead>
                         </table>
@@ -59,6 +59,7 @@
 @push('js')
     <script>
         $(document).ready(function() {
+
             const columns = [{
                     data: 'index',
                     name: 'index',
@@ -70,35 +71,41 @@
                     data: 'name',
                     name: 'name',
                     className: 'text-center',
-                    render: data => `<span class="badge bg-light font-15 text-dark">${data}</span>`
+                    render: (data) => `
+                    <span class='text-dark badge bg-light font-15'>${data}</span>
+                `
                 },
                 {
-                    data: 'logo',
-                    name: 'logo',
+                    data: 'email',
+                    name: 'email',
+                    orderable: false,
+                    searchable: false,
                     className: 'text-center',
-                    render: data =>
-                        `<img src="{{ asset('asset/admin/brands') }}/${data.logo}"  height="auto" width="100%" loading="lazy">`
-                },
-
-                {
-                    data: 'country',
-                    name: 'country',
-                    className: 'text-center',
-                    render: data => `<span class="badge bg-light font-15 text-dark">${data}</span>`
+                    render: (data) => `<span class='text-dark'>${data}</span>`
                 },
                 {
-                    data: 'website_link',
-                    name: 'website_link',
+                    data: 'tel',
+                    name: 'tel',
+                    orderable: false,
+                    searchable: false,
                     className: 'text-center',
-                    render: data => `<a href="${data}" class='text-dark' target="_blank" rel="noopener noreferrer">
-                                    ${data}
-                                </a>`
+                    render: (data) => `<span class='text-dark'>${data}</span>`
+                },
+                {
+                    data: 'address',
+                    name: 'address',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    render: (data) => `<span class='text-dark'>${data}</span>`
                 },
                 {
                     data: 'created_at',
                     name: 'created_at',
+                    orderable: false,
+                    searchable: false,
                     className: 'text-center',
-                    render: data => data ?? ''
+                    render: (data) => `<span class='text-dark'>${data}</span>`
                 },
                 {
                     data: 'actions',
@@ -107,43 +114,34 @@
                     searchable: false,
                     className: 'text-center',
                     render: (data) => `
-                    <span class='table-action d-flex justify-content-center gap-2'>
-                        <a href="${data.preview}" class="action-view" data-id="${data.id}" title="Chi tiết">
-                                <i class="edit text-info uil uil-list-ul action-icon"></i>
+                        <span class='table-action d-flex justify-content-center gap-2'>
+                            <a href="${data.edit}">
+                                <i class="edit text-primary uil-edit action-icon"></i>
                             </a>
-                        <a href="${data.edit}">
-                            <i class="uil-edit text-primary action-icon"></i>
-                        </a>
-                        <form action="${data.destroy}" method="POST" class="d-inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id" value="${data.id}">
-                            <i class="uil-trash-alt text-danger destroy action-icon" type="button"></i>
-                        </form>
-                    </span>
-                `
+                            <form action="${data.destroy}" method="POST" class="d-inline action-icon" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?')">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="${data.id}">
+                                <button type="submit" class="btn p-0 border-0 bg-transparent">
+                                    <i class="destroy text-danger uil-trash-alt"></i>
+                                </button>
+                            </form>
+                        </span>
+                    `
                 }
             ];
 
             let table = $('#datatable').DataTable(
-                customerDatatable("{{ route('admin.brands.getList') }}", columns)
+                customerDatatable("{{ route('admin.customers.getList') }}", columns)
             );
 
-            const routeDelete = '{{ route('admin.brands.destroy') }}';
-            const routeRestore = '{{ route('admin.brands.restoreAll') }}';
-            restore(routeRestore, table);
-            destroy(routeDelete, table);
+            // const routeDestroy = '{{ route('admin.members.destroy') }}';
+            // const routeRestore = '{{ route('admin.members.restoreAll') }}';
+            // const routeForceDelete = '{{ route('admin.members.forceDelete') }}';
 
-            let pusher = new Pusher('bf2e0cdd448eb0b918e8', {
-                cluster: 'ap1',
-                encrypted: true
-            });
-
-            Pusher.logToConsole = true;
-
-            pusher.subscribe('consolog').bind('test1', function(data) {
-                console.log(1);
-            });
+            // forceDelete(routeForceDelete, table);
+            // restore(routeRestore, table);
+            // destroy(routeDestroy, table);
         });
     </script>
 @endpush

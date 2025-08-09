@@ -1022,10 +1022,6 @@
             </div>
         </div>
     </section>
-    <hr>
-    <section class="section-preview">
-        danh gia va binh luan
-    </section>
 @endsection
 @push('js')
     <script src="{{ asset('js/libraries/fancybox/fancybox.umd.js') }}"></script>

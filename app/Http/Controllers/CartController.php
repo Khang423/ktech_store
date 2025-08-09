@@ -31,7 +31,11 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $result = $this->cartService->update($request);
-        if ($result) {
+        if ($result == 'out_of_stock') {
+            return response()->json([
+                'message' => $result
+            ]);
+        } else if ($result == true) {
             return $this->successResponse();
         }
         return $this->errorResponse();

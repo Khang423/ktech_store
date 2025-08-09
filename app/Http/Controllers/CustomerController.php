@@ -17,6 +17,7 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Colors\Rgb\Channels\Red;
+use Yajra\DataTables\DataTables;
 
 class CustomerController extends Controller
 {
@@ -32,12 +33,39 @@ class CustomerController extends Controller
         $this->customerService = $customerService;
     }
 
+    public function index()
+    {
+        return view('admin.customer.index');
+    }
+
+    public function getList()
+    {
+        return DataTables::of(
+            Customer::with(['cities', 'districts', 'wards'])->orderBy('created_at', 'desc')
+                ->get()
+        )
+            ->editColumn('index', function ($object) {
+                static $i = 0;
+                return ++$i;
+            })
+            ->editColumn('address', function ($object) {
+                return $object->note . ' -  ' . $object->wards->name . ' -  ' . $object->districts->name . ' -  ' . $object->cities->name;
+            })
+            ->addColumn('actions', function ($object) {
+                return [
+                    'id' => $object->id,
+                    'destroy' => ' ',
+                    'edit' => '',
+                ];
+            })
+            ->make(true);
+    }
     public function profile()
     {
         $customer_id = Auth::guard('customers')->user()->id;
         $customer = Customer::with(['cities', 'districts', 'wards'])->where('id', $customer_id)->first();
         $order = Order::with('orderItem.productVersions.products')->where('customer_id', $customer_id)->get();
-        $orde_count = Order::where('customer_id', $customer_id)->where('status',4)->count();
+        $orde_count = Order::where('customer_id', $customer_id)->where('status', 4)->count();
         $total_price = Order::where('customer_id', $customer_id)->where('status', OrderStatusEnum::DELIVERED)->sum('total_price');
         $city = $this->cityService->get_all();
         return view('outside.profile', [

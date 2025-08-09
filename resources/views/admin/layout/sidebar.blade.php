@@ -95,6 +95,22 @@
                 </a>
             </li>
             <li class="side-nav-item">
+                <a href="{{ route('admin.stockImports.index') }}" class="side-nav-link">
+                    <i class=" uil-down-arrow"></i>
+                    <span>
+                        Phiếu nhập kho
+                    </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ route('admin.stockExports.index') }}" class="side-nav-link">
+                    <i class="  uil-export"></i>
+                    <span>
+                        Phiếu xuất kho
+                    </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
                 <a href="\" class="side-nav-link">
                     <i class=" uil-usd-circle"></i>
                     <span>
@@ -116,9 +132,17 @@
                 </li>
                 <li class="side-nav-item">
                     <a href="{{ route('admin.members.index') }}" class="side-nav-link">
-                        <i class="uil uil-users-alt"></i>
+                        <i class="uil uil-user"></i>
                         <span>
-                            Tài khoản
+                            Tài khoản hệ thống
+                        </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="{{ route('admin.customers.index') }}" class="side-nav-link">
+                        <i class="uil uil-user-square"></i>
+                        <span>
+                            Tài khoản khách hàng
                         </span>
                     </a>
                 </li>

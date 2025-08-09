@@ -93,4 +93,13 @@ class StockImportController extends Controller
             'data' => $stock_import_detail,
         ]);
     }
+
+    public function updateStatus(Request $request)
+    {
+        $result = $this->service->updateStatus($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
+    }
 }

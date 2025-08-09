@@ -92,7 +92,7 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: `{{ route('admin.getData')}}`,
+                url: `{{ route('admin.getData') }}`,
                 method: 'GET',
                 success: function(result) {
                     const ctx = document.getElementById('myBarChart').getContext('2d');

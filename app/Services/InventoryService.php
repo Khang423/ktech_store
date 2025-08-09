@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Customer;
@@ -27,15 +28,15 @@ class InventoryService extends Controller
     public function getList()
     {
         return DataTables::of(
-            DB::table('inventories')
-                ->join('product_versions', 'inventories.product_version_id', '=', 'product_versions.id')
+            DB::table('stock_import_details')
+                ->join('product_versions', 'stock_import_details.product_version_id', '=', 'product_versions.id')
                 ->join('products', 'product_versions.product_id', '=', 'products.id')
                 ->select(
                     'products.id as id',
                     'products.thumbnail as thumbnail',
                     'products.name',
                     'products.slug',
-                    DB::raw('SUM(inventories.stock_quantity) as stock_quantity')
+                    DB::raw('SUM(stock_import_details.stock_quantity) as stock_quantity')
                 )
                 ->groupBy('products.id')
                 ->get()
@@ -64,29 +65,31 @@ class InventoryService extends Controller
     public function getListDetail($products)
     {
         return DataTables::of(
-            ProductVersion::where('product_versions.product_id', $products->id)
+            StockImportDetail::join('product_versions', 'stock_import_details.product_version_id', '=', 'product_versions.id')
+                ->where('product_versions.product_id', $products->id)
                 ->join('inventories', 'product_versions.id', '=', 'inventories.product_version_id')
-                ->join('stock_import_details', 'product_versions.id', '=', 'stock_import_details.product_version_id')
                 ->join('stock_imports', 'stock_imports.id', '=', 'stock_import_details.stock_import_id')
                 ->select([
-                    'stock_import_details.stock_import_id',
+                    'stock_import_details.id',
                     'stock_imports.ref_code',
-                    'product_versions.id as id',
+                    'stock_import_details.product_version_id',
                     'product_versions.config_name as name',
                     'stock_import_details.price as price',
                     'stock_import_details.final_price as final_price',
                     'stock_import_details.stock_quantity',
                     'stock_import_details.created_at as create_date',
+                    'stock_import_details.status',
                 ])
                 ->groupBy(
-                    'stock_import_details.stock_import_id',
+                    'stock_import_details.id',
                     'stock_imports.ref_code',
-                    'product_versions.id',
+                    'stock_import_details.product_version_id',
                     'product_versions.config_name',
                     'stock_import_details.price',
                     'stock_import_details.final_price',
                     'stock_import_details.stock_quantity',
                     'stock_import_details.created_at',
+                    'stock_import_details.status',
                 )
                 ->get()
         )
@@ -111,6 +114,12 @@ class InventoryService extends Controller
             })
             ->editColumn('created_at', function ($object) {
                 return $object->create_date;
+            })
+            ->editColumn('status', function ($object) {
+                if ($object->status == StatusEnum::ON) {
+                    return StatusEnum::ON;
+                }
+                return StatusEnum::OFF;
             })
             ->addColumn('actions', function ($object) {
                 return [
