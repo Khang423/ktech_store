@@ -65,7 +65,11 @@ class CustomerController extends Controller
         $customer_id = Auth::guard('customers')->user()->id;
         $customer = Customer::with(['cities', 'districts', 'wards'])->where('id', $customer_id)->first();
         $order = Order::with('orderItem.productVersions.products')->where('customer_id', $customer_id)->get();
+<<<<<<< HEAD
         $orde_count = Order::where('customer_id', $customer_id)->where('status', 4)->count();
+=======
+        $orde_count = Order::where('customer_id', $customer_id)->where('status',4)->count();
+>>>>>>> dc930179fddc3a818979281bcf47e0f29ad53138
         $total_price = Order::where('customer_id', $customer_id)->where('status', OrderStatusEnum::DELIVERED)->sum('total_price');
         $city = $this->cityService->get_all();
         return view('outside.profile', [
