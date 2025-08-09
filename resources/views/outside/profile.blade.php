@@ -149,7 +149,7 @@
                                                     @if ($i->status === 1)
                                                         <span class="text-info badge bg-light font-15">Chờ xác nhận</span>
                                                     @elseif ($i->status === 2)
-                                                        <span class="text-success badge bg-light font-15">Đãng xử lý</span>
+                                                        <span class="text-success badge bg-light font-15">Đang xử lý</span>
                                                     @elseif ($i->status === 3)
                                                         <span class="text-primary badge bg-light font-15">Đang giao</span>
                                                     @elseif ($i->status === 4)

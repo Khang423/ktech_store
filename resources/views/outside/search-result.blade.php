@@ -39,15 +39,15 @@
                 <div class="content">
                     <div class="input-price">
                         <div class="start-price">
-                            <input type="text">
+                            <input type="text" value="0₫">
                         </div>
                         <span class="d-flex justify-content-center align-items-center fs-3"> - </span>
                         <div class="end-price">
-                            <input type="text">
+                            <input type="text" id="price-display">
                         </div>
                     </div>
                     <div class="animation-ragne-price">
-                        <input type="range">
+                        <input type="range" min="0" id="price-range" max="100000000" step="1000000">
                     </div>
                 </div>
             </div>
@@ -268,6 +268,14 @@
                     @endforeach
                 </div>
             </div>
+            <div class="actions">
+                <div class="btn-delete-filter">
+                    <span>Xoá bộ lộc</span>
+                </div>
+                <div class="btn-filter">
+                    <span>Áp dụng</span>
+                </div>
+            </div>
         </div>
         <div class="view-product">
             <section id="section-laptop">
@@ -284,11 +292,6 @@
                             <div class="product-price">
                                 {{ formatPriceToVND($item->final_price) }}
                             </div>
-                            <div class="product-rate d-flex">
-                                <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                <div class="icon-heart">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -298,5 +301,14 @@
 @endsection
 @push('js')
     <script src="{{ asset('js/outside/search-result.js') }}"></script>
-    <script></script>
+    <script>
+        $(document).ready(() => {
+            const priceRange = document.getElementById('price-range');
+            const priceDisplay = document.getElementById('price-display');
+            priceRange.addEventListener('input', () => {
+                const value = parseInt(priceRange.value);
+                priceDisplay.value = value.toLocaleString('vi-VN') + '₫';
+            });
+        });
+    </script>
 @endpush

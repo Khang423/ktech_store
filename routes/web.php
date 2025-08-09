@@ -24,6 +24,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\TagDetailController;
 use App\Http\Controllers\UsageTypeController;
 use App\Mail\CheckPassMail;
+use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -408,6 +409,7 @@ Route::group(
                 Route::post('/getDataProduct', [StockImportController::class, 'getDataProduct'])->name('getDataProduct');
                 Route::post('/getDataProductVersion', [StockImportController::class, 'getDataProductVersion'])->name('getDataProductVersion');
                 Route::post('/get-data-stock-import-detail', [StockImportController::class, 'getDataStockImportDetail'])->name('getDataStockImportDetail');
+                Route::post('/update-status', [StockImportController::class, 'updateStatus'])->name('updateStatus');
             },
         );
 
@@ -486,5 +488,17 @@ Route::group(
             },
         );
         // Discount Route
+
+        // Order Route
+        Route::group(
+            [
+                'prefix' => 'customer',
+                'as' => 'customers.',
+            ],
+            function () {
+                Route::get('/', [CustomerController::class, 'index'])->name('index');
+                Route::post('/getList', [CustomerController::class, 'getList'])->name('getList');
+            },
+        );
     },
 );

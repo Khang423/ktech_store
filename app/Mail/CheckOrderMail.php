@@ -25,7 +25,7 @@ class CheckOrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Hóa đơn #' . $this->order->order_code
+            subject: 'K-Tech Store'
         );
     }
 

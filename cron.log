@@ -1,0 +1,456 @@
+
+  2025-08-09 18:04:02 Running ['artisan' test:cron] ............ 262.51ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:04:02 Running ['artisan' test:cron] ............ 226.85ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:05:02 Running ['artisan' test:cron] ............ 282.21ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:05:02 Running ['artisan' test:cron] ............ 243.16ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:06:02 Running ['artisan' test:cron] ............ 495.43ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:06:02 Running ['artisan' test:cron] ............ 405.69ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:07:02 Running ['artisan' test:cron] ............ 293.41ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:07:02 Running ['artisan' test:cron] ............ 295.34ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:08:02 Running ['artisan' test:cron] ............ 165.35ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:08:02 Running ['artisan' test:cron] ............ 178.47ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:09:01 Running ['artisan' test:cron] ............ 209.24ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:09:01 Running ['artisan' test:cron] ............ 177.17ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:10:01 Running ['artisan' test:cron] ............ 158.92ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:10:01 Running ['artisan' test:cron] ............ 145.10ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:11:02 Running ['artisan' test:cron] ............ 190.87ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:11:02 Running ['artisan' test:cron] ............ 164.41ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:12:01 Running ['artisan' test:cron] ............ 160.76ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:12:01 Running ['artisan' test:cron] ............ 152.27ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:14:41 Running ['artisan' test:cron] ............ 163.97ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:14:41 Running ['artisan' test:cron] ............ 178.33ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:14:42 Running ['artisan' test:cron] ............ 225.05ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:14:42 Running ['artisan' test:cron] ............ 168.79ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:15:01 Running ['artisan' test:cron] ............ 275.92ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:15:02 Running ['artisan' test:cron] ............ 290.63ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:16:01 Running ['artisan' test:cron] ............ 209.26ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:16:02 Running ['artisan' test:cron] ............ 180.15ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:17:02 Running ['artisan' test:cron] ............ 542.83ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:17:02 Running ['artisan' test:cron] ............ 401.52ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:18:01 Running ['artisan' test:cron] ............ 173.50ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:18:01 Running ['artisan' test:cron] ............ 166.96ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:19:02 Running ['artisan' test:cron] ............ 213.74ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:19:02 Running ['artisan' test:cron] ............ 189.35ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:20:01 Running ['artisan' test:cron] ............ 189.82ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:20:02 Running ['artisan' test:cron] ............ 197.86ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:21:01 Running ['artisan' test:cron] ............ 221.92ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:21:01 Running ['artisan' test:cron] ............ 168.12ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:22:02 Running ['artisan' test:cron] ............ 182.63ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:22:02 Running ['artisan' test:cron] ............ 179.83ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:23:02 Running ['artisan' test:cron] ............ 215.82ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:23:02 Running ['artisan' test:cron] ............ 174.56ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:24:01 Running ['artisan' test:cron] ............ 221.96ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:24:02 Running ['artisan' test:cron] ............ 177.22ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:25:01 Running ['artisan' test:cron] ............ 190.87ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:25:01 Running ['artisan' test:cron] ............ 171.97ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:26:02 Running ['artisan' test:cron] ............ 208.50ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:26:02 Running ['artisan' test:cron] ............ 221.56ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:27:02 Running ['artisan' test:cron] ............ 187.97ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:27:02 Running ['artisan' test:cron] ............ 171.53ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:28:01 Running ['artisan' test:cron] ............ 156.61ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:28:01 Running ['artisan' test:cron] ............ 154.48ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:29:01 Running ['artisan' test:cron] ............ 160.68ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:29:01 Running ['artisan' test:cron] ............ 175.78ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:30:02 Running ['artisan' test:cron] ............ 165.18ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:30:02 Running ['artisan' test:cron] ............ 168.03ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:31:01 Running ['artisan' test:cron] ............ 165.33ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:31:01 Running ['artisan' test:cron] ............ 159.78ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:32:01 Running ['artisan' test:cron] ............ 167.86ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:32:01 Running ['artisan' test:cron] ............ 151.04ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:52:23 Running ['artisan' test:cron] ............ 299.14ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:52:23 Running ['artisan' test:cron] ............ 199.99ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:53:01 Running ['artisan' test:cron] ............ 226.68ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:53:01 Running ['artisan' test:cron] ............ 241.63ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:54:01 Running ['artisan' test:cron] ............ 176.18ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:54:01 Running ['artisan' test:cron] ............ 160.05ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:55:01 Running ['artisan' test:cron] ............ 493.30ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:55:02 Running ['artisan' test:cron] ............ 502.13ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:56:02 Running ['artisan' test:cron] ............ 612.58ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:56:03 Running ['artisan' test:cron] ............ 437.67ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:57:02 Running ['artisan' test:cron] ............ 358.96ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:57:02 Running ['artisan' test:cron] ............ 543.97ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:58:01 Running ['artisan' test:cron] ............ 404.19ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:58:02 Running ['artisan' test:cron] ............ 428.28ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 18:59:02 Running ['artisan' test:cron] ............ 175.98ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 18:59:02 Running ['artisan' test:cron] ............ 163.86ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:00:01 Running ['artisan' test:cron] ............ 231.26ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:00:02 Running ['artisan' test:cron] ............ 188.13ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:01:01 Running ['artisan' test:cron] ............ 202.75ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:01:01 Running ['artisan' test:cron] ............ 200.80ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:02:01 Running ['artisan' test:cron] ............ 168.60ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:02:01 Running ['artisan' test:cron] ............ 156.24ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:03:02 Running ['artisan' test:cron] ............ 197.78ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:03:02 Running ['artisan' test:cron] ............ 208.42ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:04:01 Running ['artisan' test:cron] ............ 220.78ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:04:02 Running ['artisan' test:cron] ............ 219.47ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:05:01 Running ['artisan' test:cron] ............ 147.38ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:05:01 Running ['artisan' test:cron] ............ 143.40ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:06:02 Running ['artisan' test:cron] ............ 277.02ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:06:03 Running ['artisan' test:cron] ............ 263.66ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:07:01 Running ['artisan' test:cron] ............ 180.36ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:07:01 Running ['artisan' test:cron] ............ 180.25ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:08:01 Running ['artisan' test:cron] ............ 301.51ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:08:01 Running ['artisan' test:cron] ............ 270.78ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:09:01 Running ['artisan' test:cron] ............ 276.75ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:09:01 Running ['artisan' test:cron] ............ 187.82ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:10:02 Running ['artisan' test:cron] ............ 174.79ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:10:02 Running ['artisan' test:cron] ............ 175.88ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:11:02 Running ['artisan' test:cron] ............ 387.25ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:11:02 Running ['artisan' test:cron] ............ 252.45ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:12:02 Running ['artisan' test:cron] ............ 258.17ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:12:02 Running ['artisan' test:cron] ............ 272.60ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:13:01 Running ['artisan' test:cron] ............ 198.59ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:13:01 Running ['artisan' test:cron] ............ 180.56ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:14:02 Running ['artisan' test:cron] ............ 240.36ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:14:02 Running ['artisan' test:cron] ............ 144.32ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:15:02 Running ['artisan' test:cron] ............ 235.05ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:15:02 Running ['artisan' test:cron] ............ 244.98ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:16:01 Running ['artisan' test:cron] ............ 145.29ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:16:02 Running ['artisan' test:cron] ............ 258.91ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:17:01 Running ['artisan' test:cron] ............ 343.88ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:17:02 Running ['artisan' test:cron] ............ 296.74ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:18:01 Running ['artisan' test:cron] ............ 154.15ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:18:01 Running ['artisan' test:cron] ............ 175.28ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:19:01 Running ['artisan' test:cron] ............ 177.17ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:19:01 Running ['artisan' test:cron] ............ 143.80ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:20:02 Running ['artisan' test:cron] ............ 173.58ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:20:02 Running ['artisan' test:cron] ............ 177.11ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:21:02 Running ['artisan' test:cron] ............ 210.72ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:21:02 Running ['artisan' test:cron] ............ 271.16ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:22:01 Running ['artisan' test:cron] ............ 201.98ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:22:02 Running ['artisan' test:cron] ............ 169.01ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:23:01 Running ['artisan' test:cron] ............ 161.16ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:23:01 Running ['artisan' test:cron] ............ 138.48ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:24:01 Running ['artisan' test:cron] ............ 166.56ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:24:01 Running ['artisan' test:cron] ............ 165.00ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:25:01 Running ['artisan' test:cron] ............ 157.28ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:25:02 Running ['artisan' test:cron] ............ 136.67ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:26:01 Running ['artisan' test:cron] ............ 177.83ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:26:01 Running ['artisan' test:cron] ............ 153.31ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 19:27:02 Running ['artisan' test:cron] ............ 190.34ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 19:27:02 Running ['artisan' test:cron] ............ 151.29ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:01:24 Running ['artisan' test:cron] ............ 200.93ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:01:25 Running ['artisan' test:cron] ............ 239.84ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:02:01 Running ['artisan' test:cron] ............ 204.20ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:02:01 Running ['artisan' test:cron] ............ 213.79ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:03:02 Running ['artisan' test:cron] ............ 230.73ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:03:02 Running ['artisan' test:cron] ............ 199.94ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:04:02 Running ['artisan' test:cron] ............ 283.89ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:04:02 Running ['artisan' test:cron] ............ 520.62ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:05:01 Running ['artisan' test:cron] ............ 287.48ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:05:01 Running ['artisan' test:cron] ............ 156.43ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:06:02 Running ['artisan' test:cron] ............ 202.30ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:06:02 Running ['artisan' test:cron] ............ 174.82ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:07:01 Running ['artisan' test:cron] ............ 147.31ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:07:01 Running ['artisan' test:cron] ............ 160.05ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:08:01 Running ['artisan' test:cron] ............ 231.12ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:08:01 Running ['artisan' test:cron] ............ 193.92ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:09:02 Running ['artisan' test:cron] ............ 555.28ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:09:02 Running ['artisan' test:cron] ............ 549.71ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:10:01 Running ['artisan' test:cron] ............ 316.96ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:10:02 Running ['artisan' test:cron] ............ 273.58ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+
+
+  2025-08-09 20:11:01 Running ['artisan' test:cron] ............ 176.33ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+  2025-08-09 20:11:01 Running ['artisan' test:cron] ............ 174.09ms DONE
+  ⇂ '/usr/local/bin/php' 'artisan' test:cron > '/dev/null' 2>&1  
+

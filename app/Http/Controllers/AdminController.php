@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PusherEvent;
 use App\Models\Product;
 use App\Models\ProductVersion;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ class AdminController extends Controller
 {
     public function index()
     {
+
         $countProduct = ProductVersion::count();
         return view('admin.index', [
             'countProduct' => $countProduct

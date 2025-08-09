@@ -85,10 +85,6 @@ const setDataSearch = (response) => {
                     <div class="product-price">
                         ${formattedPrice}
                     </div>
-                    <div class="product-rate d-flex">
-                        <img src="/asset/outside/icon/star.png" alt="star">
-                        <div class="icon-heart"></div>
-                    </div>
                 </div>
             </div>`;
 

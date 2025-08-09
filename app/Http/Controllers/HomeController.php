@@ -42,6 +42,9 @@ class HomeController extends Controller
         })->with([
             'products' => function ($query) {
                 $query->where('status', StatusEnum::ON);
+            },
+            'stockImportDetails' => function ($query) {
+                $query->where('status', StatusEnum::ON);
             }
         ])->get();
         $category_product = CategoryProduct::get();
@@ -133,7 +136,13 @@ class HomeController extends Controller
         $customer_id = Auth::guard('customers')->user()->id;
         $cart = Cart::where('customer_id', $customer_id)->first('id');
         $cart_item = CartItem::where('cart_id', $cart->id)
-            ->with('productVersion.products')
+            ->with([
+                'productVersion.products',
+                'productVersion.stockImportDetails' => function ($q) {
+                    $q->where('status', 0)
+                        ->where('stock_quantity', '>', 0);
+                }
+            ])
             ->get();
         return view('outside.cart', [
             'title' => 'Giỏ hàng của tôi',

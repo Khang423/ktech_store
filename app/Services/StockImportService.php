@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Customer;
@@ -39,7 +40,6 @@ class StockImportService extends Controller
             ->editColumn('total_amount', function ($object) {
                 return number_format($object->total_amount, 0, ',', '.') . ' ₫';
             })
-
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
@@ -95,6 +95,24 @@ class StockImportService extends Controller
                 'total_amount' => $total_amount,
             ]);
 
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function updateStatus($request)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->status === 'checked') {
+                StockImportDetail::where('id', $request->id)->update(['status' => StatusEnum::ON]);
+            } else {
+                StockImportDetail::where('id', $request->id)->update(['status' => StatusEnum::OFF]);
+            }
             DB::commit();
             return true;
         } catch (\Exception $e) {

@@ -16,7 +16,7 @@
     </section>
     <div class="product-title mt-3">
         <h2 class="text-dark">
-            LAPTOP
+            Laptop
         </h2>
     </div>
     <section id="section-laptop">
@@ -27,10 +27,6 @@
                         <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
                             <div class="product-content" data-id="product-id">
                                 <div class="product-discount d-flex">
-                                    <img src="{{ asset('asset/outside/icon/sale.png') }}" alt="Icon sale">
-                                    <div class="percent-discount">
-                                        Giảm 30%
-                                    </div>
                                 </div>
                                 <div class="product-thumbnail">
                                     <img src="{{ asset('asset/admin/products') . '/' . $item->products->id .'/'. $item->products->thumbnail }}"
@@ -40,13 +36,11 @@
                                     {{ $item->config_name }}
                                 </div>
                                 <div class="product-price">
-                                    {{ formatPriceToVND($item->final_price) }}
-                                </div>
-                                <div class="product-rate d-flex">
-                                    <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                    <span class="rate-point">4.8</span>
-                                    <div class="icon-heart">
-                                    </div>
+                                    @if ($item->final_price > 0)
+                                        {{ formatPriceToVND($item->final_price) }}
+                                    @else
+                                        Đang cập nhật
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -57,7 +51,7 @@
     </section>
     <div class="product-title mt-3">
         <h2 class="text-dark">
-            ĐIỆN THOẠI
+            Điện thoại
         </h2>
     </div>
     <section id="section-laptop">
@@ -68,10 +62,6 @@
                         <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
                             <div class="product-content" data-id="product-id">
                                 <div class="product-discount d-flex">
-                                    <img src="{{ asset('asset/outside/icon/sale.png') }}" alt="Icon sale">
-                                    <div class="percent-discount">
-                                        Giảm 30%
-                                    </div>
                                 </div>
                                 <div class="product-thumbnail">
                                     <img src="{{ asset('asset/admin/products') . '/' . $item->products->id .'/'. $item->products->thumbnail }}"
@@ -82,11 +72,6 @@
                                 </div>
                                 <div class="product-price">
                                     {{ formatPriceToVND($item->final_price) }}
-                                </div>
-                                <div class="product-rate d-flex">
-                                    <img src="{{ asset('asset/outside/icon/star.png') }}" alt="">
-                                    <div class="icon-heart">
-                                    </div>
                                 </div>
                             </div>
                         </div>

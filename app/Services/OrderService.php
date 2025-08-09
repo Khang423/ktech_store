@@ -110,6 +110,7 @@ class OrderService extends Controller
 
                 $stock_import_detail = StockImportDetail::where('product_version_id', $item['product_version_id'])
                     ->where('stock_quantity', '>', 0)
+                    ->where('status', '0')
                     ->orderBy('stock_import_id', 'asc')
                     ->first();
 
@@ -149,6 +150,16 @@ class OrderService extends Controller
 
             session(['order_info' => $order]);
 
+            // send mail
+            $or = Order::with(['orderItem.productVersions', 'customers'])
+                ->where('id', $order->id)
+                ->first();
+            $pdf = Pdf::loadView('pdf.invoice-import', [
+                'data' => $or,
+            ]);
+
+            Mail::to($or->customers->email)->send(new CheckOrderMail($or, $pdf->output()));
+
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -166,13 +177,6 @@ class OrderService extends Controller
                 $this->model->where('id', $request->order_id)->update([
                     'status' => OrderStatusEnum::PROCCESSING
                 ]);
-                $or = Order::with(['orderItem.productVersions', 'customers'])
-                    ->where('id', $request->order_id)
-                    ->first();
-                $pdf = Pdf::loadView('pdf.invoice-import', [
-                    'data' => $or,
-                ]);
-                Mail::to($or->customers->email)->send(new CheckOrderMail($or, $pdf->output()));
             } else if ($request->status === 'cancel') {
                 $this->model->where('id', $request->order_id)->update([
                     'status' => OrderStatusEnum::CANCEL

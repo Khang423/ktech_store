@@ -54,10 +54,12 @@ $(document).ready(function () {
         $(".product-check:checked").each(function () {
             const price = parseInt($(this).data("price")) || 0;
             const quantity = parseInt($(this).data("quantity")) || 0;
-            const thumbnail = $(this).data("thumbnail") || ' ';
-            const name = $(this).data("name") || '';
+            const thumbnail = $(this).data("thumbnail") || " ";
+            const name = $(this).data("name") || "";
             const product_id = parseInt($(this).data("product-id"));
-            const product_version_id = parseInt($(this).data("product-version-id"));
+            const product_version_id = parseInt(
+                $(this).data("product-version-id")
+            );
 
             const product_info = {
                 price: price,
@@ -69,7 +71,10 @@ $(document).ready(function () {
             };
             selectedProducts.push(product_info);
         });
-        sessionStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+        sessionStorage.setItem(
+            "selectedProducts",
+            JSON.stringify(selectedProducts)
+        );
         window.location.href = RouteOrder;
     });
 });
@@ -140,8 +145,11 @@ function handleQuantityChange(productId, action) {
             action,
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
-        success: function () {
-            location.reload();
+        success: function (response) {
+            console.log(response);
+            if (response.message === "out_of_stock") {
+                toast("Số lượng vượt quá số lượng hiện có trong kho ", "error");
+            }
         },
         error: function (data) {
             console.log(data.responseJSON.errors);

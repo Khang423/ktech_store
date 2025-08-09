@@ -24,14 +24,11 @@
         @foreach ($cart_item as $item)
             <div class="item mb-2">
                 <div class="product-checkbox">
-                    <input type="checkbox"
-                        data-price="{{ $item->unit_price }}"
+                    <input type="checkbox" data-price="{{ $item->unit_price }}"
                         data-product-id="{{ $item->productVersion->products->id }}"
-                        data-product-version-id="{{ $item->productVersion->id }}"
-                        data-quantity="{{ $item->quantity }}"
+                        data-product-version-id="{{ $item->productVersion->id }}" data-quantity="{{ $item->quantity }}"
                         data-thumbnail="{{ $item->productVersion->products->thumbnail }}"
-                        data-name="{{ $item->productVersion->config_name }}"
-                        class="form-check-input product-check"
+                        data-name="{{ $item->productVersion->config_name }}" class="form-check-input product-check"
                         id="product-check">
                 </div>
                 <div class="product-thumbnail">
@@ -49,21 +46,29 @@
                     </div>
                 </div>
                 <div class="action">
-                    <div class="btn-delete" data-product-id="{{ $item->id }}">
-                        <i class="uil uil-trash-alt"></i>
+                    <div class="row">
+                        <div class="btn-delete" data-product-id="{{ $item->id }}">
+                            <i class="uil uil-trash-alt"></i>
+                        </div>
+                        <div class="product-quantity mt-1">
+                            <div class="quantity-reduce" data-product-id="{{ $item->product_id }}">
+                                <i class="uil uil-minus"></i>
+                            </div>
+                            <div class="quantity">
+                                {{ $item->quantity }}
+                            </div>
+                            <div class="quantity-increase" data-product-id="{{ $item->product_id }}">
+                                <i class="uil uil-plus"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="product-quantity mt-1">
-                        <div class="quantity-reduce" data-product-id="{{ $item->product_id }}">
-                            <i class="uil uil-minus"></i>
-                        </div>
-                        <div class="quantity">
-                            {{ $item->quantity }}
-                        </div>
-                        <div class="quantity-increase" data-product-id="{{ $item->product_id }}">
-                            <i class="uil uil-plus"></i>
+                    <div class="row mt-2">
+                        <div class="d-flex align-items-end">
+                            Kho : {{ $item->productVersion->stockImportDetails->first()->stock_quantity }}
                         </div>
                     </div>
                 </div>
+
             </div>
         @endforeach
         <div class="view-price">
