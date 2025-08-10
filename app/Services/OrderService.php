@@ -155,11 +155,8 @@ class OrderService extends Controller
             $or = Order::with(['orderItem.productVersions', 'customers'])
                 ->where('id', $order->id)
                 ->first();
-            $pdf = Pdf::loadView('pdf.invoice-import', [
-                'data' => $or,
-            ]);
 
-            Mail::to($or->customers->email)->send(new CheckOrderMail($or, $pdf->output()));
+            Mail::to($or->customers->email)->send(new CheckOrderMail($or));
 
             DB::commit();
             return true;

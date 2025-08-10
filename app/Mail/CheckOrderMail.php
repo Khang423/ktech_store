@@ -16,10 +16,10 @@ class CheckOrderMail extends Mailable
     public $order;
     public $pdfContent;
 
-    public function __construct($order, $pdfContent)
+    public function __construct($order)
     {
         $this->order = $order;
-        $this->pdfContent = $pdfContent;
+        // $this->pdfContent = $pdfContent;
     }
 
     public function envelope(): Envelope
@@ -42,8 +42,8 @@ class CheckOrderMail extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromData(fn() => $this->pdfContent, "hoa-don-{$this->order->order_code}.pdf")
-                ->withMime('application/pdf'),
+            // Attachment::fromData(fn() => $this->pdfContent, "hoa-don-{$this->order->order_code}.pdf")
+            //     ->withMime('application/pdf'),
         ];
     }
 }

@@ -23,9 +23,11 @@ use App\Http\Controllers\StockImportController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TagDetailController;
 use App\Http\Controllers\UsageTypeController;
+use App\Mail\CheckOrderMail;
 use App\Mail\CheckPassMail;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -62,7 +64,6 @@ Route::group(
         Route::get('/order-invoice', [HomeController::class, 'orderInvoice'])->name('orderInvoice');
     },
 );
-
 
 Route::group(
     [

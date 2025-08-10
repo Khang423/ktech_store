@@ -31,27 +31,26 @@ class AdminController extends Controller
 
     public function getData()
     {
-        $products = DB::table('stock_exports')
+        // Query chung cho các thống kê
+        $baseQuery = DB::table('stock_exports')
             ->where('stock_exports.status', OrderStatusEnum::SHIPED)
             ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+            ->join('order_items', 'order_items.order_id', '=', 'orders.id');
+
+        // Tổng sản phẩm theo tháng
+        $products = (clone $baseQuery)
             ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
             ->select([
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
                 DB::raw('SUM(order_items.quantity) as total_quantity'),
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
             ])
-            ->groupBy(
-                DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'),
-            )
-            ->orderBy(DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'), 'asc')
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
             ->get();
 
-
-        $products_detail = DB::table('stock_exports')
-            ->where('stock_exports.status', OrderStatusEnum::SHIPED)
-            ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+        // Chi tiết sản phẩm theo tháng
+        $productsDetail = (clone $baseQuery)
             ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
             ->select([
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
@@ -59,137 +58,107 @@ class AdminController extends Controller
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
                 'product_versions.config_name as product_name',
             ])
-            ->groupBy(
-                DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'),
-                'product_versions.config_name'
-            )
-            ->orderBy(DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'), 'asc')
+            ->groupBy('month', 'product_versions.config_name')
+            ->orderBy('month', 'asc')
             ->get();
 
-        $order = DB::table('stock_exports')
-            ->where('stock_exports.status', OrderStatusEnum::SHIPED)
-            ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+        // Tổng đơn hàng theo tháng
+        $orders = (clone $baseQuery)
             ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
             ->select([
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
-                DB::raw('COUNT(orders.id) as sum_order')
+                DB::raw('COUNT(DISTINCT orders.id) as sum_order')
             ])
-            ->groupBy(
-                DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'),
-            )
-            ->orderBy(DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'), 'asc')
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
             ->get();
 
-        $stock_export = DB::table('stock_exports')
-            ->where('stock_exports.status', OrderStatusEnum::SHIPED)
-            ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+        // Doanh thu và lợi nhuận (chỉ cần 1 dòng)
+        $stockExport = (clone $baseQuery)
             ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id')
             ->select([
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
                 DB::raw('SUM((order_items.unit_price - stock_import_details.price) * order_items.quantity) as total_profit'),
             ])
-            ->get();
+            ->first();
 
-        $labels = $products->pluck('month');
-        $data = $products->pluck('total_price');
-        $revenus = $stock_export->pluck('total_price');
-        $profit = $stock_export->pluck('total_profit');
-
+        // Trả dữ liệu
         return response()->json([
-            'labels' => $labels,
-            'data' => $data,
-            'labels_detail' => $products_detail->pluck('product_name'),
-            'data_detail' => $products_detail->pluck('total_price'),
-            'revenus' => $revenus,
-            'profit' => $profit,
-            'order' => $order->pluck('sum_order'),
+            'labels'        => $products->pluck('month'),
+            'data'          => $products->pluck('total_price'),
+            'labels_detail' => $productsDetail->pluck('product_name'),
+            'data_detail'   => $productsDetail->pluck('total_price'),
+            'revenus'       => $stockExport->total_price ?? 0,
+            'profit'        => $stockExport->total_profit ?? 0,
+            'order'         => $orders->pluck('sum_order'),
         ]);
     }
+
 
     public function chartSearch(Request $request)
     {
         $fromDate = Carbon::createFromFormat('m/d/Y', $request->from_date)->startOfDay();
         $toDate   = Carbon::createFromFormat('m/d/Y', $request->to_date)->endOfDay();
 
-        $products = DB::table('stock_exports')
+        // Query chung
+        $baseQuery = DB::table('stock_exports')
             ->where('stock_exports.status', OrderStatusEnum::SHIPED)
             ->whereBetween('stock_exports.created_at', [$fromDate, $toDate])
             ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
             ->join('order_items', 'order_items.order_id', '=', 'orders.id')
-            ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
+            ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id');
+
+        // Tổng sản phẩm theo tháng
+        $products = (clone $baseQuery)
             ->select([
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
                 DB::raw('SUM(order_items.quantity) as total_quantity'),
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
             ])
-            ->groupBy(
-                DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'),
-            )
-            ->orderBy(DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'), 'asc')
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
             ->get();
 
-        $products_detail = DB::table('stock_exports')
-            ->where('stock_exports.status', OrderStatusEnum::SHIPED)
-            ->whereBetween('stock_exports.created_at', [$fromDate, $toDate])
-            ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
-            ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
+        // Chi tiết sản phẩm theo tháng
+        $productsDetail = (clone $baseQuery)
             ->select([
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
                 DB::raw('SUM(order_items.quantity) as total_quantity'),
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
                 'product_versions.config_name as product_name',
             ])
-            ->groupBy(
-                DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'),
-                'product_versions.config_name'
-            )
-            ->orderBy(DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'), 'asc')
+            ->groupBy('month', 'product_versions.config_name')
+            ->orderBy('month', 'asc')
             ->get();
 
-        $order = DB::table('stock_exports')
-            ->where('stock_exports.status', OrderStatusEnum::SHIPED)
-            ->whereBetween('stock_exports.created_at', [$fromDate, $toDate])
-            ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
-            ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
+        // Tổng đơn hàng theo tháng
+        $orders = (clone $baseQuery)
             ->select([
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
-                DB::raw('COUNT(orders.id) as sum_order')
+                DB::raw('COUNT(DISTINCT orders.id) as sum_order')
             ])
-            ->groupBy(
-                DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'),
-            )
-            ->orderBy(DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y")'), 'asc')
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
             ->get();
 
-        $stock_export = DB::table('stock_exports')
-            ->where('stock_exports.status', OrderStatusEnum::SHIPED)
-            ->whereBetween('stock_exports.created_at', [$fromDate, $toDate])
-            ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+        // Doanh thu và lợi nhuận
+        $stockExport = (clone $baseQuery)
             ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id')
             ->select([
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
                 DB::raw('SUM((order_items.unit_price - stock_import_details.price) * order_items.quantity) as total_profit'),
             ])
-            ->get();
+            ->first(); // Chỉ cần 1 dòng
 
-        $labels = $products->pluck('month');
-        $data = $products->pluck('total_price');
-        $revenus = $stock_export->pluck('total_price');
-        $profit = $stock_export->pluck('total_profit');
-
+        // Chuẩn bị dữ liệu trả về
         return response()->json([
-            'labels' => $labels,
-            'data' => $data,
-            'labels_detail' => $products_detail->pluck('product_name'),
-            'data_detail' => $products_detail->pluck('total_price'),
-            'revenus' => $revenus,
-            'profit' => $profit,
-            'order' => $order->pluck('sum_order'),
+            'labels'        => $products->pluck('month'),
+            'data'          => $products->pluck('total_price'),
+            'labels_detail' => $productsDetail->pluck('product_name'),
+            'data_detail'   => $productsDetail->pluck('total_price'),
+            'revenus'       => $stockExport->total_price ?? 0,
+            'profit'        => $stockExport->total_profit ?? 0,
+            'order'         => $orders->pluck('sum_order'),
         ]);
     }
 }
