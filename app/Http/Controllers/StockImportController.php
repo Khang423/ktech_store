@@ -93,7 +93,6 @@ class StockImportController extends Controller
             'data' => $stock_import_detail,
         ]);
     }
-<<<<<<< HEAD
 
     public function updateStatus(Request $request)
     {
@@ -103,6 +102,4 @@ class StockImportController extends Controller
         }
         return $this->errorResponse();
     }
-=======
->>>>>>> dc930179fddc3a818979281bcf47e0f29ad53138
 }

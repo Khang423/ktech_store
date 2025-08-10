@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StockExport extends Model
 {
 
-    protected $fillbale = [
+    protected $fillable = [
         'ref_code',
         'order_id',
         'member_id',
@@ -48,10 +48,14 @@ class StockExport extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return date(' H:i:s d/m/Y', strtotime($value));
+        return date(' d/m/Y H:i:s ', strtotime($value));
     }
     public function getUpdatedAtAttribute($value)
     {
-        return date(' H:i:s d/m/Y', strtotime($value));
+        return date(' d/m/Y H:i:s ', strtotime($value));
+    }
+    public function orders()
+    {
+        return  $this->belongsTo(Order::class, 'order_id', 'id');
     }
 }

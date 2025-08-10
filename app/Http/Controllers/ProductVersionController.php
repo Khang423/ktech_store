@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Enums\StatusEnum;
 use App\Http\Requests\Admin\product_version\UpdateRequest;
 use App\Http\Requests\Admin\product_version\StoreRequest;
 use App\Models\Brand;
@@ -71,10 +71,9 @@ class ProductVersionController extends Controller
     {
         $laptopspec = LaptopSpec::where('product_id', $product_version->id)->first();
         $phonespec = PhoneSpec::where('product_id', $product_version->id)->first();
-        $stock_import_detail = StockImportDetail::where('product_version_id', $product_version->id)->get();
         $stock_import = StockImport::with('stockImportDetails')
             ->wherehas('stockImportDetails', function ($query) use ($product_version) {
-                $query->where('product_version_id', $product_version->id);
+                $query->where('product_version_id', $product_version->id)->where('status', StatusEnum::ON);
             })->get();
 
         return view('admin.productVersion.edit', [
@@ -85,7 +84,6 @@ class ProductVersionController extends Controller
             'productVersions' => $product_version,
             'laptopSpec' => $laptopspec,
             'phoneSpec' => $phonespec,
-            'stock_import_detail' => $stock_import_detail,
             'stock_import' => $stock_import
         ]);
     }

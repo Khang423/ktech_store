@@ -15,67 +15,73 @@
         </div>
     </section>
     <div class="product-title mt-3">
-        <h2 class="text-dark">
-            Laptop
-        </h2>
+        <h3 class="text-dark">
+            LAPTOP MỚI
+        </h3>
     </div>
     <section id="section-laptop">
         <div class="swiper-product-item">
             <div class="swiper-wrapper">
                 @foreach ($product_version as $item)
-                    <div class="swiper-slide">
-                        <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
-                            <div class="product-content" data-id="product-id">
-                                <div class="product-discount d-flex">
-                                </div>
-                                <div class="product-thumbnail">
-                                    <img src="{{ asset('asset/admin/products') . '/' . $item->products->id .'/'. $item->products->thumbnail }}"
-                                        alt="">
-                                </div>
-                                <div class="product-title ">
-                                    {{ $item->config_name }}
-                                </div>
-                                <div class="product-price">
-                                    @if ($item->final_price > 0)
-                                        {{ formatPriceToVND($item->final_price) }}
-                                    @else
-                                        Đang cập nhật
-                                    @endif
+                    @if ($item->products->category_product_id == 1)
+                        <div class="swiper-slide">
+                            <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
+                                <div class="product-content" data-id="product-id">
+                                    <div class="product-discount d-flex"></div>
+                                    <div class="product-thumbnail">
+                                        <img src="{{ asset('asset/admin/products/' . $item->products->id . '/' . $item->products->thumbnail) }}"
+                                            alt="">
+                                    </div>
+                                    <div class="product-title">
+                                        {{ $item->config_name }}
+                                    </div>
+                                    <div class="product-price">
+                                        @if ($item->final_price > 0)
+                                            {{ formatPriceToVND($item->final_price) }}
+                                        @else
+                                            Đang cập nhật
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>
     </section>
     <div class="product-title mt-3">
-        <h2 class="text-dark">
-            Điện thoại
-        </h2>
+        <h3 class="text-dark">
+            ĐIỆN THOẠI
+        </h3>
     </div>
     <section id="section-laptop">
         <div class="swiper-product-item">
             <div class="swiper-wrapper">
                 @foreach ($product_version as $item)
-                    <div class="swiper-slide">
-                        <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
-                            <div class="product-content" data-id="product-id">
-                                <div class="product-discount d-flex">
-                                </div>
-                                <div class="product-thumbnail">
-                                    <img src="{{ asset('asset/admin/products') . '/' . $item->products->id .'/'. $item->products->thumbnail }}"
-                                        alt="">
-                                </div>
-                                <div class="product-title ">
-                                    {{ $item->name }}
-                                </div>
-                                <div class="product-price">
-                                    {{ formatPriceToVND($item->final_price) }}
+                    @if ($item->products->category_product_id == 2)
+                        <div class="swiper-slide">
+                            <div class="card-product" data-id="{{ $item->id }}" data-slug="{{ $item->slug }}">
+                                <div class="product-content" data-id="product-id">
+                                    <div class="product-discount d-flex"></div>
+                                    <div class="product-thumbnail">
+                                        <img src="{{ asset('asset/admin/products/' . $item->products->id . '/' . $item->products->thumbnail) }}"
+                                            alt="">
+                                    </div>
+                                    <div class="product-title">
+                                        {{ $item->config_name }}
+                                    </div>
+                                    <div class="product-price">
+                                        @if ($item->final_price > 0)
+                                            {{ formatPriceToVND($item->final_price) }}
+                                        @else
+                                            Đang cập nhật
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>

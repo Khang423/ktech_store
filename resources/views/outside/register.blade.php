@@ -7,12 +7,12 @@
                 <img src="{{ asset('asset/admin/systemImage/ktech-dark.svg') }}" alt="Ktech dark">
             </div>
             <div class="title mb-2">
-                Đăng ký với
+                Đăng ký tài khoản
             </div>
             <div class="login-with">
-                <div class="login-with-google">
+                {{-- <div class="login-with-google">
                     <img src="{{ asset('asset/outside/icon/google-icon.svg') }}" alt=""> Google
-                </div>
+                </div> --}}
             </div>
             <div class="form-login">
                 <form action="{{ route('home.registerProcess') }}" method="post" id="form-register">
@@ -29,10 +29,6 @@
                         <input type="text" class="form-input" name="email" id="email"
                             placeholder="Email ( Không bắt buộc )">
                             <div class="text-danger mt-1 error-email"></div>
-                    </div>
-                    <div class="birthday-input mb-2">
-                        <input type="text" class="form-input" name="birthday" id="birthday" placeholder="Ngày sinh">
-                        <div class="text-danger mt-1 error-birthday"></div>
                     </div>
                     <div class="password-input mb-2 ">
                         <input type="password" class="form-input" name="password" id="password" placeholder="Nhập mật khẩu">

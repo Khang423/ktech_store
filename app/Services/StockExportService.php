@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Inventories;
+use App\Models\Order;
 use App\Models\StockExport;
 use App\Models\StockImport;
 use App\Models\StockImportDetail;
@@ -25,7 +27,7 @@ class StockExportService extends Controller
     public function getList()
     {
         return DataTables::of(
-            $this->model::orderBy('created_at', 'desc')
+            $this->model::with('orders')->orderBy('created_at', 'desc')
                 ->get()
         )
             ->editColumn('index', function ($object) {
@@ -35,14 +37,34 @@ class StockExportService extends Controller
             ->editColumn('member_id', function ($object) {
                 return $object->member->name ?? '';
             })
+            ->editColumn('order_code', function ($object) {
+                return $object->orders->order_code ?? '';
+            })
+            ->editColumn('total_amount', function ($object) {
+                return number_format($object->total_amount, 0, ',', '.') . ' ₫';
+            })
+            ->editColumn('status', function ($object) {
+                $statuses = [
+                    OrderStatusEnum::PENDING     => ['text' => 'Chờ xác nhận',  'class' => 'text-info'],
+                    OrderStatusEnum::PROCCESSING => ['text' => 'Đang chuẩn bị', 'class' => 'text-success'],
+                    OrderStatusEnum::SHIPED      => ['text' => 'Đã xuất kho',        'class' => 'text-primary'],
+                    OrderStatusEnum::CANCEL      => ['text' => 'Đã huỷ',        'class' => 'text-danger'],
+                    OrderStatusEnum::DELIVERED   => ['text' => 'Đã giao',       'class' => 'text-success'],
+                ];
+
+                $status = $statuses[$object->status] ?? ['text' => 'Không xác định', 'class' => 'text-secondary'];
+                return "<span class='{$status['class']} badge bg-light font-15'>{$status['text']}</span>";
+            })
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' => route('admin.inventories.delete'),
-                    'preview' => route('admin.inventories.delete'),
-                    'edit' => '',
+                    'status' => $object->status,
+                    'cancel' => '',
+                    'preview' => '',
+                    'accept' => '',
                 ];
             })
+            ->rawColumns(['status'])
             ->make(true);
     }
 
@@ -87,6 +109,33 @@ class StockExportService extends Controller
                 'total_amount' => $total_price,
             ]);
 
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+            return false;
+        }
+    }
+
+    public function updateStatus($request)
+    {
+        DB::beginTransaction();
+        try {
+            $member_id = Auth::guard('members')->user()->id;
+            if ($request->status === 'accept') {
+                $this->model->where('id', $request->stock_export_id)->update([
+                    'status' => OrderStatusEnum::SHIPED
+                ]);
+                $stock_export = StockExport::where('id', $request->stock_export_id)->first('order_id');
+                Order::where('id', $stock_export->order_id)->update([
+                    'status' => OrderStatusEnum::DELIVERED
+                ]);
+            } else if ($request->status === 'cancel') {
+                $this->model->where('id', $request->order_id)->update([
+                    'status' => OrderStatusEnum::CANCEL
+                ]);
+            }
             DB::commit();
             return true;
         } catch (\Exception $e) {

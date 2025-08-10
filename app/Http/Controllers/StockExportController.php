@@ -34,4 +34,13 @@ class StockExportController extends Controller
             'order' => $order
         ]);
     }
+
+    public function updateStatus(Request $request)
+    {
+        $result = $this->stockExportService->updateStatus($request);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
+    }
 }
