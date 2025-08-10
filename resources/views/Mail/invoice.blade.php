@@ -18,8 +18,7 @@
 
                     <!-- Header -->
                     <tr>
-                        <td
-                            style="background: linear-gradient(90deg, #4f46e5, #9333ea); padding:20px; text-align:center; color:#fff;">
+                        <td style="background:  #2a52be; padding:20px; text-align:center; color:#fff;">
                             <div style="font-size:20px; font-weight:bold;">Đặt Hàng Thành Công!</div>
                             <div style="font-size:14px; font-weight:normal; margin-top:4px;">
                                 Cảm ơn bạn đã mua sắm tại cửa hàng chúng tôi
@@ -96,7 +95,7 @@
                                     </tr>
                                     @php
                                         $sum = 0;
-                                        $sum += $i->unit_price * $i->quantity
+                                        $sum += $i->unit_price * $i->quantity;
                                     @endphp
                                 @endforeach
 
