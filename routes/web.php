@@ -120,7 +120,8 @@ Route::group(
         // route dashboard
         Route::group([], function () {
             Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-            Route::get('/getData', [AdminController::class, 'getData'])->name('getData');
+            Route::get('/get-data-chart', [AdminController::class, 'getData'])->name('getData');
+            Route::post('/get-data-chart-by-date', [AdminController::class, 'chartSearch'])->name('chartSearch');
         });
         // Member route
         Route::group(
@@ -424,6 +425,7 @@ Route::group(
                 Route::post('/getList', [StockExportController::class, 'getList'])->name('getList');
                 Route::get('/create', [StockExportController::class, 'create'])->name('create');
                 Route::post('/store', [StockExportController::class, 'store'])->name('store');
+                Route::post('/update-status', [StockExportController::class, 'updateStatus'])->name('updateStatus');
             },
         );
 

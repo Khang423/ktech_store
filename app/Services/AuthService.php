@@ -55,7 +55,7 @@ class AuthService extends Controller
 
         DB::beginTransaction();
         try {
-            $dataCustomer = $request->only(['name', 'tel', 'email', 'birthday']);
+            $dataCustomer = $request->only(['name', 'tel', 'email']);
             $dataCustomer['password'] = Hash::make($request->password);
             $customer = Customer::create($dataCustomer);
             Cart::create(['customer_id' => $customer->id]);

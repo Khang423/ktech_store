@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\CategoryProduct;
 use App\Models\Order;
+use App\Models\StockExport;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -51,7 +52,12 @@ if (!function_exists('checkOrder')) {
         return Order::where('status', OrderStatusEnum::PENDING)->count();
     }
 }
-
+if (!function_exists('checkStockExport')) {
+    function checkStockExport()
+    {
+        return StockExport::where('status', OrderStatusEnum::PROCCESSING)->count();
+    }
+}
 // if (!function_exists('checkStockQuantiy')) {
 //     function checkStockQuantiy()
 //     {

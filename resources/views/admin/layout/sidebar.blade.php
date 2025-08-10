@@ -21,7 +21,6 @@
             <li class="side-nav-item">
                 <a href="{{ route('admin.dashboard') }}" class="side-nav-link">
                     <i class=" uil-chart-line"></i>
-                    <span class="badge bg-success float-end">5</span>
                     <span>
                         Bảng điều khiển
                     </span>
@@ -105,6 +104,9 @@
             <li class="side-nav-item">
                 <a href="{{ route('admin.stockExports.index') }}" class="side-nav-link">
                     <i class="  uil-export"></i>
+                    @if (checkStockExport() >= 1)
+                        <span class="badge bg-danger float-end">{{ checkStockExport() }}</span>
+                    @endif
                     <span>
                         Phiếu xuất kho
                     </span>

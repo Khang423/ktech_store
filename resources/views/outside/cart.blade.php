@@ -64,7 +64,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="d-flex align-items-end">
-                            Kho : {{ $item->productVersion->stockImportDetails->first()->stock_quantity }}
+                            Kho : {{ $item->productVersion->stockImportDetails->first()->stock_quantity ?? ''}}
                         </div>
                     </div>
                 </div>

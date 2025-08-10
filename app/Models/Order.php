@@ -65,6 +65,11 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function stockExports()
+    {
+        return $this->hasOne(StockExport::class);
+    }
+
     public function cities()
     {
         return $this->belongsTo(City::class, 'city_id');

@@ -10,9 +10,9 @@
                 Đăng nhập với
             </div>
             <div class="login-with">
-                <div class="login-with-google">
+                {{-- <div class="login-with-google">
                     <img src="{{ asset('asset/outside/icon/google-icon.svg') }}" alt=""> Google
-                </div>
+                </div> --}}
             </div>
             <div class="form-login">
                 <form action="{{ route('home.loginProcess') }}" method="POST" id="form-login">

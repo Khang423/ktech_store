@@ -13,6 +13,7 @@ use App\Models\Inventories;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ProductVersion;
+use App\Models\StockExport;
 use App\Models\StockExportDetail;
 use App\Models\StockImportDetail;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -132,7 +133,9 @@ class OrderService extends Controller
                     'product_id' => $item['product_version_id'],
                     'quantity'   => $item['quantity'],
                     'unit_price' => $item['price'],
+                    'import_id' => $stock_import_detail->id,
                 ]);
+
 
                 // Remove the item from cart
                 CartItem::where([
@@ -145,8 +148,6 @@ class OrderService extends Controller
             $order->update([
                 'total_price' => $total_price,
             ]);
-
-            // update inventory
 
             session(['order_info' => $order]);
 
@@ -173,14 +174,25 @@ class OrderService extends Controller
     {
         DB::beginTransaction();
         try {
+            $member_id = Auth::guard('members')->user()->id;
             if ($request->status === 'accept') {
                 $this->model->where('id', $request->order_id)->update([
                     'status' => OrderStatusEnum::PROCCESSING
+                ]);
+                $order = Order::where('id', $request->order_id)->first();
+
+                StockExport::create([
+                    'ref_code' => 'XK-' . time(),
+                    'order_id' => $request->order_id,
+                    'member_id' => $member_id,
+                    'total_amount' => $order->total_price,
+                    'status' => OrderStatusEnum::PROCCESSING,
                 ]);
             } else if ($request->status === 'cancel') {
                 $this->model->where('id', $request->order_id)->update([
                     'status' => OrderStatusEnum::CANCEL
                 ]);
+                StockExport::where('order_id', $request->order_id)->delete();
             }
             DB::commit();
             return true;
@@ -190,6 +202,7 @@ class OrderService extends Controller
             return false;
         }
     }
+
     public function delete($request)
     {
         DB::beginTransaction();

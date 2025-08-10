@@ -136,7 +136,6 @@
                         {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
-                                    <i data-id="${data.id}" data-status="accept" class="btn-updateStatus text-success uil uil-file-check-alt action-icon"></i>
                                     <a href="${data.preview}">
                                         <i class="edit text-primary uil uil-print action-icon"></i>
                                     </a>
