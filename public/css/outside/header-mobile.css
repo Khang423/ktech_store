@@ -101,10 +101,11 @@
     background-color: #18abef;
     color: #fff;
     border-radius: 25px;
-    padding-left: 3.5px;
-    padding-bottom: 1.5px;
     top: 5px;
     left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* menu */
 .header .container .menu-mobile {

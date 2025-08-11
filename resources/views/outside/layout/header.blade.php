@@ -217,9 +217,16 @@
                     <div class="cart">
                         <div class="circle-cart btn-cart">
                             <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
-                            <div class="quantity-item-cart">
-                                2
-                            </div>
+                            @auth('customers')
+                                <div class="quantity-item-cart">
+                                    {{ checkCountCart(Auth::guard('customers')->user()->id) }}
+                                </div>
+                            @endauth
+                            @guest('customers')
+                                <div class="quantity-item-cart">
+                                    0
+                                </div>
+                            @endguest
                         </div>
                     </div>
                 </div>
@@ -228,7 +235,7 @@
                 <div class="col-12">
                     <div class="search-bar">
                         <input type="text" name="keyword" id="input-search-bar"
-                            placeholder="Nhập tên điện thoại, laptop, phụ kiền... cần tìm">
+                            placeholder="Nhập từ khoá sản phẩm cần tìm">
                         <div class="circle-icon" id="circle-icon">
                             <i class="uil-search" id="icon-search"></i>
                         </div>
@@ -236,6 +243,7 @@
                 </div>
             </div>
         </div>
+
         <div class="menu-mobile">
             <div class="header-bar">
                 <div class="logo">
