@@ -33,8 +33,11 @@
     </div>
     <div class="section-search">
         <div class="option">
+            <div class="btn-close-option">
+                <i class="uil uil-multiply"></i>
+            </div>
             <div class="content-search">
-                <div class="title">
+                <div class="title fs-4 text-center fw-bold mb-2">
                     Bộ lọc tìm kiếm
                 </div>
                 <div class="content">
