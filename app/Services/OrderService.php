@@ -121,6 +121,31 @@ class OrderService extends Controller
                         $stock_import_detail->update([
                             'stock_quantity' => $quantity_new
                         ]);
+
+                        if ($stock_import_detail->stock_quantity == 0) {
+                            $stock_import_detail->update([
+                                'status' => StatusEnum::OFF
+                            ]);
+                            $stock_import_detail_new = StockImportDetail::where('product_version_id', $item['product_version_id'])
+                                ->where('stock_quantity', '>', 0)
+                                ->orderBy('stock_import_id', 'asc')
+                                ->first();
+                            if ($stock_import_detail_new) {
+                                $stock_import_detail_new->update([
+                                    'status' => StatusEnum::ON
+                                ]);
+
+                                ProductVersion::where('id', $item['product_version_id'])->update([
+                                    'final_price' => $stock_import_detail_new->final_price,
+                                ]);
+                            } else {
+                                ProductVersion::where('id', $item['product_version_id'])->update([
+                                    'final_price' => 0,
+                                ]);
+                                // nếu không còn sản phẩm trong khi thì xoá sản phẩm khỏi giỏ hàng của khách hàng khác
+                                CartItem::where('product_id',$item['product_version_id'])->delete();
+                            }
+                        }
                     } else {
                         return false;
                     }

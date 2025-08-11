@@ -28,7 +28,6 @@ const getSelectedItems = () => {
         if (!selectedItems[itemName]) {
             selectedItems[itemName] = [];
         }
-
         selectedItems[itemName].push(itemValue);
     });
 
@@ -52,12 +51,11 @@ const initFilterChangeListener = () => {
             success: function (response) {
                 console.log("success", response);
                 setDataSearch(response); // render sản phẩm mới
-                $('.option').removeClass('active');
+                $(".option").animate({ right: "-100vw" }, 200);
             },
         });
     });
 };
-
 
 const setDataSearch = (response) => {
     const $preview = $("#section-laptop");
@@ -99,8 +97,16 @@ $("#section-laptop").on("click", ".card-product", function () {
 });
 
 $(".btn-open-tool-filter").on("click", (e) => {
-    $('.option').addClass('active');
+    // $(".option").addClass("d-none");
+    $(".option").animate({ right: "0px" }, 200);
 });
+
 $(".btn-close-option").on("click", (e) => {
-    $('.option').removeClass('active');
+    $(".option").animate({ right: "-100vw" }, 200);
+});
+
+$(".btn-delete-filter").on("click", (e) => {
+    $(
+        ".section-search .option .item .content .item input[type=checkbox]:checked"
+    ).prop("checked", false);
 });
