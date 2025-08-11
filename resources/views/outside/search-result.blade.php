@@ -20,6 +20,17 @@
             </span>
         </div>
     </div>
+    <div class="tool">
+        <div class="select-filter">
+
+        </div>
+        <div class="btn-open-tool-filter">
+            <span>
+                Bộ lọc
+            </span>
+            <i class="uil uil-filter"></i>
+        </div>
+    </div>
     <div class="section-search">
         <div class="option">
             <div class="content-search">
@@ -290,7 +301,11 @@
                                 {{ $item->config_name }}
                             </div>
                             <div class="product-price">
-                                {{ formatPriceToVND($item->final_price) }}
+                                @if ($item->final_price > 0)
+                                    {{ formatPriceToVND($item->final_price) }}
+                                @else
+                                    Đang cập nhật
+                                @endif
                             </div>
                         </div>
                     </div>

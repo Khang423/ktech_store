@@ -44,7 +44,7 @@ class HomeController extends Controller
                 $query->where('status', StatusEnum::ON);
             },
             'stockImportDetails' => function ($query) {
-                $query->where('status', StatusEnum::ON);
+                $query->where('status', StatusEnum::ON)->where('quantity', '>', '0');
             }
         ])->get();
         $category_product = CategoryProduct::get();
@@ -188,7 +188,7 @@ class HomeController extends Controller
             })
             ->when($price, function ($query) use ($price) {
                 // Nếu $price là dạng mảng [min, max]
-                $query->whereBetween('final_price', [0, $price]);
+                $query->whereBetween('final_price', [1, $price]);
             })
             ->when($usage_type, function ($query) use ($usage_type) {
                 $query->whereHas('products.usageTypes', function ($q) use ($usage_type) {

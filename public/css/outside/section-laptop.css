@@ -146,24 +146,25 @@
     #section-laptop {
         gap: 10px;
     }
-    .section-search .option {
+    /* .section-search .option {
         width: 100vw;
         height: 100%;
         position: absolute;
         top: 0;
         right: 0;
-        transform: translateX(100%); /* nằm ngoài màn hình bên phải */
+        transform: translateX(100%);
         transition: transform 0.3s ease-in-out;
         z-index: 999999;
         border-radius: 0;
-        background-color: #fff; /* tùy chọn */
+        background-color: #fff;
     }
 
     .section-search .option.active {
         transform: translateX(0);
-        left: 0px; /* trượt vào từ phải */
+        left: 0px;
         right: 0px;
-    }
+    } */
+
     .breadcrumb1 {
         top: 7rem;
     }
@@ -174,7 +175,7 @@
     #section-laptop .card-product {
         /* width: 48%; */
         flex: 1 1 48%;
-        height: 400px;
+        height: 310px;
         padding: 15px;
         background-color: #fff;
         cursor: pointer;
@@ -184,24 +185,32 @@
 }
 @media (max-width: 480px) {
     .section-search .option {
-        width: 100%;
-        height: 100%;
-        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
         top: 0;
-        right: 0;
-        transform: translateX(100%); /* nằm ngoài màn hình bên phải */
-        transition: transform 0.3s ease-in-out;
-        z-index: 999999;
+        right: -100vw;
+        z-index: 9999;
         border-radius: 0;
+        transition: left 0.3s ease;
         background-color: #fff; /* tùy chọn */
     }
 
-    .section-search .option.active {
-        transform: translateX(0);
-        left: 0px;
-        right: 0px; /* trượt vào từ phải */
-    }
     .header .container .content-mobile {
         width: 100vw;
+    }
+    #section-laptop .card-product {
+        width: 23%;
+        height: 310px;
+        padding: 15px;
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+        transition: none;
+    }
+
+    #section-laptop .card-product:hover {
+        transform: none;
     }
 }

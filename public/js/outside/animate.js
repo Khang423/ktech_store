@@ -26,6 +26,7 @@ $(document).ready(function () {
         $(".product-info-detail-overlay").addClass("d-none");
         $(".product-info-detail").animate({ right: "-100vw" }, 200);
     });
+
     $(".btn-product-info-detail-close-mobile").on("click", function () {
         $(".product-info-detail-overlay").addClass("d-none");
         $(".product-info-detail").animate({ right: "-100vw" }, 200);
@@ -71,12 +72,14 @@ $(document).ready(function () {
     $(".desktop-menu .sidebar .item").on("click", function (e) {
         const item_name = $(this).find(".title").data("name");
         const tab = $(".sidebar-tab");
-        tab.removeClass('d-none');
+        tab.removeClass("d-none");
         if (!item_name) return;
 
         tab.find(".content").addClass("d-none");
         tab.find(`.tab-${item_name}`).removeClass("d-none");
     });
+
+    
 });
 
 function goToPageProfile() {

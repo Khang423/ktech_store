@@ -271,8 +271,10 @@
                     const total_revenue = $('#total-revenue');
                     const total_profit = $('#total-profit');
 
+                    const revenue = result.revenus.reduce((sum, val) => sum + val, 0);
+
                     total_revenue.text(
-                        Number(result.revenus).toLocaleString('vi-VN', {
+                        revenue.toLocaleString('vi-VN', {
                             style: 'currency',
                             currency: 'VND'
                         })
@@ -285,8 +287,9 @@
                         total_profit.addClass('text-success');
                     }
 
-                    let profit = Number(result.profit);
-                    let sign = profit > 0 ? '+' : '';
+                    const profit = result.profit.reduce((sum, val) => sum + val, 0);
+                    const sign = profit > 0 ? '+' : '';
+
                     total_profit.text(
                         sign + profit.toLocaleString('vi-VN', {
                             style: 'currency',

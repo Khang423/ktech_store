@@ -35,8 +35,9 @@ class AdminController extends Controller
         $baseQuery = DB::table('stock_exports')
             ->where('stock_exports.status', OrderStatusEnum::SHIPED)
             ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
-            ->join('order_items', 'order_items.order_id', '=', 'orders.id');
-
+            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+            ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id')
+            ->limit('3');
         // Tổng sản phẩm theo tháng
         $products = (clone $baseQuery)
             ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
@@ -44,9 +45,11 @@ class AdminController extends Controller
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
                 DB::raw('SUM(order_items.quantity) as total_quantity'),
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
+                DB::raw('SUM(order_items.unit_price * order_items.quantity) as revenue'),
+                DB::raw('SUM((order_items.unit_price - stock_import_details.price) * order_items.quantity) as profit'),
             ])
             ->groupBy('month')
-            ->orderBy('month', 'asc')
+            ->orderBy('month', 'desc')
             ->get();
 
         // Chi tiết sản phẩm theo tháng
@@ -58,8 +61,8 @@ class AdminController extends Controller
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
                 'product_versions.config_name as product_name',
             ])
-            ->groupBy('month', 'product_versions.config_name')
-            ->orderBy('month', 'asc')
+            ->groupBy('month', 'product_name')
+            ->orderBy('month', 'desc')
             ->get();
 
         // Tổng đơn hàng theo tháng
@@ -70,17 +73,14 @@ class AdminController extends Controller
                 DB::raw('COUNT(DISTINCT orders.id) as sum_order')
             ])
             ->groupBy('month')
-            ->orderBy('month', 'asc')
+            ->orderBy('month', 'desc')
             ->get();
 
         // Doanh thu và lợi nhuận (chỉ cần 1 dòng)
-        $stockExport = (clone $baseQuery)
-            ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id')
-            ->select([
-                DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
-                DB::raw('SUM((order_items.unit_price - stock_import_details.price) * order_items.quantity) as total_profit'),
-            ])
-            ->first();
+        // $stockExport = (clone $baseQuery)
+        //     ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id')
+        //     ->select([])
+        //     ->first();
 
         // Trả dữ liệu
         return response()->json([
@@ -88,8 +88,8 @@ class AdminController extends Controller
             'data'          => $products->pluck('total_price'),
             'labels_detail' => $productsDetail->pluck('product_name'),
             'data_detail'   => $productsDetail->pluck('total_price'),
-            'revenus'       => $stockExport->total_price ?? 0,
-            'profit'        => $stockExport->total_profit ?? 0,
+            'revenus'       => $products->pluck('revenue'),
+            'profit'        => $products->pluck('profit'),
             'order'         => $orders->pluck('sum_order'),
         ]);
     }
@@ -106,7 +106,8 @@ class AdminController extends Controller
             ->whereBetween('stock_exports.created_at', [$fromDate, $toDate])
             ->join('orders', 'orders.id', '=', 'stock_exports.order_id')
             ->join('order_items', 'order_items.order_id', '=', 'orders.id')
-            ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id');
+            ->join('product_versions', 'product_versions.id', '=', 'order_items.product_id')
+            ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id');
 
         // Tổng sản phẩm theo tháng
         $products = (clone $baseQuery)
@@ -114,6 +115,8 @@ class AdminController extends Controller
                 DB::raw('DATE_FORMAT(stock_exports.created_at, "%m-%Y") as month'),
                 DB::raw('SUM(order_items.quantity) as total_quantity'),
                 DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
+                DB::raw('SUM(order_items.unit_price * order_items.quantity) as revenue'),
+                DB::raw('SUM((order_items.unit_price - stock_import_details.price) * order_items.quantity) as profit'),
             ])
             ->groupBy('month')
             ->orderBy('month', 'asc')
@@ -141,14 +144,6 @@ class AdminController extends Controller
             ->orderBy('month', 'asc')
             ->get();
 
-        // Doanh thu và lợi nhuận
-        $stockExport = (clone $baseQuery)
-            ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id')
-            ->select([
-                DB::raw('SUM(order_items.unit_price * order_items.quantity) as total_price'),
-                DB::raw('SUM((order_items.unit_price - stock_import_details.price) * order_items.quantity) as total_profit'),
-            ])
-            ->first(); // Chỉ cần 1 dòng
 
         // Chuẩn bị dữ liệu trả về
         return response()->json([
@@ -156,8 +151,8 @@ class AdminController extends Controller
             'data'          => $products->pluck('total_price'),
             'labels_detail' => $productsDetail->pluck('product_name'),
             'data_detail'   => $productsDetail->pluck('total_price'),
-            'revenus'       => $stockExport->total_price ?? 0,
-            'profit'        => $stockExport->total_profit ?? 0,
+            'revenus'       => $products->pluck('revenue'),
+            'profit'        => $products->pluck('profit'),
             'order'         => $orders->pluck('sum_order'),
         ]);
     }
