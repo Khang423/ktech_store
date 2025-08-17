@@ -187,7 +187,6 @@ class OrderService extends Controller
                 Mail::to($or->receiver_email)->send(new CheckOrderMail($or));
             }
 
-
             DB::commit();
             return true;
         } catch (\Exception $e) {
