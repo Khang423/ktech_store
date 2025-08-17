@@ -163,6 +163,7 @@ return [
         'model_series_id' => 'Seri sản phẩm',
         'usage_type_id' => 'Nhu cầu sử dụng',
         'brand_id' => 'Thương hiệu',
+        'email_receiver' => 'Mail người nhận'
     ],
 
 ];

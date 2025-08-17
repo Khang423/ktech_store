@@ -134,15 +134,17 @@
             restore(routeRestore, table);
             destroy(routeDelete, table);
 
-            let pusher = new Pusher('bf2e0cdd448eb0b918e8', {
-                cluster: 'ap1',
-                encrypted: true
-            });
-
             Pusher.logToConsole = true;
 
-            pusher.subscribe('consolog').bind('test1', function(data) {
-                console.log(1);
+            const pusher = new Pusher('5663e34e9aa73c142365', {
+                cluster: 'ap1',
+                forceTLS: true
+            });
+
+            const channel = pusher.subscribe('testpusher');
+
+            channel.bind('message', function(data) {
+                console.log('Nhận tin nhắn:', data);
             });
         });
     </script>

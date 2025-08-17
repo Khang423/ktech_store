@@ -113,14 +113,6 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="\" class="side-nav-link">
-                    <i class=" uil-usd-circle"></i>
-                    <span>
-                        Giảm giá
-                    </span>
-                </a>
-            </li>
-            <li class="side-nav-item">
                 <a href="{{ route('admin.tags.index') }}" class="side-nav-link">
                     <i class="uil uil-pricetag-alt"></i>
                     <span>

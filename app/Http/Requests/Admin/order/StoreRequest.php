@@ -18,12 +18,12 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email_receiver' => 'required',
+            'email_receiver' => 'required|email',
             'city' => 'required',
             'ward' => 'required',
             'tel' => 'required',
             'district' => 'required',
-            'address' => 'required',
+            'address' => 'nullable',
             'note' => 'nullable',
             'productSelected' => 'required',
         ];

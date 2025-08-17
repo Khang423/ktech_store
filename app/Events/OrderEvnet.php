@@ -4,12 +4,13 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-
-class PusherEvent implements ShouldBroadcast
+class OrderEvnet
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,7 +23,7 @@ class PusherEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('testpusher');
+        return new Channel('order_event');
     }
 
     public function broadcastAs()

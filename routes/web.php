@@ -62,6 +62,9 @@ Route::group(
         Route::get('/thanks', [HomeController::class, 'thanks'])->name('thanks');
 
         Route::get('/order-invoice', [HomeController::class, 'orderInvoice'])->name('orderInvoice');
+        // vnpay
+        Route::get('/vnpay-payment', [HomeController::class, 'createPayment'])->name('createPayment');
+        Route::get('/vnpay-return', [HomeController::class, 'vnpReturn'])->name('vnpReturn');
     },
 );
 

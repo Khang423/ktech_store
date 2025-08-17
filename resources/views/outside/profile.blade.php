@@ -66,15 +66,7 @@
             <div class="dashboard">
                 <div class="main">
                     <div class="sidebar">
-                        <div class="item">
-                            <div class="icon">
-                                <i class="uil uil-home"></i>
-                            </div>
-                            <div class="title">
-                                Tổng quan
-                            </div>
-                        </div>
-                        <div class="item btn-purchase-history ">
+                        <div class="item btn-purchase-history  ">
                             <div class="icon">
                                 <i class="uil uil-bill"></i>
                             </div>
@@ -82,7 +74,7 @@
                                 Lịch sử mua hàng
                             </div>
                         </div>
-                        <div class="item btn-account-info">
+                        <div class="item btn-account-info active">
                             <div class="icon">
                                 <i class="uil uil-user-square"></i>
                             </div>

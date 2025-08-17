@@ -44,7 +44,7 @@ class OrderService extends Controller
                 return ++$i;
             })
             ->editColumn('customer', function ($object) {
-                return $object->customers->name;
+                return $object->customers->name ?? '';
             })
             ->editColumn('total_price', function ($object) {
                 return number_format($object->total_price, 0, ',', '.') . ' ₫';
@@ -143,7 +143,7 @@ class OrderService extends Controller
                                     'final_price' => 0,
                                 ]);
                                 // nếu không còn sản phẩm trong khi thì xoá sản phẩm khỏi giỏ hàng của khách hàng khác
-                                CartItem::where('product_id',$item['product_version_id'])->delete();
+                                CartItem::where('product_id', $item['product_version_id'])->delete();
                             }
                         }
                     } else {
@@ -181,7 +181,9 @@ class OrderService extends Controller
                 ->where('id', $order->id)
                 ->first();
 
-            Mail::to($or->customers->email)->send(new CheckOrderMail($or));
+            if ($or) {
+                Mail::to($or->receiver_email)->send(new CheckOrderMail($or));
+            }
 
             DB::commit();
             return true;
