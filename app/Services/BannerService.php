@@ -72,25 +72,33 @@ class BannerService extends Controller
         }
     }
 
-    public function update($request, $categoryProduct)
+    public function update($request, $banner)
     {
-        // DB::beginTransaction();
-        // try {
-        //     $dataStore = [];
-        //     $dataStore['name'] = $request->name;
-        //     $dataStore['description'] = $request->description;
-        //     $dataStore['slug'] = Str::slug($request->name);
+        DB::beginTransaction();
+        try {
 
-        //     $this->model
-        //         ->query()
-        //         ->where('id', $categoryProduct->id)
-        //         ->update($dataStore);
-        //     DB::commit();
-        //     return true;
-        // } catch (\Exception $e) {
-        //     DB::rollBack();
-        //     throw $e;
-        // }
+            if ($request->hasFile('thumbnail_new')) {
+                $thumbnailName = $this->imageTrait->convertToWebpAndStore($request->file('thumbnail_new'), 'banners');
+                $result = $this->imageTrait->deleteImage($request->thumbnail_old, 'banners', null);
+                if ($result) {
+                    Banner::where('id', $banner->id)->update([
+                        'banner' => $thumbnailName
+                    ]);
+                }
+            }
+
+            $this->model->where('id', $banner->id)->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'member_id' => Auth::user()->id
+            ]);
+
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function delete($request)

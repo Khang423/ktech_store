@@ -6,7 +6,7 @@
 @section('title')
     <div class="text-dark">
         <span class="text-primary">
-            Nhà cung cấp
+            Đơn hàng
         </span>
         <i class="mdi mdi-chevron-right"></i>
         Danh sách

@@ -55,7 +55,6 @@ class StockImportController extends Controller
         return $this->errorResponse();
     }
 
-    public function detail(StockImport $stockImport) {}
 
     public function exportPDF(Request $request)
     {

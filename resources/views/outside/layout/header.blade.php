@@ -161,7 +161,10 @@
                                 </a>
                                 <div class="content-child">
                                     @foreach ($i->modelSeries as $model)
-                                        <a href="">
+                                        <a
+                                            href="{{ route('home.showProduct', [
+                                                'data' => $model->name,
+                                            ]) }}">
                                             <div class="item">
                                                 {{ $model->name }}
                                             </div>

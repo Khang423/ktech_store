@@ -17,14 +17,14 @@ $(document).ready(function () {
 
         if ($(this).hasClass("btn-purchase-history")) {
             $(".purchase-history").removeClass("d-none");
-            $(".header-profile").addClass("d-none");
+            // $(".header-profile").addClass("d-none");
         } else {
             $(".purchase-history").addClass("d-none");
         }
 
         if ($(this).hasClass("btn-account-info")) {
             $(".account-info").removeClass("d-none");
-            $(".header-profile").addClass("d-none");
+            // $(".header-profile").addClass("d-none");
         } else {
             $(".account-info").addClass("d-none");
         }

@@ -44,7 +44,7 @@
                     </div>
                     <div class="email">
                         <label for="email ">Email</label>
-                        <input type="text" name="email_receiver" id="email_receiver" placeholder="NguyenVanA@gmail.com"
+                        <input type="text" name="email_receiver" id="email_receiver" placeholder="Email"
                             value="{{ $customer->email }}">
                         <div class="text-danger mt-1 error-email_receiver"></div>
                     </div>

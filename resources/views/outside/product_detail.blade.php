@@ -54,7 +54,11 @@
                                     {{ $i->config_name }}
                                 </div>
                                 <div class="product-version-price">
-                                    {{ formatPriceToVND($i->final_price) }}
+                                    @if ($i->final_price > 0)
+                                        {{ formatPriceToVND($i->final_price) }}
+                                    @else
+                                        Đang cập nhật
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -68,7 +72,11 @@
                                     {{ $i->config_name }}
                                 </div>
                                 <div class="product-version-price">
-                                    {{ formatPriceToVND($i->final_price) }}
+                                    @if ($i->final_price > 0)
+                                        {{ formatPriceToVND($i->final_price) }}
+                                    @else
+                                        Đang cập nhật
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -121,7 +129,7 @@
                     {!! $product->description !!}
                 </div>
                 <div class="see-more">
-                   <span id="btn-see-more"> Xem thêm nội dung </span><i class="uil uil-angle-down fs-2"></i>
+                    <span id="btn-see-more"> Xem thêm nội dung </span><i class="uil uil-angle-down fs-2"></i>
                 </div>
             </div>
             <div class="product-info">

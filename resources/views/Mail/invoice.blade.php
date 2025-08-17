@@ -58,7 +58,7 @@
                                     <td style="padding:4px 0;">Phương thức thanh toán</td>
                                 </tr>
                                 <tr style="font-size:14px; color:#111827;">
-                                    <td style="padding:4px 0;">{{ $method }}g</td>
+                                    <td style="padding:4px 0;">{{ $method }}</td>
                                 </tr>
                                 <tr style="font-size:14px; color:#374151; font-weight:bold;">
                                     <td style="padding:4px 0;">Trạng thái</td>

@@ -12,13 +12,12 @@ use App\Models\StockExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class AdminController extends Controller
 {
     public function index()
     {
-
+        event(new PusherEvent('123'));
         $countProduct = ProductVersion::count();
         $countCustomer = Customer::count();
         $countMember = Member::count();

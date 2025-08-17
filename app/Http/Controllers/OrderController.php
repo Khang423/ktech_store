@@ -30,7 +30,7 @@ class OrderController extends Controller
     {
         return $this->orderService->getList();
     }
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $result = $this->orderService->store($request);
         if ($result) {

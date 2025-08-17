@@ -108,9 +108,6 @@
                         render: function(data, type, row) {
                             return `
                             <span class='table-action'>
-                                <a href="${data.view}" data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <i class="list text-primary uil uil-eye action-icon"></i>
-                                </a>
                                 <a href="${data.list}" data-bs-toggle="tooltip" data-bs-placement="top" title="Danh sách sản phẩm cùng phiên bản">
                                     <i class="list text-primary uil uil-list-ul action-icon"></i>
                                 </a>

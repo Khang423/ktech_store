@@ -51,7 +51,11 @@ class BannerController extends Controller
 
     public function update(Request $request, Banner $banner)
     {
-        return $this->bannerService->update($request, $banner);
+        $result = $this->bannerService->update($request, $banner);
+        if ($result) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 
     public function destroy(Request $request)
