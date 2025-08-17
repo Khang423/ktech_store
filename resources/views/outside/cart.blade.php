@@ -54,7 +54,7 @@
                             <div class="quantity-reduce" data-product-id="{{ $item->product_id }}">
                                 <i class="uil uil-minus"></i>
                             </div>
-                            <div class="quantity">
+                            <div class="quantity" data-product-id="{{ $item->product_id }}">
                                 {{ $item->quantity }}
                             </div>
                             <div class="quantity-increase" data-product-id="{{ $item->product_id }}">
@@ -64,7 +64,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="d-flex align-items-end">
-                            Kho : {{ $item->productVersion->stockImportDetails->first()->stock_quantity ?? ''}}
+                            Kho : {{ $item->productVersion->stockImportDetails->first()->stock_quantity ?? '' }}
                         </div>
                     </div>
                 </div>
@@ -89,5 +89,6 @@
         const RouteCartItemUpdate = "{{ route('home.cartItemUpdate') }}";
         const RouteCartItemDelete = "{{ route('home.detleItemCart') }}";
         const RouteOrder = "{{ route('home.order') }}";
+
     </script>
 @endpush

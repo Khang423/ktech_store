@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CartEvent;
 use App\Repositories\cart\CartInterface;
 use App\Repositories\cart\CartRepository;
 use App\Services\CartService;
@@ -31,12 +32,22 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $result = $this->cartService->update($request);
-        if ($result == 'out_of_stock') {
+        if ($result['message'] === 'out_of_stock') {
             return response()->json([
-                'message' => $result
+                'data' => $result
             ]);
-        } else if ($result == true) {
-            return $this->successResponse();
+        } else if ($result['message'] == 'product_deleted') {
+            return response()->json([
+                'data' => $result
+            ]);
+        } else if ($result['message'] === 'increase') {
+            return response()->json([
+                'data' => $result
+            ]);
+        } else if ($result['message'] === 'reduce') {
+            return response()->json([
+                'data' => $result
+            ]);
         }
         return $this->errorResponse();
     }
@@ -45,6 +56,8 @@ class CartController extends Controller
     {
         $result = $this->cartService->store($request);
         if ($result) {
+            $customer_id = Auth::guard('customers')->user()->id;
+            event(new CartEvent(checkCountCart($customer_id)));
             return $this->successResponse();
         } else {
             return $this->errorResponse();

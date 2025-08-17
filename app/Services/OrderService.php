@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Enums\OrderStatusEnum;
 use App\Enums\StatusEnum;
+use App\Events\OrderEvent;
+use App\Events\OrderEvnet;
 use App\Http\Controllers\Controller;
 use App\Mail\CheckOrderMail;
 use App\Models\Address;
@@ -44,7 +46,7 @@ class OrderService extends Controller
                 return ++$i;
             })
             ->editColumn('customer', function ($object) {
-                return $object->customers->name ?? '';
+                return $object->receiver_name ?? '';
             })
             ->editColumn('total_price', function ($object) {
                 return number_format($object->total_price, 0, ',', '.') . ' ₫';
@@ -184,6 +186,7 @@ class OrderService extends Controller
             if ($or) {
                 Mail::to($or->receiver_email)->send(new CheckOrderMail($or));
             }
+
 
             DB::commit();
             return true;

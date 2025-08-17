@@ -146,9 +146,28 @@ function handleQuantityChange(productId, action) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            console.log(response);
-            if (response.message === "out_of_stock") {
+            console.log(response.data.message);
+
+            if (response.data.message === "out_of_stock") {
                 toast("Số lượng vượt quá số lượng hiện có trong kho ", "error");
+            } else if (response.data.message === "product_deleted") {
+                let productId = response.data.product_id;
+                toast("Sản phẩm đã bị xoá khỏi giỏ hàng ", "error");
+                $('.item .quantity[data-product-id="' + productId + '"]')
+                    .closest(".item")
+                    .remove();
+            } else if (response.data.message === "increase") {
+                let productId = response.data.data.product_id;
+                console.log(response);
+
+                $('.quantity[data-product-id="' + productId + '"]').text(
+                    response.data.data.quantity
+                );
+            } else if (response.data.message === "reduce") {
+                let productId = response.data.data.product_id;
+                $('.quantity[data-product-id="' + productId + '"]').text(
+                    response.data.data.quantity
+                );
             }
         },
         error: function (data) {

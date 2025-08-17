@@ -65,7 +65,7 @@
                                         <div class="icon-cart">
                                             <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
                                         </div>
-                                        <div class="circle-quantity-item-cart">
+                                        <div class="circle-quantity-item-cart cart-quantity">
                                             {{ checkCountCart(Auth::guard('customers')->user()->id) }}
                                         </div>
                                     </div>
@@ -221,7 +221,7 @@
                         <div class="circle-cart btn-cart">
                             <img src="{{ asset('asset/outside/icon/cart.png') }}" alt="Icon cart">
                             @auth('customers')
-                                <div class="quantity-item-cart">
+                                <div class="quantity-item-cart cart-quantity">
                                     {{ checkCountCart(Auth::guard('customers')->user()->id) }}
                                 </div>
                             @endauth
@@ -348,5 +348,11 @@
         const searchRoute = "{{ route('home.searchProcess') }}";
         const authCheckStatus = "{{ route('home.authStatus') }}";
         const routeProfile = "{{ route('home.profile') }}";
+
+        const channel = pusher.subscribe('cart_event');
+
+        channel.bind('message', function(data) {
+            $('.cart-quantity').text(data.message);
+        });
     </script>
 @endpush

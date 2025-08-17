@@ -69,6 +69,7 @@ class InventoryService extends Controller
                 ->where('product_versions.product_id', $products->id)
                 ->join('inventories', 'product_versions.id', '=', 'inventories.product_version_id')
                 ->join('stock_imports', 'stock_imports.id', '=', 'stock_import_details.stock_import_id')
+                ->orderBy('stock_import_details.stock_quantity', 'desc')
                 ->select([
                     'stock_import_details.id',
                     'stock_imports.ref_code',

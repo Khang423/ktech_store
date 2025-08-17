@@ -4,26 +4,24 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderEvnet
+class CartItemEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $data;
+    public $data ;
 
-    public function __construct($data = null)
+    public function __construct($data = [])
     {
         $this->data = $data;
     }
 
     public function broadcastOn()
     {
-        return new Channel('order_event');
+        return new Channel('cart_item_up_event');
     }
 
     public function broadcastAs()
@@ -33,8 +31,6 @@ class OrderEvnet
 
     public function broadcastWith()
     {
-        return [
-            'message' =>  $this->data ?? '',
-        ];
+        return  $this->data ;
     }
 }
