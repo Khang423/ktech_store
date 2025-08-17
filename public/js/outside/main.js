@@ -1,10 +1,3 @@
-$(document)
-    .ajaxStart(function () {
-        $("#loading-spinner").fadeIn();
-    })
-    .ajaxStop(function () {
-        $("#loading-spinner").fadeOut();
-    });
 $(document).ready(function () {
     // Initialize Swiper for banners
     new Swiper(".swiper-banner", {
@@ -106,4 +99,6 @@ $(document).ready(function () {
             },
         });
     });
+
+    
 });

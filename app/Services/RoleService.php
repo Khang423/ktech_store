@@ -35,7 +35,7 @@ class RoleService extends Controller
             ->addColumn('actions', function ($object) {
                 return [
                     'id' => $object->id,
-                    'destroy' =>' ',
+                    'destroy' => ' ',
                     'edit' => route('admin.roles.edit', $object),
                     'member_role' => route('admin.roles.memberRoles.index', $object),
                 ];
@@ -51,7 +51,16 @@ class RoleService extends Controller
         return true;
     }
 
-    public function update($request, $member) {}
+    public function update($request, $role)
+    {
+
+        $this->model::where('id', $role->id)->update([
+            'name' => $request->name,
+            'slug' =>  Str::slug($request->name)
+        ]);
+
+        return true;
+    }
 
     public function delete($request)
     {

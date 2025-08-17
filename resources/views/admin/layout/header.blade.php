@@ -52,8 +52,8 @@
                     <div class="dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Xin chào!</h6>
                     </div>
-                    <a class="dropdown-item">
-                        {{-- href="{{ route('admin.members.edit', Auth::user()) }}" --}}
+                    <a href="{{ route('admin.members.edit', Auth::guard('members')->user()->slug) }}"
+                        class="dropdown-item">
                         <i class="uil-user-circle me-1"></i>
                         <span>
                             Tài khoản của tôi

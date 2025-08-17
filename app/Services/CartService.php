@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Events\CartEvent;
+use App\Events\CartItemEvent;
+use App\Events\CartItemUpEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartItem;
@@ -42,6 +45,7 @@ class CartService extends Controller
                     'unit_price' => $product_version->final_price
                 ]);
             }
+
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -82,8 +86,16 @@ class CartService extends Controller
                 if ($check > 0) {
                     $product_old->quantity += 1;
                     $product_old->save();
+                    $product_old = CartItem::where('cart_id', $cart->id)
+                        ->where('product_id', $product_id)
+                        ->first();
+                    DB::commit();
+                    return [
+                        'message' => 'increase',
+                        'data' => $product_old
+                    ];
                 } else {
-                    return 'out_of_stock';
+                    return ['message' => 'out_of_stock'];
                 }
             }
 
@@ -92,8 +104,22 @@ class CartService extends Controller
                 if ($product_old->quantity > 1) {
                     $product_old->quantity -= 1;
                     $product_old->save();
+                    $product_old = CartItem::where('cart_id', $cart->id)
+                        ->where('product_id', $product_id)
+                        ->first();
+                    DB::commit();
+                    return [
+                        'message' => 'reduce',
+                        'data' => $product_old
+                    ];
                 } else {
+                    $product_id_deleted = $product_old->product_id;
                     $product_old->delete();
+                    DB::commit();
+                    return  [
+                        'message' => 'product_deleted',
+                        'product_id' => $product_id_deleted
+                    ];
                 }
             }
 

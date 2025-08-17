@@ -77,9 +77,7 @@
             <li class="side-nav-item">
                 <a href="{{ route('admin.orders.index') }}" class="side-nav-link">
                     <i class=" uil-bill"></i>
-                    @if (checkOrder() >= 1)
-                        <span class="badge bg-danger float-end">{{ checkOrder() }}</span>
-                    @endif
+                    <span class="badge bg-danger float-end " id="count-order">{{ checkOrder() }}</span>
                     <span>
                         Đơn hàng
                     </span>
@@ -156,3 +154,18 @@
         </ul>
     </div>
 </div>
+@push('js')
+    <script>
+        const pusher = new Pusher('5663e34e9aa73c142365', {
+            cluster: 'ap1',
+            forceTLS: true
+        });
+
+        const channel = pusher.subscribe('order_event');
+
+        channel.bind('message', function(data) {
+
+            $('#count-order').text(data.message);
+        });
+    </script>
+@endpush

@@ -15,9 +15,14 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::guard('members')->user();
+        if (!$user) {
+            $this->errorToast('messages.auth_admin_error');
+            return redirect()->route('admin.index');
+        }
+
         $role = $user->memberRoles()->first()?->role_id;
 
-        if (in_array($role, [RoleEnum::ROOT_ADMIN, RoleEnum::SALE_STAFF, RoleEnum::WHEREHOUSE_STAFF])) {
+        if (in_array($role, [RoleEnum::ROOT_ADMIN, RoleEnum::STAFF])) {
             return $next($request);
         }
 

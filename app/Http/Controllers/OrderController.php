@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderEvent;
+use App\Events\OrderEvnet;
 use App\Http\Requests\Admin\order\StoreRequest;
 use App\Mail\CheckOrderMail;
 use App\Models\Order;
@@ -34,6 +36,8 @@ class OrderController extends Controller
     {
         $result = $this->orderService->store($request);
         if ($result) {
+            $checkorder = checkOrder();
+            event(new OrderEvent($checkorder));
             return $this->successResponse();
         }
         return $this->errorResponse();

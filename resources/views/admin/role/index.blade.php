@@ -101,7 +101,7 @@
                     render: (data) => `
             <span class='table-action d-flex justify-content-center gap-2'>
                 <a href="${data.member_role}">
-                    <i class="edit text-primary uil uil-eye action-icon"></i>
+                    <i class="edit text-primary uil uil-list-ul action-icon"></i>
                 </a>
                 <a href="${data.edit}">
                     <i class="edit text-primary uil-edit action-icon"></i>

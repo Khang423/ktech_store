@@ -17,3 +17,15 @@
    <script src="{{ asset('js/libraries/select2/select2.min.js') }}"></script>
 
    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+   {{-- Pusher --}}
+   <script src="{{ asset('js/libraries/pusher/pusher.min.js') }}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.15.0/echo.iife.js"></script>
+
+   <script>
+       let pusher = new Pusher("5663e34e9aa73c142365", {
+           cluster: "ap1",
+           forceTLS: true,
+       });
+
+       window.pusher = pusher;
+   </script>

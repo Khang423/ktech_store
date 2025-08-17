@@ -54,10 +54,10 @@ class RoleController extends Controller
         ]);
     }
 
-    public function update(UpdateRequest $request, Role $role)
+    public function update(Request $request, Role $role)
     {
         $result = $this->roleService->update($request, $role);
-        if ($result) {
+        if ($result == true) {
             return $this->successResponse();
         }
         return $this->errorResponse();

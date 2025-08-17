@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
+use App\Events\OrderEvent;
+use App\Events\OrderEvnet;
 use App\Events\PusherEvent;
 use App\Models\Customer;
 use App\Models\Member;
@@ -17,7 +19,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-        event(new PusherEvent('123'));
         $countProduct = ProductVersion::count();
         $countCustomer = Customer::count();
         $countMember = Member::count();

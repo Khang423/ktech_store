@@ -36,7 +36,7 @@
                                     </div>
 
                                 </div>
-                                <button class="btn btn-primary" id="btn-store">
+                                <button class="btn btn-primary" id="btn-update">
                                     <i class="mdi mdi-plus-circle me-2"></i>
                                     <span>Cập nhật</span>
                                 </button>
