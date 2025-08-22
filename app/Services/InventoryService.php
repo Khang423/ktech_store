@@ -33,9 +33,9 @@ class InventoryService extends Controller
                 ->join('products', 'product_versions.product_id', '=', 'products.id')
                 ->select(
                     'products.id as id',
-                    'products.thumbnail as thumbnail',
-                    'products.name',
-                    'products.slug',
+                    DB::raw('MIN(products.thumbnail) as thumbnail'),
+                    DB::raw('MIN(products.name) as name'),
+                    DB::raw('MIN(products.slug) as slug'),
                     DB::raw('SUM(stock_import_details.stock_quantity) as stock_quantity')
                 )
                 ->groupBy('products.id')
@@ -62,6 +62,7 @@ class InventoryService extends Controller
             })
             ->make(true);
     }
+
     public function getListDetail($products)
     {
         return DataTables::of(
