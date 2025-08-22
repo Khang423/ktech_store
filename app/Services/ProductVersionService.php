@@ -277,6 +277,7 @@ class ProductVersionService extends Controller
             // lấy id phiếu nhập sớm nhất nếu số lượng ở phiếu nhập đó = 0 tức là bán hết thì sẽ lấy id kế tiếp
             $stock_import_old_id = StockImportDetail::with('stockImport')
                 ->where('product_version_id', $productVersion->id)
+                ->where('status', StatusEnum::ON)
                 ->where('stock_quantity', '>', '0')->min('stock_import_id');
             // lấy giá nhập tại phiếu nhập đó
             $stock_import = StockImport::with('stockImportDetails')->where('id', $stock_import_old_id)->first();

@@ -76,13 +76,6 @@ class AdminController extends Controller
             ->orderBy('month', 'desc')
             ->get();
 
-        // Doanh thu và lợi nhuận (chỉ cần 1 dòng)
-        // $stockExport = (clone $baseQuery)
-        //     ->join('stock_import_details', 'stock_import_details.id', '=', 'order_items.import_id')
-        //     ->select([])
-        //     ->first();
-
-        // Trả dữ liệu
         return response()->json([
             'labels'        => $products->pluck('month'),
             'data'          => $products->pluck('total_price'),
