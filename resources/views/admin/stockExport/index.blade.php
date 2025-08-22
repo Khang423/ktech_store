@@ -101,9 +101,6 @@
                         if (data.status === 3) {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
-                                    <a href="${data.preview}">
-                                        <i class="edit text-primary uil uil-print action-icon"></i>
-                                    </a>
                                 </span>
                             `;
                         } else if (data.status === 2) {
@@ -111,17 +108,11 @@
                                 <span class='table-action d-flex justify-content-center gap-2'>
                                     <i data-id="${data.id}" data-status="accept" class="btn-updateStatus text-success uil uil-file-check-alt action-icon"></i>
                                     <i data-id="${data.id}" data-status="cancel" class="btn-updateStatus text-danger uil uil-file-times-alt action-icon"></i>
-                                    <a href="${data.preview}">
-                                        <i class="edit text-primary uil uil-print action-icon"></i>
-                                    </a>
                                 </span>
                             `;
                         } else if (data.status === 5) {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
-                                    <a href="${data.preview}">
-                                        <i class="edit text-primary uil uil-print action-icon"></i>
-                                    </a>
                                 </span>
                             `;
                         }

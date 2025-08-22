@@ -76,6 +76,8 @@ class OrderController extends Controller
         if ($result) {
             $checkStockExport = checkStockExport();
             event(new StockExport($checkStockExport));
+            $checkorder = checkOrder();
+            event(new OrderEvent($checkorder));
             return $this->successResponse();
         }
         return $this->errorResponse();

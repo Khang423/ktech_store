@@ -49,7 +49,10 @@ class CustomerController extends Controller
                 return ++$i;
             })
             ->editColumn('address', function ($object) {
-                return $object->note . ' -  ' . $object->wards->name . ' -  ' . $object->districts->name . ' -  ' . $object->cities->name;
+                return ($object->note ?? '') . ' - ' .
+                    ($object->wards->name ?? '') . ' - ' .
+                    ($object->districts->name ?? '') . ' - ' .
+                    ($object->cities->name ?? '');
             })
             ->addColumn('actions', function ($object) {
                 return [
