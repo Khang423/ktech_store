@@ -26,6 +26,7 @@ class StoreRequest extends FormRequest
             'address' => 'nullable',
             'note' => 'nullable',
             'productSelected' => 'required',
+            'method_id' => 'required',
         ];
     }
 }

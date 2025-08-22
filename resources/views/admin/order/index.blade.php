@@ -144,8 +144,8 @@
                         }
                         return `
                             <span class='table-action d-flex justify-content-center gap-2'>
-                                <i data-id="${data.id}" style="cursor: pointer; data-status="accept" class="btn-updateStatus text-success uil uil-file-check-alt action-icon"></i>
-                                <i data-id="${data.id}" style="cursor: pointer; data-status="cancel" class="btn-updateStatus text-danger uil uil-file-times-alt action-icon"></i>
+                                <i data-id="${data.id}" style="cursor: pointer;" data-status="accept" class="btn-updateStatus text-success uil uil-file-check-alt action-icon"></i>
+                                <i data-id="${data.id}" style="cursor: pointer;" data-status="cancel" class="btn-updateStatus text-danger uil uil-file-times-alt action-icon"></i>
                                 <a href="${data.preview}">
                                     <i class="edit text-primary uil uil-print action-icon"></i>
                                 </a>
@@ -177,12 +177,6 @@
                     postDataStatus(id, status, route, table);
                 }
             });
-            Pusher.logToConsole = true;
-            const pusher = new Pusher('5663e34e9aa73c142365', {
-                cluster: 'ap1',
-                forceTLS: true
-            });
-
             const channel = pusher.subscribe('order_event');
 
             channel.bind('message', function(data) {

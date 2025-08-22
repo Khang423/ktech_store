@@ -17,6 +17,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MemberRoleController;
 use App\Http\Controllers\ModelSeriesController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductVersionController;
 use App\Http\Controllers\StockExportController;
 use App\Http\Controllers\StockImportController;
@@ -52,19 +53,11 @@ Route::group(
         // search product
         Route::post('/search', [HomeController::class, 'searchProcess'])->name('searchProcess');
         Route::get('/search-result', [HomeController::class, 'searchResult'])->name('searchResult');
-
         Route::get('/product', [HomeController::class, 'showProduct'])->name('showProduct');
         // check auth status
         Route::post('/auth-status', [AuthController::class, 'authCheck'])->name('authStatus');
-
+        // product fillter
         Route::post('/productFillter', [HomeController::class, 'productFillter'])->name('productFillter');
-
-        Route::get('/thanks', [HomeController::class, 'thanks'])->name('thanks');
-
-        Route::get('/order-invoice', [HomeController::class, 'orderInvoice'])->name('orderInvoice');
-        // vnpay
-        Route::get('/vnpay-payment', [HomeController::class, 'createPayment'])->name('createPayment');
-        Route::get('/vnpay-return', [HomeController::class, 'vnpReturn'])->name('vnpReturn');
     },
 );
 
@@ -82,16 +75,18 @@ Route::group(
         // order
         Route::get('cart/payment-info', [HomeController::class, 'order'])->name('order');
         Route::post('cart/order/store', [OrderController::class, 'store'])->name('orderStore');
+        Route::get('cart/order/store/thanks', [HomeController::class, 'thanks'])->name('thanks');
         // profile
         Route::get('customer/profile', [CustomerController::class, 'profile'])->name('profile');
         Route::post('customer/add-address', [CustomerController::class, 'addAddress'])->name('addAddress');
-
         Route::post('customer/delete-address', [CustomerController::class, 'deleteAddress'])->name('deleteAddress');
         Route::post('customer/get-data-order', [CustomerController::class, 'getDataOrder'])->name('getDataOrder');
         Route::post('customer/get-data-order-item', [CustomerController::class, 'getDataOrderItem'])->name('getDataOrderItem');
-
         Route::post('customer/profile/info-update', [CustomerController::class, 'infoUpdate'])->name('infoUpdate');
         Route::post('customer/profile/address-update', [CustomerController::class, 'addressUpdate'])->name('addressUpdate');
+        // payment
+        Route::get('cart/payment-info/vnpay-payment', [PaymentController::class, 'createPayment'])->name('createPayment');
+        Route::get('cart/payment-info/vnpay-payment/success', [PaymentController::class, 'vnpayReturn'])->name('vnpayReturn');
     },
 );
 

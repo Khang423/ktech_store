@@ -86,33 +86,41 @@
             <hr>
             <div class="product-price">
                 <div class="btn-price">
-                    {{ formatPriceToVND($productVersion->final_price) }}
+                    @if ($productVersion->final_price > 0)
+                        {{ formatPriceToVND($productVersion->final_price) }}
+                    @else
+                        Đang cập nhật
+                    @endif
                 </div>
                 <div class="product-buy mt-2">
                     @if (Auth::guard('customers')->check())
-                        <div class="btn-buy" data-product-id={{ $productVersion->id }}>
-                            <span>
-                                MUA NGAY
-                            </span>
-                        </div>
-                        <div class="btn-add_to_cart" data-product-id={{ $productVersion->id }}>
-                            <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
-                            <span>
-                                Thêm vào giỏ
-                            </span>
-                        </div>
+                        @if ($productVersion->final_price > 0)
+                            <div class="btn-buy" data-product-id={{ $productVersion->id }}>
+                                <span>
+                                    MUA NGAY
+                                </span>
+                            </div>
+                            <div class="btn-add_to_cart" data-product-id={{ $productVersion->id }}>
+                                <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
+                                <span>
+                                    Thêm vào giỏ
+                                </span>
+                            </div>
+                        @endif
                     @else
-                        <div class="btn-buy" id="guest-btn-buy">
-                            <span>
-                                MUA NGAY
-                            </span>
-                        </div>
-                        <div class="btn-add_to_cart" id="guest-add-to-cart">
-                            <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
-                            <span>
-                                Thêm vào giỏ
-                            </span>
-                        </div>
+                        @if ($productVersion->final_price > 0)
+                            <div class="btn-buy" id="guest-btn-buy">
+                                <span>
+                                    MUA NGAY
+                                </span>
+                            </div>
+                            <div class="btn-add_to_cart" id="guest-add-to-cart">
+                                <img src="{{ asset('asset/outside/icon/add-to-cart.png') }}" alt="Icon-add-to-cart">
+                                <span>
+                                    Thêm vào giỏ
+                                </span>
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>

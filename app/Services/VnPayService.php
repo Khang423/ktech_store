@@ -1,27 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
-use App\Mail\CheckOrderMail;
-use App\Models\Order;
+use App\Http\Controllers\Controller;
+use App\Models\address\City;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
-class PaymentController extends Controller
+class VnPayService extends Controller
 {
-
-    public function createPayment(Request $request)
+    public function createPayment($request)
     {
-        $data = json_decode($request->query('data'));
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = route('home.vnpayReturn');
         $vnp_TmnCode = "23I03C8Z"; //Mã website tại VNPAY
         $vnp_HashSecret = "4OAXNBQY6YY02N90O0TJ1DQYSWSRZMEJ"; //Chuỗi bí mật
 
-        $vnp_TxnRef = $data->order_code; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = 'Thanh toán đơn hàng ' . $data->order_code;
+        $vnp_TxnRef = $request->order_code; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = 'Thanh toán đơn hàng ' . $request->order_code;
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = $data->total_price;
+        $vnp_Amount = $request->total_price *100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = '';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -39,7 +37,6 @@ class PaymentController extends Controller
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => $vnp_Returnurl,
             "vnp_TxnRef" => $vnp_TxnRef,
-
         );
 
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
@@ -66,33 +63,20 @@ class PaymentController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        // return redirect()->away($vnp_Url);
+        return $vnp_Url;
     }
-
 
     public function vnpayReturn(Request $request)
     {
         $inputData = $request->all();
-        $parts = explode(" ", $inputData['vnp_OrderInfo']);
-        $code = end($parts); // KT20250822084438
-        $get_data_order = Order::with(['orderItem.productVersions', 'customers'])
-            ->where('order_code', $code)
-            ->first();
+        
         if ($inputData['vnp_ResponseCode'] == '00') {
-            Mail::to($get_data_order->receiver_email)->send(new CheckOrderMail($get_data_order));
-            return view('outside.thanks', [
-                'data' => $get_data_order,
-                'status' => 'success'
-            ]);
+            return 'Giao dịch thành công';
         } else {
-            $get_data_order->update(['status' => 5]);
-            return view('outside.thanks', [
-                'data' => $get_data_order,
-                'status' => 'failed'
-            ]);
+            return 'Giao dịch thất bại';
         }
     }
 }

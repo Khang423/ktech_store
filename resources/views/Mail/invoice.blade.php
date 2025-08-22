@@ -28,7 +28,7 @@
                     @php
                         $methodList = [
                             0 => 'Thanh toán khi nhận hàng',
-                            1 => 'Thanh toán trực tuyến MOMO',
+                            1 => 'Thanh toán trực tuyến VNPay',
                             2 => 'Thanh toán chuyển khoảng ngân hàng',
                         ];
                         $method = $methodList[$order->method_payment] ?? 'Không xác định';

@@ -5,137 +5,10 @@
     <link rel="shortcut icon" href="{{ asset('asset/admin/systemImage/short_icon_ktech.svg') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanks you </title>
+    <title>Cảm ơn bạn đã đặt hàng </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: #ffffff;
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .thank-you-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e9ecef;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 450px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .thank-you-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-
-        .success-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            animation: bounce 0.6s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes bounce {
-            0% {
-                transform: scale(0);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .success-icon i {
-            color: white;
-            font-size: 2rem;
-        }
-
-        .order-details {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-left: 4px solid #667eea;
-        }
-
-        .btn-custom {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 25px;
-            padding: 12px 30px;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-        }
-
-        .btn-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-            color: white;
-        }
-
-        .btn-outline-custom {
-            border: 2px solid #667eea;
-            color: #667eea;
-            background: transparent;
-            border-radius: 25px;
-            padding: 10px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-        }
-
-        .btn-outline-custom:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .social-links a {
-            color: #667eea;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #764ba2;
-            transform: translateY(-3px);
-        }
-    </style>
+    <link href="{{ asset('css/outside/thanks.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -143,31 +16,55 @@
         <div class="row justify-content-center align-items-center min-vh-100">
             <div class="col-12">
                 <div class="thank-you-container">
+                    @if ($status == 'success')
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    @else
+                        <div class="danger-icon">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    @endif
 
-                    <div class="success-icon">
-                        <i class="fas fa-check"></i>
-                    </div>
 
-                    <h1 class="h2 fw-bold text-primary mb-3">Cảm ơn bạn!</h1>
-                    <p class="lead text-muted mb-4">Đơn hàng của bạn đã được đặt thành công</p>
+                    @if ($status == 'success')
+                        <h1 class="h2 fw-bold text-primary mb-3">Cảm ơn bạn!</h1>
+                        <p class="lead text-muted mb-4">Đơn hàng của bạn đã được đặt thành công</p>
+                    @else
+                        <h1 class="h2 fw-bold text-primary mb-3">Thông báo!</h1>
+                        <p class="lead text-muted mb-4">Thanh toán bị gián đoạn</p>
+                    @endif
+
 
                     <div class="order-details">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <h6 class="fw-bold text-primary">Mã đơn hàng</h6>
-                                <p class="mb-0">{{ $order->order_code }}</p>
+                                <p class="mb-0"> {{ $data->order_code }}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h6 class="fw-bold text-primary">Ngày đặt</h6>
-                                <p class="mb-0">{{ $order->created_at }}</p>
+                                <p class="mb-0"> {{ $data->created_at }}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h6 class="fw-bold text-primary">Tổng tiền</h6>
-                                <p class="mb-0 text-success fw-bold">{{ formatPriceToVND($order->total_price) }}</p>
+                                <p class="mb-0 text-success fw-bold"> {{ formatPriceToVND($data->total_price) }}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h6 class="fw-bold text-primary">Trạng thái</h6>
-                                <span class="badge bg-success">Đang xử lý</span>
+                                @if ($status == 'success')
+                                    <span class="badge bg-success">Đang xử lý</span>
+                                @else
+                                    <span class="badge bg-danger">Đã huỷ</span>
+                                @endif
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h6 class="fw-bold text-primary">Phương thức thanh toán</h6>
+                                @if ($data->method_payment == 0)
+                                    <span class="badge bg-success">Thanh toán khi nhận hàng</span>
+                                @elseif ($data->method_payment == 1)
+                                    <span class="badge bg-success">VNPay</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -198,8 +95,8 @@
                     </div>
 
                     <p class="text-muted small mb-0">
-                        Cần hỗ trợ? Liên hệ: <strong>1900-1234</strong> hoặc
-                        <a href="mailto:support@example.com" class="text-decoration-none">support@example.com</a>
+                        Cần hỗ trợ? Liên hệ: <strong>0799599040</strong> hoặc
+                        <a href="mailto:cskhktech@gmail.com" class="text-decoration-none">cskhktech@gmail.com</a>
                     </p>
                 </div>
             </div>
@@ -215,12 +112,7 @@
         const continueShopping = () => {
             window.location.href = '/';
         };
-        const orderDataJson = localStorage.getItem("orderData");
-        if (orderDataJson) {
-            const orderData = JSON.parse(orderDataJson);
-            console.log("Dữ liệu đơn hàng:", orderData);
-            localStorage.removeItem("orderData");
-        }
+
         history.replaceState(null, '', '/thanks');
     </script>
     <script>

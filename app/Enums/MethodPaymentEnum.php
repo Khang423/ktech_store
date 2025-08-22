@@ -14,6 +14,5 @@ use BenSampo\Enum\Enum;
 final class MethodPaymentEnum extends Enum
 {
     const COD = 0; // thanh toán khi nhận hàng
-    const MOMO = 1; // Thanh toán bằng ví momo
-    const QR = 2; // thanh toán bằng mã qr ngân hàng
+    const VNPAY = 1; // Thanh toán bằng ví momo
 }

@@ -19,6 +19,7 @@ use App\Services\CityService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class HomeController extends Controller
 {
@@ -216,7 +217,6 @@ class HomeController extends Controller
 
     public function ShowProduct(Request $request)
     {
-
         $brand = Brand::get(['id', 'name']);
         $tag = Tag::with('tagDetails')->get();
         $category = CategoryProduct::where('slug', $request->data)->first();
@@ -234,94 +234,12 @@ class HomeController extends Controller
         ]);
     }
 
-    public function thanks()
+    public function thanks(Request $request)
     {
-        $order = session()->pull('order_info');
-
-        return view('outside.thanks', compact('order'));
-    }
-
-    public function createPayment(Request $request)
-    {
-        $startTime = date("YmdHis");
-        $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
-
-        $vnp_TmnCode    = '23I03C8Z'; // Mã website của bạn tại VNPAY
-        $vnp_HashSecret = 'RT5FDZR52IT47H2AZKK7FRV9FXZ2LKD3'; // Chuỗi bí mật
-        $vnp_Url        = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl  = route('home.vnpReturn'); // URL trả về sau khi thanh toán
-
-        $vnp_TxnRef     = rand(1, 10000); // Mã giao dịch thanh toán tham chiếu của merchant
-        $vnp_Amount     = '500000'; // Số tiền thanh toán (VNĐ)
-        $vnp_Locale     = 'vn'; // Ngôn ngữ
-        $vnp_BankCode   = ''; // Mã ngân hàng
-        $vnp_IpAddr     = '192.168.1.7'; // IP khách hàng
-
-        $inputData = array(
-            "vnp_Version"    => "2.1.0",
-            "vnp_TmnCode"    => $vnp_TmnCode,
-            "vnp_Amount"     => $vnp_Amount * 100, // nhân 100 theo chuẩn VNPAY
-            "vnp_Command"    => "pay",
-            "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode"   => "VND",
-            "vnp_IpAddr"     => $vnp_IpAddr,
-            "vnp_Locale"     => $vnp_Locale,
-            "vnp_OrderInfo"  => "Thanh toan GD:" . $vnp_TxnRef,
-            "vnp_OrderType"  => "other",
-            "vnp_ReturnUrl"  => $vnp_Returnurl,
-            "vnp_TxnRef"     => $vnp_TxnRef,
-            "vnp_ExpireDate" => $expire
-        );
-
-        if (!empty($vnp_BankCode)) {
-            $inputData['vnp_BankCode'] = $vnp_BankCode;
-        }
-
-        // Bước 1: sắp xếp mảng dữ liệu
-        ksort($inputData);
-        $query = "";
-        $i = 0;
-        $hashdata = "";
-        $vnpSecureHash = "";
-        foreach ($inputData as $key => $value) {
-            if ($i == 1) {
-                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-            } else {
-                $hashdata .= urlencode($key) . "=" . urlencode($value);
-                $i = 1;
-            }
-            $query .= urlencode($key) . "=" . urlencode($value) . '&';
-        }
-
-        $vnp_Url = $vnp_Url . "?" . $query;
-        if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
-            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-        }
-
-        return redirect($vnp_Url);
-    }
-
-    public function vnpayReturn(Request $request)
-    {
-        $vnp_HashSecret = env('VNPAY_HASH_SECRET');
-        $inputData = $request->all();
-
-        $vnp_SecureHash = $inputData['vnp_SecureHash'] ?? '';
-        unset($inputData['vnp_SecureHash']);
-
-        ksort($inputData);
-        $hashData = urldecode(http_build_query($inputData));
-        $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
-
-        if ($secureHash === $vnp_SecureHash) {
-            if ($inputData['vnp_ResponseCode'] == '00') {
-                return "Giao dịch thành công!";
-            } else {
-                return "Giao dịch thất bại!";
-            }
-        } else {
-            return "Sai chữ ký!";
-        }
+        $data = json_decode(Crypt::decryptString($request->query('data')));
+        return view('outside.thanks', [
+            'data' => $data,
+            'status' => 'success'
+        ]);
     }
 }
