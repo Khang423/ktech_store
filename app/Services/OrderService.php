@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Enums\MethodPaymentEnum;
 use App\Enums\OrderStatusEnum;
+use App\Enums\PaymentStatusEnum;
 use App\Enums\StatusEnum;
 use App\Events\OrderEvent;
 use App\Events\OrderEvnet;
@@ -80,14 +82,15 @@ class OrderService extends Controller
     {
         DB::beginTransaction();
         try {
+            // chuyển dữ liệu trong productSelectd sang dạng mảng
             $productSelected = json_decode($request->input('productSelected'), true);
             $customer_id = Auth::guard('customers')->user()->id;
             $cart = Cart::where('customer_id', $customer_id)->first('id');
 
             $prefix = 'KT';
-            $timestamp = now()->format('YmdHis'); // NămThángNgàyGiờPhútGiây
+            $timestamp = now()->format('YmdHis');
             $code = $prefix . $timestamp;
-            // Create order and assign address and customer info
+
 
             $order = Order::create([
                 'receiver_name'   => $request->name,
@@ -106,65 +109,64 @@ class OrderService extends Controller
 
             $total_price = 0;
 
-            // Loop through each selected product to create order items and remove from cart
             foreach ($productSelected as $item) {
                 $subtotal = $item['price'] * $item['quantity'];
                 $total_price += $subtotal;
-
-                $stock_import_detail = StockImportDetail::where('product_version_id', $item['product_version_id'])
+                // Kiểm tra kho có lô hàng nào còn sản phẩm
+                $shipment = StockImportDetail::where('product_version_id', $item['product_version_id'])
                     ->where('stock_quantity', '>', 0)
                     ->where('status', '0')
                     ->orderBy('stock_import_id', 'asc')
                     ->first();
 
-                if ($stock_import_detail) {
-                    $quantity_new = $stock_import_detail->stock_quantity - $item['quantity'];
+                if ($shipment) {
+                    $quantity_new = $shipment->stock_quantity - $item['quantity'];
                     if ($quantity_new >= 0) {
-                        $stock_import_detail->update([
+                        $shipment->update([
                             'stock_quantity' => $quantity_new
                         ]);
-
-                        if ($stock_import_detail->stock_quantity == 0) {
-                            $stock_import_detail->update([
+                        // nếu số lượng sản phẩm trong lô hàng giảm xuống bằng 0 thì chuyển lô hàng sang thạng thái dùng hoạt động
+                        if ($shipment->stock_quantity == 0) {
+                            $shipment->update([
                                 'status' => StatusEnum::OFF
                             ]);
-                            $stock_import_detail_new = StockImportDetail::where('product_version_id', $item['product_version_id'])
+                            // Kiểm tra có lô hàng nào còn sản phẩm không
+                            $shipment_new = StockImportDetail::where('product_version_id', $item['product_version_id'])
                                 ->where('stock_quantity', '>', 0)
                                 ->orderBy('stock_import_id', 'asc')
                                 ->first();
-                            if ($stock_import_detail_new) {
-                                $stock_import_detail_new->update([
+                            // nếu co thì chuyển trạng thái lô hàng đó sang trạng thái hoạt động
+                            if ($shipment_new) {
+                                $shipment_new->update([
                                     'status' => StatusEnum::ON
                                 ]);
-
+                                // Cập nhật lại giá của sản phẩm.
                                 ProductVersion::where('id', $item['product_version_id'])->update([
-                                    'final_price' => $stock_import_detail_new->final_price,
+                                    'final_price' => $shipment_new->final_price,
                                 ]);
+                                // ngược lại nếu trong kho hết hàng thì cập nhật lại giá sản phẩm bằng 0
                             } else {
                                 ProductVersion::where('id', $item['product_version_id'])->update([
                                     'final_price' => 0,
                                 ]);
-                                // nếu không còn sản phẩm trong khi thì xoá sản phẩm khỏi giỏ hàng của khách hàng khác
+                                // nếu không còn sản phẩm trong kho thì xoá sản phẩm khỏi giỏ hàng của khách hàng khác
                                 CartItem::where('product_id', $item['product_version_id'])->delete();
                             }
                         }
-                    } else {
-                        return false;
                     }
                 } else {
-                    return false;
+                    return 'out_of_stock_product';
                 }
-
+                // thêm dữ liệu sản phẩm người dùng mua
                 OrderItem::create([
                     'order_id'   => $order->id,
                     'product_id' => $item['product_version_id'],
                     'quantity'   => $item['quantity'],
                     'unit_price' => $item['price'],
-                    'import_id' => $stock_import_detail->id,
+                    'import_id' => $shipment->id,
                 ]);
 
-
-                // Remove the item from cart
+                // Xoá sản phẩm đó ra khỏi giỏ hàng khi đã đặt hàng xong.
                 CartItem::where([
                     ['product_id', '=', $item['product_version_id']],
                     ['cart_id', '=', $cart->id]
@@ -176,23 +178,29 @@ class OrderService extends Controller
                 'total_price' => $total_price,
             ]);
 
-            session(['order_info' => $order]);
-
-            // send mail
-            $or = Order::with(['orderItem.productVersions', 'customers'])
+            // lấy dữ liệu đơn hàng
+            $get_data_order = Order::with(['orderItem.productVersions', 'customers'])
                 ->where('id', $order->id)
                 ->first();
 
-            if ($or) {
-                Mail::to($or->receiver_email)->send(new CheckOrderMail($or));
-            }
-
             DB::commit();
-            return true;
+            if ($request->method_id == MethodPaymentEnum::COD) {
+                Mail::to($get_data_order->receiver_email)->send(new CheckOrderMail($get_data_order));
+                return [
+                    'status' => 'success',
+                    'method' => $request->method_id,
+                    'data' => $get_data_order
+                ];
+            } else if ($request->method_id == MethodPaymentEnum::VNPAY) {
+                return [
+                    'status' => 'success',
+                    'method' => $request->method_id,
+                    'data' => $get_data_order
+                ];
+            }
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
-            return false;
         }
     }
 

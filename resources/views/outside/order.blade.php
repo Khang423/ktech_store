@@ -176,20 +176,12 @@
                                 Thanh toán khi nhận hàng
                             </div>
                         </div>
-                        <div class="method-payment mb-1 bank_transfer" data-id="2">
-                            <div class="method-icon">
-                                <img src="{{ asset('asset/icon/qr_code.png') }}" alt="">
-                            </div>
-                            <div class="method-name">
-                                Chuyển khoản ngân hàng qua mã QR
-                            </div>
-                        </div>
                         <div class="method-payment momo mb-1" data-id="1">
                             <div class="method-icon">
-                                <img src="{{ asset('asset/icon/momo.png') }}" alt="">
+                                <img src="{{ asset('asset/admin/systemImage/vnpay.png') }}" alt="">
                             </div>
                             <div class="method-name">
-                                Ví MoMo
+                                VNPay
                             </div>
                         </div>
                     </div>
@@ -219,5 +211,6 @@
         const RouteGetWard = "{{ route('address.getWards') }}";
         const RouteOrderStore = "{{ route('home.orderStore') }}";
         const RouteOrder = "{{ route('home.order') }}";
+        const VNPayPayment = "{{ route('home.createPayment') }}";
     </script>
 @endpush

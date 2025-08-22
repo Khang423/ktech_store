@@ -199,19 +199,16 @@ function submitOrder(formData) {
         contentType: false,
         processData: false,
         data: formData,
-        success: function () {
-            const formObj = {};
-            formData.forEach((value, key) => {
-                formObj[key] = value;
-            });
-            // Lưu vào localStorage
-            localStorage.setItem("orderData", JSON.stringify(formObj));
-            // Chuyển trang
-            window.location.href = "/thanks";
+        success: function (response) {
+            console.log(response.status);
+            if (response.status == "success" && response.method == "COD") {
+                window.location.href = response.thank_url;
+            } else if (response.status == "success" && response.method == "VNPAY"){
+                window.location.href = response.vnp_url;
+            }
         },
         error: function (data) {
             $(".text-danger").text("");
-            
             const errors = data.responseJSON?.errors || {};
             Object.entries(errors).forEach(([field, messages]) => {
                 $(`.error-${field}`).text(messages[0]);

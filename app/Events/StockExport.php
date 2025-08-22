@@ -9,7 +9,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 
-class PusherEvent implements ShouldBroadcast
+class StockExport implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,7 +22,7 @@ class PusherEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('testpusher');
+        return new Channel('stock_export_update');
     }
 
     public function broadcastAs()

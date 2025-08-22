@@ -102,9 +102,7 @@
             <li class="side-nav-item">
                 <a href="{{ route('admin.stockExports.index') }}" class="side-nav-link">
                     <i class="  uil-export"></i>
-                    @if (checkStockExport() >= 1)
-                        <span class="badge bg-danger float-end">{{ checkStockExport() }}</span>
-                    @endif
+                    <span class="badge bg-danger float-end " id="stock_export">{{ checkStockExport() }}</span>
                     <span>
                         Phiếu xuất kho
                     </span>
@@ -156,16 +154,14 @@
 </div>
 @push('js')
     <script>
-        const pusher = new Pusher('5663e34e9aa73c142365', {
-            cluster: 'ap1',
-            forceTLS: true
+        const channel = pusher.subscribe('order_event');
+        channel.bind('message', function(data) {
+            $('#count-order').text(data.message);
         });
 
-        const channel = pusher.subscribe('order_event');
-
-        channel.bind('message', function(data) {
-
-            $('#count-order').text(data.message);
+        const channel1 = pusher.subscribe('stock_export_update');
+        channel1.bind('message', function(data) {
+            $('#stock_export').text(data.message);
         });
     </script>
 @endpush
