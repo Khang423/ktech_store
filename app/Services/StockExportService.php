@@ -132,7 +132,11 @@ class StockExportService extends Controller
                     'status' => OrderStatusEnum::DELIVERED
                 ]);
             } else if ($request->status === 'cancel') {
-                $this->model->where('id', $request->order_id)->update([
+                $this->model->where('id', $request->stock_export_id)->update([
+                    'status' => OrderStatusEnum::CANCEL
+                ]);
+                $stock_export = StockExport::where('id', $request->stock_export_id)->first('order_id');
+                Order::where('id', $stock_export->order_id)->update([
                     'status' => OrderStatusEnum::CANCEL
                 ]);
             }

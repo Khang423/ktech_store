@@ -115,15 +115,12 @@
                     className: 'text-center',
                     render: (data) => `
                         <span class='table-action d-flex justify-content-center gap-2'>
-                            <a href="${data.edit}">
-                                <i class="edit text-primary uil-edit action-icon"></i>
-                            </a>
                             <form action="${data.destroy}" method="POST" class="d-inline action-icon" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?')">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="${data.id}">
                                 <button type="submit" class="btn p-0 border-0 bg-transparent">
-                                    <i class="destroy text-danger uil-trash-alt"></i>
+                                    <i class="destroy text-danger uil-lock-alt"></i>
                                 </button>
                             </form>
                         </span>
