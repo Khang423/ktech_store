@@ -98,19 +98,19 @@
                     orderable: false,
                     searchable: false,
                     render: (data) => {
-                        if (data.status === 3) {
+                        if (data.status == 3) {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
                                 </span>
                             `;
-                        } else if (data.status === 2) {
+                        } else if (data.status == 2) {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
                                     <i data-id="${data.id}" data-status="accept" class="btn-updateStatus text-success uil uil-file-check-alt action-icon"></i>
                                     <i data-id="${data.id}" data-status="cancel" class="btn-updateStatus text-danger uil uil-file-times-alt action-icon"></i>
                                 </span>
                             `;
-                        } else if (data.status === 5) {
+                        } else if (data.status == 5) {
                             return `
                                 <span class='table-action d-flex justify-content-center gap-2'>
                                 </span>
