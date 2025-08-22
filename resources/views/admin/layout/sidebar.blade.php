@@ -116,7 +116,7 @@
                     </span>
                 </a>
             </li>
-            @if (Auth::guard('members')->user()->memberRoles()->first()->role_id === RoleEnum::ROOT_ADMIN)
+            @if (Auth::guard('members')->user()->memberRoles()->first()->role_id == RoleEnum::ROOT_ADMIN)
                 <li class="side-nav-title">
                     Hệ thống
                 </li>
