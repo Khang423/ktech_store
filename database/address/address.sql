@@ -1,40 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Aug 29, 2024 at 02:13 AM
--- Server version: 8.0.30
--- PHP Version: 8.3.9
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `address`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cities`
---
-
-CREATE TABLE `cities` (
-  `id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cities`
---
 
 INSERT INTO `cities` (`id`, `name`) VALUES
 (92, 'Thành phố Cần Thơ'),
@@ -101,21 +65,7 @@ INSERT INTO `cities` (`id`, `name`) VALUES
 (75, 'Tỉnh Đồng Nai'),
 (87, 'Tỉnh Đồng Tháp');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `districts`
---
-
-CREATE TABLE `districts` (
-  `id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `city_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `districts`
---
 
 INSERT INTO `districts` (`id`, `name`, `city_id`) VALUES
 (1, 'Quận Ba Đình', 1),
@@ -825,15 +775,6 @@ INSERT INTO `districts` (`id`, `name`, `city_id`) VALUES
 -- Table structure for table `wards`
 --
 
-CREATE TABLE `wards` (
-  `id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `district_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `wards`
---
 
 INSERT INTO `wards` (`id`, `name`, `district_id`) VALUES
 (1, 'Phường Phúc Xá', 1),
@@ -11439,49 +11380,3 @@ INSERT INTO `wards` (`id`, `name`, `district_id`) VALUES
 (32244, 'Thị trấn Rạch Gốc', 973),
 (32245, 'Xã Tân Ân', 973),
 (32248, 'Xã Đất Mũi', 973);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cities`
---
-ALTER TABLE `cities`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Indexes for table `districts`
---
-ALTER TABLE `districts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Ma_tinh` (`city_id`);
-
---
--- Indexes for table `wards`
---
-ALTER TABLE `wards`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Ma_huyen` (`district_id`);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `districts`
---
-ALTER TABLE `districts`
-  ADD CONSTRAINT `districts_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
-
---
--- Constraints for table `wards`
---
-ALTER TABLE `wards`
-  ADD CONSTRAINT `wards_ibfk_1` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

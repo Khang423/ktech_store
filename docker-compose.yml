@@ -8,7 +8,8 @@ services:
             - .:/var/www
         working_dir: /var/www
         depends_on:
-            - db
+            db:
+                condition: service_healthy
         networks:
             - laravel
 
@@ -27,19 +28,25 @@ services:
 
     db:
         image: mysql:8.0
-        container_name: mysql
+        container_name: ktech-db
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: kltn
+            MYSQL_ROOT_PASSWORD: 4223
+            MYSQL_DATABASE: ktech
             MYSQL_USER: ktech
             MYSQL_PASSWORD: 4223
+            TZ: Asia/Ho_Chi_Minh
         volumes:
             - dbdata:/var/lib/mysql
         networks:
             - laravel
         ports:
             - "3307:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 5s
+            timeout: 5s
+            retries: 10
 
 volumes:
     dbdata:

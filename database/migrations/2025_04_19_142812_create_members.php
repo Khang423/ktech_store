@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->integer('city_id')->nullable();
-            $table->integer('district_id')->nullable();
-            $table->integer('ward_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
             $table->text('avatar')->nullable();
@@ -24,9 +21,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
-            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
+            $table->foreignId('city_id')->nullable()->constrained('cities')->cascadeOnDelete(); 
+            $table->foreignId('district_id')->nullable()->constrained('districts')->cascadeOnDelete(); 
+            $table->foreignId('ward_id')->nullable()->constrained('wards')->cascadeOnDelete(); 
             $table->timestamps();
             $table->softDeletes();
         });
